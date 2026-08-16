@@ -1,0 +1,241 @@
+"use client";
+
+import { useState, useMemo } from "react";
+import ProductCard from "../components/shared/ProductCard";
+import { laptopProducts, desktopProducts, Product } from "../data/products";
+
+type SystemType =
+  | "basic"
+  | "office"
+  | "development"
+  | "creator"
+  | "gaming"
+  | "workstation";
+
+const systemCategoryMap: Record<SystemType, string[]> = {
+  basic: ["Basic"],
+  office: ["Enterprise"],
+  development: ["Enterprise", "Editing"], 
+  creator: ["Editing"],
+  gaming: ["Gaming"],
+  workstation: ["Editing", "Gaming", "Enterprise"],
+};
+
+const brands = ["All", "Lenovo", "HP", "Dell", "Asus"];
+const processors = [
+  "All",
+  "Intel Core i3",
+  "Intel Core i5",
+  "Intel Core i7",
+  "Intel Core i9",
+  "Intel Core Ultra 7",
+  "AMD Ryzen 5",
+  "AMD Ryzen 7",
+  "Intel Xeon"
+];
+const rams = ["All", "8GB", "16GB", "32GB", "64GB"];
+const storages = ["All", "256GB", "512GB", "1TB", "2TB"];
+
+export default function Configurator({
+  defaultSystem = "basic",
+}: {
+  defaultSystem?: SystemType;
+}) {
+  const [activeBrand, setActiveBrand] = useState("All");
+  const [activeProcessor, setActiveProcessor] = useState("All");
+  const [activeRAM, setActiveRAM] = useState("All");
+  const [activeStorage, setActiveStorage] = useState("All");
+
+  const targetCategories = systemCategoryMap[defaultSystem] || ["Basic"];
+  
+  // Combine laptops and desktops
+  const allProducts: Product[] = [...laptopProducts, ...desktopProducts];
+
+  const filteredProducts = useMemo(() => {
+    return allProducts.filter((product) => {
+      // Category Map Filter
+      const matchesCategory = targetCategories.includes(product.category);
+
+      // Brand Filter
+      const matchesBrand = activeBrand === "All" || product.brand === activeBrand;
+
+      // Processor Filter
+      const matchesProcessor =
+        activeProcessor === "All" ||
+        product.specs.some(
+          (spec) =>
+            spec.label === "Processor" &&
+            spec.value.toLowerCase().includes(activeProcessor.toLowerCase())
+        );
+
+      // RAM Filter
+      const matchesRAM =
+        activeRAM === "All" ||
+        product.specs.some(
+          (spec) =>
+            spec.label === "RAM" &&
+            spec.value.toLowerCase().includes(activeRAM.toLowerCase())
+        );
+
+      // Storage Filter
+      const matchesStorage =
+        activeStorage === "All" ||
+        product.specs.some(
+          (spec) =>
+            spec.label === "Storage" &&
+            spec.value.toLowerCase().includes(activeStorage.toLowerCase())
+        );
+
+      return (
+        matchesCategory &&
+        matchesBrand &&
+        matchesProcessor &&
+        matchesRAM &&
+        matchesStorage
+      );
+    });
+  }, [
+    activeBrand,
+    activeProcessor,
+    activeRAM,
+    activeStorage,
+    targetCategories,
+    allProducts,
+  ]);
+
+  const pageTitles: Record<SystemType, string> = {
+    basic: "Basic Systems for Everyday Use",
+    office: "Enterprise & Office Systems",
+    development: "Development & Programming Machines",
+    creator: "Creator & Editing Workstations",
+    gaming: "High-Performance Gaming Systems",
+    workstation: "Ultimate Power Workstations"
+  };
+
+  return (
+    <main className="min-h-screen bg-[#0A0F1C] text-white selection:bg-blue-500/30 pt-40 pb-20">
+      <div className="page-container">
+        
+        <div className="mb-12 border-b border-gray-800 pb-8 text-center md:text-left">
+          <p className="text-blue-500 font-bold tracking-widest uppercase text-sm mb-2">Build Your Workflow</p>
+          <h1 className="text-4xl md:text-5xl font-black text-white tracking-tight">
+            {pageTitles[defaultSystem] || "Customize Your PC"}
+          </h1>
+          <p className="text-gray-400 mt-4 max-w-2xl text-lg">
+            We've curated the best hardware for your specific use case. Use the filters to narrow down the perfect machine for your needs.
+          </p>
+        </div>
+
+        <div className="grid-12">
+          {/* Left Sidebar Filters */}
+          <div className="col-span-12 lg:col-span-3">
+            <div className="bg-[#111827] border border-gray-800 rounded-2xl p-6 sticky top-32 shadow-xl">
+              <h3 className="text-xl font-bold mb-6 border-b border-gray-700 pb-4 text-white">Refine Search</h3>
+              
+              <div className="space-y-6">
+                
+                <div>
+                  <h4 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-3">Brand</h4>
+                  <select
+                    value={activeBrand}
+                    onChange={(e) => setActiveBrand(e.target.value)}
+                    className="w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-2.5 text-sm text-white focus:outline-none focus:border-blue-500 transition-colors appearance-none shadow-inner"
+                  >
+                    {brands.map((brand) => (
+                      <option key={brand} value={brand}>
+                        {brand}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div>
+                  <h4 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-3">Processor</h4>
+                  <select
+                    value={activeProcessor}
+                    onChange={(e) => setActiveProcessor(e.target.value)}
+                    className="w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-2.5 text-sm text-white focus:outline-none focus:border-blue-500 transition-colors appearance-none shadow-inner"
+                  >
+                    {processors.map((proc) => (
+                      <option key={proc} value={proc}>
+                        {proc}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div>
+                  <h4 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-3">RAM</h4>
+                  <select
+                    value={activeRAM}
+                    onChange={(e) => setActiveRAM(e.target.value)}
+                    className="w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-2.5 text-sm text-white focus:outline-none focus:border-blue-500 transition-colors appearance-none shadow-inner"
+                  >
+                    {rams.map((ram) => (
+                      <option key={ram} value={ram}>
+                        {ram}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div>
+                  <h4 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-3">Storage (ROM)</h4>
+                  <select
+                    value={activeStorage}
+                    onChange={(e) => setActiveStorage(e.target.value)}
+                    className="w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-2.5 text-sm text-white focus:outline-none focus:border-blue-500 transition-colors appearance-none shadow-inner"
+                  >
+                    {storages.map((storage) => (
+                      <option key={storage} value={storage}>
+                        {storage}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          {/* Product Grid */}
+          <div className="col-span-12 lg:col-span-9">
+            {filteredProducts.length === 0 ? (
+              <div className="text-center py-24 bg-[#111827] rounded-2xl border border-gray-800 shadow-inner">
+                <div className="text-gray-600 mb-4">
+                  <svg className="w-16 h-16 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <h3 className="text-2xl font-bold text-white mb-2">No matching systems found</h3>
+                <p className="text-gray-400">We couldn't find any machines matching your exact hardware requirements.</p>
+                <button
+                  onClick={() => {
+                    setActiveBrand("All");
+                    setActiveProcessor("All");
+                    setActiveRAM("All");
+                    setActiveStorage("All");
+                  }}
+                  className="mt-8 px-8 py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-full font-bold transition-all shadow-[0_0_15px_rgba(37,99,235,0.4)]"
+                >
+                  Reset Filters
+                </button>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                {filteredProducts.map((sys, index) => (
+                  <ProductCard
+                    key={sys.id}
+                    {...sys}
+                    delay={(index % 6) * 0.1}
+                  />
+                ))}
+              </div>
+            )}
+          </div>
+
+        </div>
+      </div>
+    </main>
+  );
+}

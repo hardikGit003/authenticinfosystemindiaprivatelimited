@@ -94,10 +94,10 @@ return () => {
 
   </a>
 
-  <a href="#contact">
+  <a href="#configuration">
 
-    <button className="secondary-btn">
-      Contact Us
+    <button className="primary-btn">
+      Customize your system
     </button>
 
   </a>
