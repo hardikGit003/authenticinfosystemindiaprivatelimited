@@ -115,7 +115,7 @@ export default function EnterprisePage() {
                 <div className="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center text-xl">📞</div>
                 <div>
                   <p className="text-sm text-gray-500 uppercase tracking-wider">Call Us</p>
-                  <p className="font-medium text-lg">+91 83038 11370</p>
+                  <p className="font-medium text-lg">+91 9643990077</p>
                 </div>
               </div>
             </div>
@@ -173,9 +173,9 @@ export default function EnterprisePage() {
         <SectionHeader title="Our Leadership Vision" align="center" />
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
           {[
-            { quote: "Our technological infrastructure is built on a foundation of innovation and absolute reliability. We are committed to pushing the boundaries of what enterprise IT can achieve.", author: "Saurabh Rai", role: "Chief Technology Officer (CTO)" },
-            { quote: "Security and strategic growth are at the core of our operations. We prioritize providing our clients with robust security solutions that give them complete peace of mind.", author: "Sourav Sharma", role: "Chief Security Officer (CSO)" },
-            { quote: "We deeply understand our clients' unique challenges and translate them into impactful, market-leading solutions that drive true business transformation.", author: "Hardik Prajapati", role: "Chief Marketing Officer (CMO)" },
+            { quote: "Our technological infrastructure is built on a foundation of innovation and absolute reliability. We are committed to pushing the boundaries of what enterprise IT can achieve.", author: "Vikas Verma", role: "Chief Technology Officer (CTO)" },
+            { quote: "Security and strategic growth are at the core of our operations. We prioritize providing our clients with robust security solutions that give them complete peace of mind.", author: "Ankit Singh", role: "Chief Security Officer (CSO)" },
+            { quote: "We deeply understand our clients' unique challenges and translate them into impactful, market-leading solutions that drive true business transformation.", author: "Chesta Sharma", role: "Chief Marketing Officer (CMO)" },
           ].map((testi, i) => (
             <div key={i} className="glass-panel p-8 relative">
               <div className="text-5xl text-blue-500/30 absolute top-4 left-6">"</div>
