@@ -24,19 +24,14 @@ export default function AboutSection() {
         </p>
 
         <h2 className="about-heading">
-
-          Building Modern
-          <br />
-
+          Building Modern{" "}
+          <br className="hidden sm:inline" />
           Technology
           <span className="gradient-text">
             {" "}Infrastructure
-          </span>
-
-          <br />
-
+          </span>{" "}
+          <br className="hidden sm:inline" />
           For Businesses.
-
         </h2>
 
         <div className="about-line"></div>

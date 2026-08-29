@@ -32,8 +32,8 @@ export default function BrandsSection() {
         </p>
 
         <h2 className="brands-heading">
-          Technology Partners
-          <br />
+          Technology Partners{" "}
+          <br className="hidden sm:inline" />
           We Work With.
         </h2>
 

@@ -67,11 +67,11 @@ return () => {
         </p>
 
         <h1>
-          Technology Products and 
-          <br />
-         IT Solutions for Businesses
-           <br />
-         and Individual Customers.
+          Technology Products and{" "}
+          <br className="hidden sm:inline" />
+          IT Solutions for Businesses{" "}
+          <br className="hidden sm:inline" />
+          and Individual Customers.
         </h1>
 
         <p className="hero-description">

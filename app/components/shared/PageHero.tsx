@@ -23,7 +23,7 @@ export default function PageHero({
   bgImage = "/placeholder-hero.jpg",
 }: PageHeroProps) {
   return (
-    <section className="relative w-full min-h-[70vh] flex items-center justify-center overflow-hidden bg-black pt-40">
+    <section className="relative w-full min-h-[50vh] sm:min-h-[65vh] flex items-center justify-center overflow-hidden bg-black pt-28 sm:pt-40 pb-12 sm:pb-16">
       {/* Background Image & Overlay */}
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-transparent z-10" />
@@ -44,30 +44,30 @@ export default function PageHero({
           className="max-w-3xl"
         >
           {miniText && (
-            <p className="text-blue-400 text-xs tracking-[8px] uppercase mb-4 font-semibold">
+            <p className="text-blue-400 text-xs tracking-[4px] sm:tracking-[8px] uppercase mb-3 sm:mb-4 font-semibold">
               {miniText}
             </p>
           )}
           
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tighter leading-[1.1] mb-6">
+          <h1 className="text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight sm:tracking-tighter leading-[1.1] mb-4 sm:mb-6">
             {title}
           </h1>
           
-          <p className="text-gray-300 text-lg md:text-xl leading-relaxed font-light mb-10 max-w-2xl">
+          <p className="text-gray-300 text-sm sm:text-base md:text-xl leading-relaxed font-light mb-8 sm:mb-10 max-w-2xl">
             {subtitle}
           </p>
           
-          <div className="flex flex-wrap items-center gap-4">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 w-full sm:w-auto">
             <Link
               href={primaryButtonLink}
-              className="px-8 py-4 bg-white text-black rounded-full font-semibold transition-all hover:bg-gray-200 hover:-translate-y-1 shadow-lg"
+              className="px-6 sm:px-8 py-3 sm:py-3.5 rounded-full bg-blue-600 hover:bg-blue-500 text-white font-medium text-sm transition-all shadow-[0_0_20px_rgba(37,99,235,0.4)] text-center"
             >
               {primaryButtonText}
             </Link>
             
             <Link
               href={secondaryButtonLink}
-              className="px-8 py-4 bg-white/10 text-white border border-white/20 backdrop-blur-md rounded-full font-semibold transition-all hover:bg-white/20 hover:-translate-y-1"
+              className="px-6 sm:px-8 py-3 sm:py-3.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-white font-medium text-sm backdrop-blur-md transition-all text-center"
             >
               {secondaryButtonText}
             </Link>

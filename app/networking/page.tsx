@@ -135,21 +135,21 @@ export default function NetworkingPage() {
       />
 
       {/* Solution Categories */}
-      <section className="py-20 page-container border-b border-white/5">
+      <section className="py-12 sm:py-20 page-container border-b border-white/5">
         <SectionHeader title="Comprehensive IT Infrastructure" align="center" />
-        <div className="flex flex-wrap justify-center gap-3 mt-12">
+        <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mt-8 sm:mt-12">
           {['Enterprise Networking', 'Wireless Access Points', 'Managed Switches', 'Firewalls', 'Routers', 'Load Balancers', 'VPN', 'Structured Cabling', 'Fiber Solutions', 'Server Racks'].map((cat, i) => (
-            <span key={i} className="px-5 py-2.5 rounded-lg bg-white/5 border border-white/10 text-gray-300 hover:text-white transition-colors cursor-default">
+            <span key={i} className="px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-lg bg-white/5 border border-white/10 text-gray-300 hover:text-white transition-colors cursor-default text-xs sm:text-sm">
               {cat}
             </span>
           ))}
         </div>
       </section>
 
-      {/* Featured Products */}
-      <section className="py-20 page-container">
+      {/* Featured Hardware */}
+      <section className="py-12 sm:py-20 page-container">
         <SectionHeader title="Featured Hardware" subtitle="Industry-leading equipment from trusted global partners." />
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mt-8 sm:mt-12">
           {networkingProducts.map((product, index) => (
             <ProductCard
               key={product.id}

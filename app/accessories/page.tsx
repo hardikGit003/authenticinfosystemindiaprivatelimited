@@ -241,10 +241,10 @@ export default function AccessoriesPage() {
       />
 
       {/* Categories */}
-      <section className="py-8 page-container border-b border-white/5">
-        <div className="flex flex-wrap justify-center gap-4">
+      <section className="py-6 sm:py-8 page-container border-b border-white/5">
+        <div className="flex overflow-x-auto sm:flex-wrap justify-start sm:justify-center gap-2 sm:gap-4 pb-2 sm:pb-0 scrollbar-hide w-full">
           {['Keyboard', 'Mouse', 'Monitor', 'Docking Station', 'USB Hub', 'Webcam', 'Headsets', 'Conference Devices', 'Speakers', 'Power Backup', 'External Storage', 'Cables'].map((cat, i) => (
-            <button key={i} className="px-5 py-2.5 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 transition-colors text-sm font-medium">
+            <button key={i} className="px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 transition-colors text-xs sm:text-sm font-medium whitespace-nowrap shrink-0">
               {cat}
             </button>
           ))}
@@ -252,9 +252,9 @@ export default function AccessoriesPage() {
       </section>
 
       {/* Featured Products Grid */}
-      <section className="py-10 page-container">
+      <section className="py-8 sm:py-10 page-container">
         <SectionHeader title="Featured Accessories" subtitle="Hand-picked tools to maximize your daily productivity." />
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mt-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 mt-8 sm:mt-12">
           {accessoriesProducts.map((product, index) => (
             <ProductCard
               key={product.id}

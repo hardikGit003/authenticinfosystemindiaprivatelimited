@@ -20,6 +20,30 @@ const faqs = [
 
 export default function EnterprisePage() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const [companyName, setCompanyName] = useState("");
+  const [businessEmail, setBusinessEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [companySize, setCompanySize] = useState("1-50 Employees");
+  const [productsInterested, setProductsInterested] = useState("");
+  const [messageDetails, setMessageDetails] = useState("");
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const whatsappMessage =
+`Enterprise Inquiry
+
+Company Name: ${companyName}
+Business Email: ${businessEmail}
+Phone Number: ${phoneNumber}
+Company Size: ${companySize}
+Products Interested: ${productsInterested}
+
+Details:
+${messageDetails}`;
+
+    const whatsappURL = `https://wa.me/919643990077?text=${encodeURIComponent(whatsappMessage)}`;
+    window.open(whatsappURL, "_blank");
+  };
 
   return (
     <main className="min-h-screen bg-black text-white selection:bg-blue-500/30">
@@ -122,26 +146,26 @@ export default function EnterprisePage() {
           </div>
 
           <div className="glass-card p-8 md:p-10">
-            <form className="space-y-4">
+            <form className="space-y-4" onSubmit={handleSubmit}>
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-xs uppercase tracking-wider text-gray-400 mb-2">Company Name</label>
-                  <input type="text" className="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 text-sm focus:border-blue-500 outline-none transition-colors" placeholder="Acme Corp" />
+                  <input type="text" className="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 text-sm focus:border-blue-500 outline-none transition-colors" placeholder="Acme Corp" value={companyName} onChange={(e) => setCompanyName(e.target.value)} />
                 </div>
                 <div>
                   <label className="block text-xs uppercase tracking-wider text-gray-400 mb-2">Business Email</label>
-                  <input type="email" className="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 text-sm focus:border-blue-500 outline-none transition-colors" placeholder="you@company.com" />
+                  <input type="email" className="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 text-sm focus:border-blue-500 outline-none transition-colors" placeholder="you@company.com" value={businessEmail} onChange={(e) => setBusinessEmail(e.target.value)} />
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-xs uppercase tracking-wider text-gray-400 mb-2">Phone Number</label>
-                  <input type="tel" className="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 text-sm focus:border-blue-500 outline-none transition-colors" placeholder="+91 xxxxx xxxxx" />
+                  <input type="tel" className="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 text-sm focus:border-blue-500 outline-none transition-colors" placeholder="+91 xxxxx xxxxx" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} />
                 </div>
                 <div>
                   <label className="block text-xs uppercase tracking-wider text-gray-400 mb-2">Company Size</label>
-                  <select className="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 text-sm focus:border-blue-500 outline-none transition-colors appearance-none">
+                  <select className="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 text-sm focus:border-blue-500 outline-none transition-colors appearance-none" value={companySize} onChange={(e) => setCompanySize(e.target.value)}>
                     <option>1-50 Employees</option>
                     <option>51-200 Employees</option>
                     <option>201-500 Employees</option>
@@ -152,12 +176,12 @@ export default function EnterprisePage() {
 
               <div>
                 <label className="block text-xs uppercase tracking-wider text-gray-400 mb-2">Products/Services Interested In</label>
-                <input type="text" className="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 text-sm focus:border-blue-500 outline-none transition-colors" placeholder="Laptops, Networking, AMC..." />
+                <input type="text" className="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 text-sm focus:border-blue-500 outline-none transition-colors" placeholder="Laptops, Networking, AMC..." value={productsInterested} onChange={(e) => setProductsInterested(e.target.value)} />
               </div>
 
               <div>
                 <label className="block text-xs uppercase tracking-wider text-gray-400 mb-2">Message Details</label>
-                <textarea rows={4} className="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 text-sm focus:border-blue-500 outline-none transition-colors" placeholder="Tell us about your project requirements..."></textarea>
+                <textarea rows={4} className="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 text-sm focus:border-blue-500 outline-none transition-colors" placeholder="Tell us about your project requirements..." value={messageDetails} onChange={(e) => setMessageDetails(e.target.value)}></textarea>
               </div>
 
               <button type="submit" className="w-full py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-lg font-bold transition-colors mt-4">
@@ -232,16 +256,16 @@ export default function EnterprisePage() {
       </section>
 
       {/* Final CTA */}
-      <section className="py-32 text-center bg-[url('/placeholder-hero.jpg')] bg-cover bg-center relative border-t border-white/10">
+      <section className="py-16 sm:py-28 text-center bg-[url('/placeholder-hero.jpg')] bg-cover bg-center relative border-t border-white/10">
         <div className="absolute inset-0 bg-black/80 backdrop-blur-sm z-0"></div>
         <div className="relative z-10 page-container">
-          <h2 className="text-4xl md:text-6xl font-bold mb-6 tracking-tight">Let's Build Your Next IT Infrastructure Together.</h2>
-          <p className="text-gray-300 text-lg md:text-xl mb-10 max-w-3xl mx-auto font-light">From a single laptop to enterprise-wide digital transformation, Authentic Infosystem is your trusted technology partner.</p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <button className="px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-full font-bold transition-all shadow-[0_0_20px_rgba(37,99,235,0.4)]">
+          <h2 className="text-2xl sm:text-4xl md:text-6xl font-bold mb-4 sm:mb-6 tracking-tight">Let's Build Your Next IT Infrastructure Together.</h2>
+          <p className="text-gray-300 text-sm sm:text-base md:text-xl mb-8 sm:mb-10 max-w-3xl mx-auto font-light">From a single laptop to enterprise-wide digital transformation, Authentic Infosystem is your trusted technology partner.</p>
+          <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 max-w-md sm:max-w-none mx-auto">
+            <button className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-full font-bold transition-all shadow-[0_0_20px_rgba(37,99,235,0.4)]">
               Schedule a Consultation
             </button>
-            <button className="px-8 py-4 bg-white/10 border border-white/20 text-white rounded-full font-bold hover:bg-white/20 transition-all backdrop-blur-md">
+            <button className="w-full sm:w-auto px-6 sm:px-8 py-3.5 sm:py-4 bg-white/10 border border-white/20 text-white rounded-full font-bold hover:bg-white/20 transition-all backdrop-blur-md">
               Contact Sales
             </button>
           </div>

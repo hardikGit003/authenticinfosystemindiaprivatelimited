@@ -76,53 +76,66 @@ export default function ConfigurationSection() {
       <div className="w-full">
         
         {/* HUGE PARENT CARD */}
-        <div className="w-full bg-white border border-gray-200 shadow-2xl rounded-[2.5rem] p-8 md:p-16 backdrop-blur-xl relative overflow-hidden">
+        <div className="w-full bg-[#070B14] border border-gray-800/80 shadow-[0_0_60px_rgba(0,0,0,0.8)] rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[2.5rem] p-4 sm:p-7 md:p-14 backdrop-blur-xl relative overflow-hidden">
           
-          <div className="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 rounded-full bg-blue-50 blur-[100px] pointer-events-none"></div>
-          <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 rounded-full bg-purple-50 blur-[80px] pointer-events-none"></div>
+          {/* VIDEO ANIMATION */}
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="absolute inset-0 w-full h-full object-cover z-0 pointer-events-none opacity-85"
+          >
+            <source src="/StartYourBuildNew.MP4" type="video/mp4" />
+          </video>
 
-          <div className="text-center mb-16 relative z-10">
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-blue-600 mb-6 tracking-tight">
+          {/* OVERLAYS & GLOW ACCENTS */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#070B14]/80 via-[#070B14]/25 to-[#070B14]/85 z-[1] pointer-events-none"></div>
+          <div className="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 rounded-full bg-blue-500/10 blur-[100px] pointer-events-none z-[1]"></div>
+          <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 rounded-full bg-purple-500/10 blur-[80px] pointer-events-none z-[1]"></div>
+
+          <div className="text-center mb-8 sm:mb-12 md:mb-16 relative z-10">
+            <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-blue-100 to-blue-400 mb-3 sm:mb-6 tracking-tight">
               Start Your Build.
             </h2>
-            <p className="text-gray-500 text-lg md:text-xl max-w-2xl mx-auto font-medium leading-relaxed">
-              Select a category that matches your workflow. We'll guide you to the perfect configuration for your needs.
+            <p className="text-gray-400 text-sm sm:text-base md:text-xl max-w-2xl mx-auto font-medium leading-relaxed px-2">
+              Select a category that matches your workflow. We&apos;ll guide you to the perfect configuration for your needs.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 relative z-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 relative z-10">
             {systemCategories.map((system) => (
               <Link
                 key={system.key}
                 href={`/configuration?system=${system.key}`}
-                className="group flex flex-col p-8 rounded-[2rem] bg-[#0A0F1C] border border-gray-800 hover:border-gray-700 hover:shadow-[0_8px_30px_rgb(0,0,0,0.15)] transition-all duration-500 relative overflow-hidden"
+                className="group flex flex-col p-5 sm:p-6 md:p-8 rounded-2xl md:rounded-[2rem] bg-[#0A0F1C]/75 backdrop-blur-xl border border-gray-800/80 hover:border-blue-500/40 hover:bg-[#0A0F1C]/90 hover:shadow-[0_12px_40px_rgba(37,99,235,0.18)] transition-all duration-500 relative overflow-hidden"
               >
-                <div className={`absolute inset-0 bg-gradient-to-br ${system.color} opacity-0 group-hover:opacity-[0.08] transition-opacity duration-500`}></div>
+                <div className={`absolute inset-0 bg-gradient-to-br ${system.color} opacity-0 group-hover:opacity-[0.12] transition-opacity duration-500`}></div>
                 
-                <div className="mb-8 flex justify-between items-start">
-                  <div className={`w-14 h-14 rounded-2xl flex items-center justify-center bg-gray-800/50 border border-gray-700/50 text-gray-300 group-hover:text-white group-hover:border-transparent relative z-10 overflow-hidden transition-all duration-500 shadow-sm`}>
+                <div className="mb-6 sm:mb-8 flex justify-between items-start">
+                  <div className={`w-12 h-12 sm:w-14 sm:h-14 rounded-2xl flex items-center justify-center bg-gray-800/60 border border-gray-700/60 text-gray-300 group-hover:text-white group-hover:border-transparent relative z-10 overflow-hidden transition-all duration-500 shadow-sm`}>
                     <div className={`absolute inset-0 bg-gradient-to-br ${system.color} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}></div>
                     <div className="relative z-10">
                       {system.icon}
                     </div>
                   </div>
                   
-                  <div className="w-10 h-10 rounded-full bg-gray-800/50 border border-gray-700/50 flex items-center justify-center text-gray-400 group-hover:bg-blue-500 group-hover:border-transparent group-hover:text-white transition-all duration-500 -rotate-45 group-hover:rotate-0 shadow-sm">
-                    <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-gray-800/60 border border-gray-700/60 flex items-center justify-center text-gray-400 group-hover:bg-blue-500 group-hover:border-transparent group-hover:text-white transition-all duration-500 -rotate-45 group-hover:rotate-0 shadow-sm">
+                    <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                     </svg>
                   </div>
                 </div>
 
                 <div className="mt-auto">
-                  <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-blue-400 transition-colors duration-300">
+                  <h3 className="text-xl sm:text-2xl font-bold text-white mb-2 sm:mb-3 group-hover:text-blue-400 transition-colors duration-300">
                     {system.title}
                   </h3>
-                  <div className="w-12 h-1 bg-gray-800 rounded-full mb-4 group-hover:w-full transition-all duration-500">
+                  <div className="w-12 h-1 bg-gray-800 rounded-full mb-3 sm:mb-4 group-hover:w-full transition-all duration-500">
                     <div className={`h-full rounded-full bg-gradient-to-r ${system.color} w-0 group-hover:w-full transition-all duration-700 delay-100`}></div>
                   </div>
-                  <p className="text-[0.65rem] text-gray-500 uppercase tracking-widest mb-2 font-bold">Ideal For</p>
-                  <p className="text-gray-400 text-sm leading-relaxed font-medium">
+                  <p className="text-[0.65rem] text-gray-500 uppercase tracking-widest mb-1.5 font-bold">Ideal For</p>
+                  <p className="text-gray-400 text-xs sm:text-sm leading-relaxed font-medium">
                     {system.bestFor}
                   </p>
                 </div>

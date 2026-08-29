@@ -43,8 +43,8 @@ export default function FinalSection() {
         </p>
 
         <h2>
-          Future Ready
-          <br />
+          Future Ready{" "}
+          <br className="hidden sm:inline" />
           <span>Enterprise Infrastructure</span>
         </h2>
 

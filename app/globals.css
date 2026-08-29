@@ -841,11 +841,12 @@ section {
   letter-spacing: -2px;
   color: white;
   font-weight: 700;
+}
 
-  gap: 20px;
-
-  align-items: stretch;
-
+.flip-card-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
 }
 
 /* ========================================
@@ -856,7 +857,7 @@ section {
 
   perspective: 1400px;
 
-  height: 430px;
+  height: 290px;
 
 }
 
@@ -1047,13 +1048,13 @@ section {
 
   .flip-card-grid {
 
-    grid-template-columns: 1fr;
+    gap: 24px;
 
   }
 
   .flip-card {
 
-    height: 360px;
+    height: 270px;
 
   }
 
@@ -1957,68 +1958,6 @@ section {
   opacity: 0.75;
 }
 
-/* =========================
-   RESPONSIVE DESIGN FOR AUTHONTIC INFOSYSTEM PRIVATE LIMITED
-========================= */
-
-@media (max-width: 1024px) {
-
-  .hero-content h1,
-  .about-left h2,
-  .services-header h2,
-  .brands-content h2,
-  .contact-left h2,
-  .final-content h2 {
-    font-size: 4rem;
-  }
-
-  .about-section,
-  .contact-content,
-  .premium-services-grid,
-  .brands-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .about-section,
-  .services-section,
-  .brands-content,
-  .contact-content {
-    padding: 100px 40px;
-  }
-
-}
-
-@media (max-width: 768px) {
-
-  .navbar {
-    left: 24px;
-  }
-
-  .hero-content {
-    padding-left: 24px;
-    padding-right: 24px;
-  }
-
-  .hero-content h1 {
-    font-size: 2.8rem;
-
-    line-height: 1;
-  }
-
-  .hero-buttons {
-    flex-direction: column;
-  }
-
-  .about-left h2,
-  .services-header h2,
-  .brands-content h2,
-  .contact-left h2,
-  .final-content h2 {
-    font-size: 3rem;
-  }
-
-}
-
 /* =========================================
    WHY SECTION
 ========================================= */
@@ -2385,181 +2324,6 @@ section {
 }
 
 /* =========================================
-   RESPONSIVE
-========================================= */
-
-@media(max-width: 1200px) {
-
-  .why-container {
-
-    grid-template-columns: 1fr;
-
-    gap: 60px;
-
-  }
-
-}
-
-@media(max-width: 768px) {
-
-  .why-section {
-
-    padding: 90px 24px;
-
-  }
-
-  .why-heading {
-
-    font-size: 3rem;
-
-    line-height: 1;
-
-    letter-spacing: -2px;
-
-  }
-
-  .why-right {
-
-    grid-template-columns: 1fr;
-
-  }
-
-  .why-flip-card {
-
-    aspect-ratio: 16 / 9;
-
-    min-height: 220px;
-
-  }
-
-}
-
-/* FOOTER */
-
-.footer {
-  background: #efefef;
-  padding: 80px 9%;
-  color: #111;
-}
-
-.footer-social {
-  display: flex;
-  gap: 18px;
-  margin-bottom: 35px;
-}
-
-.footer-social a {
-  width: 45px;
-  height: 45px;
-  background: white;
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-  color: #111;
-  font-size: 22px;
-  transition: 0.3s ease;
-}
-
-.footer-social a:hover {
-  transform: translateY(-5px);
-}
-
-.subscribe-btn {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 18px 32px;
-  background: black;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  font-size: 20px;
-  font-weight: 600;
-  cursor: pointer;
-  margin-bottom: 50px;
-}
-
-.footer-line {
-  width: 100%;
-  height: 1px;
-  background: #cfcfcf;
-  margin-bottom: 60px;
-}
-
-.footer-links {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 50px;
-}
-
-.footer-column h3 {
-  font-size: 30px;
-  margin-bottom: 25px;
-  font-weight: 600;
-}
-
-.footer-column a {
-  display: block;
-  margin-bottom: 18px;
-  text-decoration: none;
-  color: #222;
-  font-size: 18px;
-}
-
-.footer-bottom {
-  margin-top: 70px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 20px;
-}
-
-.footer-bottom p {
-  font-size: 16px;
-  color: #333;
-}
-
-.footer-policy {
-  display: flex;
-  gap: 25px;
-}
-
-.footer-policy a {
-  text-decoration: none;
-  color: #333;
-  font-size: 15px;
-}
-
-/* MOBILE */
-
-@media(max-width:992px) {
-
-  .footer-links {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-}
-
-@media(max-width:768px) {
-
-  .footer-links {
-    grid-template-columns: 1fr;
-  }
-
-  .footer-bottom {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .footer-policy {
-    flex-wrap: wrap;
-  }
-}
-
-/* =========================================
    PREMIUM GLASS NAVBAR
 ========================================= */
 
@@ -2739,40 +2503,6 @@ section {
     inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
-/* =========================================
-   RESPONSIVE
-========================================= */
-
-@media (max-width: 1100px) {
-
-  .main-navbar {
-    padding: 0 24px;
-  }
-
-  .nav-links {
-    gap: 24px;
-  }
-
-}
-
-@media (max-width: 900px) {
-
-  .nav-links {
-    display: none;
-  }
-
-  .main-navbar {
-    height: 74px;
-
-    padding: 0 20px;
-  }
-
-  .nav-logo img {
-    height: 46px;
-  }
-
-}
-
 /* =========================
    PREMIUM B2B UTILITIES (ADDED)
 ========================= */
@@ -2833,22 +2563,23 @@ section {
 }
 
 .page-container {
-  width: 96%;
-  max-width: none;
+  width: 100%;
+  max-width: 1600px;
   margin: 0 auto;
-  padding-left: 42px;
-  padding-right: 42px;
+  padding-left: 16px;
+  padding-right: 16px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 640px) {
   .page-container {
-    padding-left: 42px;
-    padding-right: 42px;
+    padding-left: 24px;
+    padding-right: 24px;
   }
 }
 
 @media (min-width: 1024px) {
   .page-container {
+    width: 96%;
     padding-left: 42px;
     padding-right: 42px;
   }
@@ -2868,4 +2599,648 @@ section {
 .scrollbar-hide {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+/* ==========================================================================
+   MASTER RESPONSIVE DESIGN SYSTEM (ALL PHONES & TABLETS - IOS & ANDROID)
+   ========================================================================== */
+
+/* TAP-TO-FLIP SUPPORT FOR TOUCH SCREENS */
+.flip-card.is-flipped .flip-card-inner,
+.why-flip-card.is-flipped .why-flip-inner {
+  transform: rotateY(180deg) !important;
+}
+
+/* TABLET & MOBILE GLOBAL RESETS (<= 1024px) */
+@media (max-width: 1024px) {
+
+  /* ELIMINATE ARTIFICIAL 100VH STRETCHING AND VERTICAL CENTERING VOIDS */
+  section,
+  .hero,
+  .about-section,
+  .services-section,
+  .configuration-section,
+  .brands-section,
+  .why-section,
+  .b2b-section,
+  .contact-section,
+  .final-section {
+    min-height: 0 !important;
+    height: auto !important;
+    max-height: none !important;
+    display: block !important;
+    overflow: hidden !important;
+    position: relative !important;
+  }
+
+  /* KEEP BACKGROUND VIDEOS CONFINED TO EACH SECTION BOUNDARY */
+  .hero-video,
+  .brands-video,
+  .b2b-video,
+  .why-video,
+  .contact-video,
+  .final-video {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    z-index: 1 !important;
+    pointer-events: none !important;
+    transform: none !important;
+  }
+
+  .brands-overlay,
+  .b2b-overlay,
+  .why-overlay,
+  .contact-overlay,
+  .final-overlay {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    z-index: 2 !important;
+  }
+
+  /* NAVBAR TABLET / MOBILE */
+  .nav-links {
+    display: none !important;
+  }
+  .main-navbar {
+    height: 66px !important;
+    padding: 0 16px !important;
+    top: 12px !important;
+    width: 94% !important;
+    position: fixed !important;
+    z-index: 9999 !important;
+  }
+  .nav-logo img {
+    height: 36px !important;
+  }
+
+  /* SECTION 1: HERO */
+  .hero {
+    padding: 118px 24px 50px !important;
+    text-align: center !important;
+  }
+  .hero-content {
+    padding: 0 !important;
+    width: 100% !important;
+    max-width: 700px !important;
+    margin: 0 auto !important;
+    position: relative !important;
+    z-index: 10 !important;
+  }
+  .hero-mini-text {
+    letter-spacing: 4px !important;
+    font-size: 0.72rem !important;
+    margin-bottom: 18px !important;
+  }
+  .hero-content h1 {
+    font-size: clamp(2rem, 5.8vw, 3.2rem) !important;
+    line-height: 1.15 !important;
+    letter-spacing: -1.5px !important;
+    margin-bottom: 20px !important;
+  }
+  .hero-content h1 br {
+    display: none !important;
+  }
+  .hero-description {
+    font-size: 0.98rem !important;
+    line-height: 1.65 !important;
+    margin: 0 auto 28px !important;
+    max-width: 620px !important;
+  }
+  .hero-buttons {
+    flex-direction: column !important;
+    width: 100% !important;
+    max-width: 360px !important;
+    margin: 0 auto !important;
+    gap: 12px !important;
+  }
+  .hero-buttons a,
+  .hero-buttons button {
+    width: 100% !important;
+    padding: 15px 24px !important;
+    font-size: 0.95rem !important;
+  }
+
+  /* SECTION 2: ABOUT */
+  .about-section {
+    padding: 48px 24px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 28px !important;
+  }
+  .about-left {
+    width: 100% !important;
+    max-width: none !important;
+  }
+  .about-mini-text {
+    letter-spacing: 4px !important;
+    font-size: 0.72rem !important;
+    margin-bottom: 14px !important;
+  }
+  .about-heading {
+    font-size: clamp(1.9rem, 5.5vw, 2.75rem) !important;
+    line-height: 1.15 !important;
+    letter-spacing: -1.5px !important;
+    margin-bottom: 18px !important;
+  }
+  .about-heading br {
+    display: none !important;
+  }
+  .about-line {
+    margin: 18px 0 !important;
+  }
+  .about-description {
+    font-size: 0.96rem !important;
+    line-height: 1.65 !important;
+    margin-bottom: 14px !important;
+    max-width: none !important;
+  }
+  .about-right {
+    width: 100% !important;
+  }
+  .about-right img {
+    width: 100% !important;
+    max-height: 320px !important;
+    object-fit: cover !important;
+    border-radius: 18px !important;
+  }
+
+  /* SECTION 3: SERVICES (SOLUTIONS) */
+  .services-section {
+    padding: 48px 24px !important;
+  }
+  .services-header {
+    margin-bottom: 24px !important;
+    text-align: left !important;
+  }
+  .services-mini-text {
+    letter-spacing: 4px !important;
+    font-size: 0.72rem !important;
+    margin-bottom: 12px !important;
+  }
+  .services-heading {
+    font-size: clamp(1.9rem, 5.5vw, 2.75rem) !important;
+    line-height: 1.15 !important;
+    letter-spacing: -1.5px !important;
+  }
+  .services-heading br {
+    display: none !important;
+  }
+  .flip-card-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 18px !important;
+    width: 100% !important;
+  }
+  .flip-card {
+    height: 260px !important;
+    width: 100% !important;
+  }
+  .flip-card-front h3 {
+    font-size: 1.45rem !important;
+    left: 24px !important;
+    bottom: 24px !important;
+  }
+  .flip-card-back {
+    padding: 24px 20px !important;
+  }
+  .flip-card-back h3 {
+    font-size: 1.3rem !important;
+    margin-bottom: 10px !important;
+  }
+  .flip-card-back p {
+    font-size: 0.88rem !important;
+    line-height: 1.55 !important;
+  }
+
+  /* SECTION 4: CONFIGURATION (START YOUR BUILD) */
+  .configuration-section {
+    padding: 40px 16px !important;
+  }
+
+  /* SECTION 5: BRANDS */
+  .brands-section {
+    padding: 44px 0 !important;
+    text-align: left !important;
+  }
+  .brands-content {
+    padding: 0 24px !important;
+    position: relative !important;
+    z-index: 10 !important;
+  }
+  .brands-mini-text {
+    letter-spacing: 4px !important;
+    font-size: 0.72rem !important;
+    margin-bottom: 12px !important;
+  }
+  .brands-heading {
+    font-size: clamp(1.9rem, 5.5vw, 2.75rem) !important;
+    line-height: 1.15 !important;
+    letter-spacing: -1.5px !important;
+    margin-bottom: 24px !important;
+  }
+  .brands-heading br {
+    display: none !important;
+  }
+  .brands-slider {
+    width: 100% !important;
+    overflow: hidden !important;
+  }
+
+  /* SECTION 6: WHY CHOOSE US */
+  .why-section {
+    padding: 48px 24px !important;
+  }
+  .why-container {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 28px !important;
+    padding: 0 !important;
+    width: 100% !important;
+    position: relative !important;
+    z-index: 10 !important;
+  }
+  .why-left {
+    width: 100% !important;
+    max-width: none !important;
+  }
+  .why-mini-text {
+    letter-spacing: 4px !important;
+    font-size: 0.72rem !important;
+    margin-bottom: 12px !important;
+  }
+  .why-heading {
+    font-size: clamp(1.9rem, 5.5vw, 2.75rem) !important;
+    line-height: 1.15 !important;
+    letter-spacing: -1.5px !important;
+    margin-bottom: 18px !important;
+  }
+  .why-heading br {
+    display: none !important;
+  }
+  .why-description {
+    font-size: 0.96rem !important;
+    line-height: 1.65 !important;
+    max-width: none !important;
+  }
+  .why-right {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+    width: 100% !important;
+  }
+  .why-flip-card {
+    width: 100% !important;
+    height: 210px !important;
+    min-height: 210px !important;
+    aspect-ratio: auto !important;
+  }
+  .why-flip-front h3 {
+    font-size: 1.35rem !important;
+  }
+  .why-flip-back {
+    padding: 22px 18px !important;
+  }
+  .why-flip-back h3 {
+    font-size: 1.25rem !important;
+    margin-bottom: 8px !important;
+  }
+  .why-flip-back p {
+    font-size: 0.88rem !important;
+    line-height: 1.5 !important;
+  }
+
+  /* SECTION 7: B2B PROCUREMENT */
+  .b2b-section {
+    padding: 48px 24px !important;
+  }
+  .b2b-content {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 28px !important;
+    padding: 0 !important;
+    width: 100% !important;
+    position: relative !important;
+    z-index: 10 !important;
+  }
+  .b2b-left {
+    width: 100% !important;
+    max-width: none !important;
+  }
+  .b2b-mini-text {
+    letter-spacing: 4px !important;
+    font-size: 0.72rem !important;
+    margin-bottom: 12px !important;
+  }
+  .b2b-left h2 {
+    font-size: clamp(1.9rem, 5.5vw, 2.75rem) !important;
+    line-height: 1.15 !important;
+    letter-spacing: -1.5px !important;
+    margin-bottom: 18px !important;
+  }
+  .b2b-left h2 br {
+    display: none !important;
+  }
+  .b2b-description {
+    font-size: 0.96rem !important;
+    line-height: 1.65 !important;
+    margin-bottom: 14px !important;
+    max-width: none !important;
+  }
+  .b2b-right {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 14px !important;
+    width: 100% !important;
+  }
+  .stat-card {
+    padding: 20px 18px !important;
+    border-radius: 16px !important;
+  }
+  .stat-card h3 {
+    font-size: 1.45rem !important;
+    margin-bottom: 4px !important;
+  }
+  .stat-card p {
+    font-size: 0.86rem !important;
+  }
+
+  /* SECTION 8: CONTACT */
+  .contact-section {
+    padding: 48px 24px !important;
+  }
+  .contact-content {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 28px !important;
+    padding: 0 !important;
+    width: 100% !important;
+    position: relative !important;
+    z-index: 10 !important;
+  }
+  .contact-left {
+    width: 100% !important;
+    max-width: none !important;
+  }
+  .contact-mini-text {
+    letter-spacing: 4px !important;
+    font-size: 0.72rem !important;
+    margin-bottom: 12px !important;
+  }
+  .contact-left h2 {
+    font-size: clamp(1.9rem, 5.5vw, 2.75rem) !important;
+    line-height: 1.15 !important;
+    letter-spacing: -1.5px !important;
+    margin-bottom: 18px !important;
+  }
+  .contact-left h2 br {
+    display: none !important;
+  }
+  .contact-description {
+    font-size: 0.96rem !important;
+    line-height: 1.65 !important;
+    margin-bottom: 22px !important;
+    max-width: none !important;
+  }
+  .contact-details {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 14px !important;
+  }
+  .contact-form-wrapper {
+    width: 100% !important;
+  }
+  .contact-form {
+    width: 100% !important;
+    padding: 24px 20px !important;
+    border-radius: 18px !important;
+    gap: 12px !important;
+  }
+  .contact-form input,
+  .contact-form textarea {
+    width: 100% !important;
+    padding: 14px 16px !important;
+    font-size: 16px !important;
+    border-radius: 12px !important;
+  }
+  .contact-form textarea {
+    height: 110px !important;
+  }
+  .contact-form button {
+    width: 100% !important;
+    padding: 15px !important;
+    font-size: 1rem !important;
+  }
+
+  /* SECTION 9: FINAL CALL TO ACTION */
+  .final-section {
+    padding: 55px 24px !important;
+    text-align: center !important;
+  }
+  .final-content {
+    width: 100% !important;
+    max-width: 650px !important;
+    margin: 0 auto !important;
+    position: relative !important;
+    z-index: 10 !important;
+  }
+  .final-mini-text {
+    letter-spacing: 4px !important;
+    font-size: 0.72rem !important;
+    margin-bottom: 14px !important;
+  }
+  .final-content h2 {
+    font-size: clamp(2rem, 5.5vw, 3rem) !important;
+    line-height: 1.15 !important;
+    letter-spacing: -1.5px !important;
+    margin-bottom: 18px !important;
+  }
+  .final-content h2 br {
+    display: none !important;
+  }
+  .final-description {
+    font-size: 0.96rem !important;
+    line-height: 1.65 !important;
+    margin-bottom: 28px !important;
+  }
+  .final-buttons {
+    flex-direction: column !important;
+    width: 100% !important;
+    max-width: 360px !important;
+    margin: 0 auto 32px !important;
+    gap: 12px !important;
+  }
+  .final-buttons a,
+  .final-buttons button {
+    width: 100% !important;
+    padding: 15px 24px !important;
+    font-size: 0.95rem !important;
+  }
+  .final-stats {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+    align-items: center !important;
+    width: 100% !important;
+  }
+  .final-stat-card {
+    width: 100% !important;
+    max-width: 320px !important;
+    padding: 20px !important;
+  }
+
+  /* FOOTER */
+  .footer {
+    padding: 48px 24px 28px !important;
+  }
+  .footer-links {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 24px !important;
+  }
+  .footer-bottom {
+    margin-top: 36px !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 12px !important;
+  }
+}
+
+/* SMARTPHONES & COMPACT SCREENS (<= 768px) */
+@media (max-width: 768px) {
+
+  /* COMPACT BALANCED PADDINGS - ZERO VOIDS */
+  .hero {
+    padding: 105px 16px 40px !important;
+  }
+  .about-section {
+    padding: 42px 16px !important;
+    gap: 24px !important;
+  }
+  .services-section {
+    padding: 42px 16px !important;
+  }
+  .configuration-section {
+    padding: 34px 12px !important;
+  }
+  .brands-section {
+    padding: 36px 0 !important;
+  }
+  .why-section {
+    padding: 42px 16px !important;
+    gap: 24px !important;
+  }
+  .b2b-section {
+    padding: 42px 16px !important;
+    gap: 24px !important;
+  }
+  .contact-section {
+    padding: 42px 16px !important;
+    gap: 24px !important;
+  }
+  .final-section {
+    padding: 44px 16px !important;
+  }
+  .footer {
+    padding: 42px 16px 24px !important;
+  }
+
+  /* FLUID TYPOGRAPHY FOR MOBILE PHONES */
+  .hero-content h1,
+  .about-heading,
+  .services-heading,
+  .brands-heading,
+  .why-heading,
+  .b2b-left h2,
+  .contact-left h2,
+  .final-content h2 {
+    font-size: clamp(1.8rem, 6.6vw, 2.3rem) !important;
+    line-height: 1.15 !important;
+    letter-spacing: -1px !important;
+    margin-bottom: 16px !important;
+  }
+
+  .hero-mini-text,
+  .about-mini-text,
+  .services-mini-text,
+  .brands-mini-text,
+  .why-mini-text,
+  .b2b-mini-text,
+  .contact-mini-text,
+  .final-mini-text {
+    letter-spacing: 3px !important;
+    font-size: 0.68rem !important;
+    margin-bottom: 12px !important;
+  }
+
+  .hero-description,
+  .about-description,
+  .why-description,
+  .b2b-description,
+  .contact-description,
+  .final-description {
+    font-size: 0.92rem !important;
+    line-height: 1.6 !important;
+    margin-bottom: 18px !important;
+  }
+
+  /* MOBILE CARDS */
+  .flip-card {
+    height: 250px !important;
+  }
+  .why-flip-card {
+    height: 195px !important;
+    min-height: 195px !important;
+  }
+  .b2b-right {
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+  }
+  .footer-links {
+    grid-template-columns: 1fr !important;
+    gap: 22px !important;
+  }
+}
+
+/* EXTRA COMPACT PHONES (<= 480px) */
+@media (max-width: 480px) {
+  .main-navbar {
+    height: 58px !important;
+    padding: 0 12px !important;
+    top: 8px !important;
+    width: 95% !important;
+    border-radius: 18px !important;
+  }
+  .nav-logo img {
+    height: 32px !important;
+  }
+  .hero {
+    padding: 95px 12px 35px !important;
+  }
+  .about-section,
+  .services-section,
+  .why-section,
+  .b2b-section,
+  .contact-section,
+  .final-section {
+    padding: 36px 12px !important;
+  }
+  .configuration-section {
+    padding: 30px 10px !important;
+  }
+  .brands-section {
+    padding: 32px 0 !important;
+  }
+  .flip-card {
+    height: 240px !important;
+  }
+  .why-flip-card {
+    height: 185px !important;
+    min-height: 185px !important;
+  }
 }

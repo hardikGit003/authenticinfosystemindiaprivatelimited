@@ -45,6 +45,7 @@ export default function Configurator({
   const [activeProcessor, setActiveProcessor] = useState("All");
   const [activeRAM, setActiveRAM] = useState("All");
   const [activeStorage, setActiveStorage] = useState("All");
+  const [showMobileFilters, setShowMobileFilters] = useState(false);
 
   const targetCategories = systemCategoryMap[defaultSystem] || ["Basic"];
   
@@ -113,22 +114,36 @@ export default function Configurator({
   };
 
   return (
-    <main className="min-h-screen bg-[#0A0F1C] text-white selection:bg-blue-500/30 pt-40 pb-20">
+    <main className="min-h-screen bg-[#0A0F1C] text-white selection:bg-blue-500/30 pt-28 sm:pt-40 pb-12 sm:pb-20">
       <div className="page-container">
         
-        <div className="mb-12 border-b border-gray-800 pb-8 text-center md:text-left">
-          <p className="text-blue-500 font-bold tracking-widest uppercase text-sm mb-2">Build Your Workflow</p>
-          <h1 className="text-4xl md:text-5xl font-black text-white tracking-tight">
+        <div className="mb-8 sm:mb-12 border-b border-gray-800 pb-6 sm:pb-8 text-center md:text-left">
+          <p className="text-blue-500 font-bold tracking-widest uppercase text-xs sm:text-sm mb-2">Build Your Workflow</p>
+          <h1 className="text-2xl sm:text-4xl md:text-5xl font-black text-white tracking-tight">
             {pageTitles[defaultSystem] || "Customize Your PC"}
           </h1>
-          <p className="text-gray-400 mt-4 max-w-2xl text-lg">
+          <p className="text-gray-400 mt-3 sm:mt-4 max-w-2xl text-sm sm:text-base md:text-lg">
             We've curated the best hardware for your specific use case. Use the filters to narrow down the perfect machine for your needs.
           </p>
         </div>
 
+        {/* Mobile Filters Toggle Button */}
+        <button
+          onClick={() => setShowMobileFilters((prev) => !prev)}
+          className="lg:hidden w-full mb-6 py-3 px-4 rounded-xl bg-white/5 border border-white/10 text-white font-medium flex items-center justify-between text-sm"
+        >
+          <span className="flex items-center gap-2">
+            <svg className="w-4 h-4 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
+            </svg>
+            Refine Search Filters
+          </span>
+          <span className="text-blue-400 text-xs font-semibold">{showMobileFilters ? "Hide ▲" : "Show ▼"}</span>
+        </button>
+
         <div className="grid-12">
           {/* Left Sidebar Filters */}
-          <div className="col-span-12 lg:col-span-3">
+          <div className={`col-span-12 lg:col-span-3 ${showMobileFilters ? "block" : "hidden lg:block"}`}>
             <div className="bg-[#111827] border border-gray-800 rounded-2xl p-6 sticky top-32 shadow-xl">
               <h3 className="text-xl font-bold mb-6 border-b border-gray-700 pb-4 text-white">Refine Search</h3>
               
