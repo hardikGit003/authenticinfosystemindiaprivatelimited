@@ -12,11 +12,6 @@ export type Product = {
 };
 
 // Image references
-const IMG_DELL_LAPTOP = "https://images.unsplash.com/photo-1593642632823-8f785ba67e45?w=600&auto=format&fit=crop&q=60";
-const IMG_HP_LAPTOP = "https://images.unsplash.com/photo-1583394838336-acd977736f90?w=600&auto=format&fit=crop&q=60";
-const IMG_LENOVO_LAPTOP = "https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=600&auto=format&fit=crop&q=60";
-const IMG_ASUS_LAPTOP = "https://images.unsplash.com/photo-1600861194942-f883de0dfe96?w=600&auto=format&fit=crop&q=60";
-
 const IMG_DELL_DESKTOP = "https://images.unsplash.com/photo-1593640408182-31c70c8268f5?w=600&auto=format&fit=crop&q=60";
 const IMG_HP_DESKTOP = "https://images.unsplash.com/photo-1587831990711-23ca6441447b?w=600&auto=format&fit=crop&q=60";
 const IMG_LENOVO_DESKTOP = "https://images.unsplash.com/photo-1547082299-de196ea013d6?w=600&auto=format&fit=crop&q=60";
@@ -32,7 +27,7 @@ export const laptopProducts: Product[] = [
     brand: "Dell",
     category: "Basic",
     price: 38990,
-    image: IMG_DELL_LAPTOP,
+    image: "/products/laptops/dell-vostro-3520.jpg",
     specs: [
       { label: "Processor", value: "Intel Core i3-1215U" },
       { label: "RAM", value: "8GB DDR4" },
@@ -49,7 +44,7 @@ export const laptopProducts: Product[] = [
     brand: "HP",
     category: "Basic",
     price: 42500,
-    image: IMG_HP_LAPTOP,
+    image: "/products/laptops/hp-15s.jpg",
     specs: [
       { label: "Processor", value: "Intel Core i5-1235U" },
       { label: "RAM", value: "8GB DDR4" },
@@ -66,7 +61,7 @@ export const laptopProducts: Product[] = [
     brand: "Lenovo",
     category: "Basic",
     price: 45990,
-    image: IMG_LENOVO_LAPTOP,
+    image: "/products/laptops/lenovo-ideapad-slim-3.jpg",
     specs: [
       { label: "Processor", value: "AMD Ryzen 5 7520U" },
       { label: "RAM", value: "16GB LPDDR5" },
@@ -83,7 +78,7 @@ export const laptopProducts: Product[] = [
     brand: "Asus",
     category: "Basic",
     price: 36990,
-    image: IMG_ASUS_LAPTOP,
+    image: "/products/laptops/asus-vivobook-15.jpg",
     specs: [
       { label: "Processor", value: "Intel Core i3-1220P" },
       { label: "RAM", value: "8GB DDR4" },
@@ -102,7 +97,7 @@ export const laptopProducts: Product[] = [
     brand: "Dell",
     category: "Gaming",
     price: 165000,
-    image: IMG_DELL_LAPTOP,
+    image: "/products/laptops/alienware-m16-r2.jpg",
     specs: [
       { label: "Processor", value: "Intel Core Ultra 7 155H" },
       { label: "RAM", value: "16GB DDR5" },
@@ -119,7 +114,7 @@ export const laptopProducts: Product[] = [
     brand: "HP",
     category: "Gaming",
     price: 135000,
-    image: IMG_HP_LAPTOP,
+    image: "/products/laptops/hp-omen-16.jpg",
     specs: [
       { label: "Processor", value: "AMD Ryzen 7 7840HS" },
       { label: "RAM", value: "16GB DDR5" },
@@ -136,7 +131,7 @@ export const laptopProducts: Product[] = [
     brand: "Lenovo",
     category: "Gaming",
     price: 155000,
-    image: IMG_LENOVO_LAPTOP,
+    image: "/products/laptops/lenovo-legion-pro-5i.jpg",
     specs: [
       { label: "Processor", value: "Intel Core i7-13700HX" },
       { label: "RAM", value: "32GB DDR5" },
@@ -153,7 +148,7 @@ export const laptopProducts: Product[] = [
     brand: "Asus",
     category: "Gaming",
     price: 142000,
-    image: IMG_ASUS_LAPTOP,
+    image: "/products/laptops/asus-rog-strix-g16.jpg",
     specs: [
       { label: "Processor", value: "Intel Core i7-13650HX" },
       { label: "RAM", value: "16GB DDR5" },
@@ -172,7 +167,7 @@ export const laptopProducts: Product[] = [
     brand: "Dell",
     category: "Editing",
     price: 195000,
-    image: IMG_DELL_LAPTOP,
+    image: "/products/laptops/dell-xps-15.jpg",
     specs: [
       { label: "Processor", value: "Intel Core i7-13700H" },
       { label: "RAM", value: "32GB DDR5" },
@@ -189,7 +184,7 @@ export const laptopProducts: Product[] = [
     brand: "HP",
     category: "Editing",
     price: 158000,
-    image: IMG_HP_LAPTOP,
+    image: "/products/laptops/hp-spectre-x360.jpg",
     specs: [
       { label: "Processor", value: "Intel Core Ultra 7 155H" },
       { label: "RAM", value: "32GB LPDDR5x" },
@@ -206,7 +201,7 @@ export const laptopProducts: Product[] = [
     brand: "Lenovo",
     category: "Editing",
     price: 175000,
-    image: IMG_LENOVO_LAPTOP,
+    image: "/products/laptops/lenovo-yoga-pro-9i.jpg",
     specs: [
       { label: "Processor", value: "Intel Core i9-13905H" },
       { label: "RAM", value: "32GB LPDDR5x" },
@@ -223,7 +218,7 @@ export const laptopProducts: Product[] = [
     brand: "Asus",
     category: "Editing",
     price: 185000,
-    image: IMG_ASUS_LAPTOP,
+    image: "/products/laptops/asus-zenbook-pro-14-duo.jpg",
     specs: [
       { label: "Processor", value: "Intel Core i9-13900H" },
       { label: "RAM", value: "32GB LPDDR5" },
@@ -242,7 +237,7 @@ export const laptopProducts: Product[] = [
     brand: "Dell",
     category: "Enterprise",
     price: 125000,
-    image: IMG_DELL_LAPTOP,
+    image: "/products/laptops/dell-latitude-7440.jpg",
     specs: [
       { label: "Processor", value: "Intel Core i5-1335U" },
       { label: "RAM", value: "16GB LPDDR5" },
@@ -259,7 +254,7 @@ export const laptopProducts: Product[] = [
     brand: "HP",
     category: "Enterprise",
     price: 132000,
-    image: IMG_HP_LAPTOP,
+    image: "/products/laptops/hp-elitebook-840-g10.jpg",
     specs: [
       { label: "Processor", value: "Intel Core i7-1355U" },
       { label: "RAM", value: "16GB DDR5" },
@@ -276,7 +271,7 @@ export const laptopProducts: Product[] = [
     brand: "Lenovo",
     category: "Enterprise",
     price: 155000,
-    image: IMG_LENOVO_LAPTOP,
+    image: "/products/laptops/lenovo-thinkpad-x1-carbon.jpg",
     specs: [
       { label: "Processor", value: "Intel Core i7-1365U vPro" },
       { label: "RAM", value: "32GB LPDDR5" },
@@ -293,7 +288,7 @@ export const laptopProducts: Product[] = [
     brand: "Asus",
     category: "Enterprise",
     price: 145000,
-    image: IMG_ASUS_LAPTOP,
+    image: "/products/laptops/asus-expertbook-b9.jpg",
     specs: [
       { label: "Processor", value: "Intel Core i7-1255U" },
       { label: "RAM", value: "16GB LPDDR5" },
