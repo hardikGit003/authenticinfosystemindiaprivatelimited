@@ -7,6 +7,7 @@ interface ProductCardProps {
   name: string;
   modelNumber: string;
   image: string;
+  description?: string;
   price?: number;
   specs: { label: string; value: string }[];
   badges: string[];
@@ -19,6 +20,7 @@ export default function ProductCard({
   name,
   modelNumber,
   image,
+  description,
   price,
   specs,
   badges,
@@ -50,6 +52,11 @@ export default function ProductCard({
         <div className="mb-4">
           <p className="text-gray-400 text-xs tracking-widest uppercase mb-1">{modelNumber}</p>
           <h3 className="text-xl font-semibold text-white leading-tight mb-2">{name}</h3>
+          {description && (
+            <p className="text-gray-300/80 text-xs sm:text-sm leading-relaxed mb-3 line-clamp-2">
+              {description}
+            </p>
+          )}
           {price && (
             <p className="text-2xl font-bold text-blue-400">
               {new Intl.NumberFormat("en-IN", {

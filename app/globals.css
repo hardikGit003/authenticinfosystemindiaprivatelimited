@@ -34,10 +34,6 @@ section {
 
   width: 100%;
 
-  min-height: 100vh;
-
-  overflow: hidden;
-
   background: black;
 }
 
@@ -49,7 +45,7 @@ section {
   position: relative;
 
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
 
   overflow: hidden;
 
@@ -61,6 +57,7 @@ section {
 
   margin-top: 0;
   padding-top: 0.1px;
+  padding-bottom: 40px;
 }
 
 /* VIDEO WRAPPER */
@@ -138,7 +135,7 @@ section {
 
   padding-right: 60px;
 
-  padding-top: 110px;
+  padding-top: 80px;
 
   display: flex;
 
@@ -164,23 +161,23 @@ section {
 
   color: rgba(255, 255, 255, 0.62);
 
-  margin-bottom: 50px;
+  margin-bottom: 24px;
 
 }
 
 .hero-content h1 {
 
-  font-size: clamp(3.4rem, 7vw, 5.4rem);
+  font-size: clamp(3.2rem, 6.5vw, 5rem);
 
-  line-height: 0.90;
+  line-height: 0.95;
 
   font-weight: 750;
 
-  letter-spacing: -4px;
+  letter-spacing: -3px;
 
   max-width: 1350px;
 
-  margin: 0 auto 42px;
+  margin: 0 auto 28px;
 
   text-align: center;
 
@@ -202,7 +199,7 @@ section {
 
   font-size: 1.00rem;
 
-  line-height: 2.1;
+  line-height: 2.0;
 
   font-weight: 300;
 
@@ -230,15 +227,13 @@ section {
 
   justify-content: center;
 
-  gap: 32px;
+  gap: 28px;
 
-  margin-top: 60px;
+  margin-top: 36px;
 
   position: relative;
 
   z-index: 10;
-
-  transform: translateY(25px);
 
 }
 
@@ -2536,10 +2531,11 @@ section {
   transform: translateX(-50%);
 
   width: 96%;
+  max-width: 1440px;
 
-  height: 82px;
+  height: 74px;
 
-  padding: 0 42px;
+  padding: 0 24px;
 
   display: flex;
 
@@ -2547,19 +2543,19 @@ section {
 
   justify-content: space-between;
 
-  border-radius: 22px;
+  border-radius: 9999px;
 
   background: #ffffff;
 
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.08);
 
   box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.35),
-    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    0 8px 30px rgba(0, 0, 0, 0.18),
+    0 2px 8px rgba(0, 0, 0, 0.06);
 
   z-index: 9999;
 
-  transition: all 0.4s ease;
+  transition: all 0.35s ease;
 }
 
 /* =========================================
@@ -2597,96 +2593,18 @@ section {
 
   cursor: pointer;
 
-  transition: all 0.4s ease;
+  transition: all 0.3s ease;
 }
 
 .nav-logo img {
-  height: 58px;
+  height: 44px;
   width: auto;
   object-fit: contain;
-  mix-blend-mode: multiply;
-  transition: all 0.4s ease;
+  transition: all 0.3s ease;
 }
 
 .nav-logo:hover img {
-  transform: scale(1.06);
-}
-
-/* =========================================
-   NAV LINKS
-========================================= */
-
-.nav-links {
-  position: relative;
-
-  z-index: 2;
-
-  display: flex;
-
-  align-items: center;
-
-  gap: 42px;
-}
-
-.nav-links a {
-  position: relative;
-
-  color: #333333;
-
-  text-decoration: none;
-
-  font-size: 1.1rem;
-
-  font-weight: 500;
-
-  letter-spacing: 0.3px;
-
-  transition: all 0.35s ease;
-}
-
-/* NAV ANIMATION REMOVED */
-.nav-links a:hover {
-  color: #000000;
-}
-
-/* =========================================
-   SEARCH ICON
-========================================= */
-
-.nav-search {
-  position: relative;
-
-  z-index: 2;
-
-  width: 48px;
-
-  height: 48px;
-
-  border-radius: 50%;
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: center;
-
-  color: #333;
-
-  background: rgba(0, 0, 0, 0.06);
-
-  border: 1px solid rgba(0, 0, 0, 0.08);
-
-  cursor: pointer;
-
-  transition: all 0.35s ease;
-}
-
-.nav-search:hover {
-  transform: scale(1.1);
-
-  background: rgba(77, 163, 255, 0.18);
-
-  box-shadow: 0 0 20px rgba(77, 163, 255, 0.4);
+  transform: scale(1.04);
 }
 
 /* =========================================

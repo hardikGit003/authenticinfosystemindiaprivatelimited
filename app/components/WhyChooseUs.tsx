@@ -4,25 +4,25 @@ import { useState } from "react";
 
 const whyCards = [
   {
-    image: "/Photos/1g.png",
+    image: "/Pan%20India%20Delivery.jpg",
     frontTitle: "PAN India Delivery",
     backTitle: "Nationwide Logistics",
     backDesc: "Reliable procurement and fast delivery support for businesses, institutions, enterprise clients, and organizations across India."
   },
   {
-    image: "/Photos/2g.png",
-    frontTitle: "B2B & B2C Solutions",
+    image: "/B2B%20%26%20B2C%20Business.jpg",
+    frontTitle: "B2B & B2C Business",
     backTitle: "Flexible Supply",
     backDesc: "Supplying IT hardware, laptops, and networking systems for both large enterprise setups and individual requirements."
   },
   {
-    image: "/Photos/3g.png",
+    image: "/Direct%20Procurement.jpg",
     frontTitle: "Direct Procurement",
     backTitle: "Direct Sourcing",
     backDesc: "Competitive pricing, genuine products, and trusted technology procurement from top global brands."
   },
   {
-    image: "/Photos/4g.png",
+    image: "/Enterprise%20Assitacne.jpg",
     frontTitle: "Enterprise Assistance",
     backTitle: "Dedicated Support",
     backDesc: "Infrastructure consultation, deployment guidance, and long term enterprise technology assistance."

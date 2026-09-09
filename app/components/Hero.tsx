@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import Link from "next/link";
 
 export default function Hero() {
 
@@ -84,25 +85,21 @@ return () => {
 
         {/* BUTTONS */}
 
-   <div className="hero-buttons">
+        <div className="hero-buttons">
 
-  <a href="#solutions">
+          <Link href="/configuration">
+            <button className="primary-btn">
+              Customize your System
+            </button>
+          </Link>
 
-    <button className="primary-btn">
-      Explore Solutions
-    </button>
+          <a href="#contact">
+            <button className="primary-btn">
+              Contact Us
+            </button>
+          </a>
 
-  </a>
-
-  <a href="#configuration">
-
-    <button className="primary-btn">
-      Customize your system
-    </button>
-
-  </a>
-
-</div>
+        </div>
       </div>
 
     </section>

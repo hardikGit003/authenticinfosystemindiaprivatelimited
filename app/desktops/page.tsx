@@ -13,6 +13,33 @@ const brands = ["All", "Lenovo", "HP", "Dell", "Asus"];
 const processors = ["All", "Intel Core i3", "Intel Core i5", "Intel Core i7", "Intel Core i9", "AMD Ryzen 5", "AMD Ryzen 7"];
 const rams = ["All", "8GB", "16GB", "32GB", "64GB"];
 
+const popularConfigs = [
+  {
+    title: "Office Package",
+    image: "/Desktop%20Subpage/Office%20Package.jpg",
+  },
+  {
+    title: "Developer Package",
+    image: "/Desktop%20Subpage/Developer%20Package.jpg",
+  },
+  {
+    title: "Video Editing Package",
+    image: "/Desktop%20Subpage/Video%20Editing%20Package.jpg",
+  },
+  {
+    title: "AI Training Package",
+    image: "/Desktop%20Subpage/AI%20Training%20.jpg",
+  },
+  {
+    title: "AutoCAD Package",
+    image: "/Desktop%20Subpage/Autocad%20Package.jpg",
+  },
+  {
+    title: "Enterprise Package",
+    image: "/Desktop%20Subpage/Enterprise%20Package.jpg",
+  },
+];
+
 export default function DesktopsPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState("All");
@@ -213,43 +240,53 @@ export default function DesktopsPage() {
         </div>
       </section>
 
-      {/* Performance Comparison Infographics */}
-      <section className="py-24 bg-white/5 page-container">
-        <SectionHeader title="Performance Comparison Metrics" subtitle="Evaluate what matters most for your workloads." />
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
-          {['Performance Score', 'Power Consumption', 'Upgradeability', 'Warranty'].map((metric, i) => (
-            <div key={i} className="glass-card p-6 border-t-4 border-t-blue-500">
-              <h4 className="text-lg font-semibold text-gray-200 mb-4">{metric}</h4>
-              <div className="h-32 w-full bg-gradient-to-tr from-white/5 to-white/10 rounded-lg flex items-center justify-center border border-white/5">
-                <span className="text-white/20 font-mono text-sm">[Infographic]</span>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
 
       {/* Popular Configurations */}
-      <section className="py-24 page-container">
+      <section className="py-12 sm:py-16 page-container">
         <SectionHeader title="Popular Configurations" align="center" />
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
-          {['Office Package', 'Developer Package', 'Video Editing Package', 'AI Training Package', 'AutoCAD Package', 'Enterprise Package'].map((pkg, i) => (
-            <div key={i} className="bg-white rounded-[22px] p-8 border border-black/5 shadow-[0_8px_32px_rgba(0,0,0,0.35)] text-center cursor-pointer group hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
-              <h3 className="text-xl font-bold text-black mb-3 group-hover:text-blue-600 transition-colors">{pkg}</h3>
-              <p className="text-gray-600 text-sm leading-relaxed">Optimized hardware bundled with recommended peripherals for this specific workflow.</p>
-            </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mt-6">
+          {popularConfigs.map((pkg, i) => (
+            <a
+              key={i}
+              href={`https://wa.me/919643990077?text=${encodeURIComponent(`Hi, I am interested in the ${pkg.title} desktop configuration from Authentic Infosystem.`)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="relative rounded-[22px] overflow-hidden min-h-[150px] sm:min-h-[170px] flex items-center justify-center p-6 border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.35)] cursor-pointer group hover:shadow-[0_12px_40px_rgba(77,163,255,0.25)] hover:border-blue-500/40 hover:-translate-y-1.5 transition-all duration-300 block"
+            >
+              {/* Background Image with uniform ratio & cover */}
+              <img
+                src={pkg.image}
+                alt={pkg.title}
+                className="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700 ease-out"
+              />
+
+              {/* Light Vignette Overlay for Clear Image Visibility */}
+              <div className="absolute inset-0 bg-black/25 group-hover:bg-black/15 transition-colors duration-300" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-black/30" />
+
+              {/* Centered Heading with White Text & Strong Contrast Shadow */}
+              <h3 className="relative z-10 text-white font-bold text-lg sm:text-xl md:text-2xl text-center px-4 tracking-wide drop-shadow-[0_4px_16px_rgba(0,0,0,1)] [text-shadow:_0_2px_14px_rgba(0,0,0,0.95)] group-hover:text-blue-100 group-hover:scale-105 transition-all duration-300">
+                {pkg.title}
+              </h3>
+            </a>
           ))}
         </div>
       </section>
 
       {/* CTA Banner */}
-      <section className="py-24 text-center page-container border-t border-white/10">
-        <div className="glass-card max-w-4xl mx-auto p-12 bg-gradient-to-br from-blue-900/40 to-black relative overflow-hidden">
+      <section className="py-12 sm:py-16 text-center page-container border-t border-white/10">
+        <div className="glass-card max-w-4xl mx-auto p-8 sm:p-12 bg-gradient-to-br from-blue-900/40 to-black relative overflow-hidden">
           <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl"></div>
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 relative z-10">Build Your Custom Desktop</h2>
-          <p className="text-gray-300 text-lg mb-10 max-w-2xl mx-auto relative z-10">Don't see exactly what you need? We build custom workstations tailored to your specific enterprise requirements.</p>
-          <button className="relative z-10 px-8 py-4 bg-white text-black hover:bg-gray-200 rounded-full font-semibold transition-all">
+          <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4 relative z-10">Build Your Custom Desktop</h2>
+          <p className="text-gray-300 text-sm sm:text-base md:text-lg mb-6 sm:mb-8 max-w-2xl mx-auto relative z-10">Don't see exactly what you need? We build custom workstations tailored to your specific enterprise requirements.</p>
+          <a
+            href="https://wa.me/919643990077?text=Hi%2C%20I%20want%20to%20request%20a%20custom%20desktop%20configuration%20from%20Authentic%20Infosystem."
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block relative z-10 px-6 sm:px-8 py-3 sm:py-3.5 bg-white text-black hover:bg-gray-200 rounded-full font-semibold text-sm transition-all shadow-lg hover:scale-105 active:scale-95"
+          >
             Request Configuration
-          </button>
+          </a>
         </div>
       </section>
 

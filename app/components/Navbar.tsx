@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { FaSearch, FaBars, FaTimes } from "react-icons/fa";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -16,14 +16,19 @@ const navLinks = [
 export default function Navbar() {
   const pathname = usePathname();
   const [searchValue, setSearchValue] = useState("");
-  const [searchOpen, setSearchOpen] = useState(false);
+  const [isSearchHovered, setIsSearchHovered] = useState(false);
+  const [isSearchFocused, setIsSearchFocused] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const isSearchExpanded = isSearchHovered || isSearchFocused || searchValue.length > 0;
 
   // Close menus when route changes
   useEffect(() => {
     setMobileMenuOpen(false);
-    setSearchOpen(false);
+    setIsSearchHovered(false);
+    setIsSearchFocused(false);
   }, [pathname]);
 
   // Lock body scroll when mobile menu is open
@@ -85,85 +90,109 @@ export default function Navbar() {
         {/* GLASS OVERLAY */}
         <div className="navbar-overlay"></div>
 
-        {/* LOGO */}
-        <a href="/" className="nav-logo flex items-center">
-          <img src="/Navbar%20Logo-Photoroom.png" alt="Authentic Infosystem" className="h-10 md:h-12 w-auto object-contain" />
-        </a>
+        {/* LEFT CONTAINER: LOGO */}
+        <div className="flex items-center shrink-0 z-10">
+          <a href="/" className="nav-logo flex items-center">
+            <img src="/logo_theme.png" alt="Authentic Infosystem" className="h-9 md:h-11 w-auto object-contain" />
+          </a>
+        </div>
 
-        {/* DESKTOP NAV LINKS */}
-        <div className="nav-links flex gap-2">
+        {/* CENTER CONTAINER: BALANCED CENTERED DESKTOP NAV LINKS */}
+        <div className="hidden lg:flex items-center justify-center gap-1 xl:gap-2.5 flex-1 px-4 z-10">
           {navLinks.map((item) => (
             <Link 
               key={item.href} 
               href={item.href} 
-              className="group relative px-4 py-2 rounded-full transition-all duration-300 hover:text-blue-100"
+              className={`relative px-4 py-2 rounded-full text-sm xl:text-[0.95rem] font-medium transition-all duration-200 ${
+                pathname === item.href 
+                  ? "text-blue-600 bg-blue-50/90 font-semibold shadow-xs" 
+                  : "text-gray-700 hover:text-black hover:bg-gray-100/80"
+              }`}
             >
-              {/* Glowing Aura Background */}
-              <span className="absolute inset-0 bg-blue-500/20 blur-[8px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-              <span className="absolute inset-0 bg-blue-400/20 shadow-[0_0_15px_rgba(77,163,255,0.8)] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-              
-              {/* Text */}
-              <span className="relative z-10 font-medium">{item.label}</span>
+              <span className="relative z-10">{item.label}</span>
             </Link>
           ))}
           <a 
             href="/#contact" 
-            className="group relative px-4 py-2 rounded-full transition-all duration-300 hover:text-blue-100"
+            className="relative px-4 py-2 rounded-full text-sm xl:text-[0.95rem] font-medium text-gray-700 hover:text-black hover:bg-gray-100/80 transition-all duration-200"
           >
-            {/* Glowing Aura Background */}
-            <span className="absolute inset-0 bg-blue-500/20 blur-[8px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-            <span className="absolute inset-0 bg-blue-400/20 shadow-[0_0_15px_rgba(77,163,255,0.8)] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-            
-            {/* Text */}
-            <span className="relative z-10 font-medium">Contact</span>
+            <span className="relative z-10">Contact</span>
           </a>
         </div>
 
-        {/* SEARCH & MOBILE TOGGLE */}
-        <div className="relative flex items-center gap-1 ml-2">
-          <button
-            type="button"
-            aria-label="Search"
-            className="relative text-gray-800 hover:text-blue-600 transition-colors p-2 z-20"
-            onClick={() => setSearchOpen((prev) => !prev)}
+        {/* RIGHT CONTAINER: EXPANDABLE INLINE SEARCH + MOBILE MENU */}
+        <div className="flex items-center justify-end shrink-0 gap-2 z-10">
+          {/* INLINE EXPANDABLE SEARCH ON HOVER */}
+          <div 
+            className="hidden md:flex items-center"
+            onMouseEnter={() => {
+              setIsSearchHovered(true);
+            }}
+            onMouseLeave={() => {
+              setIsSearchHovered(false);
+            }}
           >
-            <FaSearch size={18} />
-          </button>
+            <div 
+              className={`relative flex items-center transition-all duration-300 ease-out overflow-hidden ${
+                isSearchExpanded
+                  ? "w-52 lg:w-64 xl:w-72 h-10 bg-gray-100/90 border border-gray-300/80 rounded-full px-3 shadow-inner"
+                  : "w-10 h-10 bg-gray-100/80 border border-gray-200/90 rounded-full justify-center cursor-pointer hover:bg-blue-50 hover:border-blue-200"
+              }`}
+              onClick={() => {
+                setIsSearchHovered(true);
+                inputRef.current?.focus();
+              }}
+            >
+              <FaSearch 
+                className={`shrink-0 transition-colors duration-200 ${
+                  isSearchExpanded ? "text-blue-600" : "text-gray-600"
+                }`} 
+                size={14} 
+              />
+              
+              <input
+                ref={inputRef}
+                type="text"
+                className={`bg-transparent text-sm text-gray-900 placeholder-gray-400 focus:outline-none transition-all duration-300 ml-2.5 font-normal ${
+                  isSearchExpanded ? "w-full opacity-100" : "w-0 opacity-0 pointer-events-none"
+                }`}
+                placeholder="Search products..."
+                value={searchValue}
+                onChange={(e) => setSearchValue(e.target.value)}
+                onFocus={() => setIsSearchFocused(true)}
+                onBlur={() => setIsSearchFocused(false)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    navigateToSection(searchValue);
+                  }
+                }}
+              />
+
+              {isSearchExpanded && (
+                <button
+                  type="button"
+                  aria-label="Submit search"
+                  className="shrink-0 text-xs font-semibold px-2.5 py-1 bg-blue-600 hover:bg-blue-500 text-white rounded-full transition-all shadow-sm ml-1"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    navigateToSection(searchValue);
+                  }}
+                >
+                  Go
+                </button>
+              )}
+            </div>
+          </div>
 
           {/* HAMBURGER TOGGLE (Mobile & Tablet) */}
           <button
             type="button"
             aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
-            className="lg:hidden text-gray-800 hover:text-blue-600 p-2 transition-colors z-20 flex items-center justify-center"
+            className="lg:hidden text-gray-800 hover:text-blue-600 p-2 transition-colors flex items-center justify-center rounded-full hover:bg-gray-100"
             onClick={() => setMobileMenuOpen((prev) => !prev)}
           >
             {mobileMenuOpen ? <FaTimes size={20} /> : <FaBars size={20} />}
           </button>
-
-          {/* DESKTOP/MOBILE SEARCH DROPDOWN */}
-          {searchOpen && (
-            <div className="absolute right-0 top-full mt-4 w-72 max-w-[calc(100vw-36px)] bg-[#0a0f1c] border border-gray-800 rounded-xl shadow-[0_12px_40px_rgba(0,0,0,0.6)] p-2 flex gap-2 z-50 backdrop-blur-xl">
-              <input
-                type="text"
-                className="flex-1 bg-white/5 border border-white/10 text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 px-3 py-2 rounded-lg text-sm transition-all"
-                placeholder="Search products..."
-                value={searchValue}
-                onChange={(event) => setSearchValue(event.target.value)}
-                onKeyDown={(event) => {
-                  if (event.key === "Enter") {
-                    navigateToSection(searchValue);
-                  }
-                }}
-              />
-              <button
-                type="button"
-                className="bg-blue-600 hover:bg-blue-700 text-white px-3.5 py-2 rounded-lg text-sm font-semibold transition-colors shadow-sm"
-                onClick={() => navigateToSection(searchValue)}
-              >
-                Go
-              </button>
-            </div>
-          )}
         </div>
 
         {/* TOAST MESSAGE */}

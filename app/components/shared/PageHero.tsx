@@ -23,7 +23,7 @@ export default function PageHero({
   bgImage = "/placeholder-hero.jpg",
 }: PageHeroProps) {
   return (
-    <section className="relative w-full min-h-[50vh] sm:min-h-[65vh] flex items-center justify-center overflow-hidden bg-black pt-28 sm:pt-40 pb-12 sm:pb-16">
+    <section className="relative w-full min-h-[42vh] sm:min-h-[52vh] flex items-center justify-center overflow-hidden bg-black pt-28 sm:pt-36 pb-8 sm:pb-12">
       {/* Background Image & Overlay */}
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-transparent z-10" />

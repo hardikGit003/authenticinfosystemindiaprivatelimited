@@ -213,26 +213,26 @@ export default function LaptopsPage() {
       </section>
 
       {/* Why Buy & Buying Guide Sections */}
-      <section className="py-24 page-container border-t border-white/10">
+      <section className="py-12 sm:py-16 page-container border-t border-white/10">
         <SectionHeader title="Why Buy From Authentic Infosystem" align="center" />
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mt-6">
           {['Genuine Products', 'PAN India Delivery', 'Bulk Corporate Pricing', 'Certified Technical Support'].map((benefit, i) => (
-            <div key={i} className="bg-white rounded-[22px] border border-black/5 shadow-[0_8px_32px_rgba(0,0,0,0.35)] p-8 text-center flex flex-col items-center hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
-              <div className="w-16 h-16 rounded-2xl bg-blue-100 text-blue-600 flex items-center justify-center text-2xl mb-6 shadow-sm">
+            <div key={i} className="bg-white rounded-[22px] border border-black/5 shadow-[0_8px_32px_rgba(0,0,0,0.35)] p-6 sm:p-8 text-center flex flex-col items-center hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300">
+              <div className="w-14 h-14 rounded-2xl bg-blue-100 text-blue-600 flex items-center justify-center text-xl mb-4 shadow-sm">
                 ★
               </div>
-              <h4 className="text-lg font-bold text-black">{benefit}</h4>
+              <h4 className="text-base sm:text-lg font-bold text-black">{benefit}</h4>
             </div>
           ))}
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 bg-gradient-to-b from-blue-900/20 to-black text-center page-container border-t border-white/10">
-        <h2 className="text-4xl md:text-5xl font-bold mb-6">Need help choosing the perfect laptop?</h2>
-        <p className="text-gray-400 text-lg mb-10 max-w-2xl mx-auto">Our experts can help you match the right technology with your specific business or educational requirements.</p>
-        <button className="px-8 py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-full font-semibold transition-all shadow-[0_0_20px_rgba(37,99,235,0.4)]">
+      <section className="py-12 sm:py-16 bg-gradient-to-b from-blue-900/20 to-black text-center page-container border-t border-white/10">
+        <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4">Need help choosing the perfect laptop?</h2>
+        <p className="text-gray-400 text-sm sm:text-base md:text-lg mb-6 sm:mb-8 max-w-2xl mx-auto">Our experts can help you match the right technology with your specific business or educational requirements.</p>
+        <button className="px-6 sm:px-8 py-3 sm:py-3.5 bg-blue-600 hover:bg-blue-500 text-white rounded-full font-semibold text-sm transition-all shadow-[0_0_20px_rgba(37,99,235,0.4)]">
           Talk to Our Experts
         </button>
       </section>
