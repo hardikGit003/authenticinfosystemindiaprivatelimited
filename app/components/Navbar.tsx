@@ -19,17 +19,29 @@ export default function Navbar() {
   const [isSearchHovered, setIsSearchHovered] = useState(false);
   const [isSearchFocused, setIsSearchFocused] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
+  const mobileInputRef = useRef<HTMLInputElement>(null);
 
   const isSearchExpanded = isSearchHovered || isSearchFocused || searchValue.length > 0;
 
   // Close menus when route changes
   useEffect(() => {
     setMobileMenuOpen(false);
+    setMobileSearchOpen(false);
     setIsSearchHovered(false);
     setIsSearchFocused(false);
   }, [pathname]);
+
+  // Focus mobile input when mobile search opens
+  useEffect(() => {
+    if (mobileSearchOpen) {
+      setTimeout(() => {
+        mobileInputRef.current?.focus();
+      }, 100);
+    }
+  }, [mobileSearchOpen]);
 
   // Lock body scroll when mobile menu is open
   useEffect(() => {
@@ -77,6 +89,7 @@ export default function Navbar() {
         window.location.href = match.path;
       }
       setMobileMenuOpen(false);
+      setMobileSearchOpen(false);
       return;
     }
 
@@ -92,9 +105,9 @@ export default function Navbar() {
 
         {/* LEFT CONTAINER: LOGO */}
         <div className="flex items-center shrink-0 z-10">
-          <a href="/" className="nav-logo flex items-center">
+          <Link href="/" className="nav-logo flex items-center" aria-label="Go to Home page">
             <img src="/logo_theme.png" alt="Authentic Infosystem" className="h-9 md:h-11 w-auto object-contain" />
-          </a>
+          </Link>
         </div>
 
         {/* CENTER CONTAINER: BALANCED CENTERED DESKTOP NAV LINKS */}
@@ -120,9 +133,9 @@ export default function Navbar() {
           </a>
         </div>
 
-        {/* RIGHT CONTAINER: EXPANDABLE INLINE SEARCH + MOBILE MENU */}
-        <div className="flex items-center justify-end shrink-0 gap-2 z-10">
-          {/* INLINE EXPANDABLE SEARCH ON HOVER */}
+        {/* RIGHT CONTAINER: EXPANDABLE INLINE SEARCH + MOBILE BUTTONS */}
+        <div className="flex items-center justify-end shrink-0 gap-1.5 sm:gap-2 z-10">
+          {/* DESKTOP/TABLET INLINE EXPANDABLE SEARCH ON HOVER */}
           <div 
             className="hidden md:flex items-center"
             onMouseEnter={() => {
@@ -184,12 +197,32 @@ export default function Navbar() {
             </div>
           </div>
 
-          {/* HAMBURGER TOGGLE (Mobile & Tablet) */}
+          {/* MOBILE SEARCH TOGGLE BUTTON (Prominent on Phone < md) */}
+          <button
+            type="button"
+            aria-label={mobileSearchOpen ? "Close search bar" : "Open search bar"}
+            className={`md:hidden p-2.5 rounded-full transition-all flex items-center justify-center ${
+              mobileSearchOpen 
+                ? "bg-blue-600 text-white shadow-md shadow-blue-500/25" 
+                : "text-gray-700 hover:text-blue-600 hover:bg-gray-100/90 active:scale-95"
+            }`}
+            onClick={() => {
+              setMobileSearchOpen((prev) => !prev);
+              if (mobileMenuOpen) setMobileMenuOpen(false);
+            }}
+          >
+            <FaSearch size={16} />
+          </button>
+
+          {/* HAMBURGER TOGGLE (Mobile & Tablet < lg) */}
           <button
             type="button"
             aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
-            className="lg:hidden text-gray-800 hover:text-blue-600 p-2 transition-colors flex items-center justify-center rounded-full hover:bg-gray-100"
-            onClick={() => setMobileMenuOpen((prev) => !prev)}
+            className="lg:hidden text-gray-800 hover:text-blue-600 p-2.5 transition-colors flex items-center justify-center rounded-full hover:bg-gray-100 active:scale-95"
+            onClick={() => {
+              setMobileMenuOpen((prev) => !prev);
+              if (mobileSearchOpen) setMobileSearchOpen(false);
+            }}
           >
             {mobileMenuOpen ? <FaTimes size={20} /> : <FaBars size={20} />}
           </button>
@@ -205,6 +238,84 @@ export default function Navbar() {
           </div>
         )}
       </nav>
+
+      {/* MOBILE SEARCH DROPDOWN OVERLAY (Phone < md) */}
+      {mobileSearchOpen && (
+        <>
+          {/* Backdrop */}
+          <div 
+            className="fixed inset-0 z-[9991] bg-black/60 backdrop-blur-sm md:hidden animate-fadeIn"
+            onClick={() => setMobileSearchOpen(false)}
+          />
+          
+          {/* Floating Mobile Search Box */}
+          <div className="fixed top-24 left-1/2 -translate-x-1/2 w-[92%] max-w-md z-[9992] bg-[#0c1222]/95 border border-white/15 rounded-2xl shadow-2xl backdrop-blur-2xl p-4 animate-fadeIn md:hidden">
+            <div className="flex items-center bg-white/10 border border-white/20 rounded-xl px-3.5 py-2.5 focus-within:border-blue-500 focus-within:bg-white/15 transition-all">
+              <FaSearch className="text-blue-400 mr-2.5 shrink-0" size={15} />
+              <input
+                ref={mobileInputRef}
+                type="text"
+                placeholder="Search laptops, desktops, switches, mice..."
+                value={searchValue}
+                onChange={(e) => setSearchValue(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    navigateToSection(searchValue);
+                    setMobileSearchOpen(false);
+                  }
+                }}
+                className="w-full bg-transparent text-white text-sm focus:outline-none placeholder-gray-400"
+              />
+              {searchValue && (
+                <button
+                  type="button"
+                  onClick={() => {
+                    navigateToSection(searchValue);
+                    setMobileSearchOpen(false);
+                  }}
+                  className="bg-blue-600 hover:bg-blue-500 text-white text-xs px-3 py-1.5 rounded-lg font-semibold ml-2 shrink-0 shadow-sm"
+                >
+                  Search
+                </button>
+              )}
+              <button
+                type="button"
+                aria-label="Close search"
+                onClick={() => setMobileSearchOpen(false)}
+                className="text-gray-400 hover:text-white p-1 ml-1 transition-colors"
+              >
+                <FaTimes size={15} />
+              </button>
+            </div>
+
+            {/* QUICK CATEGORY CHIPS */}
+            <div className="mt-3 pt-3 border-t border-white/10">
+              <span className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider block mb-2">
+                Popular Categories
+              </span>
+              <div className="flex flex-wrap gap-1.5">
+                {[
+                  { label: "💻 Laptops", href: "/laptops" },
+                  { label: "🖥️ Desktops", href: "/desktops" },
+                  { label: "🌐 Networking", href: "/networking" },
+                  { label: "🖱️ Accessories", href: "/accessories" },
+                  { label: "🏢 Enterprise", href: "/enterprise" },
+                  { label: "⚙️ Custom PC", href: "/configuration" },
+                ].map((chip) => (
+                  <Link
+                    key={chip.href}
+                    href={chip.href}
+                    onClick={() => setMobileSearchOpen(false)}
+                    className="text-xs bg-white/5 hover:bg-blue-600/30 active:bg-blue-600 text-gray-200 hover:text-blue-200 px-3 py-1.5 rounded-full border border-white/10 transition-colors"
+                  >
+                    {chip.label}
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </div>
+        </>
+      )}
 
       {/* MOBILE NAVIGATION DRAWER */}
       {mobileMenuOpen && (
