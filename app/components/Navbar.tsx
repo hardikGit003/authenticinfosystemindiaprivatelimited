@@ -106,7 +106,7 @@ export default function Navbar() {
         {/* LEFT CONTAINER: LOGO */}
         <div className="flex items-center shrink-0 z-10">
           <Link href="/" className="nav-logo flex items-center" aria-label="Go to Home page">
-            <img src="/logo_theme.png" alt="Authentic Infosystem" className="h-9 md:h-11 w-auto object-contain" />
+            <img src="/Full%20Logo.png" alt="Authentic Infosystem" className="h-10 md:h-12 w-auto object-contain" />
           </Link>
         </div>
 
