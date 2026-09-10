@@ -2597,10 +2597,18 @@ section {
 }
 
 .nav-logo img {
-  height: 44px;
+  height: 58px;
+  max-height: 58px;
   width: auto;
   object-fit: contain;
   transition: all 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .nav-logo img {
+    height: 50px;
+    max-height: 50px;
+  }
 }
 
 .nav-logo:hover img {

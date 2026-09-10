@@ -104,9 +104,9 @@ export default function Navbar() {
         <div className="navbar-overlay"></div>
 
         {/* LEFT CONTAINER: LOGO */}
-        <div className="flex items-center shrink-0 z-10">
+        <div className="flex items-center shrink-0 z-10 py-1">
           <Link href="/" className="nav-logo flex items-center" aria-label="Go to Home page">
-            <img src="/Full%20Logo.png" alt="Authentic Infosystem" className="h-10 md:h-12 w-auto object-contain" />
+            <img src="/Full%20Logo.png" alt="Authentic Infosystem" className="h-[48px] sm:h-[52px] md:h-[58px] w-auto object-contain" />
           </Link>
         </div>
 
