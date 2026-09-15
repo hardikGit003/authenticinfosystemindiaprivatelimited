@@ -1,5 +1,6 @@
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
+import Iphone18ProAdSection from "./components/Iphone18ProAdSection";
 import AboutSection from "./components/AboutSection";
 import ServicesSection from "./components/ServicesSection";
 import ConfigurationSection from "./components/ConfigurationSection";
@@ -16,6 +17,9 @@ export default function Home() {
       <Navbar />
 
       <Hero />
+
+      {/* iPhone 18 Pro Advertisement & Pre-Order Showcase */}
+      <Iphone18ProAdSection />
 
       <AboutSection />
 
