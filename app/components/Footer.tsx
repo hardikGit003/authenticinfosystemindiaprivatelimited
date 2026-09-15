@@ -67,6 +67,7 @@ export default function Footer() {
             <h3>Products</h3>
             <Link href="/laptops">Laptops</Link>
             <Link href="/desktops">Desktops</Link>
+            <Link href="/phones">Smartphones</Link>
             <Link href="/networking">Networking</Link>
             <Link href="/accessories">Accessories</Link>
             <Link href="/configuration">Custom PC Build</Link>

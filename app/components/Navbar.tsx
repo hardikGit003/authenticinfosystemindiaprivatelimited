@@ -8,6 +8,7 @@ import { usePathname } from "next/navigation";
 const navLinks = [
   { href: "/laptops", label: "Laptops" },
   { href: "/desktops", label: "Desktops" },
+  { href: "/phones", label: "Phones" },
   { href: "/networking", label: "Networking" },
   { href: "/accessories", label: "Accessories" },
   { href: "/enterprise", label: "Enterprise" },
@@ -63,6 +64,7 @@ export default function Navbar() {
     const routeMap = [
       { keys: ["laptop", "macbook", "thinkpad"], path: "/laptops" },
       { keys: ["desktop", "pc", "computer"], path: "/desktops" },
+      { keys: ["phone", "smartphone", "mobile", "iphone", "apple", "samsung", "galaxy", "vivo", "oppo", "realme"], path: "/phones" },
       { keys: ["network", "router", "switch", "wifi"], path: "/networking" },
       { keys: ["accessori", "mouse", "keyboard", "monitor", "headphone"], path: "/accessories" },
       { keys: ["enterprise", "server", "storage"], path: "/enterprise" },
@@ -297,6 +299,7 @@ export default function Navbar() {
                 {[
                   { label: "💻 Laptops", href: "/laptops" },
                   { label: "🖥️ Desktops", href: "/desktops" },
+                  { label: "📱 Phones", href: "/phones" },
                   { label: "🌐 Networking", href: "/networking" },
                   { label: "🖱️ Accessories", href: "/accessories" },
                   { label: "🏢 Enterprise", href: "/enterprise" },
