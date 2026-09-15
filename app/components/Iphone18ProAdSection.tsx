@@ -1,30 +1,22 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import Link from "next/link";
 import { 
   FaWhatsapp, 
-  FaPlay, 
-  FaTimes, 
   FaMicrochip, 
   FaCamera, 
   FaShieldAlt, 
   FaBatteryFull, 
   FaApple,
-  FaArrowRight,
-  FaSlidersH
+  FaArrowRight
 } from "react-icons/fa";
 
 export default function Iphone18ProAdSection() {
-  const [isVideoOpen, setIsVideoOpen] = useState(false);
-
   const bannerImgSrc = "/Home%20Screen%20Advertisement/Iphone18PRoBanner.png";
   const lineupImgSrc = "/Home%20Screen%20Advertisement/apple_official/apple_iphone_lineup_2x.jpg";
   const cameraImgSrc = "/Home%20Screen%20Advertisement/apple_official/apple_camera_system_2x.jpg";
   const cameraCtrlImgSrc = "/Home%20Screen%20Advertisement/apple_official/apple_camera_control_2x.jpg";
-  const aiImgSrc = "/Home%20Screen%20Advertisement/apple_official/apple_intelligence_2x.jpg";
-  const videoSrc = "/Home%20Screen%20Advertisement/iPhone%2018%20Pro%20The%20ultimate%20performance%20and%20camera%20of%20any%20iPhone%2C%20with%20exceptional%20battery%20life.%20-%20Apple%20(1080p%2C%20h264).mp4";
 
   const whatsappInquiryMsg = encodeURIComponent(
     `Hello Authentic Infosystem! I am interested in inquiring and pre-booking the new Apple iPhone 18 Pro / Pro Max enterprise allocation.`
@@ -92,19 +84,9 @@ export default function Iphone18ProAdSection() {
               <span>Pre-Book Your Allocation</span>
             </a>
 
-            <button
-              onClick={() => setIsVideoOpen(true)}
-              className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-white hover:bg-slate-50 border border-slate-300 text-slate-800 font-bold text-xs sm:text-sm shadow-sm transition-all hover:scale-105 cursor-pointer"
-            >
-              <span className="w-5 h-5 rounded-full bg-slate-900 text-white flex items-center justify-center text-[9px]">
-                <FaPlay className="ml-0.5" />
-              </span>
-              <span>Watch Official Film</span>
-            </button>
-
             <Link
               href="/phones"
-              className="inline-flex items-center gap-1.5 px-5 py-3 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs sm:text-sm transition-all"
+              className="inline-flex items-center gap-1.5 px-6 py-3 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs sm:text-sm transition-all hover:scale-105"
             >
               <span>Explore All Phones</span>
               <FaArrowRight size={11} />
@@ -112,7 +94,7 @@ export default function Iphone18ProAdSection() {
           </motion.div>
         </div>
 
-        {/* HERO BANNER SHOWCASE CONTAINER */}
+        {/* HERO BANNER PHOTO SHOWCASE */}
         <motion.div
           initial={{ opacity: 0, scale: 0.98 }}
           whileInView={{ opacity: 1, scale: 1 }}
@@ -131,31 +113,20 @@ export default function Iphone18ProAdSection() {
             </span>
           </div>
 
-          {/* Banner Graphic */}
+          {/* Banner Photo */}
           <div className="relative w-full aspect-[21/9] min-h-[260px] sm:min-h-[380px] lg:min-h-[480px] flex items-center justify-center overflow-hidden bg-slate-950">
             <img
               src={bannerImgSrc}
               alt="Apple iPhone 18 Pro Official Banner"
               className="w-full h-full object-cover sm:object-contain object-center transition-transform duration-700 group-hover:scale-[1.02]"
             />
-
-            {/* Play Button Overlay */}
-            <button
-              onClick={() => setIsVideoOpen(true)}
-              className="absolute z-20 bottom-5 right-5 sm:bottom-7 sm:right-7 flex items-center gap-2.5 px-4 py-2.5 rounded-full bg-white/20 hover:bg-white/30 backdrop-blur-xl border border-white/40 text-white font-bold text-xs sm:text-sm shadow-xl transition-all cursor-pointer group/btn hover:scale-105"
-            >
-              <span className="w-7 h-7 rounded-full bg-white text-slate-950 group-hover/btn:bg-slate-100 flex items-center justify-center shadow-md transition-colors">
-                <FaPlay className="ml-0.5 text-xs" />
-              </span>
-              <span>Watch Keynote Preview</span>
-            </button>
           </div>
         </motion.div>
 
-        {/* OFFICIAL APPLE VISUALS & FEATURE GRID */}
+        {/* OFFICIAL APPLE PHOTO SHOWCASE & FEATURE GRID */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
           
-          {/* Card 1: Official Titanium Lineup */}
+          {/* Card 1: Official Titanium Lineup Photo */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -184,7 +155,7 @@ export default function Iphone18ProAdSection() {
             </div>
           </motion.div>
 
-          {/* Card 2: 48MP Pro Camera System */}
+          {/* Card 2: 48MP Pro Camera System Photo */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -214,7 +185,7 @@ export default function Iphone18ProAdSection() {
             </div>
           </motion.div>
 
-          {/* Card 3: Camera Control & Apple Intelligence */}
+          {/* Card 3: Camera Control Photo */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -246,7 +217,7 @@ export default function Iphone18ProAdSection() {
 
         </div>
 
-        {/* 4 ARCHITECTURAL METRICS (Clean White Theme) */}
+        {/* 4 ARCHITECTURAL METRICS */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
           <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm hover:border-slate-300 transition-all">
             <div className="w-10 h-10 rounded-xl bg-slate-100 text-slate-900 flex items-center justify-center text-lg mb-3">
@@ -315,63 +286,6 @@ export default function Iphone18ProAdSection() {
         </div>
 
       </div>
-
-      {/* CINEMA VIDEO POPUP MODAL */}
-      <AnimatePresence>
-        {isVideoOpen && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.9 }}
-              className="relative w-full max-w-4xl bg-slate-950 border border-slate-800 rounded-3xl overflow-hidden shadow-2xl"
-            >
-              {/* Modal Header */}
-              <div className="flex items-center justify-between p-4 border-b border-slate-800 bg-slate-900/80">
-                <div className="flex items-center gap-2">
-                  <FaApple className="text-white text-base" />
-                  <span className="text-sm font-bold text-white">
-                    Apple iPhone 18 Pro — Official Announcement Film
-                  </span>
-                </div>
-                <button
-                  onClick={() => setIsVideoOpen(false)}
-                  className="p-2 rounded-full text-slate-400 hover:text-white hover:bg-slate-800 transition-colors cursor-pointer"
-                >
-                  <FaTimes size={16} />
-                </button>
-              </div>
-
-              {/* Video Player */}
-              <div className="relative aspect-video w-full bg-black">
-                <video
-                  src={videoSrc}
-                  controls
-                  autoPlay
-                  playsInline
-                  className="w-full h-full object-contain"
-                />
-              </div>
-
-              {/* Modal Footer */}
-              <div className="p-4 bg-slate-900/90 flex flex-wrap items-center justify-between gap-2">
-                <p className="text-xs text-slate-400">
-                  Official Apple Keynote Preview Film • Authentic Infosystem
-                </p>
-                <a
-                  href={`https://wa.me/919643990077?text=${whatsappInquiryMsg}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-slate-950 text-xs font-bold transition-all shadow-sm"
-                >
-                  <FaWhatsapp size={14} />
-                  <span>Pre-Book Allocation</span>
-                </a>
-              </div>
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
     </section>
   );
 }
