@@ -7,6 +7,16 @@ import PageHero from "../components/shared/PageHero";
 import SectionHeader from "../components/shared/SectionHeader";
 import ProductCard from "../components/shared/ProductCard";
 import { laptopProducts } from "../data/products";
+import { 
+  FaFilter, 
+  FaTimes, 
+  FaSearch, 
+  FaCheckCircle, 
+  FaLaptop, 
+  FaBuilding, 
+  FaWhatsapp,
+  FaMicrochip
+} from "react-icons/fa";
 
 const categories = ["All", "Basic", "Gaming", "Editing", "Enterprise"];
 const brands = ["All", "Lenovo", "HP", "Dell", "Asus"];
@@ -26,14 +36,20 @@ export default function LaptopsPage() {
       // Search Filter
       const matchesSearch =
         product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        product.modelNumber.toLowerCase().includes(searchQuery.toLowerCase());
+        product.brand.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        product.modelNumber.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        product.specs.some(
+          (s) =>
+            s.value.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            s.label.toLowerCase().includes(searchQuery.toLowerCase())
+        );
 
       // Category Filter
       const matchesCategory =
         activeCategory === "All" || product.category === activeCategory;
 
       // Brand Filter
-      const matchesBrand = activeBrand === "All" || product.brand === activeBrand;
+      const matchesBrand = activeBrand === "All" || product.brand.toLowerCase() === activeBrand.toLowerCase();
 
       // Processor Filter
       const matchesProcessor =
@@ -63,6 +79,21 @@ export default function LaptopsPage() {
     });
   }, [searchQuery, activeCategory, activeBrand, activeProcessor, activeRAM]);
 
+  const clearAllFilters = () => {
+    setSearchQuery("");
+    setActiveCategory("All");
+    setActiveBrand("All");
+    setActiveProcessor("All");
+    setActiveRAM("All");
+  };
+
+  const hasActiveFilters =
+    searchQuery !== "" ||
+    activeCategory !== "All" ||
+    activeBrand !== "All" ||
+    activeProcessor !== "All" ||
+    activeRAM !== "All";
+
   return (
     <main className="min-h-screen bg-white text-slate-900 selection:bg-blue-500/20">
       <Navbar />
@@ -75,19 +106,23 @@ export default function LaptopsPage() {
       />
 
       {/* Main Content */}
-      <section className="py-12 sm:py-20 page-container">
+      <section className="py-10 sm:py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <SectionHeader title="Laptop Categories" align="center" />
+        <SectionHeader 
+          title="Explore Laptop Lineup" 
+          subtitle="Enterprise-grade mobility, official OEM warranty, bulk GST invoicing, and custom RAM/SSD configuration."
+          align="center" 
+        />
         
-        {/* Featured Categories Row */}
-        <div className="flex overflow-x-auto sm:flex-wrap justify-start sm:justify-center gap-2.5 sm:gap-4 mb-10 sm:mb-16 mt-4 sm:mt-8 pb-3 sm:pb-0 scrollbar-hide w-full">
+        {/* Category Filter Pills */}
+        <div className="flex overflow-x-auto sm:flex-wrap justify-start sm:justify-center gap-2 mb-8 mt-4 sm:mt-6 pb-2 sm:pb-0 scrollbar-hide w-full">
           {categories.map((cat, i) => (
             <button
               key={i}
               onClick={() => setActiveCategory(cat)}
-              className={`whitespace-nowrap px-5 sm:px-6 py-2 sm:py-2.5 rounded-full border transition-all text-xs sm:text-sm font-semibold shrink-0 cursor-pointer ${
+              className={`whitespace-nowrap px-4 py-1.5 rounded-full border transition-all text-xs font-semibold shrink-0 cursor-pointer ${
                 activeCategory === cat
-                  ? "bg-blue-600 border-blue-600 text-white shadow-md shadow-blue-500/25"
+                  ? "bg-blue-600 border-blue-600 text-white shadow-xs"
                   : "bg-slate-100 border-slate-200 hover:bg-slate-200 text-slate-700"
               }`}
             >
@@ -96,146 +131,254 @@ export default function LaptopsPage() {
           ))}
         </div>
 
-        {/* Mobile Filters Toggle Button */}
-        <button
-          onClick={() => setShowMobileFilters((prev) => !prev)}
-          className="lg:hidden w-full mb-6 py-3.5 px-5 rounded-2xl bg-[#042442] border border-white/10 text-white font-semibold flex items-center justify-between text-sm cursor-pointer shadow-md"
-        >
-          <span className="flex items-center gap-2.5">
-            <svg className="w-4 h-4 text-sky-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
-            </svg>
-            Filter Products
-          </span>
-          <span className="text-sky-400 text-xs font-bold">{showMobileFilters ? "Hide ▲" : "Show ▼"}</span>
-        </button>
+        {/* Mobile Search & Filter Bar */}
+        <div className="lg:hidden mb-6 flex gap-2.5">
+          <div className="relative flex-1">
+            <FaSearch className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" size={13} />
+            <input
+              type="text"
+              placeholder="Search model, brand, processor, RAM..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full pl-9 pr-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-blue-500"
+            />
+          </div>
+          <button
+            onClick={() => setShowMobileFilters(true)}
+            className="flex items-center gap-1.5 px-4 py-2.5 bg-blue-600 text-white rounded-xl font-semibold text-xs shadow-xs shrink-0"
+          >
+            <FaFilter size={12} />
+            <span>Filters</span>
+          </button>
+        </div>
 
-        <div className="grid-12">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 lg:gap-8">
           
-          {/* Left Sidebar Filters */}
-          <div className={`col-span-12 lg:col-span-3 ${showMobileFilters ? "block" : "hidden lg:block"}`}>
-            <div className="bg-[#042442] border border-white/10 rounded-2xl p-6 shadow-xl sticky top-32 text-white relative overflow-hidden">
-              {/* Subtle ambient lighting */}
-              <div className="absolute -top-16 -right-16 w-36 h-36 bg-blue-500/15 rounded-full blur-2xl pointer-events-none" />
-              <div className="absolute -bottom-16 -left-16 w-36 h-36 bg-sky-500/10 rounded-full blur-2xl pointer-events-none" />
+          {/* DESKTOP SIDEBAR FILTERS */}
+          <div className="hidden lg:block lg:col-span-1 space-y-6">
+            <div className="bg-slate-50/90 border border-slate-200 rounded-2xl p-5 shadow-xs space-y-6">
+              {/* Header with Title & Reset */}
+              <div className="flex items-center justify-between pb-3.5 border-b border-slate-200">
+                <h3 className="text-xs font-extrabold text-slate-900 uppercase tracking-wider flex items-center gap-2">
+                  <FaFilter className="text-blue-600" size={12} />
+                  <span>Filter Laptops</span>
+                </h3>
+                {hasActiveFilters && (
+                  <button
+                    onClick={clearAllFilters}
+                    className="text-xs text-blue-600 hover:text-blue-800 font-semibold cursor-pointer"
+                  >
+                    Reset All
+                  </button>
+                )}
+              </div>
 
-              <div className="relative z-10">
-                <div className="flex items-center justify-between mb-6 border-b border-white/10 pb-4">
-                  <h3 className="text-xl font-extrabold text-white tracking-tight">Filters</h3>
-                  {(searchQuery || activeBrand !== "All" || activeProcessor !== "All" || activeRAM !== "All") && (
+              {/* Search Box */}
+              <div>
+                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
+                  Search Laptops
+                </label>
+                <div className="relative">
+                  <FaSearch className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" size={12} />
+                  <input
+                    type="text"
+                    placeholder="e.g. ThinkPad, Dell i7, 32GB..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="w-full pl-9 pr-8 py-2 bg-white border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-blue-500 text-slate-900 shadow-2xs"
+                  />
+                  {searchQuery && (
                     <button
-                      onClick={() => {
-                        setSearchQuery("");
-                        setActiveBrand("All");
-                        setActiveProcessor("All");
-                        setActiveRAM("All");
-                      }}
-                      className="text-xs text-sky-400 hover:text-sky-300 font-semibold cursor-pointer transition-colors"
+                      onClick={() => setSearchQuery("")}
+                      className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
                     >
-                      Reset All
+                      <FaTimes size={11} />
                     </button>
                   )}
                 </div>
-                
-                <div className="space-y-5">
-                  <div>
-                    <h4 className="text-xs font-bold text-sky-400 uppercase tracking-wider mb-2">Search Products</h4>
-                    <input
-                      type="text"
-                      placeholder="Search models..."
-                      value={searchQuery}
-                      onChange={(e) => setSearchQuery(e.target.value)}
-                      className="w-full bg-[#031d36] border border-white/15 rounded-xl px-4 py-2.5 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-sky-400 focus:ring-1 focus:ring-sky-400 transition-all"
-                    />
-                  </div>
-                  
-                  <div>
-                    <h4 className="text-xs font-bold text-sky-400 uppercase tracking-wider mb-2">Brand</h4>
-                    <div className="relative">
-                      <select
-                        value={activeBrand}
-                        onChange={(e) => setActiveBrand(e.target.value)}
-                        className="w-full bg-[#031d36] border border-white/15 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-sky-400 focus:ring-1 focus:ring-sky-400 transition-all appearance-none cursor-pointer pr-10"
-                      >
-                        {brands.map((brand) => (
-                          <option key={brand} value={brand} className="bg-[#042442] text-white">
-                            {brand}
-                          </option>
-                        ))}
-                      </select>
-                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-sky-400">
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-                        </svg>
-                      </div>
-                    </div>
-                  </div>
+              </div>
 
-                  <div>
-                    <h4 className="text-xs font-bold text-sky-400 uppercase tracking-wider mb-2">Processor</h4>
-                    <div className="relative">
-                      <select
-                        value={activeProcessor}
-                        onChange={(e) => setActiveProcessor(e.target.value)}
-                        className="w-full bg-[#031d36] border border-white/15 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-sky-400 focus:ring-1 focus:ring-sky-400 transition-all appearance-none cursor-pointer pr-10"
-                      >
-                        {processors.map((proc) => (
-                          <option key={proc} value={proc} className="bg-[#042442] text-white">
-                            {proc}
-                          </option>
-                        ))}
-                      </select>
-                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-sky-400">
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-                        </svg>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div>
-                    <h4 className="text-xs font-bold text-sky-400 uppercase tracking-wider mb-2">RAM</h4>
-                    <div className="relative">
-                      <select
-                        value={activeRAM}
-                        onChange={(e) => setActiveRAM(e.target.value)}
-                        className="w-full bg-[#031d36] border border-white/15 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-sky-400 focus:ring-1 focus:ring-sky-400 transition-all appearance-none cursor-pointer pr-10"
-                      >
-                        {rams.map((ram) => (
-                          <option key={ram} value={ram} className="bg-[#042442] text-white">
-                            {ram}
-                          </option>
-                        ))}
-                      </select>
-                      <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-sky-400">
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-                        </svg>
-                      </div>
-                    </div>
-                  </div>
+              {/* Brand Filter */}
+              <div>
+                <div className="flex items-center justify-between mb-2">
+                  <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">
+                    Brand
+                  </label>
+                  {activeBrand !== "All" && (
+                    <button
+                      onClick={() => setActiveBrand("All")}
+                      className="text-[11px] text-blue-600 font-semibold hover:underline"
+                    >
+                      Reset
+                    </button>
+                  )}
+                </div>
+                <div className="space-y-1">
+                  {brands.map((brand) => (
+                    <button
+                      key={brand}
+                      onClick={() => setActiveBrand(brand)}
+                      className={`w-full text-left px-3 py-2 rounded-xl text-xs font-medium transition-all flex items-center justify-between cursor-pointer ${
+                        activeBrand === brand
+                          ? "bg-blue-600 text-white font-semibold shadow-xs"
+                          : "text-slate-700 hover:bg-slate-200/60 bg-white/60 border border-slate-200/50"
+                      }`}
+                    >
+                      <span>{brand}</span>
+                      {activeBrand === brand && <FaCheckCircle size={11} />}
+                    </button>
+                  ))}
                 </div>
               </div>
+
+              {/* Processor Filter */}
+              <div>
+                <div className="flex items-center justify-between mb-2">
+                  <label className="text-xs font-bold text-slate-700 uppercase tracking-wider flex items-center gap-1.5">
+                    <FaMicrochip className="text-slate-500" size={11} />
+                    <span>Processor</span>
+                  </label>
+                  {activeProcessor !== "All" && (
+                    <button
+                      onClick={() => setActiveProcessor("All")}
+                      className="text-[11px] text-blue-600 font-semibold hover:underline"
+                    >
+                      Reset
+                    </button>
+                  )}
+                </div>
+                <div className="space-y-1">
+                  {processors.map((proc) => (
+                    <button
+                      key={proc}
+                      onClick={() => setActiveProcessor(proc)}
+                      className={`w-full text-left px-3 py-1.5 rounded-xl text-xs font-medium transition-all flex items-center justify-between cursor-pointer ${
+                        activeProcessor === proc
+                          ? "bg-blue-600 text-white font-semibold shadow-xs"
+                          : "text-slate-700 hover:bg-slate-200/60 bg-white/60 border border-slate-200/50"
+                      }`}
+                    >
+                      <span>{proc}</span>
+                      {activeProcessor === proc && <FaCheckCircle size={11} />}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* RAM Filter */}
+              <div>
+                <div className="flex items-center justify-between mb-2">
+                  <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">
+                    RAM Memory
+                  </label>
+                  {activeRAM !== "All" && (
+                    <button
+                      onClick={() => setActiveRAM("All")}
+                      className="text-[11px] text-blue-600 font-semibold hover:underline"
+                    >
+                      Reset
+                    </button>
+                  )}
+                </div>
+                <div className="grid grid-cols-2 gap-1.5">
+                  {rams.map((ram) => (
+                    <button
+                      key={ram}
+                      onClick={() => setActiveRAM(ram)}
+                      className={`text-center py-2 rounded-xl text-xs font-semibold transition-all border cursor-pointer ${
+                        activeRAM === ram
+                          ? "bg-blue-600 text-white border-blue-600 shadow-xs"
+                          : "bg-white text-slate-700 border-slate-200 hover:bg-slate-100"
+                      }`}
+                    >
+                      {ram}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Clear All Filters button */}
+              {hasActiveFilters && (
+                <button
+                  onClick={clearAllFilters}
+                  className="w-full py-2.5 px-3 rounded-xl bg-slate-200 hover:bg-slate-300 text-slate-800 text-xs font-semibold transition-all cursor-pointer"
+                >
+                  Clear All Filters
+                </button>
+              )}
+            </div>
+
+            {/* Corporate Bulk Fleet Card */}
+            <div className="bg-gradient-to-br from-blue-900 to-slate-900 text-white p-5 rounded-2xl shadow-md relative overflow-hidden">
+              <FaBuilding className="text-blue-400 mb-2.5" size={20} />
+              <h4 className="text-sm font-bold mb-1">Corporate Laptop Fleet</h4>
+              <p className="text-[11px] text-blue-100/80 leading-relaxed mb-3.5">
+                Equipping office workstations, IT teams, or enterprise staff? Get custom volume pricing with pre-installed OS and asset tagging.
+              </p>
+              <a
+                href="https://wa.me/919643990077?text=Hi%2C%20I%20am%20looking%20for%20a%20bulk%20enterprise%20quote%20for%20laptops."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-1.5 w-full py-2 px-3 bg-emerald-500 hover:bg-emerald-600 text-white font-bold rounded-xl text-xs transition-all shadow-sm"
+              >
+                <FaWhatsapp size={14} />
+                <span>Request B2B Quote</span>
+              </a>
             </div>
           </div>
 
           {/* Product Grid */}
-          <div className="col-span-12 lg:col-span-9">
-            {filteredProducts.length === 0 ? (
-              <div className="text-center py-20 bg-slate-50 rounded-2xl border border-slate-200">
-                <h3 className="text-2xl font-bold text-slate-900 mb-2">No products found</h3>
-                <p className="text-slate-500">Try adjusting your filters or search query.</p>
+          <div className="col-span-12 lg:col-span-3">
+            {/* Header info bar */}
+            <div className="flex flex-wrap items-center justify-between gap-2.5 mb-5 pb-3 border-b border-slate-200">
+              <div className="flex items-center gap-2 text-xs text-slate-600">
+                <span>Showing</span>
+                <span className="font-bold text-slate-900">{filteredProducts.length}</span>
+                <span>laptops</span>
+                {activeBrand !== "All" && (
+                  <span className="bg-blue-50 text-blue-700 text-[11px] px-2 py-0.5 rounded-full font-semibold border border-blue-200">
+                    {activeBrand}
+                  </span>
+                )}
+                {activeCategory !== "All" && (
+                  <span className="bg-slate-100 text-slate-700 text-[11px] px-2 py-0.5 rounded-full font-semibold border border-slate-200">
+                    {activeCategory}
+                  </span>
+                )}
+                {activeProcessor !== "All" && (
+                  <span className="bg-purple-50 text-purple-700 text-[11px] px-2 py-0.5 rounded-full font-semibold border border-purple-200">
+                    {activeProcessor}
+                  </span>
+                )}
+                {activeRAM !== "All" && (
+                  <span className="bg-amber-50 text-amber-700 text-[11px] px-2 py-0.5 rounded-full font-semibold border border-amber-200">
+                    {activeRAM}
+                  </span>
+                )}
+              </div>
+
+              {hasActiveFilters && (
                 <button
-                  onClick={() => {
-                    setSearchQuery("");
-                    setActiveCategory("All");
-                    setActiveBrand("All");
-                    setActiveProcessor("All");
-                    setActiveRAM("All");
-                  }}
-                  className="mt-6 px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-full font-semibold transition-all shadow-sm"
+                  onClick={clearAllFilters}
+                  className="text-xs text-blue-600 hover:text-blue-800 font-semibold cursor-pointer"
                 >
-                  Clear All Filters
+                  Clear all filters
+                </button>
+              )}
+            </div>
+
+            {filteredProducts.length === 0 ? (
+              <div className="text-center py-16 bg-slate-50 rounded-2xl border border-slate-200 p-8">
+                <FaLaptop className="mx-auto text-slate-400 mb-3" size={40} />
+                <h3 className="text-base font-bold text-slate-900 mb-1">No laptops found</h3>
+                <p className="text-xs text-slate-600 max-w-sm mx-auto mb-5">
+                  Try adjusting your search query or reset the filters to browse all models.
+                </p>
+                <button
+                  onClick={clearAllFilters}
+                  className="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl text-xs transition-all shadow-xs"
+                >
+                  Reset All Filters
                 </button>
               </div>
             ) : (
@@ -244,7 +387,7 @@ export default function LaptopsPage() {
                   <ProductCard
                     key={laptop.id}
                     {...laptop}
-                    delay={(index % 6) * 0.1}
+                    delay={(index % 6) * 0.05}
                   />
                 ))}
               </div>
@@ -253,6 +396,148 @@ export default function LaptopsPage() {
 
         </div>
       </section>
+
+      {/* Mobile Filter Modal Drawer */}
+      {showMobileFilters && (
+        <div className="fixed inset-0 z-50 flex bg-black/60 backdrop-blur-xs lg:hidden animate-fade-in">
+          <div className="fixed inset-0" onClick={() => setShowMobileFilters(false)} />
+          <div className="relative ml-auto w-full max-w-xs sm:max-w-sm h-full bg-white shadow-2xl p-5 overflow-y-auto flex flex-col justify-between z-10 animate-slide-left">
+            <div className="space-y-6">
+              {/* Drawer Header */}
+              <div className="flex items-center justify-between pb-4 border-b border-slate-200">
+                <div className="flex items-center gap-2">
+                  <FaFilter className="text-blue-600" size={14} />
+                  <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider">
+                    Filter Laptops
+                  </h3>
+                </div>
+                <button
+                  onClick={() => setShowMobileFilters(false)}
+                  className="p-2 rounded-xl text-slate-400 hover:text-slate-600 hover:bg-slate-100"
+                >
+                  <FaTimes size={15} />
+                </button>
+              </div>
+
+              {/* Brand Filter */}
+              <div>
+                <div className="flex items-center justify-between mb-2">
+                  <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">
+                    Brand
+                  </label>
+                  {activeBrand !== "All" && (
+                    <button
+                      onClick={() => setActiveBrand("All")}
+                      className="text-[11px] text-blue-600 font-semibold hover:underline"
+                    >
+                      Reset
+                    </button>
+                  )}
+                </div>
+                <div className="space-y-1">
+                  {brands.map((brand) => (
+                    <button
+                      key={brand}
+                      onClick={() => setActiveBrand(brand)}
+                      className={`w-full text-left px-3 py-2 rounded-xl text-xs font-medium transition-all flex items-center justify-between cursor-pointer ${
+                        activeBrand === brand
+                          ? "bg-blue-600 text-white font-semibold shadow-xs"
+                          : "text-slate-700 hover:bg-slate-100 bg-slate-50 border border-slate-200"
+                      }`}
+                    >
+                      <span>{brand}</span>
+                      {activeBrand === brand && <FaCheckCircle size={11} />}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Processor Filter */}
+              <div>
+                <div className="flex items-center justify-between mb-2">
+                  <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">
+                    Processor
+                  </label>
+                  {activeProcessor !== "All" && (
+                    <button
+                      onClick={() => setActiveProcessor("All")}
+                      className="text-[11px] text-blue-600 font-semibold hover:underline"
+                    >
+                      Reset
+                    </button>
+                  )}
+                </div>
+                <div className="space-y-1">
+                  {processors.map((proc) => (
+                    <button
+                      key={proc}
+                      onClick={() => setActiveProcessor(proc)}
+                      className={`w-full text-left px-3 py-1.5 rounded-xl text-xs font-medium transition-all flex items-center justify-between cursor-pointer ${
+                        activeProcessor === proc
+                          ? "bg-blue-600 text-white font-semibold shadow-xs"
+                          : "text-slate-700 hover:bg-slate-100 bg-slate-50 border border-slate-200"
+                      }`}
+                    >
+                      <span>{proc}</span>
+                      {activeProcessor === proc && <FaCheckCircle size={11} />}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* RAM Filter */}
+              <div>
+                <div className="flex items-center justify-between mb-2">
+                  <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">
+                    RAM Memory
+                  </label>
+                  {activeRAM !== "All" && (
+                    <button
+                      onClick={() => setActiveRAM("All")}
+                      className="text-[11px] text-blue-600 font-semibold hover:underline"
+                    >
+                      Reset
+                    </button>
+                  )}
+                </div>
+                <div className="grid grid-cols-2 gap-1.5">
+                  {rams.map((ram) => (
+                    <button
+                      key={ram}
+                      onClick={() => setActiveRAM(ram)}
+                      className={`text-center py-2 rounded-xl text-xs font-semibold transition-all border cursor-pointer ${
+                        activeRAM === ram
+                          ? "bg-blue-600 text-white border-blue-600 shadow-xs"
+                          : "bg-white text-slate-700 border-slate-200 hover:bg-slate-100"
+                      }`}
+                    >
+                      {ram}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Bottom Actions */}
+            <div className="pt-6 border-t border-slate-200 mt-6 space-y-2">
+              {hasActiveFilters && (
+                <button
+                  onClick={clearAllFilters}
+                  className="w-full py-2.5 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-semibold transition-all"
+                >
+                  Clear All Filters
+                </button>
+              )}
+              <button
+                onClick={() => setShowMobileFilters(false)}
+                className="w-full py-3 px-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold shadow-md transition-all"
+              >
+                View {filteredProducts.length} Results
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Why Buy & Buying Guide Sections */}
       <section className="py-12 sm:py-16 page-container border-t border-slate-200">
