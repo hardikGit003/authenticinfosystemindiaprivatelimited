@@ -290,15 +290,15 @@ export default function Iphone18ProAdSection() {
         </div>
 
         {/* BOTTOM ENTERPRISE INQUIRY BANNER */}
-        <div className="rounded-3xl bg-slate-900 text-white p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl">
+        <div className="rounded-3xl bg-black text-white p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-2xl border border-neutral-800">
           <div className="space-y-1 text-center sm:text-left">
-            <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">
+            <span className="text-[11px] font-bold text-neutral-400 uppercase tracking-wider">
               Authentic Infosystem Commercial Allocation
             </span>
             <h3 className="text-xl sm:text-2xl font-black text-white">
               Reserve Your Units for Immediate Dispatch
             </h3>
-            <p className="text-xs text-slate-300 max-w-xl">
+            <p className="text-xs text-neutral-300 max-w-xl">
               Get corporate GST tax invoicing, priority serial registration, and dedicated enterprise account management.
             </p>
           </div>
