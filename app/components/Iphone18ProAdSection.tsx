@@ -7,8 +7,7 @@ import {
   FaCamera, 
   FaShieldAlt, 
   FaBatteryFull, 
-  FaApple,
-  FaBolt
+  FaApple
 } from "react-icons/fa";
 
 export default function Iphone18ProAdSection() {
@@ -94,13 +93,9 @@ export default function Iphone18ProAdSection() {
           className="relative rounded-3xl overflow-hidden border border-slate-200/90 bg-white shadow-2xl shadow-slate-200/80 mb-14 group"
         >
           {/* Top Status Bar */}
-          <div className="absolute top-4 left-4 right-4 z-20 flex flex-wrap items-center justify-between gap-2 pointer-events-none">
+          <div className="absolute top-4 left-4 z-20 pointer-events-none">
             <span className="bg-white/95 backdrop-blur-md text-slate-900 text-xs font-bold px-4 py-2 rounded-full border border-slate-200 shadow-sm flex items-center gap-2">
               <FaApple className="text-slate-900 text-sm" /> Authentic Infosystem Distribution
-            </span>
-
-            <span className="bg-slate-900/90 backdrop-blur-md text-white text-xs font-bold px-4 py-2 rounded-full shadow-sm flex items-center gap-1.5">
-              <FaBolt className="text-amber-400 text-xs" /> A20 Pro Silicon • iPhone Duo Foldable
             </span>
           </div>
 
