@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
 import { 
   FaWhatsapp, 
   FaPlay, 
@@ -10,44 +11,47 @@ import {
   FaCamera, 
   FaShieldAlt, 
   FaBatteryFull, 
-  FaCheckCircle, 
-  FaBolt, 
-  FaApple
+  FaApple,
+  FaArrowRight,
+  FaSlidersH
 } from "react-icons/fa";
 
 export default function Iphone18ProAdSection() {
   const [isVideoOpen, setIsVideoOpen] = useState(false);
 
   const bannerImgSrc = "/Home%20Screen%20Advertisement/Iphone18PRoBanner.png";
+  const lineupImgSrc = "/Home%20Screen%20Advertisement/apple_official/apple_iphone_lineup_2x.jpg";
+  const cameraImgSrc = "/Home%20Screen%20Advertisement/apple_official/apple_camera_system_2x.jpg";
+  const cameraCtrlImgSrc = "/Home%20Screen%20Advertisement/apple_official/apple_camera_control_2x.jpg";
+  const aiImgSrc = "/Home%20Screen%20Advertisement/apple_official/apple_intelligence_2x.jpg";
   const videoSrc = "/Home%20Screen%20Advertisement/iPhone%2018%20Pro%20The%20ultimate%20performance%20and%20camera%20of%20any%20iPhone%2C%20with%20exceptional%20battery%20life.%20-%20Apple%20(1080p%2C%20h264).mp4";
 
   const whatsappInquiryMsg = encodeURIComponent(
-    `Hello Authentic Infosystem! I would like to inquire about the upcoming Apple iPhone 18 Pro / Pro Max corporate pre-booking and enterprise allocation.`
+    `Hello Authentic Infosystem! I am interested in inquiring and pre-booking the new Apple iPhone 18 Pro / Pro Max enterprise allocation.`
   );
 
   return (
-    <section className="relative py-16 sm:py-24 bg-gradient-to-b from-slate-950 via-[#070b14] to-slate-950 text-white overflow-hidden border-y border-slate-800/80">
-      {/* Ambient background glows */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[750px] h-[350px] bg-blue-600/15 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute bottom-10 left-10 w-96 h-96 bg-indigo-600/10 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute top-10 right-10 w-96 h-96 bg-cyan-600/10 rounded-full blur-[120px] pointer-events-none" />
+    <section className="relative py-16 sm:py-24 bg-white text-slate-900 overflow-hidden border-b border-slate-200">
+      {/* Subtle clean neutral backdrop */}
+      <div className="absolute inset-0 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:24px_24px] opacity-40 pointer-events-none" />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Top Header Badge */}
-        <div className="flex flex-col items-center text-center mb-8 sm:mb-12">
+        
+        {/* TOP HEADER - Crisp Apple Typography */}
+        <div className="flex flex-col items-center text-center mb-10 sm:mb-14">
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-gradient-to-r from-blue-900/60 via-indigo-900/40 to-slate-900 border border-blue-500/40 shadow-lg shadow-blue-950/50 mb-4"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-100 border border-slate-200 shadow-sm mb-4"
           >
-            <FaApple className="text-blue-400 text-sm" />
-            <span className="text-[11px] sm:text-xs font-extrabold uppercase tracking-widest text-blue-300">
-              2026 Priority Allocation • Pre-Booking Open
+            <FaApple className="text-slate-900 text-sm" />
+            <span className="text-[11px] sm:text-xs font-bold uppercase tracking-widest text-slate-700">
+              Official Advertisement • Priority Pre-Booking Open
             </span>
             <span className="flex h-2 w-2 relative">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
             </span>
           </motion.div>
 
@@ -56,9 +60,9 @@ export default function Iphone18ProAdSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.4 }}
-            className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white max-w-4xl leading-tight"
+            className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-slate-950 max-w-4xl leading-tight"
           >
-            Book Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-indigo-300 to-cyan-300">iPhone 18 Pro</span>
+            iPhone 18 Pro
           </motion.h2>
 
           <motion.p
@@ -66,10 +70,46 @@ export default function Iphone18ProAdSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.4, delay: 0.1 }}
-            className="mt-4 text-sm sm:text-base text-slate-300 max-w-2xl leading-relaxed"
+            className="mt-3 text-lg sm:text-xl font-medium text-slate-600 max-w-2xl"
           >
-            The next quantum leap in Apple Silicon. Forged in aerospace Quantum Titanium with the revolutionary 2nm A20 Pro chip, under-display Face ID, and Quad-Prism 10x optical zoom.
+            Titanium. So strong. So light. So Pro.
           </motion.p>
+
+          <motion.div 
+            initial={{ opacity: 0, y: 15 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4, delay: 0.15 }}
+            className="mt-6 flex flex-wrap items-center justify-center gap-3"
+          >
+            <a
+              href={`https://wa.me/919643990077?text=${whatsappInquiryMsg}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-slate-950 hover:bg-slate-800 text-white font-bold text-xs sm:text-sm shadow-md transition-all hover:scale-105 cursor-pointer"
+            >
+              <FaWhatsapp className="text-emerald-400 text-base" />
+              <span>Pre-Book Your Allocation</span>
+            </a>
+
+            <button
+              onClick={() => setIsVideoOpen(true)}
+              className="inline-flex items-center gap-2 px-5 py-3 rounded-full bg-white hover:bg-slate-50 border border-slate-300 text-slate-800 font-bold text-xs sm:text-sm shadow-sm transition-all hover:scale-105 cursor-pointer"
+            >
+              <span className="w-5 h-5 rounded-full bg-slate-900 text-white flex items-center justify-center text-[9px]">
+                <FaPlay className="ml-0.5" />
+              </span>
+              <span>Watch Official Film</span>
+            </button>
+
+            <Link
+              href="/phones"
+              className="inline-flex items-center gap-1.5 px-5 py-3 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs sm:text-sm transition-all"
+            >
+              <span>Explore All Phones</span>
+              <FaArrowRight size={11} />
+            </Link>
+          </motion.div>
         </div>
 
         {/* HERO BANNER SHOWCASE CONTAINER */}
@@ -78,104 +118,205 @@ export default function Iphone18ProAdSection() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="relative rounded-3xl overflow-hidden border border-slate-700/80 bg-gradient-to-b from-slate-900/90 to-slate-950 shadow-2xl shadow-blue-950/40 mb-12 group"
+          className="relative rounded-3xl overflow-hidden border border-slate-200/80 bg-white shadow-xl shadow-slate-200/60 mb-12 group"
         >
-          {/* Top Banner Bar with Quick Badges */}
+          {/* Top Status Bar */}
           <div className="absolute top-4 left-4 right-4 z-20 flex flex-wrap items-center justify-between gap-2 pointer-events-none">
-            <div className="flex items-center gap-2">
-              <span className="bg-slate-900/90 backdrop-blur-md text-white text-[11px] font-bold px-3 py-1 rounded-full border border-slate-700 shadow-sm flex items-center gap-1.5">
-                <FaBolt className="text-amber-400 text-xs" /> A20 Pro (2nm)
-              </span>
-              <span className="bg-blue-600/90 backdrop-blur-md text-white text-[11px] font-bold px-3 py-1 rounded-full shadow-sm">
-                Next-Gen Apple Intelligence
-              </span>
-            </div>
+            <span className="bg-white/90 backdrop-blur-md text-slate-800 text-[11px] font-bold px-3.5 py-1.5 rounded-full border border-slate-200 shadow-sm flex items-center gap-1.5">
+              <FaApple className="text-slate-900 text-xs" /> Authentic Infosystem Distribution
+            </span>
 
-            <span className="bg-emerald-500/90 backdrop-blur-md text-slate-950 text-[11px] font-extrabold px-3 py-1 rounded-full shadow-sm flex items-center gap-1">
-              <FaCheckCircle /> Authorized Apple Distribution
+            <span className="bg-emerald-50 text-emerald-700 border border-emerald-200 backdrop-blur-md text-[11px] font-extrabold px-3 py-1 rounded-full shadow-sm">
+              GST Invoicing & Official Warranty
             </span>
           </div>
 
-          {/* Banner Image */}
-          <div className="relative w-full aspect-[21/9] min-h-[260px] sm:min-h-[380px] lg:min-h-[460px] flex items-center justify-center overflow-hidden bg-black/40">
+          {/* Banner Graphic */}
+          <div className="relative w-full aspect-[21/9] min-h-[260px] sm:min-h-[380px] lg:min-h-[480px] flex items-center justify-center overflow-hidden bg-slate-950">
             <img
               src={bannerImgSrc}
               alt="Apple iPhone 18 Pro Official Banner"
-              className="w-full h-full object-cover sm:object-contain object-center transition-transform duration-700 group-hover:scale-105"
+              className="w-full h-full object-cover sm:object-contain object-center transition-transform duration-700 group-hover:scale-[1.02]"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-black/30 pointer-events-none" />
 
-            {/* Bottom Actions Overlay */}
-            <div className="absolute z-20 bottom-6 left-6 right-6 flex flex-wrap items-center justify-between gap-3">
-              <a
-                href={`https://wa.me/919643990077?text=${whatsappInquiryMsg}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-bold text-xs sm:text-sm shadow-xl transition-all cursor-pointer hover:scale-105"
-              >
-                <FaWhatsapp size={16} />
-                <span>Pre-Book via WhatsApp</span>
-              </a>
-
-              {/* Watch Film Play Button Trigger */}
-              <button
-                onClick={() => setIsVideoOpen(true)}
-                className="flex items-center gap-2.5 px-4 py-2.5 rounded-full bg-white/15 hover:bg-white/25 backdrop-blur-xl border border-white/30 text-white font-bold text-xs sm:text-sm shadow-xl transition-all cursor-pointer group/btn hover:scale-105"
-              >
-                <span className="w-8 h-8 rounded-full bg-blue-600 group-hover/btn:bg-blue-500 flex items-center justify-center text-white shadow-md transition-colors">
-                  <FaPlay className="ml-0.5 text-xs" />
-                </span>
-                <span>Watch Official Film</span>
-              </button>
-            </div>
+            {/* Play Button Overlay */}
+            <button
+              onClick={() => setIsVideoOpen(true)}
+              className="absolute z-20 bottom-5 right-5 sm:bottom-7 sm:right-7 flex items-center gap-2.5 px-4 py-2.5 rounded-full bg-white/20 hover:bg-white/30 backdrop-blur-xl border border-white/40 text-white font-bold text-xs sm:text-sm shadow-xl transition-all cursor-pointer group/btn hover:scale-105"
+            >
+              <span className="w-7 h-7 rounded-full bg-white text-slate-950 group-hover/btn:bg-slate-100 flex items-center justify-center shadow-md transition-colors">
+                <FaPlay className="ml-0.5 text-xs" />
+              </span>
+              <span>Watch Keynote Preview</span>
+            </button>
           </div>
         </motion.div>
 
-        {/* 4 HIGHLIGHT PILLARS */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <div className="p-5 rounded-2xl bg-slate-900/70 border border-slate-800 hover:border-blue-500/50 transition-all shadow-sm">
-            <div className="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-500/30 text-blue-400 flex items-center justify-center text-lg mb-3">
+        {/* OFFICIAL APPLE VISUALS & FEATURE GRID */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+          
+          {/* Card 1: Official Titanium Lineup */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="rounded-3xl bg-slate-50 border border-slate-200 overflow-hidden flex flex-col justify-between hover:shadow-lg transition-all"
+          >
+            <div className="p-6 pb-2">
+              <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block mb-1">
+                Aerospace-Grade Alloy
+              </span>
+              <h3 className="text-xl font-black text-slate-900 mb-2">
+                Forged in Titanium
+              </h3>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Featuring a refined microblasted texture, Grade 5 titanium frame, and our thinnest borders on any Apple display ever.
+              </p>
+            </div>
+            <div className="p-4 pt-0">
+              <div className="rounded-2xl overflow-hidden bg-white border border-slate-200/80 shadow-inner">
+                <img
+                  src={lineupImgSrc}
+                  alt="Apple iPhone Pro Titanium Finish Lineup"
+                  className="w-full h-48 sm:h-52 object-contain hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Card 2: 48MP Pro Camera System */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.1 }}
+            className="rounded-3xl bg-slate-50 border border-slate-200 overflow-hidden flex flex-col justify-between hover:shadow-lg transition-all"
+          >
+            <div className="p-6 pb-2">
+              <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block mb-1">
+                Pro Cinema Studio
+              </span>
+              <h3 className="text-xl font-black text-slate-900 mb-2">
+                48MP Fusion & Tetraprism Zoom
+              </h3>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Capture 4K 120 fps Dolby Vision video with 10x lossless optical telephoto and studio-quality 4-mic array audio mix.
+              </p>
+            </div>
+            <div className="p-4 pt-0">
+              <div className="rounded-2xl overflow-hidden bg-white border border-slate-200/80 shadow-inner">
+                <img
+                  src={cameraImgSrc}
+                  alt="Apple iPhone Pro 48MP Camera System"
+                  className="w-full h-48 sm:h-52 object-cover hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Card 3: Camera Control & Apple Intelligence */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+            className="rounded-3xl bg-slate-50 border border-slate-200 overflow-hidden flex flex-col justify-between hover:shadow-lg transition-all md:col-span-2 lg:col-span-1"
+          >
+            <div className="p-6 pb-2">
+              <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block mb-1">
+                Visual Intelligence
+              </span>
+              <h3 className="text-xl font-black text-slate-900 mb-2">
+                All-New Camera Control
+              </h3>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Instant access to camera tools, aperture adjustments, tone mapping, and on-device Apple Intelligence at your fingertips.
+              </p>
+            </div>
+            <div className="p-4 pt-0">
+              <div className="rounded-2xl overflow-hidden bg-white border border-slate-200/80 shadow-inner">
+                <img
+                  src={cameraCtrlImgSrc}
+                  alt="Apple iPhone Camera Control Visuals"
+                  className="w-full h-48 sm:h-52 object-cover hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+            </div>
+          </motion.div>
+
+        </div>
+
+        {/* 4 ARCHITECTURAL METRICS (Clean White Theme) */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
+          <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm hover:border-slate-300 transition-all">
+            <div className="w-10 h-10 rounded-xl bg-slate-100 text-slate-900 flex items-center justify-center text-lg mb-3">
               <FaMicrochip />
             </div>
-            <h4 className="text-sm font-bold text-white mb-1">A20 Pro Silicon</h4>
-            <p className="text-xs text-slate-400 leading-relaxed">
-              World&apos;s first 2nm mobile architecture with 32-core Neural Engine for real-time Apple Intelligence.
+            <h4 className="text-sm font-bold text-slate-950 mb-1">2nm A-Series Silicon</h4>
+            <p className="text-xs text-slate-500 leading-relaxed">
+              Industry-leading CPU & GPU with 32-core Neural Engine for high-speed generative AI processing.
             </p>
           </div>
 
-          <div className="p-5 rounded-2xl bg-slate-900/70 border border-slate-800 hover:border-indigo-500/50 transition-all shadow-sm">
-            <div className="w-10 h-10 rounded-xl bg-indigo-500/10 border border-indigo-500/30 text-indigo-400 flex items-center justify-center text-lg mb-3">
+          <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm hover:border-slate-300 transition-all">
+            <div className="w-10 h-10 rounded-xl bg-slate-100 text-slate-900 flex items-center justify-center text-lg mb-3">
               <FaCamera />
             </div>
-            <h4 className="text-sm font-bold text-white mb-1">10x Quad-Prism Camera</h4>
-            <p className="text-xs text-slate-400 leading-relaxed">
-              All 48MP lenses with lossless 10x optical zoom, 8K ProRes Spatial recording, and Gen-3 sensor shift.
+            <h4 className="text-sm font-bold text-slate-950 mb-1">10x Quad-Prism Optics</h4>
+            <p className="text-xs text-slate-500 leading-relaxed">
+              Next-generation optical focal length range from 13mm Ultra Wide to 240mm Telephoto.
             </p>
           </div>
 
-          <div className="p-5 rounded-2xl bg-slate-900/70 border border-slate-800 hover:border-cyan-500/50 transition-all shadow-sm">
-            <div className="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 flex items-center justify-center text-lg mb-3">
+          <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm hover:border-slate-300 transition-all">
+            <div className="w-10 h-10 rounded-xl bg-slate-100 text-slate-900 flex items-center justify-center text-lg mb-3">
               <FaShieldAlt />
             </div>
-            <h4 className="text-sm font-bold text-white mb-1">Quantum Titanium</h4>
-            <p className="text-xs text-slate-400 leading-relaxed">
-              Under-display Face ID bezel-less glass and Grade 6 forged titanium alloy with zero scratch coating.
+            <h4 className="text-sm font-bold text-slate-950 mb-1">Ceramic Shield 2.0</h4>
+            <p className="text-xs text-slate-500 leading-relaxed">
+              2x tougher than any smartphone glass with advanced thermal graphite architecture.
             </p>
           </div>
 
-          <div className="p-5 rounded-2xl bg-slate-900/70 border border-slate-800 hover:border-emerald-500/50 transition-all shadow-sm">
-            <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 flex items-center justify-center text-lg mb-3">
+          <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm hover:border-slate-300 transition-all">
+            <div className="w-10 h-10 rounded-xl bg-slate-100 text-slate-900 flex items-center justify-center text-lg mb-3">
               <FaBatteryFull />
             </div>
-            <h4 className="text-sm font-bold text-white mb-1">All-Day Power (40h)</h4>
-            <p className="text-xs text-slate-400 leading-relaxed">
-              Stacked solid-state cell architecture supporting 45W MagSafe and 50% recharge in just 15 minutes.
+            <h4 className="text-sm font-bold text-slate-950 mb-1">Huge Leap in Battery</h4>
+            <p className="text-xs text-slate-500 leading-relaxed">
+              Up to 33 hours video playback with high-speed Qi2 and 45W MagSafe fast charging.
             </p>
           </div>
         </div>
+
+        {/* BOTTOM ENTERPRISE INQUIRY BANNER */}
+        <div className="rounded-3xl bg-slate-900 text-white p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl">
+          <div className="space-y-1 text-center sm:text-left">
+            <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">
+              Authentic Infosystem Commercial Allocation
+            </span>
+            <h3 className="text-xl sm:text-2xl font-black text-white">
+              Reserve Your Units for Immediate Dispatch
+            </h3>
+            <p className="text-xs text-slate-300 max-w-xl">
+              Get corporate GST tax invoicing, priority serial registration, and dedicated enterprise account management.
+            </p>
+          </div>
+
+          <a
+            href={`https://wa.me/919643990077?text=${whatsappInquiryMsg}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="shrink-0 inline-flex items-center gap-2.5 px-6 py-3 rounded-full bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-black text-xs sm:text-sm shadow-lg transition-all hover:scale-105 cursor-pointer"
+          >
+            <FaWhatsapp size={16} />
+            <span>Pre-Book via WhatsApp</span>
+          </a>
+        </div>
+
       </div>
 
-      {/* VIDEO POPUP MODAL */}
+      {/* CINEMA VIDEO POPUP MODAL */}
       <AnimatePresence>
         {isVideoOpen && (
           <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md">
@@ -190,7 +331,7 @@ export default function Iphone18ProAdSection() {
                 <div className="flex items-center gap-2">
                   <FaApple className="text-white text-base" />
                   <span className="text-sm font-bold text-white">
-                    iPhone 18 Pro — The Ultimate Performance & Camera
+                    Apple iPhone 18 Pro — Official Announcement Film
                   </span>
                 </div>
                 <button
@@ -213,9 +354,9 @@ export default function Iphone18ProAdSection() {
               </div>
 
               {/* Modal Footer */}
-              <div className="p-4 bg-slate-900/90 flex items-center justify-between">
+              <div className="p-4 bg-slate-900/90 flex flex-wrap items-center justify-between gap-2">
                 <p className="text-xs text-slate-400">
-                  Official Apple Keynote Preview Film • Authentic Infosystem Distribution
+                  Official Apple Keynote Preview Film • Authentic Infosystem
                 </p>
                 <a
                   href={`https://wa.me/919643990077?text=${whatsappInquiryMsg}`}
@@ -224,7 +365,7 @@ export default function Iphone18ProAdSection() {
                   className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-slate-950 text-xs font-bold transition-all shadow-sm"
                 >
                   <FaWhatsapp size={14} />
-                  <span>Pre-Book Now</span>
+                  <span>Pre-Book Allocation</span>
                 </a>
               </div>
             </motion.div>
@@ -234,4 +375,3 @@ export default function Iphone18ProAdSection() {
     </section>
   );
 }
-
