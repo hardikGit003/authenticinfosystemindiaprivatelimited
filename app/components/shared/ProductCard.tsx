@@ -33,32 +33,29 @@ export default function ProductCard({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay }}
-      className="glass-card flex flex-col h-full relative"
+      className="bg-white border border-slate-200 hover:border-blue-500 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col h-full relative overflow-hidden"
     >
-      {/* Badges Removed per user request */}
-
       {/* Image Container */}
-      <div className="relative w-full aspect-[4/3] bg-white/5 p-6 flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent z-0"></div>
+      <div className="relative w-full aspect-[4/3] bg-slate-50 p-6 flex items-center justify-center overflow-hidden border-b border-slate-100">
         <img
           src={image}
           alt={name}
-          className="object-contain w-full h-full max-h-[160px] relative z-10 drop-shadow-2xl transition-transform duration-500 hover:scale-105"
+          className="object-contain w-full h-full max-h-[160px] relative z-10 drop-shadow-md transition-transform duration-500 hover:scale-105"
         />
       </div>
 
       {/* Content */}
       <div className="p-6 flex-1 flex flex-col">
         <div className="mb-4">
-          <p className="text-gray-400 text-xs tracking-widest uppercase mb-1">{modelNumber}</p>
-          <h3 className="text-xl font-semibold text-white leading-tight mb-2">{name}</h3>
+          <p className="text-slate-500 text-xs tracking-widest uppercase mb-1 font-semibold">{modelNumber}</p>
+          <h3 className="text-lg sm:text-xl font-bold text-slate-900 leading-tight mb-2">{name}</h3>
           {description && (
-            <p className="text-gray-300/80 text-xs sm:text-sm leading-relaxed mb-3 line-clamp-2">
+            <p className="text-slate-600 text-xs sm:text-sm leading-relaxed mb-3 line-clamp-2">
               {description}
             </p>
           )}
           {price && (
-            <p className="text-2xl font-bold text-blue-400">
+            <p className="text-2xl font-extrabold text-blue-600">
               {new Intl.NumberFormat("en-IN", {
                 style: "currency",
                 currency: "INR",
@@ -72,9 +69,9 @@ export default function ProductCard({
         <div className="flex-1 mb-6">
           <ul className="space-y-2">
             {specs.map((spec, idx) => (
-              <li key={idx} className="flex justify-between items-center text-sm border-b border-white/5 pb-2">
-                <span className="text-gray-400">{spec.label}</span>
-                <span className="text-white font-medium text-right max-w-[60%] truncate">{spec.value}</span>
+              <li key={idx} className="flex justify-between items-center text-sm border-b border-slate-100 pb-2">
+                <span className="text-slate-500">{spec.label}</span>
+                <span className="text-slate-900 font-semibold text-right max-w-[60%] truncate">{spec.value}</span>
               </li>
             ))}
           </ul>
@@ -82,21 +79,21 @@ export default function ProductCard({
 
         {/* Footer info & Buttons */}
         <div className="mt-auto">
-          <div className="flex items-center gap-2 text-sm text-green-400 mb-4 bg-green-400/10 w-fit px-3 py-1.5 rounded-full border border-green-400/20">
-            <FaCheckCircle />
+          <div className="flex items-center gap-2 text-xs font-semibold text-emerald-700 mb-4 bg-emerald-50 w-fit px-3 py-1.5 rounded-full border border-emerald-200">
+            <FaCheckCircle className="text-emerald-600" />
             <span>{warranty}</span>
           </div>
 
           <div className="grid grid-cols-2 gap-3">
             <Link
               href={`#details-${id}`}
-              className="py-2.5 px-4 text-center rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-white text-sm font-medium transition-all"
+              className="py-2.5 px-4 text-center rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-800 text-sm font-semibold transition-all"
             >
               View Details
             </Link>
             <Link 
               href="/#contact"
-              className="py-2.5 px-4 text-center block rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-sm font-medium transition-all shadow-[0_0_15px_rgba(37,99,235,0.3)]"
+              className="py-2.5 px-4 text-center block rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold transition-all shadow-sm shadow-blue-500/20"
             >
               Request Quote
             </Link>

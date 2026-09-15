@@ -277,7 +277,7 @@ export default function AccessoriesPage() {
   };
 
   return (
-    <main className="min-h-screen bg-black text-white selection:bg-blue-500/30">
+    <main className="min-h-screen bg-white text-slate-900 selection:bg-blue-500/20">
       <Navbar />
 
       <PageHero
@@ -289,10 +289,10 @@ export default function AccessoriesPage() {
       />
 
       {/* Categories */}
-      <section className="py-6 sm:py-8 page-container border-b border-white/5">
+      <section className="py-6 sm:py-8 page-container border-b border-slate-200 bg-slate-50/50">
         <div className="flex overflow-x-auto sm:flex-wrap justify-start sm:justify-center gap-2 sm:gap-3 pb-2 sm:pb-0 scrollbar-hide w-full">
           {['Keyboard', 'Mouse', 'Monitor', 'Docking Station', 'USB Hub', 'Webcam', 'Headsets', 'Conference Devices', 'Speakers', 'Power Backup', 'External Storage', 'Cables'].map((cat, i) => (
-            <button key={i} className="px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 transition-colors text-xs sm:text-sm font-medium whitespace-nowrap shrink-0">
+            <button key={i} className="px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-white border border-slate-200 hover:bg-blue-50 hover:text-blue-600 hover:border-blue-200 text-slate-700 transition-colors text-xs sm:text-sm font-medium whitespace-nowrap shrink-0 shadow-xs">
               {cat}
             </button>
           ))}
@@ -314,28 +314,28 @@ export default function AccessoriesPage() {
       </section>
 
       {/* Workspace Collections */}
-      <section className="py-12 sm:py-16 bg-white/5 page-container">
+      <section className="py-12 sm:py-16 bg-slate-50 page-container border-y border-slate-200">
         <SectionHeader title="Workspace Collections" align="center" subtitle="Curated setups for every type of professional." />
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mt-6 sm:mt-8">
           {['Work From Home Kit', 'Developer Desk', 'Executive Office', 'Gaming Setup', 'Conference Room', 'Student Essentials'].map((collection, i) => (
-            <div key={i} className="glass-panel p-6 sm:p-8 group cursor-pointer relative overflow-hidden">
-              <div className="absolute inset-0 bg-blue-500/10 translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
-              <h3 className="text-xl sm:text-2xl font-bold mb-2 relative z-10">{collection}</h3>
-              <p className="text-blue-400 font-medium text-sm sm:text-base relative z-10">View Bundle →</p>
+            <div key={i} className="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 group cursor-pointer relative overflow-hidden shadow-xs hover:border-blue-500/40 hover:shadow-lg transition-all duration-300">
+              <div className="absolute inset-0 bg-blue-500/5 translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
+              <h3 className="text-xl sm:text-2xl font-bold text-slate-900 mb-2 relative z-10">{collection}</h3>
+              <p className="text-blue-600 font-semibold text-sm sm:text-base relative z-10">View Bundle →</p>
             </div>
           ))}
         </div>
       </section>
 
       {/* Buying Guide Carousel */}
-      <section className="py-12 sm:py-16 page-container border-t border-white/10">
+      <section className="py-12 sm:py-16 page-container border-b border-slate-200">
         <SectionHeader title="Accessory Buying Guides" />
         
         <div className="relative mt-6">
           {/* Left Arrow */}
           <button 
             onClick={() => scroll('left')}
-            className="absolute -left-5 top-1/2 -translate-y-1/2 z-10 hidden md:flex items-center justify-center w-12 h-12 rounded-full bg-white/5 border border-white/10 text-white backdrop-blur-md hover:bg-white/10 hover:scale-110 transition-all shadow-lg"
+            className="absolute -left-5 top-1/2 -translate-y-1/2 z-10 hidden md:flex items-center justify-center w-12 h-12 rounded-full bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 hover:text-blue-600 hover:scale-110 transition-all shadow-md"
             aria-label="Scroll left"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
@@ -348,7 +348,7 @@ export default function AccessoriesPage() {
             {buyingGuides.map((guide, i) => (
             <div 
               key={i} 
-              className="min-w-[280px] sm:min-w-[320px] h-[210px] sm:h-[230px] rounded-[22px] overflow-hidden relative border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.35)] p-6 sm:p-7 shrink-0 flex flex-col justify-end hover:shadow-2xl hover:border-blue-500/40 hover:-translate-y-1.5 transition-all duration-300 group cursor-pointer"
+              className="min-w-[280px] sm:min-w-[320px] h-[210px] sm:h-[230px] rounded-[22px] overflow-hidden relative border border-slate-200 shadow-[0_4px_20px_rgba(0,0,0,0.06)] p-6 sm:p-7 shrink-0 flex flex-col justify-end hover:shadow-xl hover:border-blue-500/40 hover:-translate-y-1.5 transition-all duration-300 group cursor-pointer"
             >
               {/* Background Photo */}
               <img
@@ -377,7 +377,7 @@ export default function AccessoriesPage() {
           {/* Right Arrow */}
           <button 
             onClick={() => scroll('right')}
-            className="absolute -right-5 top-1/2 -translate-y-1/2 z-10 hidden md:flex items-center justify-center w-12 h-12 rounded-full bg-white/5 border border-white/10 text-white backdrop-blur-md hover:bg-white/10 hover:scale-110 transition-all shadow-lg"
+            className="absolute -right-5 top-1/2 -translate-y-1/2 z-10 hidden md:flex items-center justify-center w-12 h-12 rounded-full bg-white border border-slate-200 text-slate-700 hover:bg-slate-50 hover:text-blue-600 hover:scale-110 transition-all shadow-md"
             aria-label="Scroll right"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
@@ -387,18 +387,18 @@ export default function AccessoriesPage() {
 
       {/* Special Bundle */}
       <section className="py-12 sm:py-16 page-container">
-        <div className="bg-white p-8 sm:p-12 lg:p-14 rounded-[22px] border border-black/5 shadow-[0_8px_32px_rgba(0,0,0,0.35)] relative overflow-hidden">
+        <div className="bg-white p-8 sm:p-12 lg:p-14 rounded-[22px] border border-slate-200 shadow-[0_8px_32px_rgba(0,0,0,0.06)] relative overflow-hidden">
           {/* Subtle accent gradient inside the white card */}
-          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-to-bl from-blue-100 to-transparent rounded-full opacity-60 blur-3xl -z-0 translate-x-1/3 -translate-y-1/4 pointer-events-none"></div>
+          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-to-bl from-blue-50 to-transparent rounded-full opacity-60 blur-3xl -z-0 translate-x-1/3 -translate-y-1/4 pointer-events-none"></div>
           
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center relative z-10">
             {/* Left Column: Text & Features */}
             <div className="lg:col-span-7">
-              <span className="px-3.5 py-1 bg-blue-100 text-blue-700 rounded-full text-xs sm:text-sm font-bold uppercase tracking-wider mb-4 inline-block">Special Bundle</span>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3 sm:mb-4 text-black">Professional Workstation Bundle</h2>
-              <p className="text-gray-600 text-sm sm:text-base mb-6 leading-relaxed">Equip your team with a complete, fully compatible workstation setup featuring top-tier components. Perfect for new hires and office upgrades.</p>
+              <span className="px-3.5 py-1 bg-blue-50 text-blue-700 rounded-full text-xs sm:text-sm font-bold uppercase tracking-wider mb-4 inline-block border border-blue-200">Special Bundle</span>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3 sm:mb-4 text-slate-900">Professional Workstation Bundle</h2>
+              <p className="text-slate-600 text-sm sm:text-base mb-6 leading-relaxed">Equip your team with a complete, fully compatible workstation setup featuring top-tier components. Perfect for new hires and office upgrades.</p>
               
-              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3.5 mb-7 text-gray-700 text-sm sm:text-base font-medium">
+              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3.5 mb-7 text-slate-700 text-sm sm:text-base font-medium">
                 <li className="flex items-center gap-3"><span className="text-blue-600 font-bold">✓</span> 27" 4K Monitor</li>
                 <li className="flex items-center gap-3"><span className="text-blue-600 font-bold">✓</span> Mechanical Keyboard</li>
                 <li className="flex items-center gap-3"><span className="text-blue-600 font-bold">✓</span> Ergonomic Mouse</li>
@@ -411,7 +411,7 @@ export default function AccessoriesPage() {
                 href="https://wa.me/919643990077?text=Hi%2C%20I%20want%20to%20request%20corporate%20pricing%20for%20the%20Professional%20Workstation%20Bundle%20from%20Authentic%20Infosystem."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block px-6 sm:px-8 py-3.5 bg-blue-600 text-white text-sm sm:text-base font-semibold rounded-xl hover:bg-blue-500 transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+                className="inline-block px-6 sm:px-8 py-3.5 bg-blue-600 text-white text-sm sm:text-base font-semibold rounded-xl hover:bg-blue-700 transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5"
               >
                 Request Corporate Pricing
               </a>
@@ -419,7 +419,7 @@ export default function AccessoriesPage() {
 
             {/* Right Column: Bundle Photo */}
             <div className="lg:col-span-5 flex justify-center items-center">
-              <div className="rounded-[20px] overflow-hidden shadow-2xl border border-black/5 w-full max-w-md group bg-gray-100">
+              <div className="rounded-[20px] overflow-hidden shadow-xl border border-slate-200 w-full max-w-md group bg-slate-100">
                 <img
                   src="/Accessories/Professional%20Workstation%20Bundle.jpeg"
                   alt="Professional Workstation Bundle"

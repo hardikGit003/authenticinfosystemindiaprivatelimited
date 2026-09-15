@@ -32,28 +32,10 @@ ${message}`;
 
   return (
     <section
-  id="contact"
-  className="contact-section"
->
-
-      {/* VIDEO */}
-
-      <video
-        autoPlay
-        muted
-        loop
-        playsInline
-        className="contact-video"
-      >
-        <source src="/CIN4.MP4" type="video/mp4" />
-      </video>
-
-      {/* OVERLAY */}
-
-      <div className="contact-overlay"></div>
-
+      id="contact"
+      className="contact-section"
+    >
       {/* CONTENT */}
-
       <div className="contact-content">
 
         {/* LEFT */}

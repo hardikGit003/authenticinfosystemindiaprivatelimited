@@ -1,30 +1,7 @@
 export default function BrandsSection() {
-
   return (
-
-    <section
-  id="brands"
-  className="brands-section"
->
-
-      {/* BACKGROUND VIDEO */}
-
-      <video
-        autoPlay
-        muted
-        loop
-        playsInline
-        className="brands-video"
-      >
-        <source src="/CIN2.mp4" type="video/mp4" />
-      </video>
-
-      {/* DARK OVERLAY */}
-
-      <div className="brands-overlay"></div>
-
+    <section id="brands" className="brands-section">
       {/* CONTENT */}
-
       <div className="brands-content">
 
         <p className="brands-mini-text">

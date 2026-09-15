@@ -7,6 +7,7 @@ import BrandsSection from "./components/BrandsSection";
 import WhyChooseUs from "./components/WhyChooseUs";
 import ContactSection from "./components/ContactSection";
 import FinalSection from "./components/FinalSection";
+import ProvideSection from "./components/ProvideSection";
 import Footer from "./components/Footer";
 
 export default function Home() {
@@ -29,6 +30,8 @@ export default function Home() {
       <ContactSection />
 
       <FinalSection />
+
+      <ProvideSection />
 
       <Footer />
     </main>

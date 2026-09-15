@@ -3,33 +3,9 @@
 import { motion } from "framer-motion";
 
 export default function FinalSection() {
-
   return (
-
     <section className="final-section">
-
-      {/* VIDEO */}
-
-      <video
-        autoPlay
-        muted
-        loop
-        playsInline
-        className="final-video"
-      >
-        <source src="/CIN5.mp4" type="video/mp4" />
-      </video>
-
-      {/* OVERLAY */}
-
-      <div className="final-overlay"></div>
-
-      {/* FLOATING GRADIENT */}
-
-      <div className="final-glow"></div>
-
       {/* CONTENT */}
-
       <motion.div
         className="final-content"
         initial={{ opacity: 0, y: 100 }}

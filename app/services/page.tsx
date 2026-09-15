@@ -1,3 +1,5 @@
+import { redirect } from "next/navigation";
+
 export default function Services() {
-  return <div className="center">Services</div>;
+  redirect("/#solutions");
 }

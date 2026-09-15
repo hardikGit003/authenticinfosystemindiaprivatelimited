@@ -6,6 +6,7 @@ interface SectionHeaderProps {
   miniText?: string;
   align?: "left" | "center";
   className?: string;
+  dark?: boolean;
 }
 
 export default function SectionHeader({
@@ -14,6 +15,7 @@ export default function SectionHeader({
   miniText,
   align = "left",
   className = "",
+  dark = false,
 }: SectionHeaderProps) {
   return (
     <motion.div
@@ -24,15 +26,15 @@ export default function SectionHeader({
       className={`mb-6 sm:mb-8 ${align === "center" ? "text-center mx-auto max-w-3xl" : "max-w-2xl"} ${className}`}
     >
       {miniText && (
-        <p className="text-gray-400 text-xs tracking-[4px] uppercase mb-2 font-semibold">
+        <p className={`text-xs tracking-[4px] uppercase mb-2 font-bold ${dark ? "text-sky-400" : "text-blue-600"}`}>
           {miniText}
         </p>
       )}
-      <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white tracking-tight mb-2 sm:mb-3 leading-tight">
+      <h2 className={`text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight mb-2 sm:mb-3 leading-tight ${dark ? "text-white" : "text-slate-900"}`}>
         {title}
       </h2>
       {subtitle && (
-        <p className="text-gray-300 text-sm sm:text-base md:text-lg leading-relaxed font-light">
+        <p className={`text-sm sm:text-base md:text-lg leading-relaxed font-normal ${dark ? "text-slate-200" : "text-slate-600"}`}>
           {subtitle}
         </p>
       )}

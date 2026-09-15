@@ -141,7 +141,7 @@ const networkingProducts = [
 
 export default function NetworkingPage() {
   return (
-    <main className="min-h-screen bg-black text-white selection:bg-blue-500/30">
+    <main className="min-h-screen bg-white text-slate-900 selection:bg-blue-500/20">
       <Navbar />
 
       <PageHero
@@ -153,11 +153,11 @@ export default function NetworkingPage() {
       />
 
       {/* Solution Categories */}
-      <section className="py-10 sm:py-14 page-container border-b border-white/5">
+      <section className="py-10 sm:py-14 page-container border-b border-slate-200">
         <SectionHeader title="Comprehensive IT Infrastructure" align="center" />
         <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mt-4 sm:mt-6">
           {['Enterprise Networking', 'Wireless Access Points', 'Managed Switches', 'Firewalls', 'Routers', 'Load Balancers', 'VPN', 'Structured Cabling', 'Fiber Solutions', 'Server Racks'].map((cat, i) => (
-            <span key={i} className="px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-lg bg-white/5 border border-white/10 text-gray-300 hover:text-white transition-colors cursor-default text-xs sm:text-sm">
+            <span key={i} className="px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-full bg-slate-100 border border-slate-200 text-slate-700 font-medium cursor-default text-xs sm:text-sm">
               {cat}
             </span>
           ))}
@@ -179,7 +179,7 @@ export default function NetworkingPage() {
       </section>
 
       {/* CCTV Section */}
-      <section className="py-12 sm:py-16 bg-white/5 page-container">
+      <section className="py-12 sm:py-16 bg-slate-50 page-container border-t border-b border-slate-200">
         <SectionHeader title="Smart Surveillance (CCTV)" subtitle="Protect your assets with advanced AI-powered video security." />
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-3 sm:gap-4 mt-6">
           {surveillanceItems.map((cam, i) => (
@@ -188,21 +188,15 @@ export default function NetworkingPage() {
               href={`https://wa.me/919643990077?text=${encodeURIComponent(`Hi, I am interested in ${cam.title} CCTV & smart surveillance solutions from Authentic Infosystem.`)}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="relative rounded-[18px] overflow-hidden aspect-square flex items-center justify-center p-2.5 border border-white/10 shadow-[0_4px_20px_rgba(0,0,0,0.3)] cursor-pointer group hover:shadow-[0_8px_30px_rgba(77,163,255,0.3)] hover:border-blue-500/50 hover:-translate-y-1 transition-all duration-300 block"
+              className="relative rounded-[18px] overflow-hidden aspect-square flex items-center justify-center p-2.5 border border-slate-200 shadow-sm cursor-pointer group hover:shadow-md hover:border-blue-500 hover:-translate-y-1 transition-all duration-300 block"
             >
-              {/* Background Image */}
               <img
                 src={cam.image}
                 alt={cam.title}
                 className="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-500 ease-out"
               />
-
-              {/* Light Vignette / Overlay for Image Clarity & Text Contrast */}
-              <div className="absolute inset-0 bg-black/25 group-hover:bg-black/15 transition-colors duration-300" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30" />
-
-              {/* Centered Heading with White Text */}
-              <span className="relative z-10 text-white font-semibold text-xs sm:text-xs md:text-sm text-center px-1 tracking-tight drop-shadow-[0_2px_8px_rgba(0,0,0,1)] [text-shadow:_0_2px_10px_rgba(0,0,0,0.95)] group-hover:text-blue-100 group-hover:scale-105 transition-all duration-300">
+              <div className="absolute inset-0 bg-slate-900/40 group-hover:bg-slate-900/30 transition-colors duration-300" />
+              <span className="relative z-10 text-white font-bold text-xs sm:text-xs md:text-sm text-center px-1 tracking-tight drop-shadow-md group-hover:scale-105 transition-all duration-300">
                 {cam.title}
               </span>
             </a>
@@ -214,55 +208,55 @@ export default function NetworkingPage() {
       <section className="py-12 sm:py-16 page-container">
         <SectionHeader title="Our Deployment Process" align="center" />
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6 mt-8 relative">
-          <div className="hidden lg:block absolute top-1/2 left-0 w-full h-1 bg-white/10 -translate-y-1/2 z-0"></div>
+          <div className="hidden lg:block absolute top-1/2 left-0 w-full h-1 bg-slate-200 -translate-y-1/2 z-0"></div>
           {['Site Survey', 'Requirement Analysis', 'Network Design', 'Installation & Testing', 'Maintenance & Support'].map((step, i) => (
-            <div key={i} className="relative z-10 glass-card p-5 sm:p-6 text-center">
-              <div className="w-12 h-12 mx-auto bg-blue-600 rounded-full flex items-center justify-center font-bold text-xl mb-4 border-4 border-black shadow-[0_0_15px_rgba(37,99,235,0.5)]">
+            <div key={i} className="relative z-10 bg-white border border-slate-200 rounded-2xl shadow-sm p-5 sm:p-6 text-center">
+              <div className="w-12 h-12 mx-auto bg-blue-600 text-white rounded-full flex items-center justify-center font-bold text-xl mb-4 border-4 border-slate-50 shadow-sm">
                 {i + 1}
               </div>
-              <h4 className="font-semibold text-sm sm:text-base">{step}</h4>
+              <h4 className="font-bold text-slate-900 text-sm sm:text-base">{step}</h4>
             </div>
           ))}
         </div>
       </section>
 
       {/* Case Study */}
-      <section className="py-12 sm:py-16 page-container border-t border-white/10">
-        <div className="glass-panel p-8 sm:p-10 lg:p-14 flex flex-col lg:flex-row items-center gap-8 lg:gap-12 bg-gradient-to-r from-blue-900/20 to-transparent">
+      <section className="py-12 sm:py-16 page-container border-t border-slate-200">
+        <div className="bg-slate-50 border border-slate-200 rounded-3xl p-8 sm:p-10 lg:p-14 flex flex-col lg:flex-row items-center gap-8 lg:gap-12 shadow-sm">
           <div className="lg:w-1/2">
-            <span className="text-blue-400 font-semibold tracking-wider uppercase text-xs sm:text-sm mb-3 block">Case Study</span>
-            <h3 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">Network Deployment for a 300-User Corporate Office</h3>
-            <p className="text-gray-300 text-sm sm:text-base leading-relaxed mb-6">
+            <span className="text-blue-600 font-bold tracking-wider uppercase text-xs sm:text-sm mb-2 block">Case Study</span>
+            <h3 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 mb-4">Network Deployment for a 300-User Corporate Office</h3>
+            <p className="text-slate-600 text-sm sm:text-base leading-relaxed mb-6">
               Authentic Infosystem successfully overhauled the legacy infrastructure for a leading tech firm, implementing a fully redundant Cisco-based core network with Wi-Fi 6 coverage across 3 floors.
             </p>
-            <button className="px-6 py-2.5 sm:py-3 bg-white/10 hover:bg-white/20 rounded-lg transition-colors font-medium text-sm border border-white/20">Read Full Case Study</button>
+            <button className="px-6 py-2.5 sm:py-3 bg-white hover:bg-slate-100 rounded-xl transition-colors font-bold text-sm border border-slate-300 text-slate-800 shadow-xs">Read Full Case Study</button>
           </div>
           <div className="lg:w-1/2 grid grid-cols-2 gap-3 sm:gap-4 w-full">
-            <div className="glass-card p-5 sm:p-6 border-l-4 border-l-green-500">
-              <h4 className="text-2xl sm:text-3xl font-bold text-white mb-1">99.9%</h4>
-              <p className="text-gray-400 text-xs sm:text-sm">Uptime Achieved</p>
+            <div className="bg-white border border-slate-200 rounded-2xl p-5 sm:p-6 shadow-sm">
+              <h4 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mb-1">99.9%</h4>
+              <p className="text-slate-500 text-xs sm:text-sm">Uptime Achieved</p>
             </div>
-            <div className="glass-card p-5 sm:p-6 border-l-4 border-l-blue-500">
-              <h4 className="text-2xl sm:text-3xl font-bold text-white mb-1">35%</h4>
-              <p className="text-gray-400 text-xs sm:text-sm">Faster Speeds</p>
+            <div className="bg-white border border-slate-200 rounded-2xl p-5 sm:p-6 shadow-sm">
+              <h4 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mb-1">35%</h4>
+              <p className="text-slate-500 text-xs sm:text-sm">Faster Speeds</p>
             </div>
-            <div className="glass-card p-5 sm:p-6 border-l-4 border-l-purple-500">
-              <h4 className="text-2xl sm:text-3xl font-bold text-white mb-1">24x7</h4>
-              <p className="text-gray-400 text-xs sm:text-sm">Active Monitoring</p>
+            <div className="bg-white border border-slate-200 rounded-2xl p-5 sm:p-6 shadow-sm">
+              <h4 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mb-1">24×7</h4>
+              <p className="text-slate-500 text-xs sm:text-sm">Active Monitoring</p>
             </div>
-            <div className="glass-card p-5 sm:p-6 border-l-4 border-l-orange-500">
-              <h4 className="text-2xl sm:text-3xl font-bold text-white mb-1">Zero</h4>
-              <p className="text-gray-400 text-xs sm:text-sm">Downtime Migration</p>
+            <div className="bg-white border border-slate-200 rounded-2xl p-5 sm:p-6 shadow-sm">
+              <h4 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mb-1">Zero</h4>
+              <p className="text-slate-500 text-xs sm:text-sm">Downtime Migration</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* CTA */}
-      <section className="py-12 sm:py-16 text-center page-container">
-        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4">Need a complete networking solution?</h2>
-        <p className="text-gray-400 text-sm sm:text-base mb-6 sm:mb-8 max-w-2xl mx-auto">Let our certified network engineers design the perfect infrastructure for your business needs.</p>
-        <button className="px-6 sm:px-8 py-3 sm:py-3.5 bg-blue-600 hover:bg-blue-500 text-white rounded-full font-semibold text-sm transition-all shadow-[0_0_20px_rgba(37,99,235,0.4)]">
+      <section className="py-12 sm:py-16 text-center page-container border-t border-slate-200">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 mb-3 sm:mb-4">Need a complete networking solution?</h2>
+        <p className="text-slate-600 text-sm sm:text-base mb-6 sm:mb-8 max-w-2xl mx-auto">Let our certified network engineers design the perfect infrastructure for your business needs.</p>
+        <button className="px-6 sm:px-8 py-3.5 bg-blue-600 hover:bg-blue-700 text-white rounded-full font-bold text-sm transition-all shadow-md shadow-blue-500/20">
           Book Site Visit
         </button>
       </section>

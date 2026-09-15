@@ -38,20 +38,6 @@ export default function WhyChooseUs() {
 
   return (
     <section id="why-us" className="why-section">
-      {/* BACKGROUND VIDEO */}
-      <video
-        className="why-video"
-        autoPlay
-        muted
-        loop
-        playsInline
-      >
-        <source src="/CIN3.mp4" type="video/mp4" />
-      </video>
-
-      {/* OVERLAY */}
-      <div className="why-overlay"></div>
-
       {/* CONTENT */}
       <div className="why-container">
         {/* LEFT SIDE */}

@@ -3,15 +3,15 @@ import "./globals.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
 export const metadata = {
-  title: "AUTHENTIC INFOSYSTEM",
-  description: "Premium Electronics Website",
+  title: "AUTHENTIC INFOSYSTEM | Enterprise Technology Solutions",
+  description: "Enterprise grade laptops, desktops, networking infrastructure, surveillance systems, and IT solutions across India.",
 };
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
-  themeColor: "#000000",
+  themeColor: "#ffffff",
 };
 
 export default function RootLayout({
@@ -21,7 +21,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body suppressHydrationWarning className="overflow-x-hidden w-full bg-black text-white selection:bg-blue-500/30">
+      <body suppressHydrationWarning className="overflow-x-hidden w-full bg-white text-slate-900 selection:bg-blue-600/20">
         {children}
       </body>
     </html>

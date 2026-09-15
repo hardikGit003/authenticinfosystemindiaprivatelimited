@@ -59,7 +59,7 @@ ${messageDetails}`;
   };
 
   return (
-    <main className="min-h-screen bg-black text-white selection:bg-blue-500/30">
+    <main className="min-h-screen bg-white text-slate-900 selection:bg-blue-500/20">
       <Navbar />
 
       <PageHero
@@ -70,31 +70,14 @@ ${messageDetails}`;
         secondaryButtonText="Request Proposal"
       />
 
-      {/* Statistics Section */}
-      <section className="py-12 sm:py-16 page-container border-b border-white/10 bg-white/5">
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-6 sm:gap-8 text-center">
-          {[
-            { label: "Projects", value: "500+" },
-            { label: "Enterprise Clients", value: "120+" },
-            { label: "Brands", value: "25+" },
-            { label: "Support", value: "24×7" },
-            { label: "Years Experience", value: "10+" },
-          ].map((stat, i) => (
-            <div key={i}>
-              <div className="text-3xl sm:text-4xl md:text-5xl font-bold text-blue-500 mb-1 sm:mb-2">{stat.value}</div>
-              <div className="text-xs sm:text-sm text-gray-400 uppercase tracking-wider font-semibold">{stat.label}</div>
-            </div>
-          ))}
-        </div>
-      </section>
 
       {/* Who We Serve */}
-      <section className="py-12 sm:py-16 page-container border-b border-white/5">
+      <section className="py-12 sm:py-16 page-container border-b border-slate-200">
         <SectionHeader title="Industries We Empower" align="center" />
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mt-6">
           {['Startups', 'SMEs', 'Large Enterprises', 'Educational Institutions', 'Healthcare', 'Manufacturing', 'Government', 'Retail Chains'].map((industry, i) => (
-            <div key={i} className="glass-card p-5 sm:p-7 text-center hover:bg-blue-600/10 transition-colors cursor-pointer border border-white/5 hover:border-blue-500/30">
-              <h4 className="text-base sm:text-lg font-bold">{industry}</h4>
+            <div key={i} className="bg-white rounded-xl p-5 sm:p-7 text-center hover:bg-blue-50 hover:border-blue-300 transition-all cursor-pointer border border-slate-200 shadow-xs hover:shadow-md">
+              <h4 className="text-base sm:text-lg font-bold text-slate-800">{industry}</h4>
             </div>
           ))}
         </div>
@@ -110,7 +93,7 @@ ${messageDetails}`;
               href={`https://wa.me/919643990077?text=${encodeURIComponent(`Hi, I am interested in ${service.title} enterprise services from Authentic Infosystem.`)}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="relative rounded-[20px] overflow-hidden min-h-[140px] sm:min-h-[150px] flex items-center justify-center p-4 border border-white/10 shadow-[0_6px_24px_rgba(0,0,0,0.35)] cursor-pointer group hover:shadow-[0_10px_35px_rgba(77,163,255,0.25)] hover:border-blue-500/40 hover:-translate-y-1.5 transition-all duration-300 block"
+              className="relative rounded-[20px] overflow-hidden min-h-[140px] sm:min-h-[150px] flex items-center justify-center p-4 border border-slate-200 shadow-[0_4px_16px_rgba(0,0,0,0.06)] cursor-pointer group hover:shadow-[0_10px_30px_rgba(0,102,204,0.15)] hover:border-blue-500/50 hover:-translate-y-1.5 transition-all duration-300 block"
             >
               {/* Background Image */}
               <img
@@ -133,19 +116,19 @@ ${messageDetails}`;
       </section>
 
       {/* Procurement Process */}
-      <section className="py-12 sm:py-16 bg-white/5 page-container">
+      <section className="py-12 sm:py-16 bg-slate-50 page-container border-y border-slate-200">
         <SectionHeader title="Streamlined Procurement Process" align="center" />
         <div className="relative mt-8 sm:mt-10 max-w-5xl mx-auto">
           {/* Timeline Line */}
-          <div className="hidden md:block absolute top-1/2 left-0 w-full h-1 bg-gradient-to-r from-blue-500/20 via-blue-500 to-blue-500/20 -translate-y-1/2 z-0"></div>
+          <div className="hidden md:block absolute top-1/2 left-0 w-full h-1 bg-slate-200 -translate-y-1/2 z-0"></div>
           
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-3 sm:gap-4 relative z-10">
             {['Requirement', 'Consultation', 'Vendor Select', 'Quotation', 'Approval', 'Delivery', 'Deployment', 'Support'].map((step, i) => (
               <div key={i} className="flex flex-col items-center text-center">
-                <div className="w-9 h-9 sm:w-10 sm:h-10 bg-black border-2 border-blue-500 rounded-full flex items-center justify-center text-xs font-bold mb-2 sm:mb-3 shadow-[0_0_10px_rgba(37,99,235,0.4)]">
+                <div className="w-9 h-9 sm:w-10 sm:h-10 bg-white border-2 border-blue-600 text-blue-600 rounded-full flex items-center justify-center text-xs font-bold mb-2 sm:mb-3 shadow-xs">
                   {i + 1}
                 </div>
-                <span className="text-xs font-semibold text-gray-300">{step}</span>
+                <span className="text-xs font-semibold text-slate-700">{step}</span>
               </div>
             ))}
           </div>
@@ -153,71 +136,82 @@ ${messageDetails}`;
       </section>
 
       {/* B2B Inquiry Form */}
-      <section className="py-12 sm:py-16 page-container border-b border-white/10" id="contact">
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start max-w-6xl mx-auto">
-          <div>
-            <SectionHeader title="Request a Custom Quote" subtitle="Partner with us for reliable, scalable, and cost-effective IT infrastructure." />
-            <div className="mt-6 space-y-4 sm:space-y-6 text-gray-300">
-              <div className="flex items-center gap-4">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-white/5 rounded-full flex items-center justify-center text-lg sm:text-xl">📧</div>
-                <div>
-                  <p className="text-xs text-gray-500 uppercase tracking-wider">Email Us</p>
-                  <p className="font-medium text-base sm:text-lg">b2b@authenticinfosystem.com</p>
+      <section className="py-16 sm:py-24 w-full bg-[#042442] border-y border-white/10 relative overflow-hidden" id="contact">
+        {/* Ambient Glows */}
+        <div className="absolute -top-32 -left-32 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-sky-500/10 rounded-full blur-3xl pointer-events-none" />
+
+        <div className="page-container relative z-10">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center max-w-6xl mx-auto">
+            <div>
+              <SectionHeader 
+                dark
+                miniText="GET IN TOUCH"
+                title="Request a Custom Quote" 
+                subtitle="Partner with us for reliable, scalable, and cost-effective IT infrastructure." 
+              />
+              <div className="mt-8 space-y-4 sm:space-y-6">
+                <div className="flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm">
+                  <div className="w-12 h-12 bg-blue-600/20 text-sky-400 border border-sky-400/30 rounded-full flex items-center justify-center text-xl shrink-0">📧</div>
+                  <div>
+                    <p className="text-xs text-sky-300 uppercase tracking-wider font-semibold">Email Us</p>
+                    <p className="font-semibold text-base sm:text-lg text-white">b2b@authenticinfosystem.com</p>
+                  </div>
                 </div>
-              </div>
-              <div className="flex items-center gap-4">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-white/5 rounded-full flex items-center justify-center text-lg sm:text-xl">📞</div>
-                <div>
-                  <p className="text-xs text-gray-500 uppercase tracking-wider">Call Us</p>
-                  <p className="font-medium text-base sm:text-lg">+91 9643990077</p>
+                <div className="flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm">
+                  <div className="w-12 h-12 bg-blue-600/20 text-sky-400 border border-sky-400/30 rounded-full flex items-center justify-center text-xl shrink-0">📞</div>
+                  <div>
+                    <p className="text-xs text-sky-300 uppercase tracking-wider font-semibold">Call Us</p>
+                    <p className="font-semibold text-base sm:text-lg text-white">+91 9643990077</p>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          <div className="glass-card p-6 sm:p-8 md:p-10">
-            <form className="space-y-4" onSubmit={handleSubmit}>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-xs uppercase tracking-wider text-gray-400 mb-2">Company Name</label>
-                  <input type="text" className="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-2.5 sm:py-3 text-sm focus:border-blue-500 outline-none transition-colors" placeholder="Acme Corp" value={companyName} onChange={(e) => setCompanyName(e.target.value)} />
+            <div className="bg-white border border-slate-200 rounded-2xl shadow-2xl p-6 sm:p-8 md:p-10">
+              <form className="space-y-4" onSubmit={handleSubmit}>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs uppercase tracking-wider text-slate-600 font-bold mb-2">Company Name</label>
+                    <input type="text" className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2.5 sm:py-3 text-sm text-slate-900 focus:bg-white focus:border-blue-500 outline-none transition-colors" placeholder="Acme Corp" value={companyName} onChange={(e) => setCompanyName(e.target.value)} />
+                  </div>
+                  <div>
+                    <label className="block text-xs uppercase tracking-wider text-slate-600 font-bold mb-2">Business Email</label>
+                    <input type="email" className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2.5 sm:py-3 text-sm text-slate-900 focus:bg-white focus:border-blue-500 outline-none transition-colors" placeholder="you@company.com" value={businessEmail} onChange={(e) => setBusinessEmail(e.target.value)} />
+                  </div>
                 </div>
-                <div>
-                  <label className="block text-xs uppercase tracking-wider text-gray-400 mb-2">Business Email</label>
-                  <input type="email" className="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-2.5 sm:py-3 text-sm focus:border-blue-500 outline-none transition-colors" placeholder="you@company.com" value={businessEmail} onChange={(e) => setBusinessEmail(e.target.value)} />
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs uppercase tracking-wider text-slate-600 font-bold mb-2">Phone Number</label>
+                    <input type="tel" className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2.5 sm:py-3 text-sm text-slate-900 focus:bg-white focus:border-blue-500 outline-none transition-colors" placeholder="+91 xxxxx xxxxx" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} />
+                  </div>
+                  <div>
+                    <label className="block text-xs uppercase tracking-wider text-slate-600 font-bold mb-2">Company Size</label>
+                    <select className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2.5 sm:py-3 text-sm text-slate-900 focus:bg-white focus:border-blue-500 outline-none transition-colors appearance-none" value={companySize} onChange={(e) => setCompanySize(e.target.value)}>
+                      <option>1-50 Employees</option>
+                      <option>51-200 Employees</option>
+                      <option>201-500 Employees</option>
+                      <option>500+ Employees</option>
+                    </select>
+                  </div>
                 </div>
-              </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs uppercase tracking-wider text-gray-400 mb-2">Phone Number</label>
-                  <input type="tel" className="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-2.5 sm:py-3 text-sm focus:border-blue-500 outline-none transition-colors" placeholder="+91 xxxxx xxxxx" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} />
+                  <label className="block text-xs uppercase tracking-wider text-slate-600 font-bold mb-2">Products/Services Interested In</label>
+                  <input type="text" className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2.5 sm:py-3 text-sm text-slate-900 focus:bg-white focus:border-blue-500 outline-none transition-colors" placeholder="Laptops, Networking, AMC..." value={productsInterested} onChange={(e) => setProductsInterested(e.target.value)} />
                 </div>
+
                 <div>
-                  <label className="block text-xs uppercase tracking-wider text-gray-400 mb-2">Company Size</label>
-                  <select className="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-2.5 sm:py-3 text-sm focus:border-blue-500 outline-none transition-colors appearance-none" value={companySize} onChange={(e) => setCompanySize(e.target.value)}>
-                    <option>1-50 Employees</option>
-                    <option>51-200 Employees</option>
-                    <option>201-500 Employees</option>
-                    <option>500+ Employees</option>
-                  </select>
+                  <label className="block text-xs uppercase tracking-wider text-slate-600 font-bold mb-2">Message Details</label>
+                  <textarea rows={4} className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2.5 sm:py-3 text-sm text-slate-900 focus:bg-white focus:border-blue-500 outline-none transition-colors" placeholder="Tell us about your project requirements..." value={messageDetails} onChange={(e) => setMessageDetails(e.target.value)}></textarea>
                 </div>
-              </div>
 
-              <div>
-                <label className="block text-xs uppercase tracking-wider text-gray-400 mb-2">Products/Services Interested In</label>
-                <input type="text" className="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-2.5 sm:py-3 text-sm focus:border-blue-500 outline-none transition-colors" placeholder="Laptops, Networking, AMC..." value={productsInterested} onChange={(e) => setProductsInterested(e.target.value)} />
-              </div>
-
-              <div>
-                <label className="block text-xs uppercase tracking-wider text-gray-400 mb-2">Message Details</label>
-                <textarea rows={4} className="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-2.5 sm:py-3 text-sm focus:border-blue-500 outline-none transition-colors" placeholder="Tell us about your project requirements..." value={messageDetails} onChange={(e) => setMessageDetails(e.target.value)}></textarea>
-              </div>
-
-              <button type="submit" className="w-full py-3.5 sm:py-4 bg-blue-600 hover:bg-blue-500 text-white rounded-lg font-bold text-sm sm:text-base transition-colors mt-2">
-                Submit Inquiry
-              </button>
-            </form>
+                <button type="submit" className="w-full py-3.5 sm:py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-bold text-sm sm:text-base transition-colors mt-2 shadow-md hover:shadow-lg">
+                  Submit Inquiry
+                </button>
+              </form>
+            </div>
           </div>
         </div>
       </section>
@@ -231,27 +225,37 @@ ${messageDetails}`;
             { quote: "Security and strategic growth are at the core of our operations. We prioritize providing our clients with robust security solutions that give them complete peace of mind.", author: "Ankit Singh", role: "Chief Security Officer (CSO)" },
             { quote: "We deeply understand our clients' unique challenges and translate them into impactful, market-leading solutions that drive true business transformation.", author: "Chesta Sharma", role: "Chief Marketing Officer (CMO)" },
           ].map((testi, i) => (
-            <div key={i} className="glass-panel p-6 sm:p-8 relative">
-              <div className="text-4xl text-blue-500/30 absolute top-3 left-4">"</div>
-              <p className="text-gray-300 relative z-10 leading-relaxed italic text-sm sm:text-base mb-6 mt-2">{testi.quote}</p>
-              <div className="border-t border-white/10 pt-3 sm:pt-4">
-                <h4 className="font-bold text-white text-sm sm:text-base">{testi.author}</h4>
-                <p className="text-xs text-gray-400">{testi.role}</p>
+            <div key={i} className="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 relative shadow-xs">
+              <div className="text-4xl text-blue-500/20 absolute top-3 left-4 font-serif">"</div>
+              <p className="text-slate-700 relative z-10 leading-relaxed italic text-sm sm:text-base mb-6 mt-2">{testi.quote}</p>
+              <div className="border-t border-slate-200 pt-3 sm:pt-4">
+                <h4 className="font-bold text-slate-900 text-sm sm:text-base">{testi.author}</h4>
+                <p className="text-xs text-slate-500 font-medium">{testi.role}</p>
               </div>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Brands Carousel (Placeholder) */}
-      <section className="py-10 sm:py-12 bg-white/5 border-y border-white/10 overflow-hidden">
-        <div className="page-container">
-           <p className="text-center text-xs sm:text-sm font-semibold uppercase tracking-widest text-gray-400 mb-6">Authorized Partners</p>
-           <div className="flex justify-between items-center opacity-50 grayscale gap-6 sm:gap-8 overflow-x-auto scrollbar-hide">
-             {['Dell', 'HP', 'Lenovo', 'Cisco', 'Microsoft', 'Acer', 'Asus', 'Intel', 'AMD'].map((brand, i) => (
-               <div key={i} className="text-xl sm:text-2xl font-bold font-sans shrink-0 px-3 sm:px-4">{brand}</div>
-             ))}
-           </div>
+      {/* Brands Carousel */}
+      <section className="py-12 sm:py-16 bg-[#042442] border-y border-white/10 relative overflow-hidden">
+        {/* Ambient Glow */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-32 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
+
+        <div className="page-container relative z-10">
+          <p className="text-center text-xs sm:text-sm font-bold uppercase tracking-[4px] sm:tracking-[6px] text-sky-400 mb-6 sm:mb-8">
+            Authorized Partners
+          </p>
+          <div className="flex justify-between items-center gap-6 sm:gap-10 overflow-x-auto scrollbar-hide py-2">
+            {['Dell', 'HP', 'Lenovo', 'Cisco', 'Microsoft', 'Acer', 'Asus', 'Intel', 'AMD'].map((brand, i) => (
+              <div 
+                key={i} 
+                className="text-xl sm:text-2xl md:text-3xl font-extrabold font-sans shrink-0 px-3 sm:px-5 py-2 text-white/75 hover:text-white hover:scale-105 transition-all cursor-default tracking-wide"
+              >
+                {brand}
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -260,13 +264,13 @@ ${messageDetails}`;
         <SectionHeader title="Frequently Asked Questions" align="center" />
         <div className="max-w-3xl mx-auto mt-6 space-y-3 sm:space-y-4">
           {faqs.map((faq, i) => (
-            <div key={i} className="glass-card overflow-hidden">
+            <div key={i} className="bg-white border border-slate-200 rounded-xl shadow-xs overflow-hidden">
               <button 
                 onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                className="w-full px-5 sm:px-6 py-4 sm:py-5 text-left flex justify-between items-center font-semibold text-sm sm:text-base focus:outline-none"
+                className="w-full px-5 sm:px-6 py-4 sm:py-5 text-left flex justify-between items-center font-semibold text-slate-900 text-sm sm:text-base focus:outline-none hover:text-blue-600 transition-colors"
               >
                 {faq.q}
-                <span className={`transition-transform duration-300 ${openFaq === i ? "rotate-45" : ""}`}>+</span>
+                <span className={`text-blue-600 transition-transform duration-300 font-bold ${openFaq === i ? "rotate-45" : ""}`}>+</span>
               </button>
               <AnimatePresence>
                 {openFaq === i && (
@@ -274,7 +278,7 @@ ${messageDetails}`;
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: "auto", opacity: 1 }}
                     exit={{ height: 0, opacity: 0 }}
-                    className="px-5 sm:px-6 pb-4 sm:pb-5 text-gray-400 text-xs sm:text-sm leading-relaxed"
+                    className="px-5 sm:px-6 pb-4 sm:pb-5 text-slate-600 text-xs sm:text-sm leading-relaxed border-t border-slate-100 pt-3"
                   >
                     {faq.a}
                   </motion.div>
@@ -286,18 +290,17 @@ ${messageDetails}`;
       </section>
 
       {/* Final CTA */}
-      <section className="py-14 sm:py-20 text-center bg-[url('/placeholder-hero.jpg')] bg-cover bg-center relative border-t border-white/10">
-        <div className="absolute inset-0 bg-black/80 backdrop-blur-sm z-0"></div>
+      <section className="py-14 sm:py-20 text-center bg-slate-900 text-white relative">
         <div className="relative z-10 page-container">
-          <h2 className="text-2xl sm:text-4xl md:text-5xl font-bold mb-3 sm:mb-4 tracking-tight">Let's Build Your Next IT Infrastructure Together.</h2>
-          <p className="text-gray-300 text-sm sm:text-base md:text-lg mb-6 sm:mb-8 max-w-3xl mx-auto font-light">From a single laptop to enterprise-wide digital transformation, Authentic Infosystem is your trusted technology partner.</p>
+          <h2 className="text-2xl sm:text-4xl md:text-5xl font-extrabold mb-3 sm:mb-4 tracking-tight">Let's Build Your Next IT Infrastructure Together.</h2>
+          <p className="text-slate-300 text-sm sm:text-base md:text-lg mb-6 sm:mb-8 max-w-3xl mx-auto font-light">From a single laptop to enterprise-wide digital transformation, Authentic Infosystem is your trusted technology partner.</p>
           <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 max-w-md sm:max-w-none mx-auto">
-            <button className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-3.5 bg-blue-600 hover:bg-blue-500 text-white rounded-full font-bold text-sm transition-all shadow-[0_0_20px_rgba(37,99,235,0.4)]">
+            <a href="#contact" className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-3.5 bg-blue-600 hover:bg-blue-500 text-white rounded-full font-bold text-sm transition-all shadow-lg hover:shadow-xl">
               Schedule a Consultation
-            </button>
-            <button className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-3.5 bg-white/10 border border-white/20 text-white rounded-full font-bold text-sm hover:bg-white/20 transition-all backdrop-blur-md">
+            </a>
+            <a href="https://wa.me/919643990077" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-3.5 bg-slate-800 border border-slate-700 text-white rounded-full font-bold text-sm hover:bg-slate-700 transition-all">
               Contact Sales
-            </button>
+            </a>
           </div>
         </div>
       </section>

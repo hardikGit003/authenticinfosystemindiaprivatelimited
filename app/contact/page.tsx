@@ -1,3 +1,5 @@
+import { redirect } from "next/navigation";
+
 export default function Contact() {
-  return <div className="center">Contact Us</div>;
+  redirect("/#contact");
 }

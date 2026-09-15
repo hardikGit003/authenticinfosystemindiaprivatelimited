@@ -114,15 +114,15 @@ export default function Configurator({
   };
 
   return (
-    <main className="min-h-screen bg-[#0A0F1C] text-white selection:bg-blue-500/30 pt-28 sm:pt-40 pb-12 sm:pb-20">
+    <main className="min-h-screen bg-white text-slate-900 selection:bg-blue-500/20 pt-28 sm:pt-40 pb-12 sm:pb-20">
       <div className="page-container">
         
-        <div className="mb-8 sm:mb-12 border-b border-gray-800 pb-6 sm:pb-8 text-center md:text-left">
-          <p className="text-blue-500 font-bold tracking-widest uppercase text-xs sm:text-sm mb-2">Build Your Workflow</p>
-          <h1 className="text-2xl sm:text-4xl md:text-5xl font-black text-white tracking-tight">
+        <div className="mb-8 sm:mb-12 border-b border-slate-200 pb-6 sm:pb-8 text-center md:text-left">
+          <p className="text-blue-600 font-bold tracking-widest uppercase text-xs sm:text-sm mb-2">Build Your Workflow</p>
+          <h1 className="text-2xl sm:text-4xl md:text-5xl font-black text-slate-900 tracking-tight">
             {pageTitles[defaultSystem] || "Customize Your PC"}
           </h1>
-          <p className="text-gray-400 mt-3 sm:mt-4 max-w-2xl text-sm sm:text-base md:text-lg">
+          <p className="text-slate-600 mt-3 sm:mt-4 max-w-2xl text-sm sm:text-base md:text-lg font-normal">
             We've curated the best hardware for your specific use case. Use the filters to narrow down the perfect machine for your needs.
           </p>
         </div>
@@ -130,31 +130,31 @@ export default function Configurator({
         {/* Mobile Filters Toggle Button */}
         <button
           onClick={() => setShowMobileFilters((prev) => !prev)}
-          className="lg:hidden w-full mb-6 py-3 px-4 rounded-xl bg-white/5 border border-white/10 text-white font-medium flex items-center justify-between text-sm"
+          className="lg:hidden w-full mb-6 py-3 px-4 rounded-xl bg-white border border-slate-200 text-slate-700 font-medium flex items-center justify-between text-sm shadow-xs"
         >
           <span className="flex items-center gap-2">
-            <svg className="w-4 h-4 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg className="w-4 h-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
             </svg>
             Refine Search Filters
           </span>
-          <span className="text-blue-400 text-xs font-semibold">{showMobileFilters ? "Hide ▲" : "Show ▼"}</span>
+          <span className="text-blue-600 text-xs font-semibold">{showMobileFilters ? "Hide ▲" : "Show ▼"}</span>
         </button>
 
         <div className="grid-12">
           {/* Left Sidebar Filters */}
           <div className={`col-span-12 lg:col-span-3 ${showMobileFilters ? "block" : "hidden lg:block"}`}>
-            <div className="bg-[#111827] border border-gray-800 rounded-2xl p-6 sticky top-32 shadow-xl">
-              <h3 className="text-xl font-bold mb-6 border-b border-gray-700 pb-4 text-white">Refine Search</h3>
+            <div className="bg-white border border-slate-200 rounded-2xl p-6 sticky top-32 shadow-xs">
+              <h3 className="text-xl font-bold mb-6 border-b border-slate-200 pb-4 text-slate-900">Refine Search</h3>
               
               <div className="space-y-6">
                 
                 <div>
-                  <h4 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-3">Brand</h4>
+                  <h4 className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2.5">Brand</h4>
                   <select
                     value={activeBrand}
                     onChange={(e) => setActiveBrand(e.target.value)}
-                    className="w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-2.5 text-sm text-white focus:outline-none focus:border-blue-500 transition-colors appearance-none shadow-inner"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:bg-white focus:border-blue-500 transition-colors appearance-none font-medium"
                   >
                     {brands.map((brand) => (
                       <option key={brand} value={brand}>
@@ -165,11 +165,11 @@ export default function Configurator({
                 </div>
 
                 <div>
-                  <h4 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-3">Processor</h4>
+                  <h4 className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2.5">Processor</h4>
                   <select
                     value={activeProcessor}
                     onChange={(e) => setActiveProcessor(e.target.value)}
-                    className="w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-2.5 text-sm text-white focus:outline-none focus:border-blue-500 transition-colors appearance-none shadow-inner"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:bg-white focus:border-blue-500 transition-colors appearance-none font-medium"
                   >
                     {processors.map((proc) => (
                       <option key={proc} value={proc}>
@@ -180,11 +180,11 @@ export default function Configurator({
                 </div>
 
                 <div>
-                  <h4 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-3">RAM</h4>
+                  <h4 className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2.5">RAM</h4>
                   <select
                     value={activeRAM}
                     onChange={(e) => setActiveRAM(e.target.value)}
-                    className="w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-2.5 text-sm text-white focus:outline-none focus:border-blue-500 transition-colors appearance-none shadow-inner"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:bg-white focus:border-blue-500 transition-colors appearance-none font-medium"
                   >
                     {rams.map((ram) => (
                       <option key={ram} value={ram}>
@@ -195,11 +195,11 @@ export default function Configurator({
                 </div>
 
                 <div>
-                  <h4 className="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-3">Storage (ROM)</h4>
+                  <h4 className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2.5">Storage (ROM)</h4>
                   <select
                     value={activeStorage}
                     onChange={(e) => setActiveStorage(e.target.value)}
-                    className="w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-2.5 text-sm text-white focus:outline-none focus:border-blue-500 transition-colors appearance-none shadow-inner"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:bg-white focus:border-blue-500 transition-colors appearance-none font-medium"
                   >
                     {storages.map((storage) => (
                       <option key={storage} value={storage}>
@@ -216,14 +216,14 @@ export default function Configurator({
           {/* Product Grid */}
           <div className="col-span-12 lg:col-span-9">
             {filteredProducts.length === 0 ? (
-              <div className="text-center py-24 bg-[#111827] rounded-2xl border border-gray-800 shadow-inner">
-                <div className="text-gray-600 mb-4">
+              <div className="text-center py-24 bg-slate-50 rounded-2xl border border-slate-200">
+                <div className="text-slate-400 mb-4">
                   <svg className="w-16 h-16 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                 </div>
-                <h3 className="text-2xl font-bold text-white mb-2">No matching systems found</h3>
-                <p className="text-gray-400">We couldn't find any machines matching your exact hardware requirements.</p>
+                <h3 className="text-2xl font-bold text-slate-900 mb-2">No matching systems found</h3>
+                <p className="text-slate-500">We couldn't find any machines matching your exact hardware requirements.</p>
                 <button
                   onClick={() => {
                     setActiveBrand("All");
@@ -231,7 +231,7 @@ export default function Configurator({
                     setActiveRAM("All");
                     setActiveStorage("All");
                   }}
-                  className="mt-8 px-8 py-3 bg-blue-600 hover:bg-blue-500 text-white rounded-full font-bold transition-all shadow-[0_0_15px_rgba(37,99,235,0.4)]"
+                  className="mt-8 px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-full font-bold transition-all shadow-md"
                 >
                   Reset Filters
                 </button>
