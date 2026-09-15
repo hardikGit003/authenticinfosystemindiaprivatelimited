@@ -289,132 +289,156 @@ export default function PhonesPage() {
 
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 lg:gap-8">
           {/* DESKTOP SIDEBAR FILTERS */}
-          <div className="hidden lg:block lg:col-span-1 space-y-5">
-            {/* Search Box */}
-            <div className="bg-slate-50 border border-slate-200 p-4.5 rounded-2xl">
-              <h4 className="text-xs font-bold text-slate-900 uppercase tracking-wider mb-2.5 flex items-center gap-2">
-                <FaSearch className="text-blue-600" size={12} />
-                <span>Search Lineup</span>
-              </h4>
-              <div className="relative">
-                <input
-                  type="text"
-                  placeholder="e.g. iPhone, S24, Vivo, 512GB..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl text-xs focus:outline-none focus:border-blue-500 text-slate-900"
-                />
-                {searchQuery && (
+          <div className="hidden lg:block lg:col-span-1 space-y-6">
+            <div className="bg-slate-50/90 border border-slate-200 rounded-2xl p-5 shadow-xs space-y-6">
+              {/* Header with Title & Reset */}
+              <div className="flex items-center justify-between pb-3.5 border-b border-slate-200">
+                <h3 className="text-xs font-extrabold text-slate-900 uppercase tracking-wider flex items-center gap-2">
+                  <FaFilter className="text-blue-600" size={12} />
+                  <span>Filter Lineup</span>
+                </h3>
+                {hasActiveFilters && (
                   <button
-                    onClick={() => setSearchQuery("")}
-                    className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
+                    onClick={clearAllFilters}
+                    className="text-xs text-blue-600 hover:text-blue-800 font-semibold cursor-pointer"
                   >
-                    <FaTimes size={11} />
+                    Reset All
                   </button>
                 )}
               </div>
-            </div>
 
-            {/* Brand Filter */}
-            <div className="bg-slate-50 border border-slate-200 p-4.5 rounded-2xl">
-              <div className="flex items-center justify-between mb-2.5">
-                <h4 className="text-xs font-bold text-slate-900 uppercase tracking-wider">Brand</h4>
-                {activeBrand !== "All" && (
-                  <button
-                    onClick={() => setActiveBrand("All")}
-                    className="text-[11px] text-blue-600 font-semibold hover:underline"
-                  >
-                    Reset
-                  </button>
-                )}
+              {/* Search Box */}
+              <div>
+                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
+                  Search Devices
+                </label>
+                <div className="relative">
+                  <FaSearch className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" size={12} />
+                  <input
+                    type="text"
+                    placeholder="e.g. iPhone, S24, Vivo, 512GB..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="w-full pl-9 pr-8 py-2 bg-white border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-blue-500 text-slate-900 shadow-2xs"
+                  />
+                  {searchQuery && (
+                    <button
+                      onClick={() => setSearchQuery("")}
+                      className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
+                    >
+                      <FaTimes size={11} />
+                    </button>
+                  )}
+                </div>
               </div>
-              <div className="space-y-1">
-                {brands.map((brand) => (
-                  <button
-                    key={brand}
-                    onClick={() => setActiveBrand(brand)}
-                    className={`w-full text-left px-3 py-1.5 rounded-lg text-xs font-medium transition-all flex items-center justify-between ${
-                      activeBrand === brand
-                        ? "bg-blue-600 text-white font-semibold shadow-2xs"
-                        : "text-slate-700 hover:bg-slate-200/70"
-                    }`}
-                  >
-                    <span>{brand}</span>
-                    {activeBrand === brand && <FaCheckCircle size={11} />}
-                  </button>
-                ))}
-              </div>
-            </div>
 
-            {/* RAM Filter */}
-            <div className="bg-slate-50 border border-slate-200 p-4.5 rounded-2xl">
-              <div className="flex items-center justify-between mb-2.5">
-                <h4 className="text-xs font-bold text-slate-900 uppercase tracking-wider">RAM</h4>
-                {activeRAM !== "All" && (
-                  <button
-                    onClick={() => setActiveRAM("All")}
-                    className="text-[11px] text-blue-600 font-semibold hover:underline"
-                  >
-                    Reset
-                  </button>
-                )}
+              {/* Brand Filter */}
+              <div>
+                <div className="flex items-center justify-between mb-2">
+                  <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">
+                    Brand
+                  </label>
+                  {activeBrand !== "All" && (
+                    <button
+                      onClick={() => setActiveBrand("All")}
+                      className="text-[11px] text-blue-600 font-semibold hover:underline"
+                    >
+                      Reset
+                    </button>
+                  )}
+                </div>
+                <div className="space-y-1">
+                  {brands.map((brand) => (
+                    <button
+                      key={brand}
+                      onClick={() => setActiveBrand(brand)}
+                      className={`w-full text-left px-3 py-2 rounded-xl text-xs font-medium transition-all flex items-center justify-between cursor-pointer ${
+                        activeBrand === brand
+                          ? "bg-blue-600 text-white font-semibold shadow-xs"
+                          : "text-slate-700 hover:bg-slate-200/60 bg-white/60 border border-slate-200/50"
+                      }`}
+                    >
+                      <span>{brand}</span>
+                      {activeBrand === brand && <FaCheckCircle size={11} />}
+                    </button>
+                  ))}
+                </div>
               </div>
-              <div className="grid grid-cols-2 gap-1.5">
-                {rams.map((ram) => (
-                  <button
-                    key={ram}
-                    onClick={() => setActiveRAM(ram)}
-                    className={`text-center py-1.5 rounded-lg text-xs font-semibold transition-all border ${
-                      activeRAM === ram
-                        ? "bg-blue-600 text-white border-blue-600 shadow-2xs"
-                        : "bg-white text-slate-700 border-slate-200 hover:bg-slate-100"
-                    }`}
-                  >
-                    {ram}
-                  </button>
-                ))}
-              </div>
-            </div>
 
-            {/* Storage Filter */}
-            <div className="bg-slate-50 border border-slate-200 p-4.5 rounded-2xl">
-              <div className="flex items-center justify-between mb-2.5">
-                <h4 className="text-xs font-bold text-slate-900 uppercase tracking-wider">Storage</h4>
-                {activeStorage !== "All" && (
-                  <button
-                    onClick={() => setActiveStorage("All")}
-                    className="text-[11px] text-blue-600 font-semibold hover:underline"
-                  >
-                    Reset
-                  </button>
-                )}
+              {/* RAM Filter */}
+              <div>
+                <div className="flex items-center justify-between mb-2">
+                  <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">
+                    RAM Capacity
+                  </label>
+                  {activeRAM !== "All" && (
+                    <button
+                      onClick={() => setActiveRAM("All")}
+                      className="text-[11px] text-blue-600 font-semibold hover:underline"
+                    >
+                      Reset
+                    </button>
+                  )}
+                </div>
+                <div className="grid grid-cols-2 gap-1.5">
+                  {rams.map((ram) => (
+                    <button
+                      key={ram}
+                      onClick={() => setActiveRAM(ram)}
+                      className={`text-center py-2 rounded-xl text-xs font-semibold transition-all border cursor-pointer ${
+                        activeRAM === ram
+                          ? "bg-blue-600 text-white border-blue-600 shadow-xs"
+                          : "bg-white text-slate-700 border-slate-200 hover:bg-slate-100"
+                      }`}
+                    >
+                      {ram}
+                    </button>
+                  ))}
+                </div>
               </div>
-              <div className="grid grid-cols-2 gap-1.5">
-                {storages.map((storage) => (
-                  <button
-                    key={storage}
-                    onClick={() => setActiveStorage(storage)}
-                    className={`text-center py-1.5 rounded-lg text-xs font-semibold transition-all border ${
-                      activeStorage === storage
-                        ? "bg-blue-600 text-white border-blue-600 shadow-2xs"
-                        : "bg-white text-slate-700 border-slate-200 hover:bg-slate-100"
-                    }`}
-                  >
-                    {storage}
-                  </button>
-                ))}
-              </div>
-            </div>
 
-            {/* Clear All Filters */}
-            {hasActiveFilters && (
-              <button
-                onClick={clearAllFilters}
-                className="w-full py-2 px-3 rounded-xl bg-slate-200 hover:bg-slate-300 text-slate-800 text-xs font-semibold transition-all"
-              >
-                Clear All Filters
-              </button>
-            )}
+              {/* Storage Filter */}
+              <div>
+                <div className="flex items-center justify-between mb-2">
+                  <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">
+                    Internal Storage
+                  </label>
+                  {activeStorage !== "All" && (
+                    <button
+                      onClick={() => setActiveStorage("All")}
+                      className="text-[11px] text-blue-600 font-semibold hover:underline"
+                    >
+                      Reset
+                    </button>
+                  )}
+                </div>
+                <div className="grid grid-cols-2 gap-1.5">
+                  {storages.map((storage) => (
+                    <button
+                      key={storage}
+                      onClick={() => setActiveStorage(storage)}
+                      className={`text-center py-2 rounded-xl text-xs font-semibold transition-all border cursor-pointer ${
+                        activeStorage === storage
+                          ? "bg-blue-600 text-white border-blue-600 shadow-xs"
+                          : "bg-white text-slate-700 border-slate-200 hover:bg-slate-100"
+                      }`}
+                    >
+                      {storage}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Clear All Filters button */}
+              {hasActiveFilters && (
+                <button
+                  onClick={clearAllFilters}
+                  className="w-full py-2.5 px-3 rounded-xl bg-slate-200 hover:bg-slate-300 text-slate-800 text-xs font-semibold transition-all cursor-pointer"
+                >
+                  Clear All Filters
+                </button>
+              )}
+            </div>
 
             {/* Corporate Bulk Fleet Card */}
             <div className="bg-gradient-to-br from-blue-900 to-slate-900 text-white p-5 rounded-2xl shadow-md relative overflow-hidden">
@@ -537,6 +561,147 @@ export default function PhonesPage() {
           </div>
         </div>
       </section>
+
+      {/* Mobile Filter Modal Drawer */}
+      {showMobileFilters && (
+        <div className="fixed inset-0 z-50 flex bg-black/60 backdrop-blur-xs lg:hidden animate-fade-in">
+          <div className="fixed inset-0" onClick={() => setShowMobileFilters(false)} />
+          <div className="relative ml-auto w-full max-w-xs sm:max-w-sm h-full bg-white shadow-2xl p-5 overflow-y-auto flex flex-col justify-between z-10 animate-slide-left">
+            <div className="space-y-6">
+              {/* Drawer Header */}
+              <div className="flex items-center justify-between pb-4 border-b border-slate-200">
+                <div className="flex items-center gap-2">
+                  <FaFilter className="text-blue-600" size={14} />
+                  <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider">
+                    Filter Smartphones
+                  </h3>
+                </div>
+                <button
+                  onClick={() => setShowMobileFilters(false)}
+                  className="p-2 rounded-xl text-slate-400 hover:text-slate-600 hover:bg-slate-100"
+                >
+                  <FaTimes size={15} />
+                </button>
+              </div>
+
+              {/* Brand Filter */}
+              <div>
+                <div className="flex items-center justify-between mb-2">
+                  <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">
+                    Brand
+                  </label>
+                  {activeBrand !== "All" && (
+                    <button
+                      onClick={() => setActiveBrand("All")}
+                      className="text-[11px] text-blue-600 font-semibold hover:underline"
+                    >
+                      Reset
+                    </button>
+                  )}
+                </div>
+                <div className="space-y-1">
+                  {brands.map((brand) => (
+                    <button
+                      key={brand}
+                      onClick={() => setActiveBrand(brand)}
+                      className={`w-full text-left px-3 py-2 rounded-xl text-xs font-medium transition-all flex items-center justify-between cursor-pointer ${
+                        activeBrand === brand
+                          ? "bg-blue-600 text-white font-semibold shadow-xs"
+                          : "text-slate-700 hover:bg-slate-100 bg-slate-50 border border-slate-200"
+                      }`}
+                    >
+                      <span>{brand}</span>
+                      {activeBrand === brand && <FaCheckCircle size={11} />}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* RAM Filter */}
+              <div>
+                <div className="flex items-center justify-between mb-2">
+                  <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">
+                    RAM Capacity
+                  </label>
+                  {activeRAM !== "All" && (
+                    <button
+                      onClick={() => setActiveRAM("All")}
+                      className="text-[11px] text-blue-600 font-semibold hover:underline"
+                    >
+                      Reset
+                    </button>
+                  )}
+                </div>
+                <div className="grid grid-cols-2 gap-1.5">
+                  {rams.map((ram) => (
+                    <button
+                      key={ram}
+                      onClick={() => setActiveRAM(ram)}
+                      className={`text-center py-2 rounded-xl text-xs font-semibold transition-all border cursor-pointer ${
+                        activeRAM === ram
+                          ? "bg-blue-600 text-white border-blue-600 shadow-xs"
+                          : "bg-white text-slate-700 border-slate-200 hover:bg-slate-100"
+                      }`}
+                    >
+                      {ram}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Storage Filter */}
+              <div>
+                <div className="flex items-center justify-between mb-2">
+                  <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">
+                    Internal Storage
+                  </label>
+                  {activeStorage !== "All" && (
+                    <button
+                      onClick={() => setActiveStorage("All")}
+                      className="text-[11px] text-blue-600 font-semibold hover:underline"
+                    >
+                      Reset
+                    </button>
+                  )}
+                </div>
+                <div className="grid grid-cols-2 gap-1.5">
+                  {storages.map((storage) => (
+                    <button
+                      key={storage}
+                      onClick={() => setActiveStorage(storage)}
+                      className={`text-center py-2 rounded-xl text-xs font-semibold transition-all border cursor-pointer ${
+                        activeStorage === storage
+                          ? "bg-blue-600 text-white border-blue-600 shadow-xs"
+                          : "bg-white text-slate-700 border-slate-200 hover:bg-slate-100"
+                      }`}
+                    >
+                      {storage}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Bottom Actions */}
+            <div className="pt-6 border-t border-slate-200 mt-6 space-y-2">
+              {hasActiveFilters && (
+                <button
+                  onClick={clearAllFilters}
+                  className="w-full py-2.5 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-semibold transition-all"
+                >
+                  Clear All Filters
+                </button>
+              )}
+              <button
+                onClick={() => setShowMobileFilters(false)}
+                className="w-full py-3 px-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold shadow-md transition-all"
+              >
+                View {filteredProducts.length} Results
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       <Footer />
     </main>
