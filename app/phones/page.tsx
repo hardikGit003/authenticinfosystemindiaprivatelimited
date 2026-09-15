@@ -29,33 +29,6 @@ const brands = ["All", "Apple", "Samsung", "Vivo", "Oppo", "Realme"];
 const rams = ["All", "6GB", "8GB", "12GB", "16GB"];
 const storages = ["All", "128GB", "256GB", "512GB", "1TB"];
 
-const highlightUseCases = [
-  {
-    title: "Executive Flagships",
-    subtitle: "Apple & Samsung Titanium Series",
-    desc: "Grade 5 Titanium, enterprise encryption, and multi-year OS lifecycle support.",
-    icon: "💎",
-  },
-  {
-    title: "Foldables & Multitasking",
-    subtitle: "Galaxy Z Fold6 & Find N3",
-    desc: "Seamless dual-screen multitasking for sheets, presentations, and remote desktop.",
-    icon: "📱",
-  },
-  {
-    title: "ZEISS & Hasselblad Optics",
-    subtitle: "Vivo X100 & Oppo Find X7",
-    desc: "Pro optical sensors and telephoto optics for mobile creators and media teams.",
-    icon: "📸",
-  },
-  {
-    title: "Enterprise Fleet & MDM",
-    subtitle: "Bulk Corporate Deployments",
-    desc: "Ready for Microsoft Intune, Knox & Android Enterprise with GST invoice credit.",
-    icon: "🏢",
-  },
-];
-
 function CompactPhoneCard({ product, delay = 0 }: { product: Product; delay?: number }) {
   const getSpecValue = (label: string) => {
     const found = product.specs.find((s) => s.label.toLowerCase() === label.toLowerCase());
@@ -267,27 +240,6 @@ export default function PhonesPage() {
         subtitle="Authorized procurement for the latest flagship, foldable, and performance devices from Apple, Samsung, Vivo, Oppo, and Realme with official warranties and bulk pricing."
         miniText="AUTHORIZED SMARTPHONE DISTRIBUTOR"
       />
-
-      {/* Highlights Bar */}
-      <section className="bg-slate-50 border-b border-slate-200 py-6 sm:py-8">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-5">
-            {highlightUseCases.map((uc, i) => (
-              <div 
-                key={i} 
-                className="bg-white p-4.5 rounded-2xl border border-slate-200/80 shadow-2xs hover:shadow-sm transition-all hover:border-blue-300 group"
-              >
-                <div className="text-2xl mb-2">{uc.icon}</div>
-                <h3 className="text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
-                  {uc.title}
-                </h3>
-                <p className="text-[11px] font-semibold text-blue-600 mb-0.5">{uc.subtitle}</p>
-                <p className="text-xs text-slate-600 leading-relaxed">{uc.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Main Content */}
       <section className="py-10 sm:py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
