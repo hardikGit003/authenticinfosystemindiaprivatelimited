@@ -591,7 +591,7 @@ export const phoneProducts: Product[] = [
     brand: "Apple",
     category: "Flagship",
     price: 144900,
-    image: "https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=600&auto=format&fit=crop&q=80",
+    image: "/products/phones/iphone-16-pro-max.jpg",
     specs: [
       { label: "Processor", value: "Apple A18 Pro (3nm)" },
       { label: "RAM", value: "8GB" },
@@ -610,7 +610,7 @@ export const phoneProducts: Product[] = [
     brand: "Apple",
     category: "Flagship",
     price: 119900,
-    image: "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=600&auto=format&fit=crop&q=80",
+    image: "/products/phones/iphone-16-pro-max.jpg",
     specs: [
       { label: "Processor", value: "Apple A18 Pro (3nm)" },
       { label: "RAM", value: "8GB" },
@@ -629,7 +629,7 @@ export const phoneProducts: Product[] = [
     brand: "Apple",
     category: "Performance",
     price: 79900,
-    image: "https://images.unsplash.com/photo-1591337676887-a217a6970a8a?w=600&auto=format&fit=crop&q=80",
+    image: "/products/phones/iphone-16.jpg",
     specs: [
       { label: "Processor", value: "Apple A18 Chip" },
       { label: "RAM", value: "8GB" },
@@ -648,7 +648,7 @@ export const phoneProducts: Product[] = [
     brand: "Apple",
     category: "Performance",
     price: 64900,
-    image: "https://images.unsplash.com/photo-1565849904461-04a58ad377e0?w=600&auto=format&fit=crop&q=80",
+    image: "/products/phones/iphone-16.jpg",
     specs: [
       { label: "Processor", value: "Apple A16 Bionic" },
       { label: "RAM", value: "6GB" },
@@ -669,7 +669,7 @@ export const phoneProducts: Product[] = [
     brand: "Samsung",
     category: "Flagship",
     price: 129999,
-    image: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=600&auto=format&fit=crop&q=80",
+    image: "/products/phones/samsung-s24-ultra.jpg",
     specs: [
       { label: "Processor", value: "Snapdragon 8 Gen 3 for Galaxy" },
       { label: "RAM", value: "12GB LPDDR5X" },
@@ -688,7 +688,7 @@ export const phoneProducts: Product[] = [
     brand: "Samsung",
     category: "Foldable",
     price: 164999,
-    image: "https://images.unsplash.com/photo-1580910051074-3eb694886505?w=600&auto=format&fit=crop&q=80",
+    image: "/products/phones/samsung-z-fold6.jpg",
     specs: [
       { label: "Processor", value: "Snapdragon 8 Gen 3 for Galaxy" },
       { label: "RAM", value: "12GB" },
@@ -707,7 +707,7 @@ export const phoneProducts: Product[] = [
     brand: "Samsung",
     category: "Foldable",
     price: 109999,
-    image: "https://images.unsplash.com/photo-1585060544812-6b45742d762f?w=600&auto=format&fit=crop&q=80",
+    image: "/products/phones/samsung-z-flip6.jpg",
     specs: [
       { label: "Processor", value: "Snapdragon 8 Gen 3 for Galaxy" },
       { label: "RAM", value: "12GB" },
@@ -726,7 +726,7 @@ export const phoneProducts: Product[] = [
     brand: "Samsung",
     category: "Performance",
     price: 74999,
-    image: "https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=600&auto=format&fit=crop&q=80",
+    image: "/products/phones/samsung-s24-ultra.jpg",
     specs: [
       { label: "Processor", value: "Snapdragon 8 Gen 3 / Exynos 2400" },
       { label: "RAM", value: "8GB" },
@@ -747,7 +747,7 @@ export const phoneProducts: Product[] = [
     brand: "Vivo",
     category: "Camera & Creator",
     price: 89999,
-    image: "https://images.unsplash.com/photo-1574944985070-8f3ebc6b79d2?w=600&auto=format&fit=crop&q=80",
+    image: "/products/phones/vivo-x100-pro.jpg",
     specs: [
       { label: "Processor", value: "MediaTek Dimensity 9300 (4nm)" },
       { label: "RAM", value: "16GB LPDDR5T" },
@@ -766,7 +766,7 @@ export const phoneProducts: Product[] = [
     brand: "Vivo",
     category: "Camera & Creator",
     price: 63999,
-    image: "https://images.unsplash.com/photo-1567581935884-3349723552ca?w=600&auto=format&fit=crop&q=80",
+    image: "/products/phones/vivo-x100-pro.jpg",
     specs: [
       { label: "Processor", value: "MediaTek Dimensity 9300" },
       { label: "RAM", value: "16GB LPDDR5X" },
@@ -785,7 +785,7 @@ export const phoneProducts: Product[] = [
     brand: "Vivo",
     category: "Camera & Creator",
     price: 49999,
-    image: "https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=600&auto=format&fit=crop&q=80",
+    image: "/products/phones/vivo-v40-pro.jpg",
     specs: [
       { label: "Processor", value: "MediaTek Dimensity 9200+ (4nm)" },
       { label: "RAM", value: "12GB" },
@@ -804,7 +804,7 @@ export const phoneProducts: Product[] = [
     brand: "Vivo",
     category: "Enterprise Fleet",
     price: 36999,
-    image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&auto=format&fit=crop&q=80",
+    image: "/products/phones/vivo-v40-pro.jpg",
     specs: [
       { label: "Processor", value: "Qualcomm Snapdragon 7 Gen 3" },
       { label: "RAM", value: "12GB" },
@@ -825,7 +825,7 @@ export const phoneProducts: Product[] = [
     brand: "Oppo",
     category: "Flagship",
     price: 94999,
-    image: "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=600&auto=format&fit=crop&q=80",
+    image: "/products/phones/oppo-find-x7-ultra.jpg",
     specs: [
       { label: "Processor", value: "Qualcomm Snapdragon 8 Gen 3" },
       { label: "RAM", value: "16GB LPDDR5X" },
@@ -844,7 +844,7 @@ export const phoneProducts: Product[] = [
     brand: "Oppo",
     category: "Camera & Creator",
     price: 36999,
-    image: "https://images.unsplash.com/photo-1584438784894-089d6a62b8fa?w=600&auto=format&fit=crop&q=80",
+    image: "/products/phones/oppo-reno-12.jpg",
     specs: [
       { label: "Processor", value: "MediaTek Dimensity 7300-Energy (4nm)" },
       { label: "RAM", value: "12GB LPDDR4X" },
@@ -863,7 +863,7 @@ export const phoneProducts: Product[] = [
     brand: "Oppo",
     category: "Enterprise Fleet",
     price: 32999,
-    image: "https://images.unsplash.com/photo-1580910051074-3eb694886505?w=600&auto=format&fit=crop&q=80",
+    image: "/products/phones/oppo-reno-12.jpg",
     specs: [
       { label: "Processor", value: "MediaTek Dimensity 7300-Energy" },
       { label: "RAM", value: "8GB" },
@@ -882,7 +882,7 @@ export const phoneProducts: Product[] = [
     brand: "Oppo",
     category: "Foldable",
     price: 79999,
-    image: "https://images.unsplash.com/photo-1575695342320-d2d2d2f9b73f?w=600&auto=format&fit=crop&q=80",
+    image: "/products/phones/oppo-reno-12.jpg",
     specs: [
       { label: "Processor", value: "MediaTek Dimensity 9200 (4nm)" },
       { label: "RAM", value: "12GB" },
@@ -903,7 +903,7 @@ export const phoneProducts: Product[] = [
     brand: "Realme",
     category: "Flagship",
     price: 44999,
-    image: "https://images.unsplash.com/photo-1574944985070-8f3ebc6b79d2?w=600&auto=format&fit=crop&q=80",
+    image: "/products/phones/realme-gt-6.jpg",
     specs: [
       { label: "Processor", value: "Snapdragon 8s Gen 3 (4nm)" },
       { label: "RAM", value: "16GB LPDDR5X" },
@@ -922,7 +922,7 @@ export const phoneProducts: Product[] = [
     brand: "Realme",
     category: "Performance",
     price: 32999,
-    image: "https://images.unsplash.com/photo-1567581935884-3349723552ca?w=600&auto=format&fit=crop&q=80",
+    image: "/products/phones/realme-gt-6.jpg",
     specs: [
       { label: "Processor", value: "Snapdragon 7+ Gen 3 (4nm)" },
       { label: "RAM", value: "12GB" },
@@ -941,7 +941,7 @@ export const phoneProducts: Product[] = [
     brand: "Realme",
     category: "Camera & Creator",
     price: 31999,
-    image: "https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=600&auto=format&fit=crop&q=80",
+    image: "/products/phones/realme-13-pro-plus.jpg",
     specs: [
       { label: "Processor", value: "Snapdragon 7s Gen 2 (4nm)" },
       { label: "RAM", value: "12GB" },
@@ -960,7 +960,7 @@ export const phoneProducts: Product[] = [
     brand: "Realme",
     category: "Enterprise Fleet",
     price: 26999,
-    image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=600&auto=format&fit=crop&q=80",
+    image: "/products/phones/realme-13-pro-plus.jpg",
     specs: [
       { label: "Processor", value: "Snapdragon 7s Gen 2" },
       { label: "RAM", value: "8GB" },

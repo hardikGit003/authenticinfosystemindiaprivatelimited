@@ -5,8 +5,8 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import PageHero from "../components/shared/PageHero";
 import SectionHeader from "../components/shared/SectionHeader";
-import ProductCard from "../components/shared/ProductCard";
-import { phoneProducts } from "../data/products";
+import { phoneProducts, Product } from "../data/products";
+import { motion } from "framer-motion";
 import { 
   FaMobileAlt, 
   FaShieldAlt, 
@@ -18,7 +18,10 @@ import {
   FaWhatsapp, 
   FaBuilding, 
   FaCheckCircle,
-  FaBolt
+  FaMicrochip,
+  FaCamera,
+  FaTv,
+  FaBatteryFull
 } from "react-icons/fa";
 
 const categories = ["All", "Flagship", "Camera & Creator", "Foldable", "Performance", "Enterprise Fleet"];
@@ -29,29 +32,158 @@ const storages = ["All", "128GB", "256GB", "512GB", "1TB"];
 const highlightUseCases = [
   {
     title: "Executive Flagships",
-    subtitle: "Apple iPhone 16 Pro & Galaxy S24 Ultra",
-    desc: "Titanium grade durability, hardware security enclaves, and peak productivity.",
+    subtitle: "Apple & Samsung Titanium Series",
+    desc: "Grade 5 Titanium, enterprise encryption, and multi-year OS lifecycle support.",
     icon: "💎",
   },
   {
     title: "Foldables & Multitasking",
-    subtitle: "Galaxy Z Fold6 & Find N3 Flip",
-    desc: "Dual-screen workflows, side-by-side apps, and next-gen portable computing.",
+    subtitle: "Galaxy Z Fold6 & Find N3",
+    desc: "Seamless dual-screen multitasking for sheets, presentations, and remote desktop.",
     icon: "📱",
   },
   {
-    title: "ZEISS & Hasselblad Cameras",
-    subtitle: "Vivo X100 Pro & Oppo Find X7",
-    desc: "Studio-grade mobile imaging, 4K HDR recording, and creator-level optics.",
+    title: "ZEISS & Hasselblad Optics",
+    subtitle: "Vivo X100 & Oppo Find X7",
+    desc: "Pro optical sensors and telephoto optics for mobile creators and media teams.",
     icon: "📸",
   },
   {
-    title: "Enterprise Fleet & Bulk Supply",
-    subtitle: "Vivo V40, Reno 12 & Realme 13",
-    desc: "Reliable 5G deployment, MDM compatibility, and fast nationwide procurement.",
+    title: "Enterprise Fleet & MDM",
+    subtitle: "Bulk Corporate Deployments",
+    desc: "Ready for Microsoft Intune, Knox & Android Enterprise with GST invoice credit.",
     icon: "🏢",
   },
 ];
+
+function CompactPhoneCard({ product, delay = 0 }: { product: Product; delay?: number }) {
+  const getSpecValue = (label: string) => {
+    const found = product.specs.find((s) => s.label.toLowerCase() === label.toLowerCase());
+    return found ? found.value : "";
+  };
+
+  const processor = getSpecValue("Processor");
+  const camera = getSpecValue("Camera");
+  const display = getSpecValue("Display");
+  const battery = getSpecValue("Battery");
+
+  const whatsappMessage = encodeURIComponent(
+    `Hi Authentic Infosystem, I would like to inquire about pricing, stock and quotation for ${product.name} (${product.modelNumber}).`
+  );
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.35, delay }}
+      className="group bg-white border border-slate-200 hover:border-blue-500 rounded-2xl shadow-xs hover:shadow-lg transition-all duration-200 flex flex-col h-full relative overflow-hidden"
+    >
+      {/* Top Image Box */}
+      <div className="relative w-full h-44 bg-gradient-to-b from-slate-50/80 to-slate-100/60 p-4 flex items-center justify-center border-b border-slate-100 overflow-hidden">
+        {/* Top Badges */}
+        <div className="absolute top-2.5 left-2.5 right-2.5 flex items-center justify-between z-10 pointer-events-none">
+          <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md bg-white/95 text-blue-700 border border-slate-200 shadow-2xs">
+            {product.brand}
+          </span>
+          {product.badges && product.badges.length > 0 && (
+            <span className="text-[10px] font-semibold px-2 py-0.5 rounded-md bg-slate-900 text-white shadow-2xs">
+              {product.badges[0]}
+            </span>
+          )}
+        </div>
+
+        {/* Product Image */}
+        <img
+          src={product.image}
+          alt={product.name}
+          className="object-contain max-h-[135px] w-auto drop-shadow-sm group-hover:scale-105 transition-transform duration-300"
+          loading="lazy"
+        />
+      </div>
+
+      {/* Content Body */}
+      <div className="p-4 flex-1 flex flex-col">
+        {/* Model ID & Name */}
+        <div className="mb-2.5">
+          <p className="text-[11px] font-semibold text-slate-400 tracking-wider uppercase mb-0.5">
+            {product.modelNumber}
+          </p>
+          <h3 className="text-sm sm:text-[15px] font-bold text-slate-900 leading-snug line-clamp-1 group-hover:text-blue-600 transition-colors">
+            {product.name}
+          </h3>
+        </div>
+
+        {/* Price */}
+        <div className="mb-3">
+          <span className="text-base sm:text-lg font-extrabold text-blue-600">
+            {new Intl.NumberFormat("en-IN", {
+              style: "currency",
+              currency: "INR",
+              maximumFractionDigits: 0,
+            }).format(product.price)}
+          </span>
+          <span className="text-[11px] text-slate-400 ml-1.5 font-normal">excl. GST / MRP</span>
+        </div>
+
+        {/* Compact Key Spec Badges (2x2 Grid) */}
+        <div className="grid grid-cols-2 gap-1.5 mb-3 text-[11px] text-slate-600">
+          {processor && (
+            <div className="flex items-center gap-1.5 bg-slate-50 border border-slate-200/80 px-2 py-1 rounded-lg truncate" title={processor}>
+              <FaMicrochip className="text-blue-500 shrink-0 text-[10px]" />
+              <span className="truncate">{processor.replace(/Apple|Snapdragon|MediaTek/g, "").trim()}</span>
+            </div>
+          )}
+          {display && (
+            <div className="flex items-center gap-1.5 bg-slate-50 border border-slate-200/80 px-2 py-1 rounded-lg truncate" title={display}>
+              <FaTv className="text-indigo-500 shrink-0 text-[10px]" />
+              <span className="truncate">{display.split(" ")[0]} AMOLED</span>
+            </div>
+          )}
+          {camera && (
+            <div className="flex items-center gap-1.5 bg-slate-50 border border-slate-200/80 px-2 py-1 rounded-lg truncate" title={camera}>
+              <FaCamera className="text-emerald-500 shrink-0 text-[10px]" />
+              <span className="truncate">{camera.split("+")[0].trim()}</span>
+            </div>
+          )}
+          {battery && (
+            <div className="flex items-center gap-1.5 bg-slate-50 border border-slate-200/80 px-2 py-1 rounded-lg truncate" title={battery}>
+              <FaBatteryFull className="text-amber-500 shrink-0 text-[10px]" />
+              <span className="truncate">{battery.split(" ")[0]}</span>
+            </div>
+          )}
+        </div>
+
+        {/* Warranty Tag */}
+        <div className="mt-auto pt-2 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500 mb-3">
+          <span className="flex items-center gap-1 text-emerald-700 font-medium truncate max-w-[85%]">
+            <FaCheckCircle className="text-emerald-600 text-[10px] shrink-0" />
+            <span className="truncate">{product.warranty}</span>
+          </span>
+        </div>
+
+        {/* Action Buttons */}
+        <div className="grid grid-cols-2 gap-2">
+          <a
+            href={`https://wa.me/919643990077?text=${whatsappMessage}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center justify-center gap-1.5 py-2 px-2.5 rounded-xl bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border border-emerald-200 text-xs font-semibold transition-colors"
+          >
+            <FaWhatsapp size={13} className="text-emerald-600 shrink-0" />
+            <span>Inquire</span>
+          </a>
+          <a
+            href="/#contact"
+            className="flex items-center justify-center py-2 px-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold transition-colors shadow-2xs text-center"
+          >
+            Get Quote
+          </a>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
 
 export default function PhonesPage() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -131,25 +263,25 @@ export default function PhonesPage() {
 
       {/* Hero Section */}
       <PageHero
-        title="Next-Gen Smartphones. Enterprise & Flagships."
+        title="Next-Gen Smartphones. Enterprise Mobility."
         subtitle="Authorized procurement for the latest flagship, foldable, and performance devices from Apple, Samsung, Vivo, Oppo, and Realme with official warranties and bulk pricing."
         miniText="AUTHORIZED SMARTPHONE DISTRIBUTOR"
       />
 
       {/* Highlights Bar */}
-      <section className="bg-slate-50 border-b border-slate-200 py-8">
+      <section className="bg-slate-50 border-b border-slate-200 py-6 sm:py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-5">
             {highlightUseCases.map((uc, i) => (
               <div 
                 key={i} 
-                className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs hover:shadow-md transition-all hover:border-blue-300 group"
+                className="bg-white p-4.5 rounded-2xl border border-slate-200/80 shadow-2xs hover:shadow-sm transition-all hover:border-blue-300 group"
               >
-                <div className="text-3xl mb-3">{uc.icon}</div>
-                <h3 className="text-base font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
+                <div className="text-2xl mb-2">{uc.icon}</div>
+                <h3 className="text-sm font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
                   {uc.title}
                 </h3>
-                <p className="text-xs font-semibold text-blue-600 mb-1">{uc.subtitle}</p>
+                <p className="text-[11px] font-semibold text-blue-600 mb-0.5">{uc.subtitle}</p>
                 <p className="text-xs text-slate-600 leading-relaxed">{uc.desc}</p>
               </div>
             ))}
@@ -158,7 +290,7 @@ export default function PhonesPage() {
       </section>
 
       {/* Main Content */}
-      <section className="py-12 sm:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-10 sm:py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader 
           title="Explore Smartphone Lineup" 
           subtitle="Direct manufacturer sourcing with genuine warranty, IMEI registration, and corporate invoice compliance."
@@ -166,14 +298,14 @@ export default function PhonesPage() {
         />
 
         {/* Category Filter Pills */}
-        <div className="flex overflow-x-auto sm:flex-wrap justify-start sm:justify-center gap-2 sm:gap-3 mb-8 sm:mb-12 mt-4 sm:mt-8 pb-3 sm:pb-0 scrollbar-hide w-full">
+        <div className="flex overflow-x-auto sm:flex-wrap justify-start sm:justify-center gap-2 mb-8 mt-4 sm:mt-6 pb-2 sm:pb-0 scrollbar-hide w-full">
           {categories.map((cat, i) => (
             <button
               key={i}
               onClick={() => setActiveCategory(cat)}
-              className={`whitespace-nowrap px-4 sm:px-5 py-2 rounded-full border transition-all text-xs sm:text-sm font-semibold shrink-0 cursor-pointer ${
+              className={`whitespace-nowrap px-4 py-1.5 rounded-full border transition-all text-xs font-semibold shrink-0 cursor-pointer ${
                 activeCategory === cat
-                  ? "bg-blue-600 border-blue-600 text-white shadow-md shadow-blue-500/25"
+                  ? "bg-blue-600 border-blue-600 text-white shadow-xs"
                   : "bg-slate-100 border-slate-200 hover:bg-slate-200 text-slate-700"
               }`}
             >
@@ -182,94 +314,94 @@ export default function PhonesPage() {
           ))}
         </div>
 
-        {/* Mobile Filters Button */}
-        <div className="lg:hidden mb-6 flex gap-3">
+        {/* Mobile Search & Filter Bar */}
+        <div className="lg:hidden mb-6 flex gap-2.5">
           <div className="relative flex-1">
-            <FaSearch className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" size={14} />
+            <FaSearch className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" size={13} />
             <input
               type="text"
-              placeholder="Search phone model, chip, camera..."
+              placeholder="Search phone model, brand, chip..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-blue-500"
+              className="w-full pl-9 pr-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-blue-500"
             />
           </div>
           <button
             onClick={() => setShowMobileFilters(true)}
-            className="flex items-center gap-2 px-4 py-2.5 bg-blue-600 text-white rounded-xl font-semibold text-sm shadow-sm"
+            className="flex items-center gap-1.5 px-4 py-2.5 bg-blue-600 text-white rounded-xl font-semibold text-xs shadow-xs shrink-0"
           >
-            <FaFilter size={13} />
+            <FaFilter size={12} />
             <span>Filters</span>
           </button>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 lg:gap-8">
           {/* DESKTOP SIDEBAR FILTERS */}
-          <div className="hidden lg:block lg:col-span-1 space-y-6">
+          <div className="hidden lg:block lg:col-span-1 space-y-5">
             {/* Search Box */}
-            <div className="bg-slate-50 border border-slate-200 p-5 rounded-2xl">
-              <h4 className="text-sm font-bold text-slate-900 mb-3 flex items-center gap-2">
-                <FaSearch className="text-blue-600" size={14} />
-                <span>Search Devices</span>
+            <div className="bg-slate-50 border border-slate-200 p-4.5 rounded-2xl">
+              <h4 className="text-xs font-bold text-slate-900 uppercase tracking-wider mb-2.5 flex items-center gap-2">
+                <FaSearch className="text-blue-600" size={12} />
+                <span>Search Lineup</span>
               </h4>
               <div className="relative">
                 <input
                   type="text"
-                  placeholder="e.g. iPhone 16, S24, Vivo, 512GB..."
+                  placeholder="e.g. iPhone, S24, Vivo, 512GB..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full px-3.5 py-2 bg-white border border-slate-300 rounded-xl text-sm focus:outline-none focus:border-blue-500 text-slate-900"
+                  className="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl text-xs focus:outline-none focus:border-blue-500 text-slate-900"
                 />
                 {searchQuery && (
                   <button
                     onClick={() => setSearchQuery("")}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
+                    className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
                   >
-                    <FaTimes size={12} />
+                    <FaTimes size={11} />
                   </button>
                 )}
               </div>
             </div>
 
             {/* Brand Filter */}
-            <div className="bg-slate-50 border border-slate-200 p-5 rounded-2xl">
-              <div className="flex items-center justify-between mb-3">
-                <h4 className="text-sm font-bold text-slate-900">Brand</h4>
+            <div className="bg-slate-50 border border-slate-200 p-4.5 rounded-2xl">
+              <div className="flex items-center justify-between mb-2.5">
+                <h4 className="text-xs font-bold text-slate-900 uppercase tracking-wider">Brand</h4>
                 {activeBrand !== "All" && (
                   <button
                     onClick={() => setActiveBrand("All")}
-                    className="text-xs text-blue-600 font-semibold hover:underline"
+                    className="text-[11px] text-blue-600 font-semibold hover:underline"
                   >
                     Reset
                   </button>
                 )}
               </div>
-              <div className="space-y-1.5">
+              <div className="space-y-1">
                 {brands.map((brand) => (
                   <button
                     key={brand}
                     onClick={() => setActiveBrand(brand)}
-                    className={`w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-all flex items-center justify-between ${
+                    className={`w-full text-left px-3 py-1.5 rounded-lg text-xs font-medium transition-all flex items-center justify-between ${
                       activeBrand === brand
-                        ? "bg-blue-600 text-white font-semibold"
+                        ? "bg-blue-600 text-white font-semibold shadow-2xs"
                         : "text-slate-700 hover:bg-slate-200/70"
                     }`}
                   >
                     <span>{brand}</span>
-                    {activeBrand === brand && <FaCheckCircle size={12} />}
+                    {activeBrand === brand && <FaCheckCircle size={11} />}
                   </button>
                 ))}
               </div>
             </div>
 
             {/* RAM Filter */}
-            <div className="bg-slate-50 border border-slate-200 p-5 rounded-2xl">
-              <div className="flex items-center justify-between mb-3">
-                <h4 className="text-sm font-bold text-slate-900">RAM Capacity</h4>
+            <div className="bg-slate-50 border border-slate-200 p-4.5 rounded-2xl">
+              <div className="flex items-center justify-between mb-2.5">
+                <h4 className="text-xs font-bold text-slate-900 uppercase tracking-wider">RAM</h4>
                 {activeRAM !== "All" && (
                   <button
                     onClick={() => setActiveRAM("All")}
-                    className="text-xs text-blue-600 font-semibold hover:underline"
+                    className="text-[11px] text-blue-600 font-semibold hover:underline"
                   >
                     Reset
                   </button>
@@ -280,9 +412,9 @@ export default function PhonesPage() {
                   <button
                     key={ram}
                     onClick={() => setActiveRAM(ram)}
-                    className={`text-center py-2 rounded-lg text-xs font-semibold transition-all border ${
+                    className={`text-center py-1.5 rounded-lg text-xs font-semibold transition-all border ${
                       activeRAM === ram
-                        ? "bg-blue-600 text-white border-blue-600 shadow-xs"
+                        ? "bg-blue-600 text-white border-blue-600 shadow-2xs"
                         : "bg-white text-slate-700 border-slate-200 hover:bg-slate-100"
                     }`}
                   >
@@ -293,13 +425,13 @@ export default function PhonesPage() {
             </div>
 
             {/* Storage Filter */}
-            <div className="bg-slate-50 border border-slate-200 p-5 rounded-2xl">
-              <div className="flex items-center justify-between mb-3">
-                <h4 className="text-sm font-bold text-slate-900">Storage</h4>
+            <div className="bg-slate-50 border border-slate-200 p-4.5 rounded-2xl">
+              <div className="flex items-center justify-between mb-2.5">
+                <h4 className="text-xs font-bold text-slate-900 uppercase tracking-wider">Storage</h4>
                 {activeStorage !== "All" && (
                   <button
                     onClick={() => setActiveStorage("All")}
-                    className="text-xs text-blue-600 font-semibold hover:underline"
+                    className="text-[11px] text-blue-600 font-semibold hover:underline"
                   >
                     Reset
                   </button>
@@ -310,9 +442,9 @@ export default function PhonesPage() {
                   <button
                     key={storage}
                     onClick={() => setActiveStorage(storage)}
-                    className={`text-center py-2 rounded-lg text-xs font-semibold transition-all border ${
+                    className={`text-center py-1.5 rounded-lg text-xs font-semibold transition-all border ${
                       activeStorage === storage
-                        ? "bg-blue-600 text-white border-blue-600 shadow-xs"
+                        ? "bg-blue-600 text-white border-blue-600 shadow-2xs"
                         : "bg-white text-slate-700 border-slate-200 hover:bg-slate-100"
                     }`}
                   >
@@ -326,47 +458,46 @@ export default function PhonesPage() {
             {hasActiveFilters && (
               <button
                 onClick={clearAllFilters}
-                className="w-full py-2.5 px-4 rounded-xl bg-slate-200 hover:bg-slate-300 text-slate-800 text-sm font-semibold transition-all"
+                className="w-full py-2 px-3 rounded-xl bg-slate-200 hover:bg-slate-300 text-slate-800 text-xs font-semibold transition-all"
               >
                 Clear All Filters
               </button>
             )}
 
-            {/* Enterprise B2B Quote Help */}
-            <div className="bg-gradient-to-br from-blue-900 to-indigo-950 text-white p-6 rounded-2xl shadow-lg relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/20 rounded-full blur-2xl pointer-events-none"></div>
-              <FaBuilding className="text-blue-400 mb-3" size={24} />
-              <h4 className="text-base font-bold mb-1">Corporate Bulk Fleet</h4>
-              <p className="text-xs text-blue-100/90 leading-relaxed mb-4">
-                Procuring 10+ smartphones for your executive team or sales fleet? Get dedicated account pricing with GST input tax credit.
+            {/* Corporate Bulk Fleet Card */}
+            <div className="bg-gradient-to-br from-blue-900 to-slate-900 text-white p-5 rounded-2xl shadow-md relative overflow-hidden">
+              <FaBuilding className="text-blue-400 mb-2.5" size={20} />
+              <h4 className="text-sm font-bold mb-1">Corporate Bulk Fleet</h4>
+              <p className="text-[11px] text-blue-100/80 leading-relaxed mb-3.5">
+                Procuring 5+ smartphones for executives or field workforce? Get customized pricing with GST invoicing.
               </p>
               <a
                 href="https://wa.me/919643990077?text=Hi%2C%20I%20am%20looking%20for%20a%20bulk%20enterprise%20quote%20for%20smartphones."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 bg-emerald-500 hover:bg-emerald-600 text-white font-bold rounded-xl text-xs transition-all shadow-md"
+                className="inline-flex items-center justify-center gap-1.5 w-full py-2 px-3 bg-emerald-500 hover:bg-emerald-600 text-white font-bold rounded-xl text-xs transition-all shadow-sm"
               >
-                <FaWhatsapp size={15} />
+                <FaWhatsapp size={14} />
                 <span>Request B2B Quote</span>
               </a>
             </div>
           </div>
 
-          {/* PRODUCT LIST GRID */}
+          {/* COMPACT PRODUCT LIST GRID */}
           <div className="lg:col-span-3">
             {/* Header info bar */}
-            <div className="flex flex-wrap items-center justify-between gap-3 mb-6 pb-4 border-b border-slate-200">
-              <div className="flex items-center gap-2 text-sm text-slate-600">
+            <div className="flex flex-wrap items-center justify-between gap-2.5 mb-5 pb-3 border-b border-slate-200">
+              <div className="flex items-center gap-2 text-xs text-slate-600">
                 <span>Showing</span>
                 <span className="font-bold text-slate-900">{filteredProducts.length}</span>
                 <span>devices</span>
                 {activeBrand !== "All" && (
-                  <span className="bg-blue-50 text-blue-700 text-xs px-2.5 py-0.5 rounded-full font-semibold border border-blue-200">
+                  <span className="bg-blue-50 text-blue-700 text-[11px] px-2 py-0.5 rounded-full font-semibold border border-blue-200">
                     {activeBrand}
                   </span>
                 )}
                 {activeCategory !== "All" && (
-                  <span className="bg-slate-100 text-slate-700 text-xs px-2.5 py-0.5 rounded-full font-semibold border border-slate-200">
+                  <span className="bg-slate-100 text-slate-700 text-[11px] px-2 py-0.5 rounded-full font-semibold border border-slate-200">
                     {activeCategory}
                   </span>
                 )}
@@ -382,34 +513,27 @@ export default function PhonesPage() {
               )}
             </div>
 
-            {/* Grid */}
+            {/* Compact Professional Responsive Grid */}
             {filteredProducts.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4 sm:gap-5">
                 {filteredProducts.map((product, idx) => (
-                  <ProductCard
+                  <CompactPhoneCard
                     key={product.id}
-                    id={product.id}
-                    name={product.name}
-                    modelNumber={product.modelNumber}
-                    image={product.image}
-                    price={product.price}
-                    specs={product.specs}
-                    badges={product.badges}
-                    warranty={product.warranty}
-                    delay={idx * 0.05}
+                    product={product}
+                    delay={idx * 0.03}
                   />
                 ))}
               </div>
             ) : (
               <div className="text-center py-16 bg-slate-50 border border-slate-200 rounded-3xl p-8">
-                <FaMobileAlt className="mx-auto text-slate-400 mb-4" size={48} />
-                <h3 className="text-lg font-bold text-slate-900 mb-1">No matching devices found</h3>
-                <p className="text-sm text-slate-600 max-w-md mx-auto mb-6">
-                  We could not find any smartphone matching your exact filter criteria. Try resetting your filters or contacting our procurement desk.
+                <FaMobileAlt className="mx-auto text-slate-400 mb-3" size={40} />
+                <h3 className="text-base font-bold text-slate-900 mb-1">No matching smartphones found</h3>
+                <p className="text-xs text-slate-600 max-w-sm mx-auto mb-5">
+                  Try adjusting your search query or reset the filters to browse all brand flagships.
                 </p>
                 <button
                   onClick={clearAllFilters}
-                  className="px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl text-sm transition-all shadow-sm"
+                  className="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl text-xs transition-all shadow-xs"
                 >
                   Reset All Filters
                 </button>
@@ -419,159 +543,43 @@ export default function PhonesPage() {
         </div>
       </section>
 
-      {/* MOBILE FILTERS MODAL */}
-      {showMobileFilters && (
-        <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-slate-900/60 backdrop-blur-sm animate-fadeIn">
-          <div className="bg-white w-full max-w-lg rounded-t-3xl sm:rounded-3xl max-h-[85vh] overflow-y-auto p-6 space-y-6">
-            <div className="flex items-center justify-between pb-4 border-b border-slate-200">
-              <h3 className="text-lg font-bold text-slate-900 flex items-center gap-2">
-                <FaFilter className="text-blue-600" size={16} />
-                <span>Filter Smartphones</span>
-              </h3>
-              <button
-                onClick={() => setShowMobileFilters(false)}
-                className="p-2 text-slate-400 hover:text-slate-700 rounded-full hover:bg-slate-100"
-              >
-                <FaTimes size={18} />
-              </button>
-            </div>
-
-            {/* Brand in Mobile */}
-            <div>
-              <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2.5">Brand</h4>
-              <div className="flex flex-wrap gap-2">
-                {brands.map((brand) => (
-                  <button
-                    key={brand}
-                    onClick={() => setActiveBrand(brand)}
-                    className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold border transition-all ${
-                      activeBrand === brand
-                        ? "bg-blue-600 text-white border-blue-600"
-                        : "bg-slate-100 text-slate-700 border-slate-200"
-                    }`}
-                  >
-                    {brand}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Category in Mobile */}
-            <div>
-              <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2.5">Category</h4>
-              <div className="flex flex-wrap gap-2">
-                {categories.map((cat) => (
-                  <button
-                    key={cat}
-                    onClick={() => setActiveCategory(cat)}
-                    className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold border transition-all ${
-                      activeCategory === cat
-                        ? "bg-blue-600 text-white border-blue-600"
-                        : "bg-slate-100 text-slate-700 border-slate-200"
-                    }`}
-                  >
-                    {cat}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* RAM in Mobile */}
-            <div>
-              <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2.5">RAM</h4>
-              <div className="flex flex-wrap gap-2">
-                {rams.map((ram) => (
-                  <button
-                    key={ram}
-                    onClick={() => setActiveRAM(ram)}
-                    className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold border transition-all ${
-                      activeRAM === ram
-                        ? "bg-blue-600 text-white border-blue-600"
-                        : "bg-slate-100 text-slate-700 border-slate-200"
-                    }`}
-                  >
-                    {ram}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Storage in Mobile */}
-            <div>
-              <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 mb-2.5">Storage</h4>
-              <div className="flex flex-wrap gap-2">
-                {storages.map((storage) => (
-                  <button
-                    key={storage}
-                    onClick={() => setActiveStorage(storage)}
-                    className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold border transition-all ${
-                      activeStorage === storage
-                        ? "bg-blue-600 text-white border-blue-600"
-                        : "bg-slate-100 text-slate-700 border-slate-200"
-                    }`}
-                  >
-                    {storage}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* Actions */}
-            <div className="pt-4 border-t border-slate-200 flex gap-3">
-              <button
-                onClick={clearAllFilters}
-                className="flex-1 py-3 px-4 bg-slate-100 hover:bg-slate-200 text-slate-800 text-sm font-semibold rounded-xl text-center"
-              >
-                Reset
-              </button>
-              <button
-                onClick={() => setShowMobileFilters(false)}
-                className="flex-1 py-3 px-4 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold rounded-xl text-center shadow-md"
-              >
-                Apply Filters
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
       {/* WHY BUY SMARTPHONES FROM AUTHENTIC INFOSYSTEM */}
-      <section className="bg-slate-50 border-t border-slate-200 py-16 sm:py-24">
+      <section className="bg-slate-50 border-t border-slate-200 py-12 sm:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
             title="Why Procure From Authentic Infosystem"
-            subtitle="Direct distributor access, authentic IMEI serial tracking, enterprise billing, and hassle-free warranty fulfillment."
+            subtitle="Direct distributor access, authentic IMEI serial tracking, enterprise billing, and official brand warranty."
             align="center"
           />
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
-            <div className="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm text-center">
-              <div className="w-14 h-14 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-5 text-2xl">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
+            <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-2xs text-center">
+              <div className="w-12 h-12 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center mx-auto mb-4 text-xl">
                 <FaShieldAlt />
               </div>
-              <h3 className="text-lg font-bold text-slate-900 mb-2">100% Genuine Brand Sourcing</h3>
-              <p className="text-sm text-slate-600 leading-relaxed">
-                Brand-new sealed boxes with manufacturer warranty, valid AppleCare / Samsung Care eligibility, and GST input tax credit for businesses.
+              <h3 className="text-base font-bold text-slate-900 mb-1.5">100% Genuine Brand Sourcing</h3>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Sealed retail boxes with valid manufacturer serial numbers, AppleCare / Samsung Care eligibility, and GST input credit.
               </p>
             </div>
 
-            <div className="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm text-center">
-              <div className="w-14 h-14 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center mx-auto mb-5 text-2xl">
+            <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-2xs text-center">
+              <div className="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-xl flex items-center justify-center mx-auto mb-4 text-xl">
                 <FaTruck />
               </div>
-              <h3 className="text-lg font-bold text-slate-900 mb-2">Insured Express Pan-India Delivery</h3>
-              <p className="text-sm text-slate-600 leading-relaxed">
-                Secure, tamper-evident logistics with door-to-door tracking for both single orders and multi-location corporate distributions.
+              <h3 className="text-base font-bold text-slate-900 mb-1.5">Pan-India Insured Dispatch</h3>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Express insured door-to-door delivery with live tracking for single devices and multi-location corporate consignments.
               </p>
             </div>
 
-            <div className="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm text-center">
-              <div className="w-14 h-14 bg-purple-50 text-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-5 text-2xl">
+            <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-2xs text-center">
+              <div className="w-12 h-12 bg-purple-50 text-purple-600 rounded-xl flex items-center justify-center mx-auto mb-4 text-xl">
                 <FaHeadset />
               </div>
-              <h3 className="text-lg font-bold text-slate-900 mb-2">Dedicated Account Manager</h3>
-              <p className="text-sm text-slate-600 leading-relaxed">
-                Single point of contact for bulk quotes, customized device deployment, accessory pairing, and post-purchase enterprise support.
+              <h3 className="text-base font-bold text-slate-900 mb-1.5">Enterprise Mobility Support</h3>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                Assistance with MDM configuration, corporate trade-ins, accessory bundling, and post-purchase priority support.
               </p>
             </div>
           </div>
