@@ -136,11 +136,11 @@ export default function Iphone18ProAdSection() {
               </p>
             </div>
             <div className="p-5 pt-0">
-              <div className="rounded-2xl overflow-hidden bg-black border border-slate-200/80 shadow-inner h-56 sm:h-64 flex items-center justify-center">
+              <div className="rounded-2xl overflow-hidden bg-slate-900 border border-slate-200/80 shadow-inner aspect-[16/9] w-full flex items-center justify-center">
                 <img
                   src={lineupImgSrc}
                   alt="Forged in Titanium & iPhone Duo"
-                  className="w-full h-full object-cover object-center hover:scale-105 transition-transform duration-500"
+                  className="w-full h-full object-contain sm:object-cover object-center hover:scale-[1.02] transition-transform duration-500"
                 />
               </div>
             </div>
@@ -166,7 +166,7 @@ export default function Iphone18ProAdSection() {
               </p>
             </div>
             <div className="p-5 pt-0">
-              <div className="rounded-2xl overflow-hidden bg-black border border-slate-200/80 shadow-inner h-56 sm:h-64 flex items-center justify-center">
+              <div className="rounded-2xl overflow-hidden bg-black border border-slate-200/80 shadow-inner aspect-[16/9] w-full flex items-center justify-center">
                 <img
                   src={cameraImgSrc}
                   alt="Horizontal Visor Island"
@@ -196,7 +196,7 @@ export default function Iphone18ProAdSection() {
               </p>
             </div>
             <div className="p-5 pt-0">
-              <div className="rounded-2xl overflow-hidden bg-black border border-slate-200/80 shadow-inner h-56 sm:h-64 flex items-center justify-center">
+              <div className="rounded-2xl overflow-hidden bg-black border border-slate-200/80 shadow-inner aspect-[16/9] w-full flex items-center justify-center">
                 <img
                   src={aiImgSrc}
                   alt="Apple Intelligence (A20 Pro)"
