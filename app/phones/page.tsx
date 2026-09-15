@@ -40,6 +40,15 @@ function CompactPhoneCard({ product, delay = 0 }: { product: Product; delay?: nu
   const display = getSpecValue("Display");
   const battery = getSpecValue("Battery");
 
+  const getBatteryLabel = (bat: string) => {
+    if (!bat) return "";
+    const mah = bat.match(/\d+mAh/i);
+    if (mah) return mah[0];
+    const hrs = bat.match(/(\d+)\s*Hours?/i);
+    if (hrs) return `${hrs[1]}h Video`;
+    return bat.split(" ")[0] === "Up" ? "All-Day" : bat.split(" ")[0];
+  };
+
   const whatsappMessage = encodeURIComponent(
     `Hi Authentic Infosystem, I would like to inquire about pricing, stock and quotation for ${product.name} (${product.modelNumber}).`
   );
@@ -53,14 +62,14 @@ function CompactPhoneCard({ product, delay = 0 }: { product: Product; delay?: nu
       className="group bg-white border border-slate-200 hover:border-blue-500 rounded-2xl shadow-xs hover:shadow-lg transition-all duration-200 flex flex-col h-full relative overflow-hidden"
     >
       {/* Top Image Box */}
-      <div className="relative w-full h-44 bg-gradient-to-b from-slate-50/80 to-slate-100/60 p-4 flex items-center justify-center border-b border-slate-100 overflow-hidden">
+      <div className="relative w-full h-44 bg-gradient-to-b from-slate-50/80 to-slate-100/60 p-4 pt-6 flex items-center justify-center border-b border-slate-100 overflow-hidden">
         {/* Top Badges */}
-        <div className="absolute top-2.5 left-2.5 right-2.5 flex items-center justify-between z-10 pointer-events-none">
-          <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md bg-white/95 text-blue-700 border border-slate-200 shadow-2xs">
+        <div className="absolute top-2.5 left-2.5 right-2.5 flex items-center justify-between z-10 pointer-events-none gap-1.5">
+          <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md bg-white/95 text-blue-700 border border-slate-200 shadow-2xs shrink-0">
             {product.brand}
           </span>
           {product.badges && product.badges.length > 0 && (
-            <span className="text-[10px] font-semibold px-2 py-0.5 rounded-md bg-slate-900 text-white shadow-2xs">
+            <span className="text-[10px] font-semibold px-2 py-0.5 rounded-md bg-slate-900 text-white shadow-2xs truncate max-w-[65%]">
               {product.badges[0]}
             </span>
           )}
@@ -70,7 +79,7 @@ function CompactPhoneCard({ product, delay = 0 }: { product: Product; delay?: nu
         <img
           src={product.image}
           alt={product.name}
-          className="object-contain max-h-[135px] w-auto drop-shadow-sm group-hover:scale-105 transition-transform duration-300"
+          className="object-contain max-h-[125px] max-w-[115px] w-auto drop-shadow-sm group-hover:scale-105 transition-transform duration-300"
           loading="lazy"
         />
       </div>
@@ -122,7 +131,7 @@ function CompactPhoneCard({ product, delay = 0 }: { product: Product; delay?: nu
           {battery && (
             <div className="flex items-center gap-1.5 bg-slate-50 border border-slate-200/80 px-2 py-1 rounded-lg truncate" title={battery}>
               <FaBatteryFull className="text-amber-500 shrink-0 text-[10px]" />
-              <span className="truncate">{battery.split(" ")[0]}</span>
+              <span className="truncate">{getBatteryLabel(battery)}</span>
             </div>
           )}
         </div>
