@@ -12,9 +12,9 @@ import {
 
 export default function Iphone18ProAdSection() {
   const bannerImgSrc = "/Home%20Screen%20Advertisement/Iphone18PRoBanner.png";
-  const lineupImgSrc = "/Home%20Screen%20Advertisement/apple_official/iphone18_lineup_hd.png";
-  const cameraImgSrc = "/Home%20Screen%20Advertisement/apple_official/iphone18_camera_visor.png";
-  const aiImgSrc = "/Home%20Screen%20Advertisement/apple_official/apple_intelligence_2x.jpg";
+  const lineupImgSrc = "/Home%20Screen%20Advertisement/Forged%20in%20Titanium.png";
+  const cameraImgSrc = "/Home%20Screen%20Advertisement/Horizontal%20Visor%20Island.png";
+  const aiImgSrc = "/Home%20Screen%20Advertisement/Apple%20Intelligence%20(A20%20Pro).png";
 
   const whatsappInquiryMsg = encodeURIComponent(
     `Hello Authentic Infosystem! I am interested in inquiring and pre-booking the new Apple iPhone 18 Pro / Pro Max enterprise allocation.`
@@ -112,7 +112,7 @@ export default function Iphone18ProAdSection() {
         {/* OFFICIAL APPLE PHOTO SHOWCASE & FEATURE GRID */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
           
-          {/* Card 1: Official Titanium Lineup Photo */}
+          {/* Card 1: Forged in Titanium */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -131,17 +131,17 @@ export default function Iphone18ProAdSection() {
               </p>
             </div>
             <div className="p-4 pt-0">
-              <div className="rounded-2xl overflow-hidden bg-white border border-slate-200/80 shadow-inner flex items-center justify-center p-3">
+              <div className="rounded-2xl overflow-hidden bg-black border border-slate-200/80 shadow-inner h-48 sm:h-56 flex items-center justify-center">
                 <img
                   src={lineupImgSrc}
-                  alt="Apple iPhone 18 Pro 4-Color Titanium Lineup"
-                  className="w-full h-48 sm:h-52 object-contain hover:scale-105 transition-transform duration-500"
+                  alt="Forged in Titanium"
+                  className="w-full h-full object-cover object-center hover:scale-105 transition-transform duration-500"
                 />
               </div>
             </div>
           </motion.div>
 
-          {/* Card 2: 48MP Pro Camera System Photo */}
+          {/* Card 2: Horizontal Visor Island */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -161,17 +161,17 @@ export default function Iphone18ProAdSection() {
               </p>
             </div>
             <div className="p-4 pt-0">
-              <div className="rounded-2xl overflow-hidden bg-white border border-slate-200/80 shadow-inner flex items-center justify-center p-3">
+              <div className="rounded-2xl overflow-hidden bg-black border border-slate-200/80 shadow-inner h-48 sm:h-56 flex items-center justify-center">
                 <img
                   src={cameraImgSrc}
-                  alt="Apple iPhone 18 Pro Camera Visor"
-                  className="w-full h-48 sm:h-52 object-contain hover:scale-105 transition-transform duration-500"
+                  alt="Horizontal Visor Island"
+                  className="w-full h-full object-cover object-center hover:scale-105 transition-transform duration-500"
                 />
               </div>
             </div>
           </motion.div>
 
-          {/* Card 3: Apple Intelligence */}
+          {/* Card 3: Apple Intelligence (A20 Pro) */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -191,11 +191,11 @@ export default function Iphone18ProAdSection() {
               </p>
             </div>
             <div className="p-4 pt-0">
-              <div className="rounded-2xl overflow-hidden bg-white border border-slate-200/80 shadow-inner flex items-center justify-center p-3">
+              <div className="rounded-2xl overflow-hidden bg-black border border-slate-200/80 shadow-inner h-48 sm:h-56 flex items-center justify-center">
                 <img
                   src={aiImgSrc}
-                  alt="Apple iPhone 18 Pro Apple Intelligence Tools"
-                  className="w-full h-48 sm:h-52 object-contain hover:scale-105 transition-transform duration-500"
+                  alt="Apple Intelligence (A20 Pro)"
+                  className="w-full h-full object-cover object-center hover:scale-105 transition-transform duration-500"
                 />
               </div>
             </div>
