@@ -12,9 +12,9 @@ import {
 
 export default function Iphone18ProAdSection() {
   const bannerImgSrc = "/Home%20Screen%20Advertisement/Iphone18PRoBanner.png";
-  const lineupImgSrc = "/Home%20Screen%20Advertisement/apple_official/apple_iphone_lineup_2x.jpg";
-  const cameraImgSrc = "/Home%20Screen%20Advertisement/apple_official/apple_camera_system_2x.jpg";
-  const cameraCtrlImgSrc = "/Home%20Screen%20Advertisement/apple_official/apple_camera_control_2x.jpg";
+  const lineupImgSrc = "/Home%20Screen%20Advertisement/apple_official/iphone18_lineup_hd.png";
+  const cameraImgSrc = "/Home%20Screen%20Advertisement/apple_official/iphone18_camera_visor.png";
+  const aiImgSrc = "/Home%20Screen%20Advertisement/apple_official/apple_intelligence_2x.jpg";
 
   const whatsappInquiryMsg = encodeURIComponent(
     `Hello Authentic Infosystem! I am interested in inquiring and pre-booking the new Apple iPhone 18 Pro / Pro Max enterprise allocation.`
@@ -121,20 +121,20 @@ export default function Iphone18ProAdSection() {
           >
             <div className="p-6 pb-2">
               <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block mb-1">
-                Aerospace-Grade Alloy
+                New 4-Color Finish Lineup
               </span>
               <h3 className="text-xl font-black text-slate-900 mb-2">
                 Forged in Titanium
               </h3>
               <p className="text-xs text-slate-600 leading-relaxed">
-                Featuring a refined microblasted texture, Grade 5 titanium frame, and our thinnest borders on any Apple display ever.
+                Available in Space Black, Frost Silver, Sky Blue, and all-new Crimson Burgundy Titanium with ultra-narrow display borders.
               </p>
             </div>
             <div className="p-4 pt-0">
-              <div className="rounded-2xl overflow-hidden bg-white border border-slate-200/80 shadow-inner">
+              <div className="rounded-2xl overflow-hidden bg-white border border-slate-200/80 shadow-inner flex items-center justify-center p-3">
                 <img
                   src={lineupImgSrc}
-                  alt="Apple iPhone Pro Titanium Finish Lineup"
+                  alt="Apple iPhone 18 Pro 4-Color Titanium Lineup"
                   className="w-full h-48 sm:h-52 object-contain hover:scale-105 transition-transform duration-500"
                 />
               </div>
@@ -151,27 +151,27 @@ export default function Iphone18ProAdSection() {
           >
             <div className="p-6 pb-2">
               <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block mb-1">
-                Pro Cinema Studio
+                Next-Gen Camera Architecture
               </span>
               <h3 className="text-xl font-black text-slate-900 mb-2">
-                48MP Fusion & Tetraprism Zoom
+                Horizontal Visor Island
               </h3>
               <p className="text-xs text-slate-600 leading-relaxed">
-                Capture 4K 120 fps Dolby Vision video with 10x lossless optical telephoto and studio-quality 4-mic array audio mix.
+                Redesigned horizontal camera visor housing 48MP variable-aperture lenses, next-gen LiDAR scanner, and 10x Tetraprism zoom.
               </p>
             </div>
             <div className="p-4 pt-0">
-              <div className="rounded-2xl overflow-hidden bg-white border border-slate-200/80 shadow-inner">
+              <div className="rounded-2xl overflow-hidden bg-white border border-slate-200/80 shadow-inner flex items-center justify-center p-3">
                 <img
                   src={cameraImgSrc}
-                  alt="Apple iPhone Pro 48MP Camera System"
-                  className="w-full h-48 sm:h-52 object-cover hover:scale-105 transition-transform duration-500"
+                  alt="Apple iPhone 18 Pro Camera Visor"
+                  className="w-full h-48 sm:h-52 object-contain hover:scale-105 transition-transform duration-500"
                 />
               </div>
             </div>
           </motion.div>
 
-          {/* Card 3: Camera Control Photo */}
+          {/* Card 3: Apple Intelligence */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -181,21 +181,21 @@ export default function Iphone18ProAdSection() {
           >
             <div className="p-6 pb-2">
               <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider block mb-1">
-                Visual Intelligence
+                2nm Silicon Power
               </span>
               <h3 className="text-xl font-black text-slate-900 mb-2">
-                All-New Camera Control
+                Apple Intelligence (A20 Pro)
               </h3>
               <p className="text-xs text-slate-600 leading-relaxed">
-                Instant access to camera tools, aperture adjustments, tone mapping, and on-device Apple Intelligence at your fingertips.
+                32-core Neural Engine powering systemwide on-device AI tools, live contextual Siri, and real-time computational photography.
               </p>
             </div>
             <div className="p-4 pt-0">
-              <div className="rounded-2xl overflow-hidden bg-white border border-slate-200/80 shadow-inner">
+              <div className="rounded-2xl overflow-hidden bg-white border border-slate-200/80 shadow-inner flex items-center justify-center p-3">
                 <img
-                  src={cameraCtrlImgSrc}
-                  alt="Apple iPhone Camera Control Visuals"
-                  className="w-full h-48 sm:h-52 object-cover hover:scale-105 transition-transform duration-500"
+                  src={aiImgSrc}
+                  alt="Apple iPhone 18 Pro Apple Intelligence Tools"
+                  className="w-full h-48 sm:h-52 object-contain hover:scale-105 transition-transform duration-500"
                 />
               </div>
             </div>
