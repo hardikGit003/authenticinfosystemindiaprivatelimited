@@ -1,15 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Link from "next/link";
 import { 
   FaWhatsapp, 
   FaMicrochip, 
   FaCamera, 
   FaShieldAlt, 
   FaBatteryFull, 
-  FaApple,
-  FaArrowRight
+  FaApple
 } from "react-icons/fa";
 
 export default function Iphone18ProAdSection() {
@@ -83,14 +81,6 @@ export default function Iphone18ProAdSection() {
               <FaWhatsapp className="text-emerald-400 text-base" />
               <span>Pre-Book Your Allocation</span>
             </a>
-
-            <Link
-              href="/phones"
-              className="inline-flex items-center gap-1.5 px-6 py-3 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs sm:text-sm transition-all hover:scale-105"
-            >
-              <span>Explore All Phones</span>
-              <FaArrowRight size={11} />
-            </Link>
           </motion.div>
         </div>
 
@@ -103,13 +93,9 @@ export default function Iphone18ProAdSection() {
           className="relative rounded-3xl overflow-hidden border border-slate-200/80 bg-white shadow-xl shadow-slate-200/60 mb-12 group"
         >
           {/* Top Status Bar */}
-          <div className="absolute top-4 left-4 right-4 z-20 flex flex-wrap items-center justify-between gap-2 pointer-events-none">
+          <div className="absolute top-4 left-4 z-20 pointer-events-none">
             <span className="bg-white/90 backdrop-blur-md text-slate-800 text-[11px] font-bold px-3.5 py-1.5 rounded-full border border-slate-200 shadow-sm flex items-center gap-1.5">
               <FaApple className="text-slate-900 text-xs" /> Authentic Infosystem Distribution
-            </span>
-
-            <span className="bg-emerald-50 text-emerald-700 border border-emerald-200 backdrop-blur-md text-[11px] font-extrabold px-3 py-1 rounded-full shadow-sm">
-              GST Invoicing & Official Warranty
             </span>
           </div>
 
