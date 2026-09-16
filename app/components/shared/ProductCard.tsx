@@ -33,7 +33,7 @@ export default function ProductCard({
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay }}
-      className="bg-white border border-slate-200 hover:border-blue-500 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col h-full relative overflow-hidden"
+      className="bg-white border border-slate-200 hover:border-black rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col h-full relative overflow-hidden"
     >
       {/* Image Container */}
       <div className="relative w-full aspect-[4/3] bg-slate-50 p-6 flex items-center justify-center overflow-hidden border-b border-slate-100">
@@ -55,7 +55,7 @@ export default function ProductCard({
             </p>
           )}
           {price && (
-            <p className="text-2xl font-extrabold text-blue-600">
+            <p className="text-2xl font-extrabold text-slate-950">
               {new Intl.NumberFormat("en-IN", {
                 style: "currency",
                 currency: "INR",
@@ -93,7 +93,7 @@ export default function ProductCard({
             </Link>
             <Link 
               href="/#contact"
-              className="py-2.5 px-4 text-center block rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold transition-all shadow-sm shadow-blue-500/20"
+              className="py-2.5 px-4 text-center block rounded-xl bg-black hover:bg-zinc-800 text-white text-sm font-semibold transition-all shadow-sm"
             >
               Request Quote
             </Link>

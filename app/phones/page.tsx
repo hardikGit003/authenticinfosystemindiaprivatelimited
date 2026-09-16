@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import PageHero from "../components/shared/PageHero";
@@ -59,13 +59,13 @@ function CompactPhoneCard({ product, delay = 0 }: { product: Product; delay?: nu
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.35, delay }}
-      className="group bg-white border border-slate-200 hover:border-blue-500 rounded-2xl shadow-xs hover:shadow-lg transition-all duration-200 flex flex-col h-full relative overflow-hidden"
+      className="group bg-white border border-slate-200 hover:border-black rounded-2xl shadow-xs hover:shadow-lg transition-all duration-200 flex flex-col h-full relative overflow-hidden"
     >
       {/* Top Image Box */}
       <div className="relative w-full h-44 bg-gradient-to-b from-slate-50/80 to-slate-100/60 p-4 pt-6 flex items-center justify-center border-b border-slate-100 overflow-hidden">
         {/* Top Badges */}
         <div className="absolute top-2.5 left-2.5 right-2.5 flex items-center justify-between z-10 pointer-events-none gap-1.5">
-          <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md bg-white/95 text-blue-700 border border-slate-200 shadow-2xs shrink-0">
+          <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md bg-zinc-100 text-slate-900 border border-slate-200 shadow-2xs shrink-0">
             {product.brand}
           </span>
           {product.badges && product.badges.length > 0 && (
@@ -91,14 +91,14 @@ function CompactPhoneCard({ product, delay = 0 }: { product: Product; delay?: nu
           <p className="text-[11px] font-semibold text-slate-400 tracking-wider uppercase mb-0.5">
             {product.modelNumber}
           </p>
-          <h3 className="text-sm sm:text-[15px] font-bold text-slate-900 leading-snug line-clamp-1 group-hover:text-blue-600 transition-colors">
+          <h3 className="text-sm sm:text-[15px] font-bold text-slate-900 leading-snug line-clamp-1 group-hover:text-black transition-colors">
             {product.name}
           </h3>
         </div>
 
         {/* Price */}
         <div className="mb-3">
-          <span className="text-base sm:text-lg font-extrabold text-blue-600">
+          <span className="text-base sm:text-lg font-extrabold text-slate-950">
             {new Intl.NumberFormat("en-IN", {
               style: "currency",
               currency: "INR",
@@ -112,13 +112,13 @@ function CompactPhoneCard({ product, delay = 0 }: { product: Product; delay?: nu
         <div className="grid grid-cols-2 gap-1.5 mb-3 text-[11px] text-slate-600">
           {processor && (
             <div className="flex items-center gap-1.5 bg-slate-50 border border-slate-200/80 px-2 py-1 rounded-lg truncate" title={processor}>
-              <FaMicrochip className="text-blue-500 shrink-0 text-[10px]" />
+              <FaMicrochip className="text-slate-700 shrink-0 text-[10px]" />
               <span className="truncate">{processor.replace(/Apple|Snapdragon|MediaTek/g, "").trim()}</span>
             </div>
           )}
           {display && (
             <div className="flex items-center gap-1.5 bg-slate-50 border border-slate-200/80 px-2 py-1 rounded-lg truncate" title={display}>
-              <FaTv className="text-indigo-500 shrink-0 text-[10px]" />
+              <FaTv className="text-slate-700 shrink-0 text-[10px]" />
               <span className="truncate">{display.split(" ")[0]} AMOLED</span>
             </div>
           )}
@@ -157,7 +157,7 @@ function CompactPhoneCard({ product, delay = 0 }: { product: Product; delay?: nu
           </a>
           <a
             href="/#contact"
-            className="flex items-center justify-center py-2 px-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold transition-colors shadow-2xs text-center"
+            className="flex items-center justify-center py-2 px-2.5 rounded-xl bg-black hover:bg-zinc-800 text-white text-xs font-semibold transition-colors shadow-2xs text-center"
           >
             Get Quote
           </a>
@@ -174,6 +174,16 @@ export default function PhonesPage() {
   const [activeRAM, setActiveRAM] = useState("All");
   const [activeStorage, setActiveStorage] = useState("All");
   const [showMobileFilters, setShowMobileFilters] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const q = params.get("search") || params.get("q");
+      if (q) {
+        setSearchQuery(q);
+      }
+    }
+  }, []);
 
   const filteredProducts = useMemo(() => {
     return phoneProducts.filter((product) => {
@@ -240,7 +250,7 @@ export default function PhonesPage() {
     activeStorage !== "All";
 
   return (
-    <main className="min-h-screen bg-white text-slate-900 selection:bg-blue-500/20">
+    <main className="min-h-screen bg-white text-slate-900 selection:bg-slate-900/15 selection:text-black">
       <Navbar />
 
       {/* Hero Section */}
@@ -266,7 +276,7 @@ export default function PhonesPage() {
               onClick={() => setActiveCategory(cat)}
               className={`whitespace-nowrap px-4 py-1.5 rounded-full border transition-all text-xs font-semibold shrink-0 cursor-pointer ${
                 activeCategory === cat
-                  ? "bg-blue-600 border-blue-600 text-white shadow-xs"
+                  ? "bg-black border-black text-white shadow-xs"
                   : "bg-slate-100 border-slate-200 hover:bg-slate-200 text-slate-700"
               }`}
             >
@@ -284,12 +294,12 @@ export default function PhonesPage() {
               placeholder="Search phone model, brand, chip..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-9 pr-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-blue-500"
+              className="w-full pl-9 pr-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-black"
             />
           </div>
           <button
             onClick={() => setShowMobileFilters(true)}
-            className="flex items-center gap-1.5 px-4 py-2.5 bg-blue-600 text-white rounded-xl font-semibold text-xs shadow-xs shrink-0"
+            className="flex items-center gap-1.5 px-4 py-2.5 bg-black text-white rounded-xl font-semibold text-xs shadow-xs shrink-0"
           >
             <FaFilter size={12} />
             <span>Filters</span>
@@ -303,13 +313,13 @@ export default function PhonesPage() {
               {/* Header with Title & Reset */}
               <div className="flex items-center justify-between pb-3.5 border-b border-slate-200">
                 <h3 className="text-xs font-extrabold text-slate-900 uppercase tracking-wider flex items-center gap-2">
-                  <FaFilter className="text-blue-600" size={12} />
+                  <FaFilter className="text-black" size={12} />
                   <span>Filter Lineup</span>
                 </h3>
                 {hasActiveFilters && (
                   <button
                     onClick={clearAllFilters}
-                    className="text-xs text-blue-600 hover:text-blue-800 font-semibold cursor-pointer"
+                    className="text-xs text-black hover:underline font-semibold cursor-pointer"
                   >
                     Reset All
                   </button>
@@ -328,7 +338,7 @@ export default function PhonesPage() {
                     placeholder="e.g. iPhone, S24, Vivo, 512GB..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full pl-9 pr-8 py-2 bg-white border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-blue-500 text-slate-900 shadow-2xs"
+                    className="w-full pl-9 pr-8 py-2 bg-white border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-black text-slate-900 shadow-2xs"
                   />
                   {searchQuery && (
                     <button
@@ -350,7 +360,7 @@ export default function PhonesPage() {
                   {activeBrand !== "All" && (
                     <button
                       onClick={() => setActiveBrand("All")}
-                      className="text-[11px] text-blue-600 font-semibold hover:underline"
+                      className="text-[11px] text-black font-semibold hover:underline"
                     >
                       Reset
                     </button>
@@ -363,7 +373,7 @@ export default function PhonesPage() {
                       onClick={() => setActiveBrand(brand)}
                       className={`w-full text-left px-3 py-2 rounded-xl text-xs font-medium transition-all flex items-center justify-between cursor-pointer ${
                         activeBrand === brand
-                          ? "bg-blue-600 text-white font-semibold shadow-xs"
+                          ? "bg-black text-white font-semibold shadow-xs"
                           : "text-slate-700 hover:bg-slate-200/60 bg-white/60 border border-slate-200/50"
                       }`}
                     >
@@ -383,7 +393,7 @@ export default function PhonesPage() {
                   {activeRAM !== "All" && (
                     <button
                       onClick={() => setActiveRAM("All")}
-                      className="text-[11px] text-blue-600 font-semibold hover:underline"
+                      className="text-[11px] text-black font-semibold hover:underline"
                     >
                       Reset
                     </button>
@@ -396,7 +406,7 @@ export default function PhonesPage() {
                       onClick={() => setActiveRAM(ram)}
                       className={`text-center py-2 rounded-xl text-xs font-semibold transition-all border cursor-pointer ${
                         activeRAM === ram
-                          ? "bg-blue-600 text-white border-blue-600 shadow-xs"
+                          ? "bg-black text-white border-black shadow-xs"
                           : "bg-white text-slate-700 border-slate-200 hover:bg-slate-100"
                       }`}
                     >
@@ -415,7 +425,7 @@ export default function PhonesPage() {
                   {activeStorage !== "All" && (
                     <button
                       onClick={() => setActiveStorage("All")}
-                      className="text-[11px] text-blue-600 font-semibold hover:underline"
+                      className="text-[11px] text-black font-semibold hover:underline"
                     >
                       Reset
                     </button>
@@ -428,7 +438,7 @@ export default function PhonesPage() {
                       onClick={() => setActiveStorage(storage)}
                       className={`text-center py-2 rounded-xl text-xs font-semibold transition-all border cursor-pointer ${
                         activeStorage === storage
-                          ? "bg-blue-600 text-white border-blue-600 shadow-xs"
+                          ? "bg-black text-white border-black shadow-xs"
                           : "bg-white text-slate-700 border-slate-200 hover:bg-slate-100"
                       }`}
                     >
@@ -450,10 +460,10 @@ export default function PhonesPage() {
             </div>
 
             {/* Corporate Bulk Fleet Card */}
-            <div className="bg-gradient-to-br from-blue-900 to-slate-900 text-white p-5 rounded-2xl shadow-md relative overflow-hidden">
-              <FaBuilding className="text-blue-400 mb-2.5" size={20} />
+            <div className="bg-gradient-to-br from-zinc-900 to-black text-white p-5 rounded-2xl shadow-md relative overflow-hidden border border-zinc-800">
+              <FaBuilding className="text-white mb-2.5" size={20} />
               <h4 className="text-sm font-bold mb-1">Corporate Bulk Fleet</h4>
-              <p className="text-[11px] text-blue-100/80 leading-relaxed mb-3.5">
+              <p className="text-[11px] text-zinc-300 leading-relaxed mb-3.5">
                 Procuring 5+ smartphones for executives or field workforce? Get customized pricing with GST invoicing.
               </p>
               <a
@@ -477,7 +487,7 @@ export default function PhonesPage() {
                 <span className="font-bold text-slate-900">{filteredProducts.length}</span>
                 <span>devices</span>
                 {activeBrand !== "All" && (
-                  <span className="bg-blue-50 text-blue-700 text-[11px] px-2 py-0.5 rounded-full font-semibold border border-blue-200">
+                  <span className="bg-zinc-100 text-zinc-900 text-[11px] px-2 py-0.5 rounded-full font-semibold border border-zinc-300">
                     {activeBrand}
                   </span>
                 )}
@@ -491,7 +501,7 @@ export default function PhonesPage() {
               {hasActiveFilters && (
                 <button
                   onClick={clearAllFilters}
-                  className="text-xs text-blue-600 hover:text-blue-800 font-semibold"
+                  className="text-xs text-black hover:underline font-semibold"
                 >
                   Clear all filters
                 </button>
@@ -510,18 +520,44 @@ export default function PhonesPage() {
                 ))}
               </div>
             ) : (
-              <div className="text-center py-16 bg-slate-50 border border-slate-200 rounded-3xl p-8">
-                <FaMobileAlt className="mx-auto text-slate-400 mb-3" size={40} />
-                <h3 className="text-base font-bold text-slate-900 mb-1">No matching smartphones found</h3>
-                <p className="text-xs text-slate-600 max-w-sm mx-auto mb-5">
-                  Try adjusting your search query or reset the filters to browse all brand flagships.
+              <div className="text-center py-16 bg-slate-50 border border-slate-200 rounded-3xl p-8 shadow-xs">
+                <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-zinc-100 border border-zinc-200 text-zinc-900 mb-3 shadow-2xs">
+                  <FaMobileAlt size={26} />
+                </div>
+                <div className="inline-block px-3 py-1 mb-2.5 rounded-full bg-black text-white text-[11px] font-bold uppercase tracking-wider shadow-2xs">
+                  ⚡ Will be available soon
+                </div>
+                <h3 className="text-lg sm:text-xl font-extrabold text-slate-900 mb-2">
+                  {searchQuery ? `"${searchQuery}" will be available soon` : "Will be available soon"}
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-600 max-w-md mx-auto mb-6 leading-relaxed">
+                  {searchQuery ? (
+                    <>
+                      We currently don't have <span className="font-bold text-slate-900">"{searchQuery}"</span> in immediate catalogue inventory, but it will be available soon. We can arrange direct enterprise batch procurement with official brand warranty.
+                    </>
+                  ) : (
+                    <>
+                      No smartphones match the selected filters right now. We regularly expand our inventory and this lineup will be available soon.
+                    </>
+                  )}
                 </p>
-                <button
-                  onClick={clearAllFilters}
-                  className="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl text-xs transition-all shadow-xs"
-                >
-                  Reset All Filters
-                </button>
+                <div className="flex flex-wrap items-center justify-center gap-3">
+                  <a
+                    href={`https://wa.me/919643990077?text=Hi%2C%20I%20am%20looking%20for%20a%20quote%20for%20${encodeURIComponent(searchQuery || 'phone')}.%20Please%20let%20me%20know%20availability%20and%20pricing.`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs transition-all shadow-sm cursor-pointer"
+                  >
+                    <FaWhatsapp size={14} />
+                    <span>Inquire Availability on WhatsApp</span>
+                  </a>
+                  <button
+                    onClick={clearAllFilters}
+                    className="px-5 py-2.5 bg-black hover:bg-zinc-800 text-white font-semibold rounded-xl text-xs transition-all shadow-xs cursor-pointer"
+                  >
+                    Reset All Filters
+                  </button>
+                </div>
               </div>
             )}
           </div>
@@ -539,7 +575,7 @@ export default function PhonesPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
             <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-2xs text-center">
-              <div className="w-12 h-12 bg-blue-50 text-blue-600 rounded-xl flex items-center justify-center mx-auto mb-4 text-xl">
+              <div className="w-12 h-12 bg-zinc-100 text-black rounded-xl flex items-center justify-center mx-auto mb-4 text-xl">
                 <FaShieldAlt />
               </div>
               <h3 className="text-base font-bold text-slate-900 mb-1.5">100% Genuine Brand Sourcing</h3>
@@ -580,7 +616,7 @@ export default function PhonesPage() {
               {/* Drawer Header */}
               <div className="flex items-center justify-between pb-4 border-b border-slate-200">
                 <div className="flex items-center gap-2">
-                  <FaFilter className="text-blue-600" size={14} />
+                  <FaFilter className="text-black" size={14} />
                   <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider">
                     Filter Smartphones
                   </h3>
@@ -602,7 +638,7 @@ export default function PhonesPage() {
                   {activeBrand !== "All" && (
                     <button
                       onClick={() => setActiveBrand("All")}
-                      className="text-[11px] text-blue-600 font-semibold hover:underline"
+                      className="text-[11px] text-black font-semibold hover:underline"
                     >
                       Reset
                     </button>
@@ -615,7 +651,7 @@ export default function PhonesPage() {
                       onClick={() => setActiveBrand(brand)}
                       className={`w-full text-left px-3 py-2 rounded-xl text-xs font-medium transition-all flex items-center justify-between cursor-pointer ${
                         activeBrand === brand
-                          ? "bg-blue-600 text-white font-semibold shadow-xs"
+                          ? "bg-black text-white font-semibold shadow-xs"
                           : "text-slate-700 hover:bg-slate-100 bg-slate-50 border border-slate-200"
                       }`}
                     >
@@ -635,7 +671,7 @@ export default function PhonesPage() {
                   {activeRAM !== "All" && (
                     <button
                       onClick={() => setActiveRAM("All")}
-                      className="text-[11px] text-blue-600 font-semibold hover:underline"
+                      className="text-[11px] text-black font-semibold hover:underline"
                     >
                       Reset
                     </button>
@@ -648,7 +684,7 @@ export default function PhonesPage() {
                       onClick={() => setActiveRAM(ram)}
                       className={`text-center py-2 rounded-xl text-xs font-semibold transition-all border cursor-pointer ${
                         activeRAM === ram
-                          ? "bg-blue-600 text-white border-blue-600 shadow-xs"
+                          ? "bg-black text-white border-black shadow-xs"
                           : "bg-white text-slate-700 border-slate-200 hover:bg-slate-100"
                       }`}
                     >
@@ -667,7 +703,7 @@ export default function PhonesPage() {
                   {activeStorage !== "All" && (
                     <button
                       onClick={() => setActiveStorage("All")}
-                      className="text-[11px] text-blue-600 font-semibold hover:underline"
+                      className="text-[11px] text-black font-semibold hover:underline"
                     >
                       Reset
                     </button>
@@ -680,7 +716,7 @@ export default function PhonesPage() {
                       onClick={() => setActiveStorage(storage)}
                       className={`text-center py-2 rounded-xl text-xs font-semibold transition-all border cursor-pointer ${
                         activeStorage === storage
-                          ? "bg-blue-600 text-white border-blue-600 shadow-xs"
+                          ? "bg-black text-white border-black shadow-xs"
                           : "bg-white text-slate-700 border-slate-200 hover:bg-slate-100"
                       }`}
                     >
@@ -703,7 +739,7 @@ export default function PhonesPage() {
               )}
               <button
                 onClick={() => setShowMobileFilters(false)}
-                className="w-full py-3 px-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold shadow-md transition-all"
+                className="w-full py-3 px-3 rounded-xl bg-black hover:bg-zinc-800 text-white text-xs font-bold shadow-md transition-all"
               >
                 View {filteredProducts.length} Results
               </button>

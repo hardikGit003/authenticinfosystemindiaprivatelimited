@@ -59,7 +59,7 @@ ${messageDetails}`;
   };
 
   return (
-    <main className="min-h-screen bg-white text-slate-900 selection:bg-blue-500/20">
+    <main className="min-h-screen bg-white text-slate-900 selection:bg-slate-900/15">
       <Navbar />
 
       <PageHero
@@ -76,7 +76,7 @@ ${messageDetails}`;
         <SectionHeader title="Industries We Empower" align="center" />
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mt-6">
           {['Startups', 'SMEs', 'Large Enterprises', 'Educational Institutions', 'Healthcare', 'Manufacturing', 'Government', 'Retail Chains'].map((industry, i) => (
-            <div key={i} className="bg-white rounded-xl p-5 sm:p-7 text-center hover:bg-blue-50 hover:border-blue-300 transition-all cursor-pointer border border-slate-200 shadow-xs hover:shadow-md">
+            <div key={i} className="bg-white rounded-xl p-5 sm:p-7 text-center hover:bg-slate-50 hover:border-slate-400 transition-all cursor-pointer border border-slate-200 shadow-xs hover:shadow-md">
               <h4 className="text-base sm:text-lg font-bold text-slate-800">{industry}</h4>
             </div>
           ))}
@@ -93,7 +93,7 @@ ${messageDetails}`;
               href={`https://wa.me/919643990077?text=${encodeURIComponent(`Hi, I am interested in ${service.title} enterprise services from Authentic Infosystem.`)}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="relative rounded-[20px] overflow-hidden min-h-[140px] sm:min-h-[150px] flex items-center justify-center p-4 border border-slate-200 shadow-[0_4px_16px_rgba(0,0,0,0.06)] cursor-pointer group hover:shadow-[0_10px_30px_rgba(0,102,204,0.15)] hover:border-blue-500/50 hover:-translate-y-1.5 transition-all duration-300 block"
+              className="relative rounded-[20px] overflow-hidden min-h-[140px] sm:min-h-[150px] flex items-center justify-center p-4 border border-slate-200 shadow-[0_4px_16px_rgba(0,0,0,0.06)] cursor-pointer group hover:shadow-xl hover:border-slate-800 hover:-translate-y-1.5 transition-all duration-300 block"
             >
               {/* Background Image */}
               <img
@@ -107,7 +107,7 @@ ${messageDetails}`;
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30" />
 
               {/* Centered Heading with White Text */}
-              <h4 className="relative z-10 text-white font-semibold text-xs sm:text-sm text-center px-2 tracking-wide drop-shadow-[0_2px_10px_rgba(0,0,0,1)] [text-shadow:_0_2px_12px_rgba(0,0,0,0.95)] group-hover:text-blue-100 group-hover:scale-105 transition-all duration-300">
+              <h4 className="relative z-10 text-white font-semibold text-xs sm:text-sm text-center px-2 tracking-wide drop-shadow-[0_2px_10px_rgba(0,0,0,1)] [text-shadow:_0_2px_12px_rgba(0,0,0,0.95)] group-hover:text-white group-hover:scale-105 transition-all duration-300">
                 {service.title}
               </h4>
             </a>
@@ -125,7 +125,7 @@ ${messageDetails}`;
           <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-3 sm:gap-4 relative z-10">
             {['Requirement', 'Consultation', 'Vendor Select', 'Quotation', 'Approval', 'Delivery', 'Deployment', 'Support'].map((step, i) => (
               <div key={i} className="flex flex-col items-center text-center">
-                <div className="w-9 h-9 sm:w-10 sm:h-10 bg-white border-2 border-blue-600 text-blue-600 rounded-full flex items-center justify-center text-xs font-bold mb-2 sm:mb-3 shadow-xs">
+                <div className="w-9 h-9 sm:w-10 sm:h-10 bg-white border-2 border-black text-black rounded-full flex items-center justify-center text-xs font-bold mb-2 sm:mb-3 shadow-xs">
                   {i + 1}
                 </div>
                 <span className="text-xs font-semibold text-slate-700">{step}</span>
@@ -136,10 +136,10 @@ ${messageDetails}`;
       </section>
 
       {/* B2B Inquiry Form */}
-      <section className="py-16 sm:py-24 w-full bg-[#042442] border-y border-white/10 relative overflow-hidden" id="contact">
+      <section className="py-16 sm:py-24 w-full bg-[#000000] border-y border-white/10 relative overflow-hidden" id="contact">
         {/* Ambient Glows */}
-        <div className="absolute -top-32 -left-32 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-sky-500/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -top-32 -left-32 w-80 h-80 bg-white/[0.04] rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-white/[0.04] rounded-full blur-3xl pointer-events-none" />
 
         <div className="page-container relative z-10">
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center max-w-6xl mx-auto">
@@ -152,16 +152,16 @@ ${messageDetails}`;
               />
               <div className="mt-8 space-y-4 sm:space-y-6">
                 <div className="flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm">
-                  <div className="w-12 h-12 bg-blue-600/20 text-sky-400 border border-sky-400/30 rounded-full flex items-center justify-center text-xl shrink-0">📧</div>
+                  <div className="w-12 h-12 bg-white/10 text-white border border-white/20 rounded-full flex items-center justify-center text-xl shrink-0">📧</div>
                   <div>
-                    <p className="text-xs text-sky-300 uppercase tracking-wider font-semibold">Email Us</p>
+                    <p className="text-xs text-zinc-400 uppercase tracking-wider font-semibold">Email Us</p>
                     <p className="font-semibold text-base sm:text-lg text-white">b2b@authenticinfosystem.com</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-4 p-4 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm">
-                  <div className="w-12 h-12 bg-blue-600/20 text-sky-400 border border-sky-400/30 rounded-full flex items-center justify-center text-xl shrink-0">📞</div>
+                  <div className="w-12 h-12 bg-white/10 text-white border border-white/20 rounded-full flex items-center justify-center text-xl shrink-0">📞</div>
                   <div>
-                    <p className="text-xs text-sky-300 uppercase tracking-wider font-semibold">Call Us</p>
+                    <p className="text-xs text-zinc-400 uppercase tracking-wider font-semibold">Call Us</p>
                     <p className="font-semibold text-base sm:text-lg text-white">+91 9643990077</p>
                   </div>
                 </div>
@@ -173,22 +173,22 @@ ${messageDetails}`;
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-xs uppercase tracking-wider text-slate-600 font-bold mb-2">Company Name</label>
-                    <input type="text" className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2.5 sm:py-3 text-sm text-slate-900 focus:bg-white focus:border-blue-500 outline-none transition-colors" placeholder="Acme Corp" value={companyName} onChange={(e) => setCompanyName(e.target.value)} />
+                    <input type="text" className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2.5 sm:py-3 text-sm text-slate-900 focus:bg-white focus:border-black outline-none transition-colors" placeholder="Acme Corp" value={companyName} onChange={(e) => setCompanyName(e.target.value)} />
                   </div>
                   <div>
                     <label className="block text-xs uppercase tracking-wider text-slate-600 font-bold mb-2">Business Email</label>
-                    <input type="email" className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2.5 sm:py-3 text-sm text-slate-900 focus:bg-white focus:border-blue-500 outline-none transition-colors" placeholder="you@company.com" value={businessEmail} onChange={(e) => setBusinessEmail(e.target.value)} />
+                    <input type="email" className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2.5 sm:py-3 text-sm text-slate-900 focus:bg-white focus:border-black outline-none transition-colors" placeholder="you@company.com" value={businessEmail} onChange={(e) => setBusinessEmail(e.target.value)} />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-xs uppercase tracking-wider text-slate-600 font-bold mb-2">Phone Number</label>
-                    <input type="tel" className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2.5 sm:py-3 text-sm text-slate-900 focus:bg-white focus:border-blue-500 outline-none transition-colors" placeholder="+91 xxxxx xxxxx" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} />
+                    <input type="tel" className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2.5 sm:py-3 text-sm text-slate-900 focus:bg-white focus:border-black outline-none transition-colors" placeholder="+91 xxxxx xxxxx" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} />
                   </div>
                   <div>
                     <label className="block text-xs uppercase tracking-wider text-slate-600 font-bold mb-2">Company Size</label>
-                    <select className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2.5 sm:py-3 text-sm text-slate-900 focus:bg-white focus:border-blue-500 outline-none transition-colors appearance-none" value={companySize} onChange={(e) => setCompanySize(e.target.value)}>
+                    <select className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2.5 sm:py-3 text-sm text-slate-900 focus:bg-white focus:border-black outline-none transition-colors appearance-none" value={companySize} onChange={(e) => setCompanySize(e.target.value)}>
                       <option>1-50 Employees</option>
                       <option>51-200 Employees</option>
                       <option>201-500 Employees</option>
@@ -199,15 +199,15 @@ ${messageDetails}`;
 
                 <div>
                   <label className="block text-xs uppercase tracking-wider text-slate-600 font-bold mb-2">Products/Services Interested In</label>
-                  <input type="text" className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2.5 sm:py-3 text-sm text-slate-900 focus:bg-white focus:border-blue-500 outline-none transition-colors" placeholder="Laptops, Networking, AMC..." value={productsInterested} onChange={(e) => setProductsInterested(e.target.value)} />
+                  <input type="text" className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2.5 sm:py-3 text-sm text-slate-900 focus:bg-white focus:border-black outline-none transition-colors" placeholder="Laptops, Networking, AMC..." value={productsInterested} onChange={(e) => setProductsInterested(e.target.value)} />
                 </div>
 
                 <div>
                   <label className="block text-xs uppercase tracking-wider text-slate-600 font-bold mb-2">Message Details</label>
-                  <textarea rows={4} className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2.5 sm:py-3 text-sm text-slate-900 focus:bg-white focus:border-blue-500 outline-none transition-colors" placeholder="Tell us about your project requirements..." value={messageDetails} onChange={(e) => setMessageDetails(e.target.value)}></textarea>
+                  <textarea rows={4} className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2.5 sm:py-3 text-sm text-slate-900 focus:bg-white focus:border-black outline-none transition-colors" placeholder="Tell us about your project requirements..." value={messageDetails} onChange={(e) => setMessageDetails(e.target.value)}></textarea>
                 </div>
 
-                <button type="submit" className="w-full py-3.5 sm:py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-bold text-sm sm:text-base transition-colors mt-2 shadow-md hover:shadow-lg">
+                <button type="submit" className="w-full py-3.5 sm:py-4 bg-black hover:bg-zinc-800 text-white rounded-lg font-bold text-sm sm:text-base transition-colors mt-2 shadow-md hover:shadow-lg">
                   Submit Inquiry
                 </button>
               </form>
@@ -226,7 +226,7 @@ ${messageDetails}`;
             { quote: "We deeply understand our clients' unique challenges and translate them into impactful, market-leading solutions that drive true business transformation.", author: "Chesta Sharma", role: "Chief Marketing Officer (CMO)" },
           ].map((testi, i) => (
             <div key={i} className="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 relative shadow-xs">
-              <div className="text-4xl text-blue-500/20 absolute top-3 left-4 font-serif">"</div>
+              <div className="text-4xl text-slate-300 absolute top-3 left-4 font-serif">"</div>
               <p className="text-slate-700 relative z-10 leading-relaxed italic text-sm sm:text-base mb-6 mt-2">{testi.quote}</p>
               <div className="border-t border-slate-200 pt-3 sm:pt-4">
                 <h4 className="font-bold text-slate-900 text-sm sm:text-base">{testi.author}</h4>
@@ -238,12 +238,12 @@ ${messageDetails}`;
       </section>
 
       {/* Brands Carousel */}
-      <section className="py-12 sm:py-16 bg-[#042442] border-y border-white/10 relative overflow-hidden">
+      <section className="py-12 sm:py-16 bg-[#000000] border-y border-white/10 relative overflow-hidden">
         {/* Ambient Glow */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-32 bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-32 bg-white/[0.04] rounded-full blur-3xl pointer-events-none" />
 
         <div className="page-container relative z-10">
-          <p className="text-center text-xs sm:text-sm font-bold uppercase tracking-[4px] sm:tracking-[6px] text-sky-400 mb-6 sm:mb-8">
+          <p className="text-center text-xs sm:text-sm font-bold uppercase tracking-[4px] sm:tracking-[6px] text-zinc-400 mb-6 sm:mb-8">
             Authorized Partners
           </p>
           <div className="flex justify-between items-center gap-6 sm:gap-10 overflow-x-auto scrollbar-hide py-2">
@@ -267,10 +267,10 @@ ${messageDetails}`;
             <div key={i} className="bg-white border border-slate-200 rounded-xl shadow-xs overflow-hidden">
               <button 
                 onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                className="w-full px-5 sm:px-6 py-4 sm:py-5 text-left flex justify-between items-center font-semibold text-slate-900 text-sm sm:text-base focus:outline-none hover:text-blue-600 transition-colors"
+                className="w-full px-5 sm:px-6 py-4 sm:py-5 text-left flex justify-between items-center font-semibold text-slate-900 text-sm sm:text-base focus:outline-none hover:text-black transition-colors"
               >
                 {faq.q}
-                <span className={`text-blue-600 transition-transform duration-300 font-bold ${openFaq === i ? "rotate-45" : ""}`}>+</span>
+                <span className={`text-slate-900 transition-transform duration-300 font-bold ${openFaq === i ? "rotate-45" : ""}`}>+</span>
               </button>
               <AnimatePresence>
                 {openFaq === i && (
@@ -290,15 +290,15 @@ ${messageDetails}`;
       </section>
 
       {/* Final CTA */}
-      <section className="py-14 sm:py-20 text-center bg-slate-900 text-white relative">
+      <section className="py-14 sm:py-20 text-center bg-black text-white relative">
         <div className="relative z-10 page-container">
           <h2 className="text-2xl sm:text-4xl md:text-5xl font-extrabold mb-3 sm:mb-4 tracking-tight">Let's Build Your Next IT Infrastructure Together.</h2>
-          <p className="text-slate-300 text-sm sm:text-base md:text-lg mb-6 sm:mb-8 max-w-3xl mx-auto font-light">From a single laptop to enterprise-wide digital transformation, Authentic Infosystem is your trusted technology partner.</p>
+          <p className="text-zinc-400 text-sm sm:text-base md:text-lg mb-6 sm:mb-8 max-w-3xl mx-auto font-light">From a single laptop to enterprise-wide digital transformation, Authentic Infosystem is your trusted technology partner.</p>
           <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 max-w-md sm:max-w-none mx-auto">
-            <a href="#contact" className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-3.5 bg-blue-600 hover:bg-blue-500 text-white rounded-full font-bold text-sm transition-all shadow-lg hover:shadow-xl">
+            <a href="#contact" className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-3.5 bg-white text-black hover:bg-zinc-200 rounded-full font-bold text-sm transition-all shadow-lg hover:shadow-xl">
               Schedule a Consultation
             </a>
-            <a href="https://wa.me/919643990077" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-3.5 bg-slate-800 border border-slate-700 text-white rounded-full font-bold text-sm hover:bg-slate-700 transition-all">
+            <a href="https://wa.me/919643990077" target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-3.5 bg-zinc-900 border border-zinc-700 text-white rounded-full font-bold text-sm hover:bg-zinc-800 transition-all">
               Contact Sales
             </a>
           </div>

@@ -26,7 +26,7 @@ export default function SectionHeader({
       className={`mb-6 sm:mb-8 ${align === "center" ? "text-center mx-auto max-w-3xl" : "max-w-2xl"} ${className}`}
     >
       {miniText && (
-        <p className={`text-xs tracking-[4px] uppercase mb-2 font-bold ${dark ? "text-sky-400" : "text-blue-600"}`}>
+        <p className={`text-xs tracking-[4px] uppercase mb-2 font-bold ${dark ? "text-zinc-400" : "text-slate-900"}`}>
           {miniText}
         </p>
       )}
@@ -34,7 +34,7 @@ export default function SectionHeader({
         {title}
       </h2>
       {subtitle && (
-        <p className={`text-sm sm:text-base md:text-lg leading-relaxed font-normal ${dark ? "text-slate-200" : "text-slate-600"}`}>
+        <p className={`text-sm sm:text-base md:text-lg leading-relaxed font-normal ${dark ? "text-slate-300" : "text-slate-600"}`}>
           {subtitle}
         </p>
       )}

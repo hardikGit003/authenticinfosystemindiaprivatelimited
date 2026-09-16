@@ -114,11 +114,11 @@ export default function Configurator({
   };
 
   return (
-    <main className="min-h-screen bg-white text-slate-900 selection:bg-blue-500/20 pt-28 sm:pt-40 pb-12 sm:pb-20">
+    <main className="min-h-screen bg-white text-slate-900 selection:bg-slate-900/15 selection:text-black pt-28 sm:pt-40 pb-12 sm:pb-20">
       <div className="page-container">
         
         <div className="mb-8 sm:mb-12 border-b border-slate-200 pb-6 sm:pb-8 text-center md:text-left">
-          <p className="text-blue-600 font-bold tracking-widest uppercase text-xs sm:text-sm mb-2">Build Your Workflow</p>
+          <p className="text-slate-900 font-extrabold tracking-widest uppercase text-xs sm:text-sm mb-2">Build Your Workflow</p>
           <h1 className="text-2xl sm:text-4xl md:text-5xl font-black text-slate-900 tracking-tight">
             {pageTitles[defaultSystem] || "Customize Your PC"}
           </h1>
@@ -133,12 +133,12 @@ export default function Configurator({
           className="lg:hidden w-full mb-6 py-3 px-4 rounded-xl bg-white border border-slate-200 text-slate-700 font-medium flex items-center justify-between text-sm shadow-xs"
         >
           <span className="flex items-center gap-2">
-            <svg className="w-4 h-4 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg className="w-4 h-4 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
             </svg>
             Refine Search Filters
           </span>
-          <span className="text-blue-600 text-xs font-semibold">{showMobileFilters ? "Hide ▲" : "Show ▼"}</span>
+          <span className="text-black text-xs font-semibold">{showMobileFilters ? "Hide ▲" : "Show ▼"}</span>
         </button>
 
         <div className="grid-12">
@@ -154,7 +154,7 @@ export default function Configurator({
                   <select
                     value={activeBrand}
                     onChange={(e) => setActiveBrand(e.target.value)}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:bg-white focus:border-blue-500 transition-colors appearance-none font-medium"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:bg-white focus:border-black transition-colors appearance-none font-medium"
                   >
                     {brands.map((brand) => (
                       <option key={brand} value={brand}>
@@ -169,7 +169,7 @@ export default function Configurator({
                   <select
                     value={activeProcessor}
                     onChange={(e) => setActiveProcessor(e.target.value)}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:bg-white focus:border-blue-500 transition-colors appearance-none font-medium"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:bg-white focus:border-black transition-colors appearance-none font-medium"
                   >
                     {processors.map((proc) => (
                       <option key={proc} value={proc}>
@@ -184,7 +184,7 @@ export default function Configurator({
                   <select
                     value={activeRAM}
                     onChange={(e) => setActiveRAM(e.target.value)}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:bg-white focus:border-blue-500 transition-colors appearance-none font-medium"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:bg-white focus:border-black transition-colors appearance-none font-medium"
                   >
                     {rams.map((ram) => (
                       <option key={ram} value={ram}>
@@ -199,7 +199,7 @@ export default function Configurator({
                   <select
                     value={activeStorage}
                     onChange={(e) => setActiveStorage(e.target.value)}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:bg-white focus:border-blue-500 transition-colors appearance-none font-medium"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-lg px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:bg-white focus:border-black transition-colors appearance-none font-medium"
                   >
                     {storages.map((storage) => (
                       <option key={storage} value={storage}>
@@ -231,7 +231,7 @@ export default function Configurator({
                     setActiveRAM("All");
                     setActiveStorage("All");
                   }}
-                  className="mt-8 px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-full font-bold transition-all shadow-md"
+                  className="mt-8 px-8 py-3 bg-black hover:bg-zinc-800 text-white rounded-full font-bold transition-all shadow-md"
                 >
                   Reset Filters
                 </button>

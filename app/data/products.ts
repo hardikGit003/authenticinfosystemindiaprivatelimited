@@ -604,7 +604,7 @@ export const phoneProducts: Product[] = [
     brand: "Apple",
     category: "Flagship",
     price: 134900,
-    image: "/products/phones/iphone-17-pro.png",
+    image: "/products/phones/iphone-17.png",
     specs: [
       { label: "Processor", value: "Apple A19 Pro (2nm)" },
       { label: "RAM", value: "12GB Unified" },
@@ -642,7 +642,7 @@ export const phoneProducts: Product[] = [
     brand: "Apple",
     category: "Performance",
     price: 82900,
-    image: "/products/phones/iphone-17.png",
+    image: "/products/phones/iphone-16.jpg",
     specs: [
       { label: "Processor", value: "Apple A19 Chip" },
       { label: "RAM", value: "8GB Unified" },
@@ -812,6 +812,125 @@ export const phoneProducts: Product[] = [
   },
 
   // ================= SAMSUNG =================
+  // --- Galaxy S26 Series (Next-Gen 2026 Flagships) ---
+  {
+    id: "p_sam_s26u",
+    name: "Samsung Galaxy S26 Ultra 5G",
+    modelNumber: "SAM-S26-ULTRA",
+    brand: "Samsung",
+    category: "Flagship",
+    price: 149999,
+    image: "/products/phones/samsung-s26-ultra.jpg",
+    specs: [
+      { label: "Processor", value: "Snapdragon 8 Elite Gen 2 (2nm)" },
+      { label: "RAM", value: "16GB LPDDR5X" },
+      { label: "Storage", value: "256GB / 512GB / 1TB UFS 4.1" },
+      { label: "Display", value: "6.9\" QHD+ Dynamic LTPO AMOLED 2X 144Hz" },
+      { label: "Camera", value: "200MP Quad ISOCELL w/ 50MP 5x Periscope" },
+      { label: "Battery", value: "5500mAh Solid-State Cell w/ 65W Fast Charge & S-Pen" },
+    ],
+    badges: ["Next-Gen Galaxy AI", "Built-in S-Pen", "200MP Quad Pro", "Titanium Frame"],
+    warranty: "1 Year Official Samsung Care+ Warranty",
+  },
+  {
+    id: "p_sam_s26plus",
+    name: "Samsung Galaxy S26+ 5G",
+    modelNumber: "SAM-S26-PLUS",
+    brand: "Samsung",
+    category: "Flagship",
+    price: 109999,
+    image: "/products/phones/samsung-s26-plus.jpg",
+    specs: [
+      { label: "Processor", value: "Snapdragon 8 Elite Gen 2 (2nm)" },
+      { label: "RAM", value: "12GB LPDDR5X" },
+      { label: "Storage", value: "256GB / 512GB UFS 4.1" },
+      { label: "Display", value: "6.7\" QHD+ Dynamic AMOLED 2X 120Hz" },
+      { label: "Camera", value: "50MP Main OIS + 50MP UW + 50MP Tele" },
+      { label: "Battery", value: "5000mAh w/ 45W Fast Charging" },
+    ],
+    badges: ["Galaxy AI 3.0", "Armor Aluminum 3.0", "ProVisual Engine"],
+    warranty: "1 Year Official Samsung Care+ Warranty",
+  },
+  {
+    id: "p_sam_s26",
+    name: "Samsung Galaxy S26 5G",
+    modelNumber: "SAM-S26-STD",
+    brand: "Samsung",
+    category: "Performance",
+    price: 84999,
+    image: "/products/phones/samsung-s26.jpg",
+    specs: [
+      { label: "Processor", value: "Snapdragon 8 Elite Gen 2 (2nm)" },
+      { label: "RAM", value: "12GB LPDDR5X" },
+      { label: "Storage", value: "128GB / 256GB / 512GB" },
+      { label: "Display", value: "6.36\" FHD+ Dynamic AMOLED 2X 120Hz LTPO" },
+      { label: "Camera", value: "50MP Triple OIS ProVisual Engine" },
+      { label: "Battery", value: "4300mAh All-Day Intelligent Battery" },
+    ],
+    badges: ["Compact Flagship", "Galaxy AI 3.0", "12GB RAM Standard"],
+    warranty: "1 Year Official Samsung Care+ Warranty",
+  },
+
+  // --- Galaxy S25 Series (2025 Flagships) ---
+  {
+    id: "p_sam_s25u",
+    name: "Samsung Galaxy S25 Ultra 5G",
+    modelNumber: "SAM-S25-ULTRA",
+    brand: "Samsung",
+    category: "Flagship",
+    price: 139999,
+    image: "/products/phones/samsung-s25-ultra.jpg",
+    specs: [
+      { label: "Processor", value: "Snapdragon 8 Elite (3nm) for Galaxy" },
+      { label: "RAM", value: "16GB / 12GB LPDDR5X" },
+      { label: "Storage", value: "256GB / 512GB / 1TB UFS 4.0" },
+      { label: "Display", value: "6.86\" QHD+ Dynamic LTPO AMOLED 2X Flat 120Hz" },
+      { label: "Camera", value: "200MP Main + 50MP 5x Tele + 50MP UW + 10MP 3x" },
+      { label: "Battery", value: "5000mAh w/ 45W Fast Charging & S-Pen" },
+    ],
+    badges: ["Snapdragon 8 Elite", "Built-in S-Pen", "Titanium Chassis", "Galaxy AI 2.0"],
+    warranty: "1 Year Official Samsung Care+ Warranty",
+  },
+  {
+    id: "p_sam_s25plus",
+    name: "Samsung Galaxy S25+ 5G",
+    modelNumber: "SAM-S25-PLUS",
+    brand: "Samsung",
+    category: "Flagship",
+    price: 99999,
+    image: "/products/phones/samsung-s25-plus.jpg",
+    specs: [
+      { label: "Processor", value: "Snapdragon 8 Elite (3nm) for Galaxy" },
+      { label: "RAM", value: "12GB LPDDR5X" },
+      { label: "Storage", value: "256GB / 512GB UFS 4.0" },
+      { label: "Display", value: "6.7\" QHD+ Dynamic AMOLED 2X 120Hz" },
+      { label: "Camera", value: "50MP Dual Pixel OIS + 12MP UW + 10MP 3x Tele" },
+      { label: "Battery", value: "4900mAh w/ 45W Super Fast Charging" },
+    ],
+    badges: ["Galaxy AI 2.0", "Armor Aluminum 2.0", "ProVisual Engine"],
+    warranty: "1 Year Official Samsung Care+ Warranty",
+  },
+  {
+    id: "p_sam_s25",
+    name: "Samsung Galaxy S25 5G",
+    modelNumber: "SAM-S25-STD",
+    brand: "Samsung",
+    category: "Performance",
+    price: 79999,
+    image: "/products/phones/samsung-s25.jpg",
+    specs: [
+      { label: "Processor", value: "Snapdragon 8 Elite (3nm) for Galaxy" },
+      { label: "RAM", value: "12GB LPDDR5X" },
+      { label: "Storage", value: "128GB / 256GB / 512GB" },
+      { label: "Display", value: "6.2\" FHD+ Dynamic AMOLED 2X 120Hz LTPO" },
+      { label: "Camera", value: "50MP Triple ProVisual Cam w/ 30x Space Zoom" },
+      { label: "Battery", value: "4000mAh All-Day Intelligent Battery" },
+    ],
+    badges: ["Snapdragon 8 Elite", "12GB RAM Standard", "Galaxy AI 2.0"],
+    warranty: "1 Year Official Samsung Care+ Warranty",
+  },
+
+  // --- Galaxy S24 & Z Fold Series ---
   {
     id: "p_sam_s24u",
     name: "Samsung Galaxy S24 Ultra 5G",
@@ -1123,3 +1242,227 @@ export const phoneProducts: Product[] = [
     warranty: "1 Year Official Realme Warranty",
   },
 ];
+
+export type UnifiedProduct = {
+  id: string;
+  name: string;
+  modelNumber: string;
+  brand?: string;
+  category?: string;
+  price?: number;
+  image: string;
+  href: string;
+  section: "Laptops" | "Desktops" | "Phones" | "Accessories" | "Networking" | "Enterprise";
+  specs?: { label: string; value: string }[];
+  badges?: string[];
+  warranty?: string;
+};
+
+export const searchAllCatalog = (query: string): UnifiedProduct[] => {
+  const clean = query.trim().toLowerCase();
+  if (!clean) return [];
+
+  const terms = clean.split(/\s+/).filter(Boolean);
+
+  const allItems: UnifiedProduct[] = [
+    ...laptopProducts.map((p) => ({
+      ...p,
+      href: `/laptops?search=${encodeURIComponent(p.name)}`,
+      section: "Laptops" as const,
+    })),
+    ...desktopProducts.map((p) => ({
+      ...p,
+      href: `/desktops?search=${encodeURIComponent(p.name)}`,
+      section: "Desktops" as const,
+    })),
+    ...phoneProducts.map((p) => ({
+      ...p,
+      href: `/phones?search=${encodeURIComponent(p.name)}`,
+      section: "Phones" as const,
+    })),
+    {
+      id: "acc_logi_mx3s",
+      name: "Logitech MX Master 3S",
+      modelNumber: "LOGI-MXM-3S",
+      brand: "Logitech",
+      category: "Mouse",
+      price: 8995,
+      image: "/products/accessories/logitech-mx-master-3s.jpg",
+      href: "/accessories",
+      section: "Accessories" as const,
+      specs: [{ label: "Type", value: "Wireless Mouse" }],
+      badges: ["Productivity", "Top Rated"],
+      warranty: "1 Year Limited",
+    },
+    {
+      id: "acc_dell_u2723qe",
+      name: 'Dell UltraSharp 27" 4K',
+      modelNumber: "U2723QE",
+      brand: "Dell",
+      category: "Monitor",
+      price: 48900,
+      image: "/products/accessories/dell-ultrasharp-27.jpg",
+      href: "/accessories",
+      section: "Accessories" as const,
+      specs: [{ label: "Resolution", value: "3840 x 2160" }],
+      badges: ["Monitor", "Professional"],
+      warranty: "3 Years Advanced Exchange",
+    },
+    {
+      id: "acc_keychron_k8p",
+      name: "Keychron K8 Pro Mechanical Keyboard",
+      modelNumber: "KEY-K8P",
+      brand: "Keychron",
+      category: "Keyboard",
+      price: 9499,
+      image: "/products/accessories/keychron-k8-pro.jpg",
+      href: "/accessories",
+      section: "Accessories" as const,
+      specs: [{ label: "Type", value: "Mechanical Keyboard" }],
+      badges: ["Developer", "Wireless"],
+      warranty: "1 Year Standard",
+    },
+    {
+      id: "acc_len_dock",
+      name: "Lenovo ThinkPad Universal USB-C Dock",
+      modelNumber: "40AY0090US",
+      brand: "Lenovo",
+      category: "Docking Station",
+      price: 18500,
+      image: "/products/accessories/lenovo-thinkpad-dock.jpg",
+      href: "/accessories",
+      section: "Accessories" as const,
+      specs: [{ label: "Power Delivery", value: "Up to 100W" }],
+      badges: ["Docking", "Essential"],
+      warranty: "3 Years Warranty",
+    },
+    {
+      id: "acc_jabra_ev2",
+      name: "Jabra Evolve2 65 Headset",
+      modelNumber: "JABRA-EV2-65",
+      brand: "Jabra",
+      category: "Headset",
+      price: 19999,
+      image: "/products/accessories/jabra-evolve2-65.jpg",
+      href: "/accessories",
+      section: "Accessories" as const,
+      specs: [{ label: "Battery Life", value: "37 hours" }],
+      badges: ["Audio", "UC Certified"],
+      warranty: "2 Years Limited",
+    },
+    {
+      id: "acc_logi_brio",
+      name: "Logitech Brio 4K Webcam",
+      modelNumber: "LOGI-BRIO-4K",
+      brand: "Logitech",
+      category: "Webcam",
+      price: 16995,
+      image: "/products/accessories/logitech-brio-4k.jpg",
+      href: "/accessories",
+      section: "Accessories" as const,
+      specs: [{ label: "Resolution", value: "4K Ultra HD" }],
+      badges: ["Video", "Premium"],
+      warranty: "3 Years Limited",
+    },
+    {
+      id: "acc_apc_ups",
+      name: "APC Back-UPS Pro 1500VA",
+      modelNumber: "BR1500G",
+      brand: "APC",
+      category: "Power Backup",
+      price: 24500,
+      image: "/products/accessories/apc-back-ups-1500va.jpg",
+      href: "/accessories",
+      section: "Accessories" as const,
+      specs: [{ label: "Capacity", value: "1500VA / 865W" }],
+      badges: ["Power", "Backup"],
+      warranty: "3 Years Repair/Replace",
+    },
+    {
+      id: "net_cisco_9300",
+      name: "Cisco Catalyst 9300 Switch",
+      modelNumber: "C9300-48P-A",
+      brand: "Cisco",
+      category: "Switch",
+      price: 285000,
+      image: "/products/networking/cisco-catalyst-9300.jpg",
+      href: "/networking",
+      section: "Networking" as const,
+      specs: [{ label: "Ports", value: "48x 1G PoE+" }],
+      badges: ["Enterprise", "Core"],
+      warranty: "Lifetime Limited",
+    },
+    {
+      id: "net_aruba_2930f",
+      name: "Aruba 2930F Layer 3 Switch",
+      modelNumber: "JL254A",
+      brand: "Aruba",
+      category: "Switch",
+      price: 145000,
+      image: "/products/networking/aruba-2930f.jpg",
+      href: "/networking",
+      section: "Networking" as const,
+      specs: [{ label: "Ports", value: "24x 1G PoE+" }],
+      badges: ["Access Layer", "Managed"],
+      warranty: "Limited Lifetime",
+    },
+    {
+      id: "net_ubi_u6",
+      name: "Ubiquiti UniFi U6 Enterprise AP",
+      modelNumber: "U6-Enterprise",
+      brand: "Ubiquiti",
+      category: "Access Point",
+      price: 34999,
+      image: "/products/networking/ubiquiti-unifi-u6.jpg",
+      href: "/networking",
+      section: "Networking" as const,
+      specs: [{ label: "Throughput", value: "10.2 Gbps" }],
+      badges: ["Wireless", "High Density"],
+      warranty: "1 Year Standard",
+    },
+    {
+      id: "net_fortinet_100f",
+      name: "Fortinet FortiGate 100F Firewall",
+      modelNumber: "FG-100F",
+      brand: "Fortinet",
+      category: "Firewall",
+      price: 210000,
+      image: "/products/networking/fortinet-fortigate-100f.jpg",
+      href: "/networking",
+      section: "Networking" as const,
+      specs: [{ label: "Firewall Pkt", value: "20 Gbps" }],
+      badges: ["Security", "SD-WAN"],
+      warranty: "Requires Support Contract",
+    },
+    {
+      id: "net_cisco_isr",
+      name: "Cisco ISR 4331 Router",
+      modelNumber: "ISR4331/K9",
+      brand: "Cisco",
+      category: "Router",
+      price: 195000,
+      image: "/products/networking/cisco-isr-4331.jpg",
+      href: "/networking",
+      section: "Networking" as const,
+      specs: [{ label: "Throughput", value: "100-300 Mbps" }],
+      badges: ["Routing", "Branch Core"],
+      warranty: "90 Days Cisco Warranty",
+    },
+  ];
+
+  return allItems.filter((p) => {
+    const combined = [
+      p.name,
+      p.modelNumber,
+      p.brand || "",
+      p.category || "",
+      p.section,
+      ...(p.badges || []),
+      ...(p.specs?.map((s) => `${s.label} ${s.value}`) || []),
+    ]
+      .join(" ")
+      .toLowerCase();
+
+    return terms.every((t) => combined.includes(t));
+  });
+};

@@ -23,16 +23,16 @@ export default function PageHero({
   bgImage = "/placeholder-hero.jpg",
 }: PageHeroProps) {
   return (
-    <section className="relative w-full min-h-[42vh] sm:min-h-[50vh] flex items-center justify-center overflow-hidden bg-[#042442] border-b border-white/10 pt-36 sm:pt-44 pb-12 sm:pb-16">
+    <section className="relative w-full min-h-[42vh] sm:min-h-[50vh] flex items-center justify-center overflow-hidden bg-black border-b border-white/10 pt-36 sm:pt-44 pb-12 sm:pb-16">
       {/* Background Image & Overlay */}
       <div className="absolute inset-0 z-0 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-[#042442] via-[#042442]/95 to-[#02182e]/90 z-10" />
-        <div className="absolute -top-40 -right-40 w-96 h-96 bg-blue-500/15 rounded-full blur-3xl z-10 pointer-events-none" />
-        <div className="absolute -bottom-20 left-1/3 w-80 h-80 bg-sky-500/10 rounded-full blur-3xl z-10 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black via-black/95 to-zinc-950/90 z-10" />
+        <div className="absolute -top-40 -right-40 w-96 h-96 bg-white/[0.04] rounded-full blur-3xl z-10 pointer-events-none" />
+        <div className="absolute -bottom-20 left-1/3 w-80 h-80 bg-zinc-700/10 rounded-full blur-3xl z-10 pointer-events-none" />
         <img
           src={bgImage}
           alt="Hero Background"
-          className="w-full h-full object-cover opacity-15 blur-[2px] scale-105"
+          className="w-full h-full object-cover opacity-20 blur-[2px] scale-105"
         />
       </div>
 
@@ -45,7 +45,7 @@ export default function PageHero({
           className="max-w-4xl"
         >
           {miniText && (
-            <p className="text-sky-400 text-xs tracking-[4px] sm:tracking-[6px] uppercase mb-3 sm:mb-4 font-bold">
+            <p className="text-zinc-400 text-xs tracking-[4px] sm:tracking-[6px] uppercase mb-3 sm:mb-4 font-bold">
               {miniText}
             </p>
           )}
@@ -54,14 +54,14 @@ export default function PageHero({
             {title}
           </h1>
           
-          <p className="text-slate-200 text-sm sm:text-base md:text-lg leading-relaxed font-normal mb-8 sm:mb-10 max-w-2xl">
+          <p className="text-slate-300 text-sm sm:text-base md:text-lg leading-relaxed font-normal mb-8 sm:mb-10 max-w-2xl">
             {subtitle}
           </p>
           
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 w-full sm:w-auto">
             <Link
               href={primaryButtonLink}
-              className="px-7 sm:px-9 py-3.5 sm:py-4 rounded-full bg-blue-600 hover:bg-blue-500 text-white font-semibold text-sm transition-all shadow-md shadow-blue-500/25 text-center"
+              className="px-7 sm:px-9 py-3.5 sm:py-4 rounded-full bg-white hover:bg-zinc-200 text-slate-950 font-semibold text-sm transition-all shadow-md text-center"
             >
               {primaryButtonText}
             </Link>

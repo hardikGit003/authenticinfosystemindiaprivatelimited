@@ -45,7 +45,7 @@ export default function Footer() {
             </div>
           ) : (
             <form onSubmit={handleSubscribe} className="footer-subscribe-form">
-              <i className="far fa-envelope text-blue-400 pl-2"></i>
+              <i className="far fa-envelope text-zinc-400 pl-2"></i>
               <input
                 type="email"
                 placeholder="Enter your work email..."

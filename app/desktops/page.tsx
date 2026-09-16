@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import PageHero from "../components/shared/PageHero";
@@ -57,6 +57,16 @@ export default function DesktopsPage() {
   const [activeProcessor, setActiveProcessor] = useState("All");
   const [activeRAM, setActiveRAM] = useState("All");
   const [showMobileFilters, setShowMobileFilters] = useState(false);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const q = params.get("search") || params.get("q");
+      if (q) {
+        setSearchQuery(q);
+      }
+    }
+  }, []);
 
   const filteredProducts = useMemo(() => {
     return desktopProducts.filter((product) => {
@@ -122,7 +132,7 @@ export default function DesktopsPage() {
     activeRAM !== "All";
 
   return (
-    <main className="min-h-screen bg-white text-slate-900 selection:bg-blue-500/20">
+    <main className="min-h-screen bg-white text-slate-900 selection:bg-slate-900/15 selection:text-black">
       <Navbar />
 
       <PageHero
@@ -150,7 +160,7 @@ export default function DesktopsPage() {
               onClick={() => setActiveCategory(cat)}
               className={`whitespace-nowrap px-4 py-1.5 rounded-full border transition-all text-xs font-semibold shrink-0 cursor-pointer ${
                 activeCategory === cat
-                  ? "bg-blue-600 border-blue-600 text-white shadow-xs"
+                  ? "bg-black border-black text-white shadow-xs"
                   : "bg-slate-100 border-slate-200 hover:bg-slate-200 text-slate-700"
               }`}
             >
@@ -168,12 +178,12 @@ export default function DesktopsPage() {
               placeholder="Search desktop model, brand, processor, RAM..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-9 pr-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-blue-500"
+              className="w-full pl-9 pr-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-black"
             />
           </div>
           <button
             onClick={() => setShowMobileFilters(true)}
-            className="flex items-center gap-1.5 px-4 py-2.5 bg-blue-600 text-white rounded-xl font-semibold text-xs shadow-xs shrink-0"
+            className="flex items-center gap-1.5 px-4 py-2.5 bg-black text-white rounded-xl font-semibold text-xs shadow-xs shrink-0"
           >
             <FaFilter size={12} />
             <span>Filters</span>
@@ -188,13 +198,13 @@ export default function DesktopsPage() {
               {/* Header with Title & Reset */}
               <div className="flex items-center justify-between pb-3.5 border-b border-slate-200">
                 <h3 className="text-xs font-extrabold text-slate-900 uppercase tracking-wider flex items-center gap-2">
-                  <FaFilter className="text-blue-600" size={12} />
+                  <FaFilter className="text-black" size={12} />
                   <span>Filter Desktops</span>
                 </h3>
                 {hasActiveFilters && (
                   <button
                     onClick={clearAllFilters}
-                    className="text-xs text-blue-600 hover:text-blue-800 font-semibold cursor-pointer"
+                    className="text-xs text-black hover:underline font-semibold cursor-pointer"
                   >
                     Reset All
                   </button>
@@ -213,7 +223,7 @@ export default function DesktopsPage() {
                     placeholder="e.g. ThinkCentre, Dell OptiPlex, 32GB..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full pl-9 pr-8 py-2 bg-white border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-blue-500 text-slate-900 shadow-2xs"
+                    className="w-full pl-9 pr-8 py-2 bg-white border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-black text-slate-900 shadow-2xs"
                   />
                   {searchQuery && (
                     <button
@@ -235,7 +245,7 @@ export default function DesktopsPage() {
                   {activeBrand !== "All" && (
                     <button
                       onClick={() => setActiveBrand("All")}
-                      className="text-[11px] text-blue-600 font-semibold hover:underline"
+                      className="text-[11px] text-black font-semibold hover:underline"
                     >
                       Reset
                     </button>
@@ -248,7 +258,7 @@ export default function DesktopsPage() {
                       onClick={() => setActiveBrand(brand)}
                       className={`w-full text-left px-3 py-2 rounded-xl text-xs font-medium transition-all flex items-center justify-between cursor-pointer ${
                         activeBrand === brand
-                          ? "bg-blue-600 text-white font-semibold shadow-xs"
+                          ? "bg-black text-white font-semibold shadow-xs"
                           : "text-slate-700 hover:bg-slate-200/60 bg-white/60 border border-slate-200/50"
                       }`}
                     >
@@ -269,7 +279,7 @@ export default function DesktopsPage() {
                   {activeProcessor !== "All" && (
                     <button
                       onClick={() => setActiveProcessor("All")}
-                      className="text-[11px] text-blue-600 font-semibold hover:underline"
+                      className="text-[11px] text-black font-semibold hover:underline"
                     >
                       Reset
                     </button>
@@ -282,7 +292,7 @@ export default function DesktopsPage() {
                       onClick={() => setActiveProcessor(proc)}
                       className={`w-full text-left px-3 py-1.5 rounded-xl text-xs font-medium transition-all flex items-center justify-between cursor-pointer ${
                         activeProcessor === proc
-                          ? "bg-blue-600 text-white font-semibold shadow-xs"
+                          ? "bg-black text-white font-semibold shadow-xs"
                           : "text-slate-700 hover:bg-slate-200/60 bg-white/60 border border-slate-200/50"
                       }`}
                     >
@@ -302,7 +312,7 @@ export default function DesktopsPage() {
                   {activeRAM !== "All" && (
                     <button
                       onClick={() => setActiveRAM("All")}
-                      className="text-[11px] text-blue-600 font-semibold hover:underline"
+                      className="text-[11px] text-black font-semibold hover:underline"
                     >
                       Reset
                     </button>
@@ -315,7 +325,7 @@ export default function DesktopsPage() {
                       onClick={() => setActiveRAM(ram)}
                       className={`text-center py-2 rounded-xl text-xs font-semibold transition-all border cursor-pointer ${
                         activeRAM === ram
-                          ? "bg-blue-600 text-white border-blue-600 shadow-xs"
+                          ? "bg-black text-white border-black shadow-xs"
                           : "bg-white text-slate-700 border-slate-200 hover:bg-slate-100"
                       }`}
                     >
@@ -337,10 +347,10 @@ export default function DesktopsPage() {
             </div>
 
             {/* Corporate Bulk Fleet Card */}
-            <div className="bg-gradient-to-br from-blue-900 to-slate-900 text-white p-5 rounded-2xl shadow-md relative overflow-hidden">
-              <FaBuilding className="text-blue-400 mb-2.5" size={20} />
+            <div className="bg-gradient-to-br from-zinc-900 to-black text-white p-5 rounded-2xl shadow-md relative overflow-hidden border border-zinc-800">
+              <FaBuilding className="text-white mb-2.5" size={20} />
               <h4 className="text-sm font-bold mb-1">Custom Workstation Lab</h4>
-              <p className="text-[11px] text-blue-100/80 leading-relaxed mb-3.5">
+              <p className="text-[11px] text-zinc-300 leading-relaxed mb-3.5">
                 Setting up CAD labs, design studios, or AI training clusters? Get tailored component configurations with official warranty.
               </p>
               <a
@@ -356,7 +366,7 @@ export default function DesktopsPage() {
           </div>
 
           {/* Product Grid */}
-          <div className="col-span-12 lg:col-span-3">
+          <div className="col-span-1 lg:col-span-3">
             {/* Header info bar */}
             <div className="flex flex-wrap items-center justify-between gap-2.5 mb-5 pb-3 border-b border-slate-200">
               <div className="flex items-center gap-2 text-xs text-slate-600">
@@ -364,7 +374,7 @@ export default function DesktopsPage() {
                 <span className="font-bold text-slate-900">{filteredProducts.length}</span>
                 <span>desktops</span>
                 {activeBrand !== "All" && (
-                  <span className="bg-blue-50 text-blue-700 text-[11px] px-2 py-0.5 rounded-full font-semibold border border-blue-200">
+                  <span className="bg-zinc-100 text-zinc-900 text-[11px] px-2 py-0.5 rounded-full font-semibold border border-zinc-300">
                     {activeBrand}
                   </span>
                 )}
@@ -388,7 +398,7 @@ export default function DesktopsPage() {
               {hasActiveFilters && (
                 <button
                   onClick={clearAllFilters}
-                  className="text-xs text-blue-600 hover:text-blue-800 font-semibold cursor-pointer"
+                  className="text-xs text-black hover:underline font-semibold cursor-pointer"
                 >
                   Clear all filters
                 </button>
@@ -396,18 +406,44 @@ export default function DesktopsPage() {
             </div>
 
             {filteredProducts.length === 0 ? (
-              <div className="text-center py-16 bg-slate-50 rounded-2xl border border-slate-200 p-8">
-                <FaDesktop className="mx-auto text-slate-400 mb-3" size={40} />
-                <h3 className="text-base font-bold text-slate-900 mb-1">No desktops found</h3>
-                <p className="text-xs text-slate-600 max-w-sm mx-auto mb-5">
-                  Try adjusting your search query or reset the filters to browse all workstation builds.
+              <div className="text-center py-16 bg-slate-50 rounded-2xl border border-slate-200 p-8 shadow-xs">
+                <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-zinc-100 border border-zinc-200 text-zinc-900 mb-3 shadow-2xs">
+                  <FaDesktop size={26} />
+                </div>
+                <div className="inline-block px-3 py-1 mb-2.5 rounded-full bg-black text-white text-[11px] font-bold uppercase tracking-wider shadow-2xs">
+                  ⚡ Will be available soon
+                </div>
+                <h3 className="text-lg sm:text-xl font-extrabold text-slate-900 mb-2">
+                  {searchQuery ? `"${searchQuery}" will be available soon` : "Will be available soon"}
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-600 max-w-md mx-auto mb-6 leading-relaxed">
+                  {searchQuery ? (
+                    <>
+                      We currently don't have <span className="font-bold text-slate-900">"{searchQuery}"</span> in immediate desktop stock, but it will be available soon. Our system architects can build or source custom configurations with OEM warranty.
+                    </>
+                  ) : (
+                    <>
+                      No workstations match the selected filters right now. We regularly update our catalog and this setup will be available soon.
+                    </>
+                  )}
                 </p>
-                <button
-                  onClick={clearAllFilters}
-                  className="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl text-xs transition-all shadow-xs"
-                >
-                  Reset All Filters
-                </button>
+                <div className="flex flex-wrap items-center justify-center gap-3">
+                  <a
+                    href={`https://wa.me/919643990077?text=Hi%2C%20I%20am%20looking%20for%20a%20quote%20for%20${encodeURIComponent(searchQuery || 'desktop')}.%20Please%20let%20me%20know%20availability%20and%20pricing.`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs transition-all shadow-sm cursor-pointer"
+                  >
+                    <FaWhatsapp size={14} />
+                    <span>Inquire Availability on WhatsApp</span>
+                  </a>
+                  <button
+                    onClick={clearAllFilters}
+                    className="px-5 py-2.5 bg-black hover:bg-zinc-800 text-white font-semibold rounded-xl text-xs transition-all shadow-xs cursor-pointer"
+                  >
+                    Reset All Filters
+                  </button>
+                </div>
               </div>
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
@@ -434,7 +470,7 @@ export default function DesktopsPage() {
               {/* Drawer Header */}
               <div className="flex items-center justify-between pb-4 border-b border-slate-200">
                 <div className="flex items-center gap-2">
-                  <FaFilter className="text-blue-600" size={14} />
+                  <FaFilter className="text-black" size={14} />
                   <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider">
                     Filter Desktops
                   </h3>
@@ -456,7 +492,7 @@ export default function DesktopsPage() {
                   {activeBrand !== "All" && (
                     <button
                       onClick={() => setActiveBrand("All")}
-                      className="text-[11px] text-blue-600 font-semibold hover:underline"
+                      className="text-[11px] text-black font-semibold hover:underline"
                     >
                       Reset
                     </button>
@@ -469,7 +505,7 @@ export default function DesktopsPage() {
                       onClick={() => setActiveBrand(brand)}
                       className={`w-full text-left px-3 py-2 rounded-xl text-xs font-medium transition-all flex items-center justify-between cursor-pointer ${
                         activeBrand === brand
-                          ? "bg-blue-600 text-white font-semibold shadow-xs"
+                          ? "bg-black text-white font-semibold shadow-xs"
                           : "text-slate-700 hover:bg-slate-100 bg-slate-50 border border-slate-200"
                       }`}
                     >
@@ -489,7 +525,7 @@ export default function DesktopsPage() {
                   {activeProcessor !== "All" && (
                     <button
                       onClick={() => setActiveProcessor("All")}
-                      className="text-[11px] text-blue-600 font-semibold hover:underline"
+                      className="text-[11px] text-black font-semibold hover:underline"
                     >
                       Reset
                     </button>
@@ -502,7 +538,7 @@ export default function DesktopsPage() {
                       onClick={() => setActiveProcessor(proc)}
                       className={`w-full text-left px-3 py-1.5 rounded-xl text-xs font-medium transition-all flex items-center justify-between cursor-pointer ${
                         activeProcessor === proc
-                          ? "bg-blue-600 text-white font-semibold shadow-xs"
+                          ? "bg-black text-white font-semibold shadow-xs"
                           : "text-slate-700 hover:bg-slate-100 bg-slate-50 border border-slate-200"
                       }`}
                     >
@@ -522,7 +558,7 @@ export default function DesktopsPage() {
                   {activeRAM !== "All" && (
                     <button
                       onClick={() => setActiveRAM("All")}
-                      className="text-[11px] text-blue-600 font-semibold hover:underline"
+                      className="text-[11px] text-black font-semibold hover:underline"
                     >
                       Reset
                     </button>
@@ -535,7 +571,7 @@ export default function DesktopsPage() {
                       onClick={() => setActiveRAM(ram)}
                       className={`text-center py-2 rounded-xl text-xs font-semibold transition-all border cursor-pointer ${
                         activeRAM === ram
-                          ? "bg-blue-600 text-white border-blue-600 shadow-xs"
+                          ? "bg-black text-white border-black shadow-xs"
                           : "bg-white text-slate-700 border-slate-200 hover:bg-slate-100"
                       }`}
                     >
@@ -558,7 +594,7 @@ export default function DesktopsPage() {
               )}
               <button
                 onClick={() => setShowMobileFilters(false)}
-                className="w-full py-3 px-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold shadow-md transition-all"
+                className="w-full py-3 px-3 rounded-xl bg-black hover:bg-zinc-800 text-white text-xs font-bold shadow-md transition-all"
               >
                 View {filteredProducts.length} Results
               </button>
@@ -577,14 +613,14 @@ export default function DesktopsPage() {
               href={`https://wa.me/919643990077?text=${encodeURIComponent(`Hi, I am interested in the ${pkg.title} desktop configuration from Authentic Infosystem.`)}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="relative rounded-[22px] overflow-hidden min-h-[150px] sm:min-h-[170px] flex items-center justify-center p-6 border border-slate-200 shadow-sm cursor-pointer group hover:shadow-md hover:border-blue-500 hover:-translate-y-1 transition-all duration-300 block"
+              className="relative rounded-[22px] overflow-hidden min-h-[150px] sm:min-h-[170px] flex items-center justify-center p-6 border border-slate-200 shadow-sm cursor-pointer group hover:shadow-md hover:border-black hover:-translate-y-1 transition-all duration-300 block"
             >
               <img
                 src={pkg.image}
                 alt={pkg.title}
                 className="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700 ease-out"
               />
-              <div className="absolute inset-0 bg-slate-900/40 group-hover:bg-slate-900/30 transition-colors duration-300" />
+              <div className="absolute inset-0 bg-black/50 group-hover:bg-black/40 transition-colors duration-300" />
               <h3 className="relative z-10 text-white font-extrabold text-lg sm:text-xl md:text-2xl text-center px-4 tracking-wide drop-shadow-md group-hover:scale-105 transition-all duration-300">
                 {pkg.title}
               </h3>
@@ -595,15 +631,15 @@ export default function DesktopsPage() {
 
       {/* CTA Banner */}
       <section className="py-12 sm:py-16 text-center page-container border-t border-slate-200">
-        <div className="max-w-4xl mx-auto p-8 sm:p-12 bg-slate-900 text-white rounded-3xl relative overflow-hidden shadow-xl">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl"></div>
+        <div className="max-w-4xl mx-auto p-8 sm:p-12 bg-black text-white rounded-3xl relative overflow-hidden shadow-xl border border-zinc-800">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-white/[0.04] rounded-full blur-3xl"></div>
           <h2 className="text-2xl sm:text-4xl md:text-5xl font-extrabold mb-3 sm:mb-4 relative z-10">Build Your Custom Desktop</h2>
-          <p className="text-slate-300 text-sm sm:text-base md:text-lg mb-6 sm:mb-8 max-w-2xl mx-auto relative z-10">Don't see exactly what you need? We build custom workstations tailored to your specific enterprise requirements.</p>
+          <p className="text-zinc-400 text-sm sm:text-base md:text-lg mb-6 sm:mb-8 max-w-2xl mx-auto relative z-10">Don't see exactly what you need? We build custom workstations tailored to your specific enterprise requirements.</p>
           <a
             href="https://wa.me/919643990077?text=Hi%2C%20I%20want%20to%20request%20a%20custom%20desktop%20configuration%20from%20Authentic%20Infosystem."
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block relative z-10 px-6 sm:px-8 py-3.5 bg-blue-600 hover:bg-blue-700 text-white rounded-full font-bold text-sm transition-all shadow-md shadow-blue-500/20 hover:scale-105"
+            className="inline-block relative z-10 px-6 sm:px-8 py-3.5 bg-white text-black hover:bg-zinc-200 rounded-full font-bold text-sm transition-all shadow-md hover:scale-105"
           >
             Request Configuration
           </a>

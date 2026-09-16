@@ -21,7 +21,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body suppressHydrationWarning className="overflow-x-hidden w-full bg-white text-slate-900 selection:bg-blue-600/20">
+      <body suppressHydrationWarning className="overflow-x-hidden w-full bg-white text-slate-900 selection:bg-slate-900/15 selection:text-black">
         {children}
       </body>
     </html>
