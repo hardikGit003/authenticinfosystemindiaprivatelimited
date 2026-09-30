@@ -8,265 +8,7 @@ import ProductCard from "../components/shared/ProductCard";
 import { useState, useMemo, useEffect, useRef } from "react";
 import { FaSearch, FaTimes, FaKeyboard, FaWhatsapp } from "react-icons/fa";
 
-const buyingGuides = [
-  {
-    title: "Mouse Guide",
-    desc: "Learn everything you need to know before making a purchase.",
-    image: "/Accessories/Mouse%20Guide.jpg",
-  },
-  {
-    title: "Keyboard Guide",
-    desc: "Learn everything you need to know before making a purchase.",
-    image: "/Accessories/Keyboard%20Guide.jpg",
-  },
-  {
-    title: "Monitor Guide",
-    desc: "Learn everything you need to know before making a purchase.",
-    image: "/Accessories/Monitor%20Guide.jpg",
-  },
-  {
-    title: "USB-C Guide",
-    desc: "Learn everything you need to know before making a purchase.",
-    image: "/Accessories/USB-C%20Guide.jpg",
-  },
-  {
-    title: "Cable Guide",
-    desc: "Learn everything you need to know before making a purchase.",
-    image: "/Accessories/Cable%20Guide.jpg",
-  },
-  {
-    title: "Power Backup Guide",
-    desc: "Learn everything you need to know before making a purchase.",
-    image: "/Accessories/Power%20Backup%20Guide.jpg",
-  },
-];
-
-const accessoriesProducts = [
-  {
-    id: "a1",
-    name: "Logitech MX Master 3S",
-    modelNumber: "LOGI-MXM-3S",
-    image: "/products/accessories/logitech-mx-master-3s.jpg",
-    description: "Quiet ergonomic wireless mouse with 8K DPI tracking on glass and MagSpeed electromagnetic scrolling for ultimate productivity.",
-    specs: [
-      { label: "Type", value: "Wireless Mouse" },
-      { label: "DPI", value: "8000 DPI Sensor" },
-      { label: "Connectivity", value: "Bluetooth/Logi Bolt" },
-    ],
-    badges: ["Productivity", "Top Rated"],
-    warranty: "1 Year Limited",
-  },
-  {
-    id: "a2",
-    name: "Dell UltraSharp 27\" 4K",
-    modelNumber: "U2723QE",
-    image: "/products/accessories/dell-ultrasharp-27.jpg",
-    description: "Brilliant 4K UHD monitor with IPS Black technology, 2000:1 contrast ratio, and integrated 90W USB-C hub with RJ45 connectivity.",
-    specs: [
-      { label: "Resolution", value: "3840 x 2160" },
-      { label: "Panel Type", value: "IPS Black Technology" },
-      { label: "Hub Features", value: "USB-C (90W PD), RJ45" },
-    ],
-    badges: ["Monitor", "Professional"],
-    warranty: "3 Years Advanced Exchange",
-  },
-  {
-    id: "a3",
-    name: "Keychron K8 Pro",
-    modelNumber: "KEY-K8P",
-    image: "/products/accessories/keychron-k8-pro.jpg",
-    description: "Custom wireless mechanical keyboard featuring QMK/VIA programmability, hot-swappable switches, and Mac/Windows layout compatibility.",
-    specs: [
-      { label: "Type", value: "Mechanical Keyboard" },
-      { label: "Layout", value: "TKL (80%)" },
-      { label: "Switches", value: "Hot-swappable" },
-    ],
-    badges: ["Developer", "Wireless"],
-    warranty: "1 Year Standard",
-  },
-  {
-    id: "a4",
-    name: "Lenovo ThinkPad Universal USB-C Dock",
-    modelNumber: "40AY0090US",
-    image: "/products/accessories/lenovo-thinkpad-dock.jpg",
-    description: "Enterprise docking solution supporting dual 4K external displays, 100W laptop power delivery, and centralized fleet management.",
-    specs: [
-      { label: "Video Ports", value: "2x DisplayPort, 1x HDMI" },
-      { label: "Power Delivery", value: "Up to 100W" },
-      { label: "Networking", value: "Gigabit Ethernet" },
-    ],
-    badges: ["Docking", "Essential"],
-    warranty: "3 Years Warranty",
-  },
-  {
-    id: "a5",
-    name: "Jabra Evolve2 65",
-    modelNumber: "JABRA-EV2-65",
-    image: "/products/accessories/jabra-evolve2-65.jpg",
-    description: "Professional wireless headset with noise-isolating ear cushions, 3-mic call clarity, integrated busy light, and 37-hour battery life.",
-    specs: [
-      { label: "Type", value: "Wireless Headset" },
-      { label: "Battery Life", value: "Up to 37 hours" },
-      { label: "Mic", value: "3-microphone tech" },
-    ],
-    badges: ["Audio", "UC Certified"],
-    warranty: "2 Years Limited",
-  },
-  {
-    id: "a6",
-    name: "Logitech Brio 4K Webcam",
-    modelNumber: "LOGI-BRIO-4K",
-    image: "/products/accessories/logitech-brio-4k.jpg",
-    description: "Ultra 4K HD webcam with HDR RightLight 3 technology, dual noise-canceling microphones, and Windows Hello facial recognition login.",
-    specs: [
-      { label: "Resolution", value: "4K Ultra HD" },
-      { label: "FOV", value: "Adjustable 65/78/90°" },
-      { label: "Features", value: "Windows Hello support" },
-    ],
-    badges: ["Video", "Premium"],
-    warranty: "3 Years Limited",
-  },
-  {
-    id: "a7",
-    name: "APC Back-UPS Pro 1500VA",
-    modelNumber: "BR1500G",
-    image: "/products/accessories/apc-back-ups-1500va.jpg",
-    description: "Premium line-interactive uninterruptible power supply providing battery backup, AVR surge protection, and LCD diagnostic display.",
-    specs: [
-      { label: "Capacity", value: "1500VA / 865W" },
-      { label: "Outlets", value: "10 Total" },
-      { label: "Topology", value: "Line Interactive" },
-    ],
-    badges: ["Power", "Backup"],
-    warranty: "3 Years Repair/Replace",
-  },
-  {
-    id: "a8",
-    name: "Samsung T7 Shield 2TB",
-    modelNumber: "SAM-T7-2TB",
-    image: "/products/accessories/samsung-t7-shield.jpg",
-    description: "Rugged high-speed portable SSD with IP65 water and dust resistance, 3-meter drop durability, and up to 1050 MB/s transfer speeds.",
-    specs: [
-      { label: "Type", value: "Portable SSD" },
-      { label: "Speed", value: "Up to 1050 MB/s" },
-      { label: "Durability", value: "IP65 Water/Dust" },
-    ],
-    badges: ["Storage", "Rugged"],
-    warranty: "3 Years Limited",
-  },
-  {
-    id: "a9",
-    name: "Poly Sync 20 Speakerphone",
-    modelNumber: "POLY-SYNC-20",
-    image: "/products/accessories/poly-sync-20.jpg",
-    description: "Portable smart USB/Bluetooth speakerphone with steerable multi-microphone array, full-duplex audio, and 20-hour talk time.",
-    specs: [
-      { label: "Connectivity", value: "USB-A/C, Bluetooth" },
-      { label: "Mic Range", value: "Up to 7 ft / 2 m" },
-      { label: "Battery", value: "Up to 20 hours" },
-    ],
-    badges: ["Conference", "Portable"],
-    warranty: "2 Years Standard",
-  },
-  {
-    id: "a10",
-    name: "Anker 7-in-1 USB-C Hub",
-    modelNumber: "A83460A2",
-    image: "/products/accessories/anker-7in1-hub.jpg",
-    description: "Multiport USB-C adapter expanding your setup with 4K HDMI, 100W Power Delivery pass-through, SD/microSD slots, and dual USB-A ports.",
-    specs: [
-      { label: "Ports", value: "HDMI, SD, USB-A/C" },
-      { label: "Power Delivery", value: "100W Pass-Through" },
-      { label: "Compatibility", value: "Mac, Windows, iPad" },
-    ],
-    badges: ["Hub", "Travel"],
-    warranty: "18 Months Warranty",
-  },
-  {
-    id: "a11",
-    name: "Belkin Thunderbolt 3 Cable",
-    modelNumber: "F2CD084BT0.8MBK",
-    image: "/products/accessories/belkin-thunderbolt3-cable.jpg",
-    description: "Ultra-fast Thunderbolt 3 cable supporting 40 Gbps data transfers, 100W Power Delivery, and dual 4K / single 5K high-res video feeds.",
-    specs: [
-      { label: "Type", value: "Thunderbolt 3 (USB-C)" },
-      { label: "Length", value: "0.8m / 2.6ft" },
-      { label: "Speed", value: "40 Gbps" },
-    ],
-    badges: ["Cables", "High Speed"],
-    warranty: "2 Years Limited",
-  },
-  {
-    id: "a12",
-    name: "LG 34\" Curved Ultrawide",
-    modelNumber: "34WN80C-B",
-    image: "/products/accessories/lg-34-curved-ultrawide.jpg",
-    description: "Immersive 34-inch 21:9 WQHD curved IPS display with HDR10, sRGB 99% color fidelity, and USB Type-C single-cable connectivity.",
-    specs: [
-      { label: "Resolution", value: "3440 x 1440 (WQHD)" },
-      { label: "Panel", value: "IPS Curved" },
-      { label: "Features", value: "USB-C PD, sRGB 99%" },
-    ],
-    badges: ["Monitor", "Ultrawide"],
-    warranty: "1 Year Parts & Labor",
-  },
-  {
-    id: "a13",
-    name: "Microsoft Sculpt Ergonomic",
-    modelNumber: "MS-SCULPT-ERGO",
-    image: "/products/accessories/microsoft-sculpt-ergo.jpg",
-    description: "Advanced ergonomic desktop bundle with split domed keyboard, cushioned wrist rest, separate numeric keypad, and ergonomic mouse.",
-    specs: [
-      { label: "Type", value: "Ergonomic Desktop Set" },
-      { label: "Layout", value: "Split Keyset" },
-      { label: "Includes", value: "Keyboard, Mouse, Numpad" },
-    ],
-    badges: ["Ergonomic", "Bundle"],
-    warranty: "3 Years Limited",
-  },
-  {
-    id: "a14",
-    name: "WD Black SN850X 2TB",
-    modelNumber: "WDS200T2X0E",
-    image: "/products/accessories/wd-black-sn850x.jpg",
-    description: "Top-tier PCIe Gen4 NVMe M.2 internal SSD delivering blazing read speeds up to 7300 MB/s for heavy computing and instant loading.",
-    specs: [
-      { label: "Type", value: "Internal NVMe SSD" },
-      { label: "Interface", value: "PCIe Gen4 x4" },
-      { label: "Speed", value: "Up to 7300 MB/s" },
-    ],
-    badges: ["Storage", "Performance"],
-    warranty: "5 Years Limited",
-  },
-  {
-    id: "a15",
-    name: "Ergotron LX Desk Monitor Arm",
-    modelNumber: "45-241-026",
-    image: "/products/accessories/ergotron-lx-monitor-arm.jpg",
-    description: "Durable polished aluminum articulating monitor arm with patented Constant Force technology for effortless screen positioning.",
-    specs: [
-      { label: "Capacity", value: "Up to 34\", 25 lbs" },
-      { label: "Adjustment", value: "13\" height range" },
-      { label: "Mounting", value: "Desk Clamp / Grommet" },
-    ],
-    badges: ["Ergonomics", "Mounting"],
-    warranty: "10 Years Warranty",
-  },
-  {
-    id: "a16",
-    name: "Kensington NanoSaver Lock",
-    modelNumber: "K64444WW",
-    image: "/products/accessories/kensington-nanosaver-lock.jpg",
-    description: "Tough carbon steel keyed laptop security cable lock designed specifically for modern ultra-thin laptops with nano security slots.",
-    specs: [
-      { label: "Type", value: "Keyed Cable Lock" },
-      { label: "Compatibility", value: "Nano Security Slot" },
-      { label: "Cable", value: "Carbon Steel" },
-    ],
-    badges: ["Security", "Physical"],
-    warranty: "5 Years Limited",
-  },
-];
+import { buyingGuides, accessoriesProducts } from "../data/accessoriesData";
 
 const categories = ['All', 'Keyboard', 'Mouse', 'Monitor', 'Docking Station', 'USB Hub', 'Webcam', 'Headsets', 'Conference Devices', 'Power Backup', 'External Storage', 'Cables'];
 
@@ -324,7 +66,7 @@ export default function AccessoriesPage() {
   };
 
   return (
-    <main className="min-h-screen bg-white text-slate-900 selection:bg-slate-900/15 selection:text-black">
+    <main className="min-h-screen bg-white text-slate-900">
       <Navbar />
 
       <PageHero
@@ -483,6 +225,9 @@ export default function AccessoriesPage() {
               <img
                 src={guide.image}
                 alt={guide.title}
+                width="400"
+                height="260"
+                loading="lazy"
                 className="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700 ease-out"
               />
 
@@ -552,6 +297,9 @@ export default function AccessoriesPage() {
                 <img
                   src="/Accessories/Professional%20Workstation%20Bundle.jpeg"
                   alt="Professional Workstation Bundle"
+                  width="500"
+                  height="333"
+                  loading="lazy"
                   className="w-full h-auto aspect-[500/333] object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
                 />
               </div>

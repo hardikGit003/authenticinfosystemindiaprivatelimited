@@ -1,31 +1,32 @@
 "use client";
 
 import { useState } from "react";
+import { FaSyncAlt } from "react-icons/fa";
 
 const whyCards = [
   {
     image: "/Pan%20India%20Delivery.jpg",
-    frontTitle: "PAN India Delivery",
-    backTitle: "Nationwide Logistics",
-    backDesc: "Reliable procurement and fast delivery support for businesses, institutions, enterprise clients, and organizations across India."
+    frontTitle: "Pan-India Logistics",
+    backTitle: "Nationwide Supply Chain",
+    backDesc: "End-to-end supply chain network delivering high-priority IT infrastructure, rapid transit assurance, and secure procurement across every major enterprise hub in India."
   },
   {
     image: "/B2B%20%26%20B2C%20Business.jpg",
-    frontTitle: "B2B & B2C Business",
-    backTitle: "Flexible Supply",
-    backDesc: "Supplying IT hardware, laptops, and networking systems for both large enterprise setups and individual requirements."
+    frontTitle: "B2B & Enterprise Supply",
+    backTitle: "Scalable IT Procurement",
+    backDesc: "Tailored volume procurement, flexible institutional licensing, and high-performance hardware architectures built for both enterprise rollouts and specialized individual workstations."
   },
   {
     image: "/Direct%20Procurement.jpg",
-    frontTitle: "Direct Procurement",
-    backTitle: "Direct Sourcing",
-    backDesc: "Competitive pricing, genuine products, and trusted technology procurement from top global brands."
+    frontTitle: "Direct OEM Procurement",
+    backTitle: "Authorized Tier-1 Sourcing",
+    backDesc: "Direct authorized tier-1 sourcing with guaranteed manufacturer warranties, transparent commercial pricing, and genuine high-grade hardware from leading global OEMs."
   },
   {
     image: "/Enterprise%20Assitacne.jpg",
-    frontTitle: "Enterprise Assistance",
-    backTitle: "Dedicated Support",
-    backDesc: "Infrastructure consultation, deployment guidance, and long term enterprise technology assistance."
+    frontTitle: "Enterprise Solutions & SLA",
+    backTitle: "Mission-Critical Support",
+    backDesc: "Comprehensive IT lifecycle management, system architecture advisory, turnkey deployment services, and dedicated SLA-backed enterprise technical support."
   }
 ];
 
@@ -42,50 +43,65 @@ export default function WhyChooseUs() {
       <div className="why-container">
         {/* LEFT SIDE */}
         <div className="why-left">
-          <p className="why-mini-text">WHY CHOOSE US</p>
+          <p className="why-mini-text">WHY CHOOSE AUTHENTIC INFOSYSTEM</p>
 
           <h2 className="why-heading">
             Enterprise Technology
             <span>Solutions</span>
-            For Modern Businesses.
+            Engineered For Growth.
           </h2>
 
           <p className="why-description">
-            Authentic Infosystem delivers enterprise grade laptops, desktops,
-            networking infrastructure, CCTV surveillance systems, accessories,
-            and complete IT procurement solutions for businesses, institutions,
-            organizations, and individual customers across India.
+            Authentic Infosystem empowers corporations, educational institutions,
+            and public-sector enterprises with enterprise-grade computing,
+            mission-critical networking, advanced surveillance, and seamless
+            turnkey IT procurement across India.
           </p>
         </div>
 
         {/* RIGHT SIDE */}
         <div className="why-right">
-          {whyCards.map((card, index) => (
-            <div
-              key={index}
-              className={`why-flip-card cursor-pointer ${flippedIndex === index ? "is-flipped" : ""}`}
-              onClick={() => toggleFlip(index)}
-            >
-              <div className="why-flip-inner">
-                {/* FRONT */}
-                <div
-                  className="why-card-front"
-                  style={{ backgroundImage: `url('${card.image}')` }}
-                >
-                  <div className="why-card-overlay"></div>
-                  <div className="why-card-content">
-                    <h3>{card.frontTitle}</h3>
+          {whyCards.map((card, index) => {
+            const isFlipped = flippedIndex === index;
+            return (
+              <div
+                key={index}
+                className={`why-flip-card ${isFlipped ? "is-flipped" : ""}`}
+                role="button"
+                tabIndex={0}
+                aria-label={`${card.frontTitle}. Tap to flip.`}
+                aria-pressed={isFlipped}
+                onClick={() => toggleFlip(index)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    toggleFlip(index);
+                  }
+                }}
+              >
+                <div className="why-flip-inner">
+                  {/* FRONT */}
+                  <div
+                    className="why-card-front"
+                    style={{ backgroundImage: `url('${card.image}')` }}
+                  >
+                    <div className="why-card-overlay"></div>
+                    <div className="why-card-content">
+                      <h3>{card.frontTitle}</h3>
+                    </div>
+                  </div>
+
+                  {/* BACK */}
+                  <div className="why-card-back">
+                    <div className="mb-2">
+                      <h3>{card.backTitle}</h3>
+                    </div>
+                    <p>{card.backDesc}</p>
                   </div>
                 </div>
-
-                {/* BACK */}
-                <div className="why-card-back">
-                  <h3>{card.backTitle}</h3>
-                  <p>{card.backDesc}</p>
-                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </section>

@@ -2,44 +2,31 @@
 
 import { useEffect } from "react";
 import Link from "next/link";
+import { 
+  FaArrowRight 
+} from "react-icons/fa";
 
 export default function Hero() {
-
   useEffect(() => {
-
     const handleScroll = () => {
-
       const scrollY = window.scrollY;
-
       const video = document.querySelector(".background-video") as HTMLVideoElement | null;
-
       if (video) {
-
         const scale = 1 + scrollY * 0.0003;
-
-        video.style.transform = `scale(${scale})` ;
-
+        video.style.transform = `scale(${scale})`;
       }
-
     };
 
- window.addEventListener("scroll", handleScroll);
-
-return () => {
-  window.removeEventListener("scroll", handleScroll);
-};
-
-}, []);
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   return (
-
-    <section
-  id="home" className="hero">
-
-      {/* VIDEO */}
-
+    <section id="home" className="hero">
+      {/* VIDEO BACKGROUND */}
       <div className="video-wrapper">
-
         <video
           autoPlay
           muted
@@ -47,27 +34,17 @@ return () => {
           playsInline
           className="background-video"
         >
-          <source
-            src="/hero.mp4"
-            type="video/mp4"
-          />
+          <source src="/hero.mp4" type="video/mp4" />
         </video>
-
       </div>
 
       {/* OVERLAY */}
-
       <div className="hero-overlay"></div>
 
       {/* CONTENT */}
-
       <div className="hero-content">
-
-        <p className="hero-mini-text">
-          AUTHENTIC INFOSYSTEM INDIA PRIVATE LIMITED
-        </p>
-
-        <h1>
+        {/* PRIMARY HEADLINE (H1) */}
+        <h1 className="hero-heading">
           Technology Products and{" "}
           <br className="hidden sm:inline" />
           IT Solutions for Businesses{" "}
@@ -75,35 +52,30 @@ return () => {
           and Individual Customers.
         </h1>
 
+        {/* SUPPORTING SUBTITLE */}
         <p className="hero-description">
-             Delivering enterprise grade laptops, desktops,
-             networking infrastructure, surveillance systems,
-             accessories, and advanced IT procurement solutions
-             tailored for modern businesses, startups,
-             institutions, and individual customers across India.
-      </p>
+          Delivering enterprise-grade laptops, desktops, networking infrastructure,
+          surveillance systems, accessories, and advanced IT procurement solutions
+          tailored for modern businesses, startups, institutions, and individual
+          customers across India.
+        </p>
 
-        {/* BUTTONS */}
-
+        {/* CALL TO ACTION BUTTONS */}
         <div className="hero-buttons">
-
           <Link href="/configuration">
-            <button className="primary-btn">
-              Customize your System
+            <button className="hero-btn-primary" aria-label="Customize your System">
+              <span>Customize your System</span>
             </button>
           </Link>
 
-          <a href="#contact">
-            <button className="primary-btn">
-              Contact Us
+          <a href="/#contact">
+            <button className="hero-btn-secondary" aria-label="Contact Us">
+              <span>Contact Us</span>
+              <FaArrowRight className="text-xs opacity-75" />
             </button>
           </a>
-
         </div>
       </div>
-
     </section>
-
   );
-
 }

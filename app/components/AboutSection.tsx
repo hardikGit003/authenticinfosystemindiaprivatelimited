@@ -66,7 +66,10 @@ export default function AboutSection() {
 
         <img
           src="/Photos/PIC1.jpg"
-          alt="Enterprise Technology"
+          alt="Authentic Infosystem Enterprise Technology Infrastructure & Hardware Operations"
+          width="950"
+          height="460"
+          loading="lazy"
         />
 
       </motion.div>

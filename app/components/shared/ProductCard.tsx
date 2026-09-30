@@ -1,3 +1,5 @@
+"use client";
+
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { FaCheckCircle } from "react-icons/fa";
@@ -39,7 +41,10 @@ export default function ProductCard({
       <div className="relative w-full aspect-[4/3] bg-slate-50 p-6 flex items-center justify-center overflow-hidden border-b border-slate-100">
         <img
           src={image}
-          alt={name}
+          alt={`${name} ${modelNumber ? `(${modelNumber})` : ""} - Authentic Infosystem`}
+          width="320"
+          height="240"
+          loading="lazy"
           className="object-contain w-full h-full max-h-[160px] relative z-10 drop-shadow-md transition-transform duration-500 hover:scale-105"
         />
       </div>

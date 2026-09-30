@@ -5,6 +5,7 @@ import {
   FaSearch, 
   FaBars, 
   FaTimes, 
+  FaHome,
   FaLaptop, 
   FaDesktop, 
   FaMobileAlt, 
@@ -14,20 +15,35 @@ import {
   FaTools,
   FaWhatsapp,
   FaPhoneAlt,
-  FaArrowRight
+  FaArrowRight,
+  FaChevronDown
 } from "react-icons/fa";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { searchAllCatalog, UnifiedProduct } from "../data/products";
 
 const navLinks = [
+  { href: "/", label: "Home", icon: FaHome },
   { href: "/laptops", label: "Laptops", icon: FaLaptop },
   { href: "/desktops", label: "Desktops", icon: FaDesktop },
-  { href: "/phones", label: "Phones", icon: FaMobileAlt },
+  { href: "/phones", label: "Mobiles", icon: FaMobileAlt },
   { href: "/networking", label: "Networking", icon: FaNetworkWired },
   { href: "/accessories", label: "Accessories", icon: FaKeyboard },
   { href: "/enterprise", label: "Enterprise", icon: FaBuilding },
-  { href: "/#contact", label: "Contact", icon: FaPhoneAlt },
+  { href: "/#contact", label: "Contact Us", icon: FaPhoneAlt },
+];
+
+const productItems = [
+  { href: "/laptops", label: "Laptops & Workstations" },
+  { href: "/desktops", label: "Desktops & All-in-Ones" },
+  { href: "/phones", label: "Smartphones & Devices" },
+  { href: "/accessories", label: "IT Accessories & Peripherals" },
+];
+
+const solutionItems = [
+  { href: "/networking", label: "Networking & CCTV" },
+  { href: "/enterprise", label: "Enterprise Infrastructure" },
+  { href: "/configuration", label: "Custom PC Configurator" },
 ];
 
 export default function Navbar() {
@@ -179,48 +195,137 @@ export default function Navbar() {
     setTimeout(() => setToastMessage(""), 4500);
   };
 
+  const isProductsActive = ["/laptops", "/desktops", "/phones", "/accessories"].includes(pathname);
+  const isSolutionsActive = ["/networking", "/enterprise", "/configuration"].includes(pathname) || pathname.startsWith("/configuration");
+
   return (
     <>
       <header className={`main-navbar ${isScrolled ? "scrolled" : ""}`}>
         <div className="w-full max-w-[1560px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 h-full flex items-center justify-between gap-4">
           
-          {/* LEFT: BRAND LOGO */}
+          {/* LEFT: BRAND LOGO & WORDMARK */}
           <div className="flex items-center shrink-0">
-            <Link href="/" className="nav-logo flex items-center py-1" aria-label="Authentic Infosystem Home">
+            <Link href="/" className="nav-logo flex items-center gap-2.5 py-1 group" aria-label="Authentic Infosystem Home">
               <img 
-                src="/Full%20Logo.png" 
+                src="/ai_icon.png" 
                 alt="Authentic Infosystem" 
-                className="h-[48px] sm:h-[52px] md:h-[56px] w-auto object-contain" 
+                width="36"
+                height="36"
+                loading="eager"
+                decoding="async"
+                className="h-[32px] sm:h-[36px] w-auto object-contain shrink-0 group-hover:scale-105 transition-transform" 
               />
+              <span className="text-[12.5px] sm:text-[14px] lg:text-[15px] font-bold tracking-tight text-slate-950 leading-tight select-none">
+                Authentic Infosystem India Private Limited
+              </span>
             </Link>
           </div>
 
-          {/* CENTER / LEFT-CENTER: CORPORATE DESKTOP NAVIGATION LINKS (HP/DELL/APPLE STYLE) */}
-          <nav className="hidden lg:flex items-center h-full gap-1 xl:gap-2 flex-1 justify-center px-4">
-            {navLinks.map((item) => {
-              const isActive = pathname === item.href || (item.href === "/#contact" && pathname === "/contact");
-              return (
-                <Link
-                  key={item.label}
-                  href={item.href}
-                  className={`relative flex items-center h-full px-4 xl:px-5 text-[15px] xl:text-[15.5px] tracking-tight font-medium transition-colors duration-150 group ${
-                    isActive 
-                      ? "text-slate-950 font-bold" 
-                      : "text-slate-700 hover:text-black"
-                  }`}
-                >
-                  <span className="relative z-10 py-2">{item.label}</span>
-                  
-                  {/* Subtle hover background highlight */}
-                  <span className="absolute inset-x-1.5 inset-y-4 rounded-lg bg-slate-100/0 group-hover:bg-slate-100/80 transition-colors -z-0 pointer-events-none" />
+          {/* CENTER: STREAMLINED CORPORATE NAVIGATION (Requirement 3: Home | Products ▾ | Solutions ▾ | Contact Us) */}
+          <nav className="hidden lg:flex items-center h-full gap-1 xl:gap-1.5 flex-1 justify-center px-4" aria-label="Main Navigation">
+            {/* 1. HOME */}
+            <Link
+              href="/"
+              className={`relative flex items-center h-full px-4 xl:px-4.5 text-[14.5px] xl:text-[15px] tracking-tight font-semibold transition-colors duration-150 group ${
+                pathname === "/" ? "text-slate-950 font-bold" : "text-slate-700 hover:text-black"
+              }`}
+            >
+              <span className="relative z-10 py-2">Home</span>
+              <span className="absolute inset-x-1 inset-y-4 rounded-lg bg-slate-100/0 group-hover:bg-slate-100/80 transition-colors -z-0 pointer-events-none" />
+              {pathname === "/" && (
+                <span className="absolute bottom-0 left-2 right-2 h-[3px] bg-slate-950 rounded-t-full shadow-xs" />
+              )}
+            </Link>
 
-                  {/* Active tab bottom indicator line */}
-                  {isActive && (
-                    <span className="absolute bottom-0 left-2.5 right-2.5 h-[3px] bg-slate-950 rounded-t-full shadow-xs" />
-                  )}
-                </Link>
-              );
-            })}
+            {/* 2. PRODUCTS DROPDOWN */}
+            <div className="nav-dropdown-wrapper">
+              <button
+                type="button"
+                className={`nav-dropdown-trigger relative flex items-center gap-1.5 h-full px-4 xl:px-4.5 text-[14.5px] xl:text-[15px] tracking-tight font-semibold transition-colors duration-150 group ${
+                  isProductsActive ? "text-slate-950 font-bold" : "text-slate-700 hover:text-black"
+                }`}
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                <span className="relative z-10 py-2">Products</span>
+                <FaChevronDown className="nav-dropdown-chevron" />
+                <span className="absolute inset-x-1 inset-y-4 rounded-lg bg-slate-100/0 group-hover:bg-slate-100/80 transition-colors -z-0 pointer-events-none" />
+                {isProductsActive && (
+                  <span className="absolute bottom-0 left-2 right-2 h-[3px] bg-slate-950 rounded-t-full shadow-xs" />
+                )}
+              </button>
+
+              <div className="nav-dropdown-menu">
+                <div className="flex flex-col gap-0.5">
+                  {productItems.map((item) => {
+                    const isItemActive = pathname === item.href;
+                    return (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        className={`nav-dropdown-item group ${isItemActive ? "bg-slate-100 font-bold" : ""}`}
+                      >
+                        <span className="text-[13.5px] font-semibold text-slate-800 group-hover:text-blue-600 transition-colors">
+                          {item.label}
+                        </span>
+                      </Link>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+
+            {/* 3. SOLUTIONS DROPDOWN */}
+            <div className="nav-dropdown-wrapper">
+              <button
+                type="button"
+                className={`nav-dropdown-trigger relative flex items-center gap-1.5 h-full px-4 xl:px-4.5 text-[14.5px] xl:text-[15px] tracking-tight font-semibold transition-colors duration-150 group ${
+                  isSolutionsActive ? "text-slate-950 font-bold" : "text-slate-700 hover:text-black"
+                }`}
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                <span className="relative z-10 py-2">Solutions</span>
+                <FaChevronDown className="nav-dropdown-chevron" />
+                <span className="absolute inset-x-1 inset-y-4 rounded-lg bg-slate-100/0 group-hover:bg-slate-100/80 transition-colors -z-0 pointer-events-none" />
+                {isSolutionsActive && (
+                  <span className="absolute bottom-0 left-2 right-2 h-[3px] bg-slate-950 rounded-t-full shadow-xs" />
+                )}
+              </button>
+
+              <div className="nav-dropdown-menu">
+                <div className="flex flex-col gap-0.5">
+                  {solutionItems.map((item) => {
+                    const isItemActive = pathname === item.href || (item.href === "/configuration" && pathname.startsWith("/configuration"));
+                    return (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        className={`nav-dropdown-item group ${isItemActive ? "bg-slate-100 font-bold" : ""}`}
+                      >
+                        <span className="text-[13.5px] font-semibold text-slate-800 group-hover:text-blue-600 transition-colors">
+                          {item.label}
+                        </span>
+                      </Link>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+
+            {/* 4. CONTACT US */}
+            <Link
+              href="/#contact"
+              className={`relative flex items-center h-full px-4 xl:px-4.5 text-[14.5px] xl:text-[15px] tracking-tight font-semibold transition-colors duration-150 group ${
+                pathname === "/contact" ? "text-slate-950 font-bold" : "text-slate-700 hover:text-black"
+              }`}
+            >
+              <span className="relative z-10 py-2">Contact Us</span>
+              <span className="absolute inset-x-1 inset-y-4 rounded-lg bg-slate-100/0 group-hover:bg-slate-100/80 transition-colors -z-0 pointer-events-none" />
+              {pathname === "/contact" && (
+                <span className="absolute bottom-0 left-2 right-2 h-[3px] bg-slate-950 rounded-t-full shadow-xs" />
+              )}
+            </Link>
           </nav>
 
           {/* RIGHT CONTROLS: SEARCH & TOGGLES */}
@@ -543,7 +648,7 @@ export default function Navbar() {
                 {[
                   { label: "💻 Laptops", href: "/laptops" },
                   { label: "🖥️ Desktops", href: "/desktops" },
-                  { label: "📱 Phones", href: "/phones" },
+                  { label: "📱 Mobiles", href: "/phones" },
                   { label: "🌐 Networking", href: "/networking" },
                   { label: "🖱️ Accessories", href: "/accessories" },
                   { label: "🏢 Enterprise", href: "/enterprise" },

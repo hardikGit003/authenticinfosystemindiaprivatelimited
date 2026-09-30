@@ -2,10 +2,6 @@ import Configurator from "./Configurator";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
-export const metadata = {
-  title: "Configure Your System | AUTHENTIC INFOSYSTEM",
-  description: "Customize your ideal laptop, desktop, or workstation system with custom hardware configurations.",
-};
 
 const validPresets = ["basic", "office", "development", "creator", "gaming", "workstation"] as const;
 

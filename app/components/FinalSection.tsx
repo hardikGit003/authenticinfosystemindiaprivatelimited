@@ -14,10 +14,6 @@ export default function FinalSection() {
         viewport={{ once: true }}
       >
 
-        <p className="final-mini-text">
-          AUTHENTIC INFOSYSTEM
-        </p>
-
         <h2>
           Future Ready{" "}
           <br className="hidden sm:inline" />

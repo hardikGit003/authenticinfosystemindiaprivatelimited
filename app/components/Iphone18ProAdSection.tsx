@@ -17,11 +17,11 @@ export default function Iphone18ProAdSection() {
   const aiImgSrc = "/Home%20Screen%20Advertisement/Apple%20Intelligence%20(A20%20Pro).png";
 
   const whatsappInquiryMsg = encodeURIComponent(
-    `Hello Authentic Infosystem! I would like to Pre-Book the new Apple iPhone 18 Pro / Pro Max & iPhone Duo enterprise allocation.`
+    `Hello Authentic Infosystem! I would like to Order the new Apple iPhone 18 Pro / Pro Max & iPhone Duo enterprise allocation.`
   );
 
   return (
-    <section className="relative py-20 sm:py-28 bg-white text-slate-900 overflow-hidden border-b border-slate-200">
+    <section id="iphone18-ad" className="relative py-20 sm:py-28 bg-white text-slate-900 overflow-hidden border-b border-slate-200">
       {/* Subtle clean neutral backdrop */}
       <div className="absolute inset-0 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:28px_28px] opacity-40 pointer-events-none" />
 
@@ -37,7 +37,7 @@ export default function Iphone18ProAdSection() {
           >
             <FaApple className="text-white text-base" />
             <span className="text-xs sm:text-sm font-extrabold uppercase tracking-wider text-slate-100">
-              2026 Apple Launch • Priority Pre-Booking Open
+              2026 Apple Launch • Orders Open
             </span>
             <span className="flex h-2.5 w-2.5 relative ml-1">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
@@ -52,7 +52,7 @@ export default function Iphone18ProAdSection() {
             transition={{ duration: 0.4 }}
             className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-slate-950 max-w-5xl leading-[1.08]"
           >
-            Book iPhone 18 Pro & iPhone Duo
+            Order iPhone 18 Pro & iPhone Duo
           </motion.h2>
 
           <motion.p
@@ -64,24 +64,6 @@ export default function Iphone18ProAdSection() {
           >
             Titanium 18 Pro Flagship & All-New Foldable iPhone Duo. Reserve Your Priority Day-1 Allocation.
           </motion.p>
-
-          <motion.div 
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4, delay: 0.15 }}
-            className="mt-8 flex flex-wrap items-center justify-center gap-4"
-          >
-            <a
-              href={`https://wa.me/919643990077?text=${whatsappInquiryMsg}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-slate-950 hover:bg-slate-800 text-white font-black text-sm sm:text-base shadow-xl shadow-slate-950/20 transition-all hover:scale-105 cursor-pointer"
-            >
-              <FaWhatsapp className="text-emerald-400 text-xl" />
-              <span>Pre-Book iPhone 18 Pro & Duo Now</span>
-            </a>
-          </motion.div>
         </div>
 
         {/* HERO BANNER PHOTO SHOWCASE */}
@@ -104,6 +86,9 @@ export default function Iphone18ProAdSection() {
             <img
               src={bannerImgSrc}
               alt="Apple iPhone 18 Pro Official Banner"
+              width="1400"
+              height="600"
+              loading="lazy"
               className="w-full h-full object-cover sm:object-contain object-center transition-transform duration-700 group-hover:scale-[1.02]"
             />
           </div>
@@ -135,6 +120,9 @@ export default function Iphone18ProAdSection() {
                 <img
                   src={lineupImgSrc}
                   alt="Forged in Titanium & iPhone Duo"
+                  width="600"
+                  height="338"
+                  loading="lazy"
                   className="w-full h-full object-contain sm:object-cover object-center hover:scale-[1.02] transition-transform duration-500"
                 />
               </div>
@@ -165,6 +153,9 @@ export default function Iphone18ProAdSection() {
                 <img
                   src={cameraImgSrc}
                   alt="Horizontal Visor Island"
+                  width="600"
+                  height="338"
+                  loading="lazy"
                   className="w-full h-full object-cover object-center hover:scale-105 transition-transform duration-500"
                 />
               </div>
@@ -195,6 +186,9 @@ export default function Iphone18ProAdSection() {
                 <img
                   src={aiImgSrc}
                   alt="Apple Intelligence (A20 Pro)"
+                  width="600"
+                  height="338"
+                  loading="lazy"
                   className="w-full h-full object-cover object-center hover:scale-105 transition-transform duration-500"
                 />
               </div>
@@ -267,7 +261,7 @@ export default function Iphone18ProAdSection() {
             className="shrink-0 inline-flex items-center gap-3 px-8 py-4 rounded-full bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-black text-sm sm:text-base shadow-lg transition-all hover:scale-105 cursor-pointer"
           >
             <FaWhatsapp size={20} />
-            <span>Pre-Book via WhatsApp</span>
+            <span>Order Now via WhatsApp</span>
           </a>
         </div>
 

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { FaSyncAlt, FaArrowRight } from "react-icons/fa";
 
 export default function ServicesSection() {
   const [flippedIndex, setFlippedIndex] = useState<number | null>(null);
@@ -36,9 +37,9 @@ export default function ServicesSection() {
       {/* HEADER */}
       <motion.div
         className="services-header"
-        initial={{ opacity: 0, y: 60 }}
+        initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1 }}
+        transition={{ duration: 0.6 }}
         viewport={{ once: true }}
       >
         <p className="services-mini-text">SOLUTIONS</p>
@@ -51,32 +52,62 @@ export default function ServicesSection() {
 
       {/* FLIP CARD GRID */}
       <div className="flip-card-grid">
-        {services.map((service, index) => (
-          <motion.div
-            className={`flip-card cursor-pointer ${flippedIndex === index ? "is-flipped" : ""}`}
-            key={index}
-            onClick={() => handleCardClick(index)}
-            initial={{ opacity: 0, y: 80 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: index * 0.2 }}
-            viewport={{ once: true }}
-          >
-            <div className="flip-card-inner">
-              {/* FRONT SIDE */}
-              <div className="flip-card-front">
-                <img src={service.image} alt={service.title} />
-                <div className="card-overlay"></div>
-                <h3>{service.title}</h3>
-              </div>
+        {services.map((service, index) => {
+          const isFlipped = flippedIndex === index;
+          return (
+            <motion.div
+              className={`flip-card ${isFlipped ? "is-flipped" : ""}`}
+              key={index}
+              role="button"
+              tabIndex={0}
+              aria-label={`${service.title}. Tap or click to flip card for details.`}
+              aria-pressed={isFlipped}
+              onClick={() => handleCardClick(index)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  handleCardClick(index);
+                }
+              }}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.15 }}
+              viewport={{ once: true }}
+            >
+              <div className="flip-card-inner">
+                {/* FRONT SIDE */}
+                <div className="flip-card-front">
+                  <img src={service.image} alt={service.title} width="800" height="400" loading="lazy" />
+                  <div className="card-overlay"></div>
+                  
+                  <div className="flip-card-front-content">
+                    <h3>{service.title}</h3>
+                  </div>
+                </div>
 
-              {/* BACK SIDE */}
-              <div className="flip-card-back">
-                <h3>{service.title}</h3>
-                <p>{service.description}</p>
+                {/* BACK SIDE */}
+                <div className="flip-card-back">
+                  <div className="mb-3 border-b border-slate-100 pb-2.5">
+                    <h3 className="text-xl font-bold text-slate-900 m-0">{service.title}</h3>
+                  </div>
+                  <p className="text-slate-600 text-sm leading-relaxed mb-4 flex-1">{service.description}</p>
+                  <div className="pt-2">
+                    <a
+                      href={`https://wa.me/919643990077?text=${encodeURIComponent(`Hi Authentic Infosystem, I would like to inquire about ${service.title}.`)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(e) => e.stopPropagation()}
+                      className="inline-flex items-center gap-2 text-xs font-bold text-white bg-slate-950 hover:bg-slate-800 px-4 py-2 rounded-lg transition-colors shadow-xs"
+                    >
+                      <span>Inquire Solution</span>
+                      <FaArrowRight size={10} />
+                    </a>
+                  </div>
+                </div>
               </div>
-            </div>
-          </motion.div>
-        ))}
+            </motion.div>
+          );
+        })}
       </div>
     </section>
   );

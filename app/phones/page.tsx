@@ -62,24 +62,14 @@ function CompactPhoneCard({ product, delay = 0 }: { product: Product; delay?: nu
       className="group bg-white border border-slate-200 hover:border-black rounded-2xl shadow-xs hover:shadow-lg transition-all duration-200 flex flex-col h-full relative overflow-hidden"
     >
       {/* Top Image Box */}
-      <div className="relative w-full h-44 bg-gradient-to-b from-slate-50/80 to-slate-100/60 p-4 pt-6 flex items-center justify-center border-b border-slate-100 overflow-hidden">
-        {/* Top Badges */}
-        <div className="absolute top-2.5 left-2.5 right-2.5 flex items-center justify-between z-10 pointer-events-none gap-1.5">
-          <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-md bg-zinc-100 text-slate-900 border border-slate-200 shadow-2xs shrink-0">
-            {product.brand}
-          </span>
-          {product.badges && product.badges.length > 0 && (
-            <span className="text-[10px] font-semibold px-2 py-0.5 rounded-md bg-slate-900 text-white shadow-2xs truncate max-w-[65%]">
-              {product.badges[0]}
-            </span>
-          )}
-        </div>
-
+      <div className="relative w-full h-44 bg-gradient-to-b from-slate-50/80 to-slate-100/60 p-4 flex items-center justify-center border-b border-slate-100 overflow-hidden">
         {/* Product Image */}
         <img
           src={product.image}
           alt={product.name}
-          className="object-contain max-h-[125px] max-w-[115px] w-auto drop-shadow-sm group-hover:scale-105 transition-transform duration-300"
+          width="200"
+          height="200"
+          className="object-contain max-h-[135px] max-w-[125px] w-auto drop-shadow-sm group-hover:scale-105 transition-transform duration-300"
           loading="lazy"
         />
       </div>
@@ -250,7 +240,7 @@ export default function PhonesPage() {
     activeStorage !== "All";
 
   return (
-    <main className="min-h-screen bg-white text-slate-900 selection:bg-slate-900/15 selection:text-black">
+    <main className="min-h-screen bg-white text-slate-900">
       <Navbar />
 
       {/* Hero Section */}
@@ -261,7 +251,7 @@ export default function PhonesPage() {
       />
 
       {/* Main Content */}
-      <section className="py-10 sm:py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-6 sm:py-8 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader 
           title="Explore Smartphone Lineup" 
           subtitle="Direct manufacturer sourcing with genuine warranty, IMEI registration, and corporate invoice compliance."
@@ -565,7 +555,7 @@ export default function PhonesPage() {
       </section>
 
       {/* WHY BUY SMARTPHONES FROM AUTHENTIC INFOSYSTEM */}
-      <section className="bg-slate-50 border-t border-slate-200 py-12 sm:py-16">
+      <section className="bg-white border-t border-slate-200 py-10 sm:py-14">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeader
             title="Why Procure From Authentic Infosystem"

@@ -1,5 +1,6 @@
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
+import Iphone18PopupModal from "./components/Iphone18PopupModal";
 import Iphone18ProAdSection from "./components/Iphone18ProAdSection";
 import AboutSection from "./components/AboutSection";
 import ServicesSection from "./components/ServicesSection";
@@ -8,6 +9,7 @@ import BrandsSection from "./components/BrandsSection";
 import WhyChooseUs from "./components/WhyChooseUs";
 import ContactSection from "./components/ContactSection";
 import FinalSection from "./components/FinalSection";
+import CustomerReviewsSection from "./components/CustomerReviewsSection";
 import ProvideSection from "./components/ProvideSection";
 import Footer from "./components/Footer";
 
@@ -15,6 +17,9 @@ export default function Home() {
   return (
     <main>
       <Navbar />
+
+      {/* iPhone 18 Launch Popup Advertisement Modal */}
+      <Iphone18PopupModal />
 
       <Hero />
 
@@ -31,11 +36,14 @@ export default function Home() {
 
       <WhyChooseUs />
 
-      <ContactSection />
-
       <FinalSection />
 
+      {/* What Customer Say About Us - Google Reviews Showcase */}
+      <CustomerReviewsSection />
+
       <ProvideSection />
+
+      <ContactSection />
 
       <Footer />
     </main>

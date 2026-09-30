@@ -114,16 +114,16 @@ export default function Configurator({
   };
 
   return (
-    <main className="min-h-screen bg-white text-slate-900 selection:bg-slate-900/15 selection:text-black pt-28 sm:pt-40 pb-12 sm:pb-20">
+    <main className="min-h-screen bg-white text-slate-900 pt-24 sm:pt-28 pb-12 sm:pb-16">
       <div className="page-container">
         
-        <div className="mb-8 sm:mb-12 border-b border-slate-200 pb-6 sm:pb-8 text-center md:text-left">
-          <p className="text-slate-900 font-extrabold tracking-widest uppercase text-xs sm:text-sm mb-2">Build Your Workflow</p>
-          <h1 className="text-2xl sm:text-4xl md:text-5xl font-black text-slate-900 tracking-tight">
+        <div className="mb-6 sm:mb-8 border-b border-slate-200 pb-5 sm:pb-6 text-center md:text-left">
+          <p className="text-slate-900 font-extrabold tracking-widest uppercase text-xs sm:text-sm mb-1.5">Build Your Workflow</p>
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
             {pageTitles[defaultSystem] || "Customize Your PC"}
           </h1>
-          <p className="text-slate-600 mt-3 sm:mt-4 max-w-2xl text-sm sm:text-base md:text-lg font-normal">
-            We've curated the best hardware for your specific use case. Use the filters to narrow down the perfect machine for your needs.
+          <p className="text-slate-600 mt-2 sm:mt-3 max-w-2xl text-xs sm:text-sm md:text-base font-normal">
+            We&apos;ve curated the best hardware for your specific use case. Use the filters to narrow down the perfect machine for your needs.
           </p>
         </div>
 

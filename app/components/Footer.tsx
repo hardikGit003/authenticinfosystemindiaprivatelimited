@@ -1,63 +1,63 @@
-"use client";
-
-import { useState } from "react";
 import Link from "next/link";
+import { FaFacebookF, FaInstagram, FaYoutube, FaLinkedinIn, FaXTwitter } from "react-icons/fa6";
 
 export default function Footer() {
-  const [email, setEmail] = useState("");
-  const [subscribed, setSubscribed] = useState(false);
-
-  const handleSubscribe = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (email && email.includes("@")) {
-      setSubscribed(true);
-      setEmail("");
-      setTimeout(() => setSubscribed(false), 5000);
-    }
-  };
-
   return (
-    <footer className="footer">
+    <footer className="footer" aria-label="Site Footer">
       <div className="footer-container">
         <div className="footer-top">
           <div className="footer-social">
-            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-              <i className="fab fa-facebook-f"></i>
+            <a
+              href="https://facebook.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Facebook"
+              title="Authentic Infosystem on Facebook"
+              className="social-fb"
+            >
+              <FaFacebookF className="text-sm sm:text-base" />
             </a>
-            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter / X">
-              <i className="fab fa-x-twitter"></i>
+            <a
+              href="https://twitter.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Twitter / X"
+              title="Authentic Infosystem on X"
+              className="social-x"
+            >
+              <FaXTwitter className="text-sm sm:text-base" />
             </a>
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-              <i className="fab fa-instagram"></i>
+            <a
+              href="https://www.instagram.com/authenticinfosystem?stkn=MWs3Z2V6Ynpmem8xNg%3D%3D&utm_source=qr"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram"
+              title="Authentic Infosystem on Instagram"
+              className="social-insta"
+            >
+              <FaInstagram className="text-base sm:text-lg" />
             </a>
-            <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
-              <i className="fab fa-youtube"></i>
+            <a
+              href="https://youtube.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="YouTube"
+              title="Authentic Infosystem on YouTube"
+              className="social-yt"
+            >
+              <FaYoutube className="text-base sm:text-lg" />
             </a>
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-              <i className="fab fa-linkedin-in"></i>
+            <a
+              href="https://www.linkedin.com/company/authentic-infosystem-india-private-limited/?viewAsMember=true"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+              title="Authentic Infosystem on LinkedIn"
+              className="social-in"
+            >
+              <FaLinkedinIn className="text-sm sm:text-base" />
             </a>
           </div>
-
-          {subscribed ? (
-            <div className="subscribe-success">
-              <i className="fas fa-check-circle"></i>
-              <span>Thank you for subscribing!</span>
-            </div>
-          ) : (
-            <form onSubmit={handleSubscribe} className="footer-subscribe-form">
-              <i className="far fa-envelope text-zinc-400 pl-2"></i>
-              <input
-                type="email"
-                placeholder="Enter your work email..."
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-              <button type="submit" className="subscribe-btn">
-                Subscribe
-              </button>
-            </form>
-          )}
         </div>
 
         <div className="footer-line"></div>
@@ -67,7 +67,7 @@ export default function Footer() {
             <h3>Products</h3>
             <Link href="/laptops">Laptops</Link>
             <Link href="/desktops">Desktops</Link>
-            <Link href="/phones">Smartphones</Link>
+            <Link href="/phones">Mobiles</Link>
             <Link href="/networking">Networking</Link>
             <Link href="/accessories">Accessories</Link>
             <Link href="/configuration">Custom PC Build</Link>

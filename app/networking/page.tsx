@@ -8,139 +8,7 @@ import ProductCard from "../components/shared/ProductCard";
 import { useState, useMemo, useEffect } from "react";
 import { FaSearch, FaTimes, FaNetworkWired, FaWhatsapp } from "react-icons/fa";
 
-const surveillanceItems = [
-  { title: "IP Cameras", image: "/Newtworking/IP%20Cameras.jpg" },
-  { title: "PTZ Cameras", image: "/Newtworking/PTZ%20Cameras.jpg" },
-  { title: "Bullet Cameras", image: "/Newtworking/Bullet%20Cameras.jpg" },
-  { title: "Dome Cameras", image: "/Newtworking/Dome%20Cameras.jpg" },
-  { title: "NVR", image: "/Newtworking/NVR%20Cameras.jpg" },
-  { title: "DVR", image: "/Newtworking/DVR%20Camera.jpg" },
-  { title: "Video Analytics", image: "/Newtworking/Video%20Analytics.jpg" },
-  { title: "AI Surveillance", image: "/Newtworking/AI%20Survillance%20Camera.jpg" },
-];
-
-const networkingProducts = [
-  {
-    id: "n1",
-    name: "Cisco Catalyst 9300",
-    modelNumber: "C9300-48P-A",
-    image: "/products/networking/cisco-catalyst-9300.jpg",
-    description: "Enterprise-grade 48-port Gigabit PoE+ stackable switch with advanced security, Layer 3 routing, and 480 Gbps StackWise capability.",
-    specs: [
-      { label: "Type", value: "Managed Switch" },
-      { label: "Ports", value: "48x 1G PoE+" },
-      { label: "Uplink", value: "4x 10G SFP+" },
-      { label: "Stacking", value: "480 Gbps StackWise" },
-    ],
-    badges: ["Enterprise", "Core"],
-    warranty: "Lifetime Limited",
-  },
-  {
-    id: "n2",
-    name: "Aruba 2930F",
-    modelNumber: "JL254A",
-    image: "/products/networking/aruba-2930f.jpg",
-    description: "High-performance Layer 3 access switch featuring 24 PoE+ ports, built-in SFP uplinks, and seamless Aruba Central cloud management.",
-    specs: [
-      { label: "Type", value: "PoE+ Switch" },
-      { label: "Ports", value: "24x 1G PoE+" },
-      { label: "Uplink", value: "4x 1G SFP" },
-      { label: "Management", value: "Aruba Central" },
-    ],
-    badges: ["Access Layer", "Managed"],
-    warranty: "Limited Lifetime",
-  },
-  {
-    id: "n3",
-    name: "Ubiquiti UniFi U6 Enterprise",
-    modelNumber: "U6-Enterprise",
-    image: "/products/networking/ubiquiti-unifi-u6.jpg",
-    description: "High-density Wi-Fi 6E ceiling-mount access point delivering up to 10.2 Gbps aggregate throughput across 2.4, 5, and 6 GHz bands.",
-    specs: [
-      { label: "Type", value: "Wi-Fi 6E AP" },
-      { label: "Bands", value: "2.4/5/6 GHz" },
-      { label: "Throughput", value: "10.2 Gbps Aggregate" },
-      { label: "Clients", value: "600+ Concurrent" },
-    ],
-    badges: ["Wireless", "High Density"],
-    warranty: "1 Year Standard",
-  },
-  {
-    id: "n4",
-    name: "Fortinet FortiGate 100F",
-    modelNumber: "FG-100F",
-    image: "/products/networking/fortinet-fortigate-100f.jpg",
-    description: "Next-generation firewall and integrated SD-WAN appliance engineered for high-throughput enterprise threat protection and VPN security.",
-    specs: [
-      { label: "Type", value: "Next-Gen Firewall" },
-      { label: "Firewall Pkt", value: "20 Gbps" },
-      { label: "Threat Protection", value: "1 Gbps" },
-      { label: "Interfaces", value: "Multiple 1G/10G" },
-    ],
-    badges: ["Security", "SD-WAN"],
-    warranty: "Requires Support Contract",
-  },
-  {
-    id: "n5",
-    name: "Cisco ISR 4331",
-    modelNumber: "ISR4331/K9",
-    image: "/products/networking/cisco-isr-4331.jpg",
-    description: "Modular enterprise branch router with multi-core architecture delivering converged routing, security, voice, and cloud acceleration.",
-    specs: [
-      { label: "Type", value: "Router" },
-      { label: "Throughput", value: "100-300 Mbps" },
-      { label: "WAN/LAN", value: "3x 1G RJ-45/SFP" },
-      { label: "Modules", value: "2x NIM, 1x SM" },
-    ],
-    badges: ["Branch Office", "Routing"],
-    warranty: "90 Days Warranty",
-  },
-  {
-    id: "n6",
-    name: "10G SFP+ Transceiver",
-    modelNumber: "SFP-10G-SR",
-    image: "/products/networking/sfp-10g-sr.jpg",
-    description: "Hot-pluggable multi-mode optical transceiver module delivering ultra-low latency 10 Gbps fiber connectivity up to 300 meters.",
-    specs: [
-      { label: "Type", value: "Fiber Module" },
-      { label: "Distance", value: "300m" },
-      { label: "Wavelength", value: "850nm" },
-      { label: "Cable Type", value: "MMF (OM3/OM4)" },
-    ],
-    badges: ["Accessories", "Fiber"],
-    warranty: "5 Years Replacement",
-  },
-  {
-    id: "n7",
-    name: "42U Server Rack Cabinet",
-    modelNumber: "RACK-42U-PRO",
-    image: "/products/networking/rack-42u-pro.jpg",
-    description: "Heavy-duty 42U datacenter equipment cabinet featuring lockable ventilated mesh doors, adjustable mounting rails, and roof exhaust fans.",
-    specs: [
-      { label: "Capacity", value: "42U" },
-      { label: "Dimensions", value: "600x1000x2050mm" },
-      { label: "Load Capacity", value: "1000 kg" },
-      { label: "Cooling", value: "4x Roof Fans" },
-    ],
-    badges: ["Infrastructure", "Datacenter"],
-    warranty: "5 Years Structural",
-  },
-  {
-    id: "n8",
-    name: "24-Port Cat6 Patch Panel",
-    modelNumber: "PP-C6-24-1U",
-    image: "/products/networking/patch-panel-cat6.jpg",
-    description: "Standard 1U 19-inch rack-mount 24-port Cat6 RJ45 patch panel engineered for clean, high-density structured cable management.",
-    specs: [
-      { label: "Ports", value: "24x RJ45 Cat6" },
-      { label: "Rack Units", value: "1U" },
-      { label: "Termination", value: "110 Punch Down" },
-      { label: "Standards", value: "TIA/EIA-568-B" },
-    ],
-    badges: ["Cabling", "Passive"],
-    warranty: "25 Years System",
-  },
-];
+import { surveillanceItems, networkingProducts } from "../data/networkingData";
 
 const categories = ['All', 'Enterprise Networking', 'Wireless Access Points', 'Managed Switches', 'Firewalls', 'Routers', 'Fiber Solutions', 'Server Racks', 'Cabling'];
 
@@ -190,7 +58,7 @@ export default function NetworkingPage() {
   };
 
   return (
-    <main className="min-h-screen bg-white text-slate-900 selection:bg-slate-900/15 selection:text-black">
+    <main className="min-h-screen bg-white text-slate-900">
       <Navbar />
 
       <PageHero
@@ -202,7 +70,7 @@ export default function NetworkingPage() {
       />
 
       {/* Solution Categories & Search Bar */}
-      <section className="py-8 sm:py-10 page-container border-b border-slate-200 bg-slate-50/50">
+      <section className="py-6 sm:py-8 page-container border-b border-slate-200 bg-slate-50/50">
         <div className="max-w-md mx-auto mb-4">
           <div className="relative">
             <FaSearch className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" size={13} />
@@ -323,6 +191,9 @@ export default function NetworkingPage() {
               <img
                 src={cam.image}
                 alt={cam.title}
+                width="400"
+                height="400"
+                loading="lazy"
                 className="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-500 ease-out"
               />
               <div className="absolute inset-0 bg-black/50 group-hover:bg-black/40 transition-colors duration-300" />

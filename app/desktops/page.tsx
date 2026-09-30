@@ -132,7 +132,7 @@ export default function DesktopsPage() {
     activeRAM !== "All";
 
   return (
-    <main className="min-h-screen bg-white text-slate-900 selection:bg-slate-900/15 selection:text-black">
+    <main className="min-h-screen bg-white text-slate-900">
       <Navbar />
 
       <PageHero
@@ -144,7 +144,7 @@ export default function DesktopsPage() {
       />
 
       {/* Main Content */}
-      <section className="py-10 sm:py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-6 sm:py-8 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <SectionHeader 
           title="Explore Desktop Lineup" 
@@ -618,6 +618,9 @@ export default function DesktopsPage() {
               <img
                 src={pkg.image}
                 alt={pkg.title}
+                width="500"
+                height="250"
+                loading="lazy"
                 className="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700 ease-out"
               />
               <div className="absolute inset-0 bg-black/50 group-hover:bg-black/40 transition-colors duration-300" />

@@ -1,3 +1,5 @@
+"use client";
+
 import { motion } from "framer-motion";
 import Link from "next/link";
 
@@ -19,11 +21,11 @@ export default function PageHero({
   primaryButtonText = "Explore Products",
   primaryButtonLink = "#products",
   secondaryButtonText = "Contact Sales",
-  secondaryButtonLink = "#contact",
+  secondaryButtonLink = "/#contact",
   bgImage = "/placeholder-hero.jpg",
 }: PageHeroProps) {
   return (
-    <section className="relative w-full min-h-[42vh] sm:min-h-[50vh] flex items-center justify-center overflow-hidden bg-black border-b border-white/10 pt-36 sm:pt-44 pb-12 sm:pb-16">
+    <section className="relative w-full flex items-center justify-center overflow-hidden bg-black border-b border-white/10 pt-28 sm:pt-32 md:pt-36 pb-8 sm:pb-10 md:pb-12">
       {/* Background Image & Overlay */}
       <div className="absolute inset-0 z-0 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-black via-black/95 to-zinc-950/90 z-10" />
@@ -31,7 +33,10 @@ export default function PageHero({
         <div className="absolute -bottom-20 left-1/3 w-80 h-80 bg-zinc-700/10 rounded-full blur-3xl z-10 pointer-events-none" />
         <img
           src={bgImage}
-          alt="Hero Background"
+          alt={`${title} - Authentic Infosystem IT Hardware`}
+          width="1920"
+          height="600"
+          loading="eager"
           className="w-full h-full object-cover opacity-20 blur-[2px] scale-105"
         />
       </div>
@@ -39,36 +44,36 @@ export default function PageHero({
       {/* Content */}
       <div className="page-container relative z-20 flex flex-col items-start justify-center w-full">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.6 }}
           className="max-w-4xl"
         >
           {miniText && (
-            <p className="text-zinc-400 text-xs tracking-[4px] sm:tracking-[6px] uppercase mb-3 sm:mb-4 font-bold">
+            <p className="text-zinc-400 text-[11px] sm:text-xs tracking-[3px] sm:tracking-[5px] uppercase mb-2 sm:mb-2.5 font-bold">
               {miniText}
             </p>
           )}
           
-          <h1 className="text-3xl sm:text-5xl md:text-6xl font-extrabold text-white tracking-tight leading-[1.1] mb-4 sm:mb-6">
+          <h1 className="text-2xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-[1.15] mb-2 sm:mb-3">
             {title}
           </h1>
           
-          <p className="text-slate-300 text-sm sm:text-base md:text-lg leading-relaxed font-normal mb-8 sm:mb-10 max-w-2xl">
+          <p className="text-slate-300 text-xs sm:text-sm md:text-base leading-relaxed font-normal mb-5 sm:mb-6 max-w-2xl">
             {subtitle}
           </p>
           
-          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 w-full sm:w-auto">
+          <div className="flex flex-row flex-wrap items-center gap-2.5 sm:gap-3.5 w-full sm:w-auto">
             <Link
               href={primaryButtonLink}
-              className="px-7 sm:px-9 py-3.5 sm:py-4 rounded-full bg-white hover:bg-zinc-200 text-slate-950 font-semibold text-sm transition-all shadow-md text-center"
+              className="px-6 sm:px-7 py-2.5 sm:py-3 rounded-lg sm:rounded-xl bg-white hover:bg-zinc-200 text-slate-950 font-bold text-xs sm:text-sm transition-all shadow-sm text-center"
             >
               {primaryButtonText}
             </Link>
             
             <Link
               href={secondaryButtonLink}
-              className="px-7 sm:px-9 py-3.5 sm:py-4 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 text-white font-semibold text-sm backdrop-blur-sm shadow-xs transition-all text-center"
+              className="px-6 sm:px-7 py-2.5 sm:py-3 rounded-lg sm:rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white font-semibold text-xs sm:text-sm backdrop-blur-sm shadow-xs transition-all text-center"
             >
               {secondaryButtonText}
             </Link>

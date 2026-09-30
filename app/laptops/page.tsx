@@ -104,7 +104,7 @@ export default function LaptopsPage() {
     activeRAM !== "All";
 
   return (
-    <main className="min-h-screen bg-white text-slate-900 selection:bg-slate-900/15 selection:text-black">
+    <main className="min-h-screen bg-white text-slate-900">
       <Navbar />
 
       {/* Hero Section */}
@@ -115,7 +115,7 @@ export default function LaptopsPage() {
       />
 
       {/* Main Content */}
-      <section className="py-10 sm:py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-6 sm:py-8 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <SectionHeader 
           title="Explore Laptop Lineup" 
@@ -574,29 +574,18 @@ export default function LaptopsPage() {
         </div>
       )}
 
-      {/* Why Buy & Buying Guide Sections */}
-      <section className="py-12 sm:py-16 page-container border-t border-slate-200">
-        <SectionHeader title="Why Buy From Authentic Infosystem" align="center" />
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mt-6">
-          {['Genuine Products', 'PAN India Delivery', 'Bulk Corporate Pricing', 'Certified Technical Support'].map((benefit, i) => (
-            <div key={i} className="bg-white rounded-[22px] border border-slate-200 shadow-sm p-6 sm:p-8 text-center flex flex-col items-center hover:shadow-md hover:-translate-y-1 transition-all duration-300">
-              <div className="w-14 h-14 rounded-2xl bg-zinc-100 text-black flex items-center justify-center text-xl mb-4 shadow-xs">
-                ★
-              </div>
-              <h4 className="text-base sm:text-lg font-bold text-slate-900">{benefit}</h4>
-            </div>
-          ))}
-        </div>
-      </section>
-
       {/* CTA Section */}
-      <section className="py-12 sm:py-16 bg-slate-50 text-center page-container border-t border-slate-200">
+      <section className="py-12 sm:py-16 bg-white text-center page-container border-t border-slate-200">
         <h2 className="text-2xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 mb-3 sm:mb-4">Need help choosing the perfect laptop?</h2>
         <p className="text-slate-600 text-sm sm:text-base md:text-lg mb-6 sm:mb-8 max-w-2xl mx-auto">Our experts can help you match the right technology with your specific business or educational requirements.</p>
-        <button className="px-6 sm:px-8 py-3 sm:py-3.5 bg-black hover:bg-zinc-800 text-white rounded-full font-bold text-sm transition-all shadow-md">
+        <a
+          href="https://wa.me/919643990077?text=Hi%2C%20I%20need%20help%20choosing%20the%20perfect%20laptop%20from%20Authentic%20Infosystem."
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-block px-6 sm:px-8 py-3 sm:py-3.5 bg-black hover:bg-zinc-800 text-white rounded-full font-bold text-sm transition-all shadow-md hover:scale-105"
+        >
           Talk to Our Experts
-        </button>
+        </a>
       </section>
 
       <Footer />
