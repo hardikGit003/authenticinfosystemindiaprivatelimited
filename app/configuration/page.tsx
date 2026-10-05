@@ -1,24 +1,24 @@
+import { Suspense } from "react";
 import Configurator from "./Configurator";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
-
-const validPresets = ["basic", "office", "development", "creator", "gaming", "workstation"] as const;
-
-type ValidPreset = (typeof validPresets)[number];
-
-export default function ConfigurationPage({ searchParams }: 
-
-{ searchParams?: { system?: string } }) 
-{
-  const system = (searchParams?.system ?? "basic") as string;
-  const defaultSystem = validPresets.includes(system as ValidPreset) ? (system as ValidPreset) : "basic";
-
+export default function ConfigurationPage() {
   return (
     <>
       <Navbar />
-      <Configurator defaultSystem={defaultSystem} />
+      <Suspense
+        fallback={
+          <div className="min-h-screen bg-slate-50 pt-28 pb-16 flex items-center justify-center">
+            <div className="w-8 h-8 border-4 border-slate-900 border-t-transparent rounded-full animate-spin" />
+          </div>
+        }
+      >
+        <Configurator />
+      </Suspense>
       <Footer />
     </>
   );
 }
+
+

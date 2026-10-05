@@ -3,7 +3,6 @@
 import { useState, useMemo, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import PageHero from "../components/shared/PageHero";
 import SectionHeader from "../components/shared/SectionHeader";
 import ProductCard from "../components/shared/ProductCard";
 import { desktopProducts } from "../data/products";
@@ -135,16 +134,8 @@ export default function DesktopsPage() {
     <main className="min-h-screen bg-white text-slate-900">
       <Navbar />
 
-      <PageHero
-        title="Uncompromising Performance."
-        subtitle="Professional desktops engineered for engineering, development, AI, business operations, and enterprise computing."
-        miniText="ENTERPRISE WORKSTATIONS"
-        primaryButtonText="Explore Workstations"
-        secondaryButtonText="Get Quote"
-      />
-
       {/* Main Content */}
-      <section className="py-6 sm:py-8 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="pt-28 sm:pt-32 pb-12 sm:pb-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <SectionHeader 
           title="Explore Desktop Lineup" 

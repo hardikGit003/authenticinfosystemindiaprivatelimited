@@ -1258,6 +1258,8 @@ export type UnifiedProduct = {
   warranty?: string;
 };
 
+import { LAPTOP_PRODUCTS } from "./laptopData";
+
 export const searchAllCatalog = (query: string): UnifiedProduct[] => {
   const clean = query.trim().toLowerCase();
   if (!clean) return [];
@@ -1265,10 +1267,19 @@ export const searchAllCatalog = (query: string): UnifiedProduct[] => {
   const terms = clean.split(/\s+/).filter(Boolean);
 
   const allItems: UnifiedProduct[] = [
-    ...laptopProducts.map((p) => ({
-      ...p,
-      href: `/laptops?search=${encodeURIComponent(p.name)}`,
+    ...LAPTOP_PRODUCTS.map((p) => ({
+      id: p.id,
+      name: `${p.brand} ${p.model}`,
+      modelNumber: p.modelNumber,
+      brand: p.brand,
+      category: p.category,
+      price: p.price || undefined,
+      image: p.image,
+      href: `/laptops/${p.brandSlug}/${p.slug}`,
       section: "Laptops" as const,
+      specs: p.specs,
+      badges: p.badges,
+      warranty: p.warranty,
     })),
     ...desktopProducts.map((p) => ({
       ...p,

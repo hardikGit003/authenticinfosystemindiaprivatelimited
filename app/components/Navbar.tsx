@@ -195,8 +195,8 @@ export default function Navbar() {
     setTimeout(() => setToastMessage(""), 4500);
   };
 
-  const isProductsActive = ["/laptops", "/desktops", "/phones", "/accessories"].includes(pathname);
-  const isSolutionsActive = ["/networking", "/enterprise", "/configuration"].includes(pathname) || pathname.startsWith("/configuration");
+  const isProductsActive = ["/laptops", "/desktops", "/phones", "/accessories"].includes(pathname) || pathname.startsWith("/laptops") || pathname.startsWith("/desktops") || pathname.startsWith("/phones") || pathname.startsWith("/accessories");
+  const isSolutionsActive = ["/networking", "/enterprise", "/configuration"].includes(pathname) || pathname.startsWith("/configuration") || pathname.startsWith("/enterprise") || pathname.startsWith("/networking");
 
   return (
     <>
@@ -437,11 +437,6 @@ export default function Navbar() {
                               <h4 className="text-xs font-bold text-slate-900 truncate group-hover:text-black">
                                 {item.name}
                               </h4>
-                              {item.price && (
-                                <p className="text-[11px] font-extrabold text-slate-900 mt-0.5">
-                                  {new Intl.NumberFormat("en-IN", { style: "currency", currency: "INR", maximumFractionDigits: 0 }).format(item.price)}
-                                </p>
-                              )}
                             </div>
                             <FaArrowRight size={10} className="text-slate-400 group-hover:text-black group-hover:translate-x-0.5 transition-all shrink-0" />
                           </Link>

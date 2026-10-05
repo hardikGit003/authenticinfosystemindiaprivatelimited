@@ -1,21 +1,24 @@
 import { Metadata } from "next";
-import { constructMetadata, getBreadcrumbSchema, getItemListSchema } from "../lib/seo";
-import { laptopProducts } from "../data/products";
+import { constructMetadata, getBreadcrumbSchema } from "../lib/seo";
 import JsonLd from "../components/shared/JsonLd";
+import { LAPTOP_BRANDS, LAPTOP_PRODUCTS } from "../data/laptopData";
 
 export const metadata: Metadata = constructMetadata({
-  title: "Enterprise Laptops & Workstations",
+  title: "Enterprise Laptops & Commercial Notebooks | Lenovo, HP, Dell, ASUS, Acer, Apple",
   description:
-    "Business laptops and mobile workstations from Dell, HP, Lenovo, and Asus with PAN India enterprise deployment and support.",
+    "Explore enterprise laptops from Lenovo (ThinkPad), HP (EliteBook/ProBook), Dell (Latitude/Vostro), ASUS (ExpertBook), Acer (TravelMate), and Apple (MacBook). Bulk procurement, asset tagging, and Pan-India deployment by Authentic Infosystem.",
   path: "/laptops",
   keywords: [
-    "enterprise laptops",
-    "business laptop supplier India",
-    "Dell Vostro Latitude",
-    "HP EliteBook ProBook",
+    "enterprise laptops India",
+    "business laptop supplier",
     "Lenovo ThinkPad India",
-    "mobile workstations",
-    "corporate laptop bulk purchase",
+    "HP EliteBook ProBook supplier",
+    "Dell Latitude Vostro corporate fleet",
+    "ASUS ExpertBook commercial laptops",
+    "Acer TravelMate B2B",
+    "Apple MacBook business procurement",
+    "bulk corporate laptop purchase",
+    "commercial IT hardware Gurugram",
   ],
 });
 
@@ -29,15 +32,23 @@ export default function LaptopsLayout({
     { name: "Laptops", url: "/laptops" },
   ]);
 
-  const itemList = getItemListSchema(
-    "Enterprise & Business Laptops",
-    "/laptops",
-    laptopProducts
-  );
+  const itemListSchema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "Enterprise & Business Laptops",
+    url: "https://authenticinfosystem.com/laptops",
+    numberOfItems: LAPTOP_PRODUCTS.length,
+    itemListElement: LAPTOP_PRODUCTS.map((laptop, idx) => ({
+      "@type": "ListItem",
+      position: idx + 1,
+      name: `${laptop.brand} ${laptop.model}`,
+      url: `https://authenticinfosystem.com/laptops/${laptop.brandSlug}/${laptop.slug}`,
+    })),
+  };
 
   return (
     <>
-      <JsonLd data={[breadcrumb, itemList]} />
+      <JsonLd data={[breadcrumb, itemListSchema]} />
       {children}
     </>
   );

@@ -8,7 +8,7 @@ export default function Footer() {
         <div className="footer-top">
           <div className="footer-social">
             <a
-              href="https://facebook.com"
+              href="https://www.facebook.com/share/18ZEngJDKr/?mibextid=wwXIfr"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Facebook"
@@ -38,7 +38,7 @@ export default function Footer() {
               <FaInstagram className="text-base sm:text-lg" />
             </a>
             <a
-              href="https://youtube.com"
+              href="https://www.youtube.com/@AUTHENTICINFOSYSTEM"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="YouTube"

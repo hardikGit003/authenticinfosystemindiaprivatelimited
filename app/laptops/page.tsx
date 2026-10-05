@@ -1,592 +1,332 @@
 "use client";
 
-import { useState, useMemo, useEffect } from "react";
+import { useState } from "react";
+import Link from "next/link";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import PageHero from "../components/shared/PageHero";
 import SectionHeader from "../components/shared/SectionHeader";
-import ProductCard from "../components/shared/ProductCard";
-import { laptopProducts } from "../data/products";
+import BrandCard from "./components/BrandCard";
+import LaptopCard from "./components/LaptopCard";
+import QuoteModal from "./components/QuoteModal";
 import { 
-  FaFilter, 
-  FaTimes, 
-  FaSearch, 
-  FaCheckCircle, 
-  FaLaptop, 
-  FaBuilding, 
-  FaWhatsapp,
-  FaMicrochip
+  LAPTOP_BRANDS, 
+  LAPTOP_PRODUCTS, 
+  getLaptopsByCategory 
+} from "../data/laptopData";
+import { 
+  FaBriefcase,
+  FaUserTie,
+  FaPalette,
+  FaGamepad,
+  FaServer,
+  FaArrowRight
 } from "react-icons/fa";
 
-const categories = ["All", "Basic", "Gaming", "Editing", "Enterprise"];
-const brands = ["All", "Lenovo", "HP", "Dell", "Asus"];
-const processors = ["All", "Intel Core i3", "Intel Core i5", "Intel Core i7", "Intel Core i9", "Intel Core Ultra 7", "AMD Ryzen 5", "AMD Ryzen 7"];
-const rams = ["All", "8GB", "16GB", "32GB", "64GB"];
+const requirementTabs = [
+  {
+    id: "Business",
+    name: "Business & Office",
+    icon: FaBriefcase,
+    tagline: "Essential enterprise fleet reliability, Office 365, ERP workflows, and long battery life.",
+    featuredSeries: "ThinkPad E-Series, HP ProBook, Dell Latitude, ASUS VivoBook, Acer TravelMate",
+  },
+  {
+    id: "Professional",
+    name: "Professional & Executive",
+    icon: FaUserTie,
+    tagline: "Featherlight magnesium/carbon chassis, 16:10 high-resolution displays, and Intel vPro security.",
+    featuredSeries: "ThinkPad X1 Carbon, HP EliteBook 840, Dell Latitude 7440, ASUS ExpertBook B9, MacBook Air",
+  },
+  {
+    id: "Creator",
+    name: "Creator & Editing",
+    icon: FaPalette,
+    tagline: "Color-accurate OLED/Liquid Retina displays, dedicated NVIDIA RTX Studio GPUs, and fast rendering.",
+    featuredSeries: "Yoga Pro 9i, HP Spectre x360, Dell XPS 15, ASUS Zenbook Pro Duo, Acer Swift Go, MacBook Pro",
+  },
+  {
+    id: "Gaming",
+    name: "Gaming & High-Compute",
+    icon: FaGamepad,
+    tagline: "High refresh rate 165Hz-240Hz screens, liquid metal vapor cooling, and max TGP graphics.",
+    featuredSeries: "Lenovo Legion, HP OMEN, Dell Alienware, ASUS ROG Strix, Acer Nitro",
+  },
+  {
+    id: "Workstation",
+    name: "Workstation & Studio",
+    icon: FaServer,
+    tagline: "Massive unified memory up to 128GB, ISV certifications, 3D simulation, and AI model training.",
+    featuredSeries: "MacBook Pro M3 Max, Dell Precision, Lenovo ThinkPad P-Series",
+  },
+];
 
 export default function LaptopsPage() {
+  const [activeRequirement, setActiveRequirement] = useState("Business");
   const [searchQuery, setSearchQuery] = useState("");
-  const [activeCategory, setActiveCategory] = useState("All");
-  const [activeBrand, setActiveBrand] = useState("All");
-  const [activeProcessor, setActiveProcessor] = useState("All");
-  const [activeRAM, setActiveRAM] = useState("All");
-  const [showMobileFilters, setShowMobileFilters] = useState(false);
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const params = new URLSearchParams(window.location.search);
-      const q = params.get("search") || params.get("q");
-      if (q) {
-        setSearchQuery(q);
-      }
-    }
-  }, []);
+  const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
+  const [quoteBrand, setQuoteBrand] = useState("");
+  const [quoteModel, setQuoteModel] = useState("");
 
-  const filteredProducts = useMemo(() => {
-    return laptopProducts.filter((product) => {
-      // Search Filter
-      const matchesSearch =
-        product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        product.brand.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        product.modelNumber.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        product.specs.some(
-          (s) =>
-            s.value.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            s.label.toLowerCase().includes(searchQuery.toLowerCase())
-        );
-
-      // Category Filter
-      const matchesCategory =
-        activeCategory === "All" || product.category === activeCategory;
-
-      // Brand Filter
-      const matchesBrand = activeBrand === "All" || product.brand.toLowerCase() === activeBrand.toLowerCase();
-
-      // Processor Filter
-      const matchesProcessor =
-        activeProcessor === "All" ||
-        product.specs.some(
-          (spec) =>
-            spec.label === "Processor" &&
-            spec.value.toLowerCase().includes(activeProcessor.toLowerCase())
-        );
-
-      // RAM Filter
-      const matchesRAM =
-        activeRAM === "All" ||
-        product.specs.some(
-          (spec) =>
-            spec.label === "RAM" &&
-            spec.value.toLowerCase().includes(activeRAM.toLowerCase())
-        );
-
-      return (
-        matchesSearch &&
-        matchesCategory &&
-        matchesBrand &&
-        matchesProcessor &&
-        matchesRAM
-      );
-    });
-  }, [searchQuery, activeCategory, activeBrand, activeProcessor, activeRAM]);
-
-  const clearAllFilters = () => {
-    setSearchQuery("");
-    setActiveCategory("All");
-    setActiveBrand("All");
-    setActiveProcessor("All");
-    setActiveRAM("All");
+  const handleOpenQuote = (brand = "", model = "") => {
+    setQuoteBrand(brand);
+    setQuoteModel(model);
+    setIsQuoteModalOpen(true);
   };
 
-  const hasActiveFilters =
-    searchQuery !== "" ||
-    activeCategory !== "All" ||
-    activeBrand !== "All" ||
-    activeProcessor !== "All" ||
-    activeRAM !== "All";
+  const currentLaptops = getLaptopsByCategory(activeRequirement);
+
+  const searchedLaptops = searchQuery.trim()
+    ? LAPTOP_PRODUCTS.filter(
+        (p) =>
+          p.model.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          p.brand.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          p.series.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          p.specs.some((s) => s.value.toLowerCase().includes(searchQuery.toLowerCase()))
+      )
+    : [];
 
   return (
-    <main className="min-h-screen bg-white text-slate-900">
+    <main className="min-h-screen bg-white text-slate-900 selection:bg-slate-900 selection:text-white">
       <Navbar />
 
-      {/* Hero Section */}
-      <PageHero
-        title="Enterprise Mobility. Unleashed."
-        subtitle="Discover powerful laptops for professionals, businesses, educational institutions, startups, and remote teams. Built for productivity, security, and performance."
-        miniText="PREMIUM B2B LAPTOPS"
-      />
+      {/* Main Content Area */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 sm:pt-32 pb-12 sm:pb-16 space-y-16 sm:space-y-24">
 
-      {/* Main Content */}
-      <section className="py-6 sm:py-8 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        <SectionHeader 
-          title="Explore Laptop Lineup" 
-          subtitle="Enterprise-grade mobility, official OEM warranty, bulk GST invoicing, and custom RAM/SSD configuration."
-          align="center" 
-        />
-        
-        {/* Category Filter Pills */}
-        <div className="flex overflow-x-auto sm:flex-wrap justify-start sm:justify-center gap-2 mb-8 mt-4 sm:mt-6 pb-2 sm:pb-0 scrollbar-hide w-full">
-          {categories.map((cat, i) => (
-            <button
-              key={i}
-              onClick={() => setActiveCategory(cat)}
-              className={`whitespace-nowrap px-4 py-1.5 rounded-full border transition-all text-xs font-semibold shrink-0 cursor-pointer ${
-                activeCategory === cat
-                  ? "bg-black border-black text-white shadow-xs"
-                  : "bg-slate-100 border-slate-200 hover:bg-slate-200 text-slate-700"
-              }`}
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
+        {/* SECTION 1: SHOP BY BRAND */}
+        <section id="shop-by-brand" className="scroll-mt-24">
+          <SectionHeader
+            title="Shop by Brand"
+            subtitle="Select your preferred brand to inspect enterprise partnership series, technical specifications, and bulk availability."
+            align="center"
+          />
 
-        {/* Mobile Search & Filter Bar */}
-        <div className="lg:hidden mb-6 flex gap-2.5">
-          <div className="relative flex-1">
-            <FaSearch className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" size={13} />
-            <input
-              type="text"
-              placeholder="Search model, brand, processor, RAM..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-9 pr-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-black"
-            />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mt-10">
+            {LAPTOP_BRANDS.map((brand) => (
+              <BrandCard key={brand.slug} brand={brand} />
+            ))}
           </div>
-          <button
-            onClick={() => setShowMobileFilters(true)}
-            className="flex items-center gap-1.5 px-4 py-2.5 bg-black text-white rounded-xl font-semibold text-xs shadow-xs shrink-0"
-          >
-            <FaFilter size={12} />
-            <span>Filters</span>
-          </button>
-        </div>
+        </section>
 
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 lg:gap-8">
-          
-          {/* DESKTOP SIDEBAR FILTERS */}
-          <div className="hidden lg:block lg:col-span-1 space-y-6">
-            <div className="bg-slate-50/90 border border-slate-200 rounded-2xl p-5 shadow-xs space-y-6">
-              {/* Header with Title & Reset */}
-              <div className="flex items-center justify-between pb-3.5 border-b border-slate-200">
-                <h3 className="text-xs font-extrabold text-slate-900 uppercase tracking-wider flex items-center gap-2">
-                  <FaFilter className="text-black" size={12} />
-                  <span>Filter Laptops</span>
-                </h3>
-                {hasActiveFilters && (
-                  <button
-                    onClick={clearAllFilters}
-                    className="text-xs text-black hover:underline font-semibold cursor-pointer"
-                  >
-                    Reset All
-                  </button>
-                )}
-              </div>
+        {/* SECTION 2: CHOOSE BY REQUIREMENT */}
+        <section id="choose-by-requirement" className="scroll-mt-24 bg-slate-50/80 rounded-3xl sm:rounded-[36px] p-6 sm:p-10 lg:p-12 border border-slate-200/80 shadow-xs">
+          <div className="text-center max-w-3xl mx-auto mb-10">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-200 text-slate-800 text-xs font-bold uppercase tracking-wider mb-3">
+              <span>WORKLOAD DISCOVERY</span>
+            </div>
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-950 tracking-tight">
+              Choose by Requirement
+            </h2>
+            <p className="text-slate-600 text-xs sm:text-sm md:text-base mt-2">
+              Know your intended workload? Browse purpose-engineered laptops curated by role and performance profile.
+            </p>
+          </div>
 
-              {/* Search Box */}
-              <div>
-                <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-2">
-                  Search Laptops
-                </label>
-                <div className="relative">
-                  <FaSearch className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" size={12} />
-                  <input
-                    type="text"
-                    placeholder="e.g. ThinkPad, Dell i7, 32GB..."
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full pl-9 pr-8 py-2 bg-white border border-slate-200 rounded-xl text-xs focus:outline-none focus:border-black text-slate-900 shadow-2xs"
-                  />
-                  {searchQuery && (
-                    <button
-                      onClick={() => setSearchQuery("")}
-                      className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
-                    >
-                      <FaTimes size={11} />
-                    </button>
-                  )}
-                </div>
-              </div>
-
-              {/* Brand Filter */}
-              <div>
-                <div className="flex items-center justify-between mb-2">
-                  <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">
-                    Brand
-                  </label>
-                  {activeBrand !== "All" && (
-                    <button
-                      onClick={() => setActiveBrand("All")}
-                      className="text-[11px] text-black font-semibold hover:underline"
-                    >
-                      Reset
-                    </button>
-                  )}
-                </div>
-                <div className="space-y-1">
-                  {brands.map((brand) => (
-                    <button
-                      key={brand}
-                      onClick={() => setActiveBrand(brand)}
-                      className={`w-full text-left px-3 py-2 rounded-xl text-xs font-medium transition-all flex items-center justify-between cursor-pointer ${
-                        activeBrand === brand
-                          ? "bg-black text-white font-semibold shadow-xs"
-                          : "text-slate-700 hover:bg-slate-200/60 bg-white/60 border border-slate-200/50"
-                      }`}
-                    >
-                      <span>{brand}</span>
-                      {activeBrand === brand && <FaCheckCircle size={11} />}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* Processor Filter */}
-              <div>
-                <div className="flex items-center justify-between mb-2">
-                  <label className="text-xs font-bold text-slate-700 uppercase tracking-wider flex items-center gap-1.5">
-                    <FaMicrochip className="text-slate-500" size={11} />
-                    <span>Processor</span>
-                  </label>
-                  {activeProcessor !== "All" && (
-                    <button
-                      onClick={() => setActiveProcessor("All")}
-                      className="text-[11px] text-black font-semibold hover:underline"
-                    >
-                      Reset
-                    </button>
-                  )}
-                </div>
-                <div className="space-y-1">
-                  {processors.map((proc) => (
-                    <button
-                      key={proc}
-                      onClick={() => setActiveProcessor(proc)}
-                      className={`w-full text-left px-3 py-1.5 rounded-xl text-xs font-medium transition-all flex items-center justify-between cursor-pointer ${
-                        activeProcessor === proc
-                          ? "bg-black text-white font-semibold shadow-xs"
-                          : "text-slate-700 hover:bg-slate-200/60 bg-white/60 border border-slate-200/50"
-                      }`}
-                    >
-                      <span>{proc}</span>
-                      {activeProcessor === proc && <FaCheckCircle size={11} />}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* RAM Filter */}
-              <div>
-                <div className="flex items-center justify-between mb-2">
-                  <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">
-                    RAM Memory
-                  </label>
-                  {activeRAM !== "All" && (
-                    <button
-                      onClick={() => setActiveRAM("All")}
-                      className="text-[11px] text-black font-semibold hover:underline"
-                    >
-                      Reset
-                    </button>
-                  )}
-                </div>
-                <div className="grid grid-cols-2 gap-1.5">
-                  {rams.map((ram) => (
-                    <button
-                      key={ram}
-                      onClick={() => setActiveRAM(ram)}
-                      className={`text-center py-2 rounded-xl text-xs font-semibold transition-all border cursor-pointer ${
-                        activeRAM === ram
-                          ? "bg-black text-white border-black shadow-xs"
-                          : "bg-white text-slate-700 border-slate-200 hover:bg-slate-100"
-                      }`}
-                    >
-                      {ram}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* Clear All Filters button */}
-              {hasActiveFilters && (
+          {/* Workload Tabs */}
+          <div className="flex overflow-x-auto sm:flex-wrap justify-start sm:justify-center gap-2.5 mb-8 pb-2 sm:pb-0 scrollbar-hide">
+            {requirementTabs.map((tab) => {
+              const Icon = tab.icon;
+              const isActive = activeRequirement === tab.id;
+              return (
                 <button
-                  onClick={clearAllFilters}
-                  className="w-full py-2.5 px-3 rounded-xl bg-slate-200 hover:bg-slate-300 text-slate-800 text-xs font-semibold transition-all cursor-pointer"
+                  key={tab.id}
+                  onClick={() => setActiveRequirement(tab.id)}
+                  className={`inline-flex items-center gap-2 px-5 py-3 rounded-2xl text-xs sm:text-sm font-bold transition-all shrink-0 cursor-pointer ${
+                    isActive
+                      ? "bg-slate-950 text-white shadow-md scale-102"
+                      : "bg-white text-slate-700 hover:bg-slate-200/70 border border-slate-200"
+                  }`}
                 >
-                  Clear All Filters
+                  <Icon size={14} className={isActive ? "text-blue-400" : "text-slate-400"} />
+                  <span>{tab.name}</span>
                 </button>
-              )}
-            </div>
-
-            {/* Corporate Bulk Fleet Card */}
-            <div className="bg-gradient-to-br from-zinc-900 to-black text-white p-5 rounded-2xl shadow-md relative overflow-hidden border border-zinc-800">
-              <FaBuilding className="text-white mb-2.5" size={20} />
-              <h4 className="text-sm font-bold mb-1">Corporate Laptop Fleet</h4>
-              <p className="text-[11px] text-zinc-300 leading-relaxed mb-3.5">
-                Equipping office workstations, IT teams, or enterprise staff? Get custom volume pricing with pre-installed OS and asset tagging.
-              </p>
-              <a
-                href="https://wa.me/919643990077?text=Hi%2C%20I%20am%20looking%20for%20a%20bulk%20enterprise%20quote%20for%20laptops."
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-1.5 w-full py-2 px-3 bg-emerald-500 hover:bg-emerald-600 text-white font-bold rounded-xl text-xs transition-all shadow-sm"
-              >
-                <FaWhatsapp size={14} />
-                <span>Request B2B Quote</span>
-              </a>
-            </div>
+              );
+            })}
           </div>
 
-          {/* Product Grid */}
-          <div className="col-span-1 lg:col-span-3">
-            {/* Header info bar */}
-            <div className="flex flex-wrap items-center justify-between gap-2.5 mb-5 pb-3 border-b border-slate-200">
-              <div className="flex items-center gap-2 text-xs text-slate-600">
-                <span>Showing</span>
-                <span className="font-bold text-slate-900">{filteredProducts.length}</span>
-                <span>laptops</span>
-                {activeBrand !== "All" && (
-                  <span className="bg-zinc-100 text-zinc-900 text-[11px] px-2 py-0.5 rounded-full font-semibold border border-zinc-300">
-                    {activeBrand}
-                  </span>
-                )}
-                {activeCategory !== "All" && (
-                  <span className="bg-slate-100 text-slate-700 text-[11px] px-2 py-0.5 rounded-full font-semibold border border-slate-200">
-                    {activeCategory}
-                  </span>
-                )}
-                {activeProcessor !== "All" && (
-                  <span className="bg-purple-50 text-purple-700 text-[11px] px-2 py-0.5 rounded-full font-semibold border border-purple-200">
-                    {activeProcessor}
-                  </span>
-                )}
-                {activeRAM !== "All" && (
-                  <span className="bg-amber-50 text-amber-700 text-[11px] px-2 py-0.5 rounded-full font-semibold border border-amber-200">
-                    {activeRAM}
-                  </span>
-                )}
-              </div>
-
-              {hasActiveFilters && (
-                <button
-                  onClick={clearAllFilters}
-                  className="text-xs text-black hover:underline font-semibold cursor-pointer"
-                >
-                  Clear all filters
-                </button>
-              )}
-            </div>
-
-            {filteredProducts.length === 0 ? (
-              <div className="text-center py-16 bg-slate-50 rounded-2xl border border-slate-200 p-8 shadow-xs">
-                <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-zinc-100 border border-zinc-200 text-zinc-900 mb-3 shadow-2xs">
-                  <FaLaptop size={26} />
-                </div>
-                <div className="inline-block px-3 py-1 mb-2.5 rounded-full bg-black text-white text-[11px] font-bold uppercase tracking-wider shadow-2xs">
-                  ⚡ Will be available soon
-                </div>
-                <h3 className="text-lg sm:text-xl font-extrabold text-slate-900 mb-2">
-                  {searchQuery ? `"${searchQuery}" will be available soon` : "Will be available soon"}
-                </h3>
-                <p className="text-xs sm:text-sm text-slate-600 max-w-md mx-auto mb-6 leading-relaxed">
-                  {searchQuery ? (
-                    <>
-                      We currently don't have <span className="font-bold text-slate-900">"{searchQuery}"</span> in immediate catalogue stock, but it will be available soon. Our enterprise sourcing desk can procure it directly on-demand with official OEM warranty.
-                    </>
-                  ) : (
-                    <>
-                      No devices match the selected filters right now. We regularly expand our inventory and this configuration will be available soon.
-                    </>
-                  )}
-                </p>
-                <div className="flex flex-wrap items-center justify-center gap-3">
-                  <a
-                    href={`https://wa.me/919643990077?text=Hi%2C%20I%20am%20looking%20for%20a%20quote%20for%20${encodeURIComponent(searchQuery || 'laptop')}.%20Please%20let%20me%20know%20availability%20and%20pricing.`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs transition-all shadow-sm cursor-pointer"
-                  >
-                    <FaWhatsapp size={14} />
-                    <span>Inquire Availability on WhatsApp</span>
-                  </a>
-                  <button
-                    onClick={clearAllFilters}
-                    className="px-5 py-2.5 bg-black hover:bg-zinc-800 text-white font-semibold rounded-xl text-xs transition-all shadow-xs cursor-pointer"
-                  >
-                    Reset All Filters
-                  </button>
-                </div>
-              </div>
-            ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-                {filteredProducts.map((laptop, index) => (
-                  <ProductCard
-                    key={laptop.id}
-                    {...laptop}
-                    delay={(index % 6) * 0.05}
-                  />
-                ))}
-              </div>
-            )}
+          {/* Laptops Matching This Requirement */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {currentLaptops.map((laptop) => (
+              <LaptopCard
+                key={laptop.id}
+                laptop={laptop}
+                onOpenQuote={(brand, model) => handleOpenQuote(brand, model)}
+              />
+            ))}
           </div>
+        </section>
 
         </div>
-      </section>
 
-      {/* Mobile Filter Modal Drawer */}
-      {showMobileFilters && (
-        <div className="fixed inset-0 z-50 flex bg-black/60 backdrop-blur-xs lg:hidden animate-fade-in">
-          <div className="fixed inset-0" onClick={() => setShowMobileFilters(false)} />
-          <div className="relative ml-auto w-full max-w-xs sm:max-w-sm h-full bg-white shadow-2xl p-5 overflow-y-auto flex flex-col justify-between z-10 animate-slide-left">
-            <div className="space-y-6">
-              {/* Drawer Header */}
-              <div className="flex items-center justify-between pb-4 border-b border-slate-200">
-                <div className="flex items-center gap-2">
-                  <FaFilter className="text-black" size={14} />
-                  <h3 className="text-sm font-bold text-slate-900 uppercase tracking-wider">
-                    Filter Laptops
+      {/* SECTION 3: WHY ENTERPRISES PARTNER (DARK FULL-WIDTH WORKSTATIONS STYLE) */}
+      <section className="w-full bg-black py-16 sm:py-20 lg:py-28 relative border-t border-white/10 overflow-hidden">
+        {/* Background Ambience Glows */}
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-blue-600/5 rounded-full blur-[140px] pointer-events-none" />
+        <div className="absolute bottom-10 right-10 w-[500px] h-[300px] bg-purple-600/5 rounded-full blur-[120px] pointer-events-none" />
+
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          {/* MAIN SECTION HEADER */}
+          <div className="text-center mb-12 sm:mb-16 max-w-4xl mx-auto">
+            <p className="text-xs sm:text-sm md:text-base uppercase tracking-[4px] sm:tracking-[6px] font-bold text-zinc-400 mb-3 sm:mb-4">
+              CUSTOM WORKSTATIONS & FLEET PROCUREMENT
+            </p>
+
+            <h2 className="text-3xl sm:text-5xl md:text-6xl font-extrabold text-white mb-4 sm:mb-6 tracking-tight leading-[1.1]">
+              Start Your Build.
+            </h2>
+
+            <p className="text-zinc-300 text-sm sm:text-base md:text-lg max-w-3xl mx-auto font-normal leading-relaxed">
+              Select the perfect computing category matching your exact workflow. We guide you to dependable daily setups, high-performance creator rigs, AI workstations, and enterprise deployments.
+            </p>
+          </div>
+
+          {/* 4 MODERN LENOVO-STYLE CARDS GRID */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 xl:gap-7 items-stretch">
+            {/* Card 01 */}
+            <div className="bg-white rounded-lg sm:rounded-xl border border-zinc-800/80 hover:border-zinc-600 shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden group hover:-translate-y-1">
+              <div className="relative w-full aspect-[2.2/1] sm:aspect-[2/1] bg-black overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-t from-amber-500/20 via-orange-500/10 to-transparent opacity-60 z-10 pointer-events-none" />
+                <img
+                  src="/Start%20Your%20Build/For%20Everyday%20Productivity.jpg"
+                  alt="For Everyday Productivity - Authentic Infosystem Custom Build"
+                  width="800"
+                  height="360"
+                  loading="lazy"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                />
+              </div>
+              <div className="p-6 sm:p-7 flex flex-col flex-grow justify-between bg-white">
+                <div>
+                  <h3 className="text-xl sm:text-2xl font-extrabold text-slate-950 mb-3 tracking-tight leading-snug group-hover:text-black transition-colors">
+                    For Everyday Productivity
                   </h3>
+                  <p className="text-slate-600 text-xs sm:text-sm leading-relaxed mb-6 font-normal">
+                    Reliable desktop and PC systems for office work, students, home users, accounting, browsing, documentation, and everyday business tasks. Choose practical configurations designed for smooth and dependable daily performance.
+                  </p>
                 </div>
-                <button
-                  onClick={() => setShowMobileFilters(false)}
-                  className="p-2 rounded-xl text-slate-400 hover:text-slate-600 hover:bg-slate-100"
-                >
-                  <FaTimes size={15} />
-                </button>
-              </div>
-
-              {/* Brand Filter */}
-              <div>
-                <div className="flex items-center justify-between mb-2">
-                  <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">
-                    Brand
-                  </label>
-                  {activeBrand !== "All" && (
-                    <button
-                      onClick={() => setActiveBrand("All")}
-                      className="text-[11px] text-black font-semibold hover:underline"
-                    >
-                      Reset
-                    </button>
-                  )}
-                </div>
-                <div className="space-y-1">
-                  {brands.map((brand) => (
-                    <button
-                      key={brand}
-                      onClick={() => setActiveBrand(brand)}
-                      className={`w-full text-left px-3 py-2 rounded-xl text-xs font-medium transition-all flex items-center justify-between cursor-pointer ${
-                        activeBrand === brand
-                          ? "bg-black text-white font-semibold shadow-xs"
-                          : "text-slate-700 hover:bg-slate-100 bg-slate-50 border border-slate-200"
-                      }`}
-                    >
-                      <span>{brand}</span>
-                      {activeBrand === brand && <FaCheckCircle size={11} />}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* Processor Filter */}
-              <div>
-                <div className="flex items-center justify-between mb-2">
-                  <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">
-                    Processor
-                  </label>
-                  {activeProcessor !== "All" && (
-                    <button
-                      onClick={() => setActiveProcessor("All")}
-                      className="text-[11px] text-black font-semibold hover:underline"
-                    >
-                      Reset
-                    </button>
-                  )}
-                </div>
-                <div className="space-y-1">
-                  {processors.map((proc) => (
-                    <button
-                      key={proc}
-                      onClick={() => setActiveProcessor(proc)}
-                      className={`w-full text-left px-3 py-1.5 rounded-xl text-xs font-medium transition-all flex items-center justify-between cursor-pointer ${
-                        activeProcessor === proc
-                          ? "bg-black text-white font-semibold shadow-xs"
-                          : "text-slate-700 hover:bg-slate-100 bg-slate-50 border border-slate-200"
-                      }`}
-                    >
-                      <span>{proc}</span>
-                      {activeProcessor === proc && <FaCheckCircle size={11} />}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* RAM Filter */}
-              <div>
-                <div className="flex items-center justify-between mb-2">
-                  <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">
-                    RAM Memory
-                  </label>
-                  {activeRAM !== "All" && (
-                    <button
-                      onClick={() => setActiveRAM("All")}
-                      className="text-[11px] text-black font-semibold hover:underline"
-                    >
-                      Reset
-                    </button>
-                  )}
-                </div>
-                <div className="grid grid-cols-2 gap-1.5">
-                  {rams.map((ram) => (
-                    <button
-                      key={ram}
-                      onClick={() => setActiveRAM(ram)}
-                      className={`text-center py-2 rounded-xl text-xs font-semibold transition-all border cursor-pointer ${
-                        activeRAM === ram
-                          ? "bg-black text-white border-black shadow-xs"
-                          : "bg-white text-slate-700 border-slate-200 hover:bg-slate-100"
-                      }`}
-                    >
-                      {ram}
-                    </button>
-                  ))}
+                <div className="mt-auto pt-2">
+                  <a
+                    href="#choose-by-requirement"
+                    className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg border-2 border-slate-900 bg-transparent text-slate-950 hover:bg-slate-950 hover:text-white font-bold text-sm transition-all duration-200 shadow-xs group/btn text-center cursor-pointer"
+                  >
+                    <span>Explore Systems</span>
+                    <FaArrowRight className="text-xs group-hover/btn:translate-x-1 transition-transform duration-200" />
+                  </a>
                 </div>
               </div>
             </div>
 
-            {/* Bottom Actions */}
-            <div className="pt-6 border-t border-slate-200 mt-6 space-y-2">
-              {hasActiveFilters && (
-                <button
-                  onClick={clearAllFilters}
-                  className="w-full py-2.5 px-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-semibold transition-all"
-                >
-                  Clear All Filters
-                </button>
-              )}
-              <button
-                onClick={() => setShowMobileFilters(false)}
-                className="w-full py-3 px-3 rounded-xl bg-black hover:bg-zinc-800 text-white text-xs font-bold shadow-md transition-all"
-              >
-                View {filteredProducts.length} Results
-              </button>
+            {/* Card 02 */}
+            <div className="bg-white rounded-lg sm:rounded-xl border border-zinc-800/80 hover:border-zinc-600 shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden group hover:-translate-y-1">
+              <div className="relative w-full aspect-[2.2/1] sm:aspect-[2/1] bg-black overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-t from-cyan-500/20 via-blue-500/10 to-transparent opacity-60 z-10 pointer-events-none" />
+                <img
+                  src="/Start%20Your%20Build/For%20Performance-Driven%20Workflows.jpg"
+                  alt="For Performance-Driven Workflows - Authentic Infosystem Custom Build"
+                  width="800"
+                  height="360"
+                  loading="lazy"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                />
+              </div>
+              <div className="p-6 sm:p-7 flex flex-col flex-grow justify-between bg-white">
+                <div>
+                  <h3 className="text-xl sm:text-2xl font-extrabold text-slate-950 mb-3 tracking-tight leading-snug group-hover:text-black transition-colors">
+                    For Performance-Driven Workflows
+                  </h3>
+                  <p className="text-slate-600 text-xs sm:text-sm leading-relaxed mb-6 font-normal">
+                    High-performance PC systems built for gaming, software development, video editing, graphic design, 3D applications, streaming, and other demanding workloads requiring powerful CPU and GPU performance.
+                  </p>
+                </div>
+                <div className="mt-auto pt-2">
+                  <a
+                    href="#choose-by-requirement"
+                    className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg border-2 border-slate-900 bg-transparent text-slate-950 hover:bg-slate-950 hover:text-white font-bold text-sm transition-all duration-200 shadow-xs group/btn text-center cursor-pointer"
+                  >
+                    <span>Explore Systems</span>
+                    <FaArrowRight className="text-xs group-hover/btn:translate-x-1 transition-transform duration-200" />
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            {/* Card 03 */}
+            <div className="bg-white rounded-lg sm:rounded-xl border border-zinc-800/80 hover:border-zinc-600 shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden group hover:-translate-y-1">
+              <div className="relative w-full aspect-[2.2/1] sm:aspect-[2/1] bg-black overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-t from-purple-500/20 via-fuchsia-500/10 to-transparent opacity-60 z-10 pointer-events-none" />
+                <img
+                  src="/Start%20Your%20Build/For%20Professional%20%26%20High-Performance%20Computing.jpg"
+                  alt="For Professional & High-Performance Computing - Authentic Infosystem Custom Build"
+                  width="800"
+                  height="360"
+                  loading="lazy"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                />
+              </div>
+              <div className="p-6 sm:p-7 flex flex-col flex-grow justify-between bg-white">
+                <div>
+                  <h3 className="text-xl sm:text-2xl font-extrabold text-slate-950 mb-3 tracking-tight leading-snug group-hover:text-black transition-colors">
+                    For Professional & High-Performance Computing
+                  </h3>
+                  <p className="text-slate-600 text-xs sm:text-sm leading-relaxed mb-6 font-normal">
+                    Professional workstation-class systems engineered for demanding applications such as AI & Machine Learning, CAD, engineering, 3D rendering, simulation, data science, and research.
+                  </p>
+                </div>
+                <div className="mt-auto pt-2">
+                  <button
+                    onClick={() => handleOpenQuote("Workstation", "Custom Machine")}
+                    className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg border-2 border-slate-900 bg-transparent text-slate-950 hover:bg-slate-950 hover:text-white font-bold text-sm transition-all duration-200 shadow-xs group/btn text-center cursor-pointer"
+                  >
+                    <span>Build Your Machine</span>
+                    <FaArrowRight className="text-xs group-hover/btn:translate-x-1 transition-transform duration-200" />
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Card 04 */}
+            <div className="bg-white rounded-lg sm:rounded-xl border border-zinc-800/80 hover:border-zinc-600 shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden group hover:-translate-y-1">
+              <div className="relative w-full aspect-[2.2/1] sm:aspect-[2/1] bg-black overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-t from-emerald-500/20 via-teal-500/10 to-transparent opacity-60 z-10 pointer-events-none" />
+                <img
+                  src="/Start%20Your%20Build/Built%20for%20Modern%20Businesses.jpg"
+                  alt="Built for Modern Businesses - Authentic Infosystem Custom Build"
+                  width="800"
+                  height="360"
+                  loading="lazy"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                />
+              </div>
+              <div className="p-6 sm:p-7 flex flex-col flex-grow justify-between bg-white">
+                <div>
+                  <h3 className="text-xl sm:text-2xl font-extrabold text-slate-950 mb-3 tracking-tight leading-snug group-hover:text-black transition-colors">
+                    Built for Modern Businesses
+                  </h3>
+                  <p className="text-slate-600 text-xs sm:text-sm leading-relaxed mb-6 font-normal">
+                    Business-ready laptops, desktops, and computing systems designed for companies, institutions, startups, and enterprise deployments. Standardized configurations, reliable hardware, and scalable procurement.
+                  </p>
+                </div>
+                <div className="mt-auto pt-2">
+                  <button
+                    onClick={() => handleOpenQuote("Enterprise", "Business Fleet")}
+                    className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg border-2 border-slate-900 bg-transparent text-slate-950 hover:bg-slate-950 hover:text-white font-bold text-sm transition-all duration-200 shadow-xs group/btn text-center cursor-pointer"
+                  >
+                    <span>Explore Business Solutions</span>
+                    <FaArrowRight className="text-xs group-hover/btn:translate-x-1 transition-transform duration-200" />
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      )}
-
-      {/* CTA Section */}
-      <section className="py-12 sm:py-16 bg-white text-center page-container border-t border-slate-200">
-        <h2 className="text-2xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 mb-3 sm:mb-4">Need help choosing the perfect laptop?</h2>
-        <p className="text-slate-600 text-sm sm:text-base md:text-lg mb-6 sm:mb-8 max-w-2xl mx-auto">Our experts can help you match the right technology with your specific business or educational requirements.</p>
-        <a
-          href="https://wa.me/919643990077?text=Hi%2C%20I%20need%20help%20choosing%20the%20perfect%20laptop%20from%20Authentic%20Infosystem."
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-block px-6 sm:px-8 py-3 sm:py-3.5 bg-black hover:bg-zinc-800 text-white rounded-full font-bold text-sm transition-all shadow-md hover:scale-105"
-        >
-          Talk to Our Experts
-        </a>
       </section>
+
+      {/* Quote Modal */}
+      <QuoteModal
+        isOpen={isQuoteModalOpen}
+        onClose={() => setIsQuoteModalOpen(false)}
+        initialBrand={quoteBrand}
+        initialModel={quoteModel}
+      />
 
       <Footer />
     </main>

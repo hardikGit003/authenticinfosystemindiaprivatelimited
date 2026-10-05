@@ -46,9 +46,9 @@ export const COMPANY_INFO = {
   sameAs: [
     "https://www.linkedin.com/company/authentic-infosystem-india-private-limited/",
     "https://www.instagram.com/authenticinfosystem",
-    "https://facebook.com",
+    "https://www.facebook.com/share/18ZEngJDKr/?mibextid=wwXIfr",
     "https://twitter.com",
-    "https://youtube.com",
+    "https://www.youtube.com/@AUTHENTICINFOSYSTEM",
   ],
 };
 

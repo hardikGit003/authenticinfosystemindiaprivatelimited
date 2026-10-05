@@ -1,10 +1,11 @@
 import { MetadataRoute } from "next";
 import { SITE_URL } from "./lib/seo";
+import { LAPTOP_BRANDS, LAPTOP_PRODUCTS } from "./data/laptopData";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const currentDate = new Date().toISOString();
 
-  const routes = [
+  const staticRoutes = [
     {
       url: `${SITE_URL}`,
       lastModified: currentDate,
@@ -15,7 +16,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${SITE_URL}/laptops`,
       lastModified: currentDate,
       changeFrequency: "daily" as const,
-      priority: 0.9,
+      priority: 0.95,
     },
     {
       url: `${SITE_URL}/desktops`,
@@ -91,5 +92,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ];
 
-  return routes;
+  // Brand routes (/laptops/lenovo, /laptops/hp, etc.)
+  const brandRoutes = LAPTOP_BRANDS.map((brand) => ({
+    url: `${SITE_URL}/laptops/${brand.slug}`,
+    lastModified: currentDate,
+    changeFrequency: "daily" as const,
+    priority: 0.9,
+  }));
+
+  // Product model routes (/laptops/lenovo/thinkpad-e14, etc.)
+  const productRoutes = LAPTOP_PRODUCTS.map((laptop) => ({
+    url: `${SITE_URL}/laptops/${laptop.brandSlug}/${laptop.slug}`,
+    lastModified: currentDate,
+    changeFrequency: "weekly" as const,
+    priority: 0.85,
+  }));
+
+  return [...staticRoutes, ...brandRoutes, ...productRoutes];
 }

@@ -3,7 +3,6 @@
 import { useState, useMemo, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import PageHero from "../components/shared/PageHero";
 import SectionHeader from "../components/shared/SectionHeader";
 import { phoneProducts, Product } from "../data/products";
 import { motion } from "framer-motion";
@@ -78,24 +77,12 @@ function CompactPhoneCard({ product, delay = 0 }: { product: Product; delay?: nu
       <div className="p-4 flex-1 flex flex-col">
         {/* Model ID & Name */}
         <div className="mb-2.5">
-          <p className="text-[11px] font-semibold text-slate-400 tracking-wider uppercase mb-0.5">
-            {product.modelNumber}
+          <p className="text-[11px] font-semibold text-blue-600 tracking-wider uppercase mb-0.5">
+            {product.brand || product.modelNumber}
           </p>
           <h3 className="text-sm sm:text-[15px] font-bold text-slate-900 leading-snug line-clamp-1 group-hover:text-black transition-colors">
             {product.name}
           </h3>
-        </div>
-
-        {/* Price */}
-        <div className="mb-3">
-          <span className="text-base sm:text-lg font-extrabold text-slate-950">
-            {new Intl.NumberFormat("en-IN", {
-              style: "currency",
-              currency: "INR",
-              maximumFractionDigits: 0,
-            }).format(product.price)}
-          </span>
-          <span className="text-[11px] text-slate-400 ml-1.5 font-normal">excl. GST / MRP</span>
         </div>
 
         {/* Compact Key Spec Badges (2x2 Grid) */}
@@ -126,16 +113,8 @@ function CompactPhoneCard({ product, delay = 0 }: { product: Product; delay?: nu
           )}
         </div>
 
-        {/* Warranty Tag */}
-        <div className="mt-auto pt-2 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500 mb-3">
-          <span className="flex items-center gap-1 text-emerald-700 font-medium truncate max-w-[85%]">
-            <FaCheckCircle className="text-emerald-600 text-[10px] shrink-0" />
-            <span className="truncate">{product.warranty}</span>
-          </span>
-        </div>
-
         {/* Action Buttons */}
-        <div className="grid grid-cols-2 gap-2">
+        <div className="mt-auto pt-2 grid grid-cols-2 gap-2">
           <a
             href={`https://wa.me/919643990077?text=${whatsappMessage}`}
             target="_blank"
@@ -243,15 +222,8 @@ export default function PhonesPage() {
     <main className="min-h-screen bg-white text-slate-900">
       <Navbar />
 
-      {/* Hero Section */}
-      <PageHero
-        title="Next-Gen Smartphones. Enterprise Mobility."
-        subtitle="Authorized procurement for the latest flagship, foldable, and performance devices from Apple, Samsung, Vivo, Oppo, and Realme with official warranties and bulk pricing."
-        miniText="AUTHORIZED SMARTPHONE DISTRIBUTOR"
-      />
-
       {/* Main Content */}
-      <section className="py-6 sm:py-8 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="pt-28 sm:pt-32 pb-12 sm:pb-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeader 
           title="Explore Smartphone Lineup" 
           subtitle="Direct manufacturer sourcing with genuine warranty, IMEI registration, and corporate invoice compliance."

@@ -7,6 +7,7 @@ import { FaCheckCircle } from "react-icons/fa";
 interface ProductCardProps {
   id: string;
   name: string;
+  brand?: string;
   modelNumber: string;
   image: string;
   description?: string;
@@ -20,6 +21,7 @@ interface ProductCardProps {
 export default function ProductCard({
   id,
   name,
+  brand,
   modelNumber,
   image,
   description,
@@ -52,20 +54,11 @@ export default function ProductCard({
       {/* Content */}
       <div className="p-6 flex-1 flex flex-col">
         <div className="mb-4">
-          <p className="text-slate-500 text-xs tracking-widest uppercase mb-1 font-semibold">{modelNumber}</p>
+          <p className="text-blue-600 text-[11px] tracking-wider uppercase mb-1 font-bold">{brand || modelNumber}</p>
           <h3 className="text-lg sm:text-xl font-bold text-slate-900 leading-tight mb-2">{name}</h3>
           {description && (
             <p className="text-slate-600 text-xs sm:text-sm leading-relaxed mb-3 line-clamp-2">
               {description}
-            </p>
-          )}
-          {price && (
-            <p className="text-2xl font-extrabold text-slate-950">
-              {new Intl.NumberFormat("en-IN", {
-                style: "currency",
-                currency: "INR",
-                maximumFractionDigits: 0,
-              }).format(price)}
             </p>
           )}
         </div>
@@ -82,13 +75,8 @@ export default function ProductCard({
           </ul>
         </div>
 
-        {/* Footer info & Buttons */}
+        {/* Footer Buttons */}
         <div className="mt-auto">
-          <div className="flex items-center gap-2 text-xs font-semibold text-emerald-700 mb-4 bg-emerald-50 w-fit px-3 py-1.5 rounded-full border border-emerald-200">
-            <FaCheckCircle className="text-emerald-600" />
-            <span>{warranty}</span>
-          </div>
-
           <div className="grid grid-cols-2 gap-3">
             <Link
               href={`#details-${id}`}
@@ -96,12 +84,14 @@ export default function ProductCard({
             >
               View Details
             </Link>
-            <Link 
-              href="/#contact"
+            <a 
+              href={`https://wa.me/919643990077?text=${encodeURIComponent(`Hi Authentic Infosystem, I would like to request the latest quote and availability for ${name} (${modelNumber || ""}).`)}`}
+              target="_blank"
+              rel="noopener noreferrer"
               className="py-2.5 px-4 text-center block rounded-xl bg-black hover:bg-zinc-800 text-white text-sm font-semibold transition-all shadow-sm"
             >
               Request Quote
-            </Link>
+            </a>
           </div>
         </div>
       </div>

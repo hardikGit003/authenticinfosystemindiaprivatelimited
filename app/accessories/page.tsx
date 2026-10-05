@@ -2,7 +2,6 @@
 
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import PageHero from "../components/shared/PageHero";
 import SectionHeader from "../components/shared/SectionHeader";
 import ProductCard from "../components/shared/ProductCard";
 import { useState, useMemo, useEffect, useRef } from "react";
@@ -69,16 +68,8 @@ export default function AccessoriesPage() {
     <main className="min-h-screen bg-white text-slate-900">
       <Navbar />
 
-      <PageHero
-        title="Elevate Your Workspace."
-        subtitle="Explore productivity-enhancing accessories designed for professionals and modern workplaces."
-        miniText="PREMIUM ACCESSORIES"
-        primaryButtonText="Browse Accessories"
-        secondaryButtonText="Request Corporate Pricing"
-      />
-
       {/* Categories & Search Bar */}
-      <section className="py-6 sm:py-8 page-container border-b border-slate-200 bg-slate-50/50">
+      <section className="pt-28 sm:pt-32 pb-6 sm:pb-8 page-container border-b border-slate-200 bg-slate-50/50">
         <div className="max-w-md mx-auto mb-4">
           <div className="relative">
             <FaSearch className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" size={13} />
