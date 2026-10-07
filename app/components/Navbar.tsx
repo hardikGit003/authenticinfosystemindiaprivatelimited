@@ -16,7 +16,8 @@ import {
   FaWhatsapp,
   FaPhoneAlt,
   FaArrowRight,
-  FaChevronDown
+  FaChevronDown,
+  FaAmazon
 } from "react-icons/fa";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -26,7 +27,7 @@ const navLinks = [
   { href: "/", label: "Home", icon: FaHome },
   { href: "/laptops", label: "Laptops", icon: FaLaptop },
   { href: "/desktops", label: "Desktops", icon: FaDesktop },
-  { href: "/phones", label: "Mobiles", icon: FaMobileAlt },
+  { href: "/phones", label: "Smartphones", icon: FaMobileAlt },
   { href: "/networking", label: "Networking", icon: FaNetworkWired },
   { href: "/accessories", label: "Accessories", icon: FaKeyboard },
   { href: "/enterprise", label: "Enterprise", icon: FaBuilding },
@@ -34,10 +35,11 @@ const navLinks = [
 ];
 
 const productItems = [
-  { href: "/laptops", label: "Laptops & Workstations" },
-  { href: "/desktops", label: "Desktops & All-in-Ones" },
-  { href: "/phones", label: "Smartphones & Devices" },
-  { href: "/accessories", label: "IT Accessories & Peripherals" },
+  { href: "/amazon", label: "Amazon Storefront" },
+  { href: "/laptops", label: "Laptops" },
+  { href: "/desktops", label: "Desktops" },
+  { href: "/phones", label: "Smartphones" },
+  { href: "/accessories", label: "Accessories" },
 ];
 
 const solutionItems = [
@@ -156,6 +158,7 @@ export default function Navbar() {
 
     const qLower = query.toLowerCase();
     const routeMap = [
+      { keys: ["amazon", "store", "prime", "meetup", "logitech vc"], path: "/amazon" },
       { keys: ["laptop", "macbook", "thinkpad", "notebook"], path: "/laptops" },
       { keys: ["desktop", "pc", "computer", "all-in-one", "aio"], path: "/desktops" },
       { keys: ["phone", "smartphone", "mobile", "iphone", "apple", "samsung", "galaxy", "vivo", "oppo", "realme"], path: "/phones" },
@@ -328,8 +331,23 @@ export default function Navbar() {
             </Link>
           </nav>
 
-          {/* RIGHT CONTROLS: SEARCH & TOGGLES */}
+          {/* RIGHT CONTROLS: SEARCH, AMAZON VISIT & TOGGLES */}
           <div className="flex items-center gap-2">
+            
+            {/* AMAZON VISIT BUTTON */}
+            <Link
+              href="/amazon"
+              className={`hidden sm:inline-flex items-center gap-1.5 px-3 sm:px-3.5 py-1.5 sm:py-2 rounded-full font-extrabold text-xs tracking-tight transition-all duration-200 border shadow-xs group shrink-0 ${
+                pathname === "/amazon"
+                  ? "bg-amber-400 text-black border-amber-500 shadow-amber-400/20 ring-2 ring-amber-300"
+                  : "bg-gradient-to-r from-[#febd69] to-[#f3a847] hover:from-[#f3a847] hover:to-[#e89a35] text-slate-950 border-amber-400 hover:shadow-md hover:scale-[1.02]"
+              }`}
+              title="Visit Authentic Infosystem Amazon Storefront"
+            >
+              <FaAmazon className="text-sm shrink-0 group-hover:scale-110 transition-transform" />
+              <span className="whitespace-nowrap">Amazon Visit</span>
+            </Link>
+
             {/* DESKTOP SEARCH INPUT */}
             <div className="relative hidden md:block">
               <div 
@@ -641,9 +659,10 @@ export default function Navbar() {
               </span>
               <div className="flex flex-wrap gap-1.5">
                 {[
+                  { label: "🛒 Amazon Store", href: "/amazon" },
                   { label: "💻 Laptops", href: "/laptops" },
                   { label: "🖥️ Desktops", href: "/desktops" },
-                  { label: "📱 Mobiles", href: "/phones" },
+                  { label: "📱 Smartphones", href: "/phones" },
                   { label: "🌐 Networking", href: "/networking" },
                   { label: "🖱️ Accessories", href: "/accessories" },
                   { label: "🏢 Enterprise", href: "/enterprise" },
@@ -695,6 +714,24 @@ export default function Navbar() {
               )}
             </div>
           </div>
+
+          {/* AMAZON VISIT CARD IN MOBILE DRAWER */}
+          <Link
+            href="/amazon"
+            onClick={() => setMobileMenuOpen(false)}
+            className="flex items-center justify-between p-3.5 rounded-2xl bg-gradient-to-r from-amber-400 to-amber-500 text-black font-extrabold shadow-md mb-4 border border-amber-300 group"
+          >
+            <div className="flex items-center gap-3">
+              <div className="w-9 h-9 rounded-xl bg-black text-amber-400 flex items-center justify-center text-lg shadow-sm">
+                <FaAmazon />
+              </div>
+              <div>
+                <div className="text-sm font-black leading-tight">Amazon Store</div>
+                <div className="text-[11px] text-zinc-900 font-medium">Browse verified catalog & buy on Amazon</div>
+              </div>
+            </div>
+            <FaArrowRight className="w-4 h-4 text-black group-hover:translate-x-1 transition-transform" />
+          </Link>
 
           {/* PRIMARY CATEGORY LINKS */}
           <div className="flex flex-col space-y-1 mb-6">

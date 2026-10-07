@@ -13,6 +13,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1.0,
     },
     {
+      url: `${SITE_URL}/amazon`,
+      lastModified: currentDate,
+      changeFrequency: "daily" as const,
+      priority: 0.95,
+    },
+    {
       url: `${SITE_URL}/laptops`,
       lastModified: currentDate,
       changeFrequency: "daily" as const,

@@ -65,9 +65,10 @@ export default function Footer() {
         <div className="footer-links">
           <div className="footer-column">
             <h3>Products</h3>
+            <Link href="/amazon">Amazon Storefront</Link>
             <Link href="/laptops">Laptops</Link>
             <Link href="/desktops">Desktops</Link>
-            <Link href="/phones">Mobiles</Link>
+            <Link href="/phones">Smartphones</Link>
             <Link href="/networking">Networking</Link>
             <Link href="/accessories">Accessories</Link>
             <Link href="/configuration">Custom PC Build</Link>

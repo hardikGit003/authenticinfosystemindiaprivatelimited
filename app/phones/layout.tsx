@@ -25,7 +25,7 @@ export default function PhonesLayout({
 }) {
   const breadcrumb = getBreadcrumbSchema([
     { name: "Home", url: "/" },
-    { name: "Mobiles", url: "/phones" },
+    { name: "Smartphones", url: "/phones" },
   ]);
 
   const itemList = getItemListSchema(
