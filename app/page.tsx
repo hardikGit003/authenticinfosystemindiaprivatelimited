@@ -1,5 +1,5 @@
 import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
+import BenQSmartBoardBanner from "./components/BenQSmartBoardBanner";
 import Iphone18PopupModal from "./components/Iphone18PopupModal";
 import Iphone18ProAdSection from "./components/Iphone18ProAdSection";
 import AboutSection from "./components/AboutSection";
@@ -21,7 +21,8 @@ export default function Home() {
       {/* iPhone 18 Launch Popup Advertisement Modal */}
       <Iphone18PopupModal />
 
-      <Hero />
+      {/* BenQ Smart Board Top Banner Showcase */}
+      <BenQSmartBoardBanner />
 
       {/* iPhone 18 Pro Advertisement & Pre-Order Showcase */}
       <Iphone18ProAdSection />

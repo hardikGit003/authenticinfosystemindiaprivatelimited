@@ -6,8 +6,7 @@ import {
   FaMicrochip, 
   FaCamera, 
   FaShieldAlt, 
-  FaBatteryFull, 
-  FaApple
+  FaBatteryFull
 } from "react-icons/fa";
 
 export default function Iphone18ProAdSection() {
@@ -21,78 +20,104 @@ export default function Iphone18ProAdSection() {
   );
 
   return (
-    <section id="iphone18-ad" className="relative py-20 sm:py-28 bg-white text-slate-900 overflow-hidden border-b border-slate-200">
+    <section id="iphone18-ad" className="relative py-12 sm:py-16 lg:py-20 bg-white text-slate-900 overflow-hidden border-b border-slate-200">
       {/* Subtle clean neutral backdrop */}
-      <div className="absolute inset-0 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:28px_28px] opacity-40 pointer-events-none" />
+      <div 
+        className="absolute inset-0 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:28px_28px] opacity-40 pointer-events-none" 
+        aria-hidden="true"
+      />
 
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* TOP HEADER - Huge Bold Announcement */}
-        <div className="flex flex-col items-center text-center mb-12 sm:mb-16">
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full bg-slate-900 text-white shadow-md mb-5"
-          >
-            <FaApple className="text-white text-base" />
-            <span className="text-xs sm:text-sm font-extrabold uppercase tracking-wider text-slate-100">
-              2026 Apple Launch • Orders Open
-            </span>
-            <span className="flex h-2.5 w-2.5 relative ml-1">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
-            </span>
-          </motion.div>
+        {/* TOP TWO-COLUMN SHOWCASE: Content Left | Photo Right (matching BenQ section layout) */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center mb-14 sm:mb-16">
+          
+          {/* LEFT COLUMN: Brand, Heading, Description, CTA */}
+          <div className="lg:col-span-5 flex flex-col justify-center z-10">
+            
+            {/* Top Brand Lockup */}
+            <motion.div 
+              initial={{ opacity: 0, y: -8 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4 }}
+              className="mb-4 sm:mb-6"
+            >
+              <div className="flex flex-col">
+                <span className="text-3xl sm:text-4xl lg:text-[40px] font-black tracking-tight text-slate-950 uppercase leading-none font-sans">
+                  Apple
+                </span>
+                <span className="text-sm sm:text-base lg:text-lg font-black tracking-wider text-slate-800 uppercase mt-1.5">
+                  iPhone 18 Pro &amp; Duo Launch
+                </span>
+              </div>
+            </motion.div>
 
-          <motion.h2
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4 }}
-            className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-slate-950 max-w-5xl leading-[1.08]"
-          >
-            Order iPhone 18 Pro & iPhone Duo
-          </motion.h2>
+            {/* Main Headline */}
+            <motion.h2 
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.1 }}
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-[44px] xl:text-[48px] font-black text-slate-950 tracking-tight leading-[1.12]"
+            >
+              Order iPhone 18 Pro &amp; iPhone Duo
+            </motion.h2>
 
-          <motion.p
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4, delay: 0.1 }}
-            className="mt-4 text-lg sm:text-2xl font-semibold text-slate-700 max-w-3xl leading-relaxed"
-          >
-            Titanium 18 Pro Flagship & All-New Foldable iPhone Duo. Reserve Your Priority Day-1 Allocation.
-          </motion.p>
+            {/* Description Text */}
+            <motion.p 
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.2 }}
+              className="mt-4 sm:mt-6 text-sm sm:text-base lg:text-[16px] text-slate-700 leading-relaxed font-normal"
+            >
+              Titanium 18 Pro Flagship &amp; All-New Foldable iPhone Duo. Reserve Your Priority Day-1 Allocation with official GST tax invoicing and dedicated account allocation.
+            </motion.p>
+
+            {/* CTA Actions */}
+            <motion.div 
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: 0.3 }}
+              className="mt-8 flex flex-wrap items-center gap-4"
+            >
+              <a
+                href={`https://wa.me/919643990077?text=${whatsappInquiryMsg}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full bg-slate-950 hover:bg-slate-800 text-white font-bold text-sm sm:text-base shadow-lg transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
+                aria-label="Order iPhone 18 Pro on WhatsApp"
+              >
+                <FaWhatsapp className="text-emerald-400 text-base" />
+                <span>Reserve via WhatsApp</span>
+              </a>
+            </motion.div>
+
+          </div>
+
+          {/* RIGHT COLUMN: Featured Photo Display Frame */}
+          <div className="lg:col-span-7 flex flex-col items-center">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.98 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="relative w-full aspect-[16/10] sm:aspect-[16/9] rounded-2xl sm:rounded-3xl overflow-hidden bg-slate-950 shadow-2xl shadow-slate-300/60 border border-slate-200 group flex items-center justify-center"
+            >
+              <img
+                src={bannerImgSrc}
+                alt="Apple iPhone 18 Pro Official Banner"
+                width="1400"
+                height="600"
+                loading="lazy"
+                className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-[1.02]"
+              />
+            </motion.div>
+          </div>
+
         </div>
-
-        {/* HERO BANNER PHOTO SHOWCASE */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.98 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="relative rounded-3xl overflow-hidden border border-slate-200/90 bg-white shadow-2xl shadow-slate-200/80 mb-14 group"
-        >
-          {/* Top Status Bar */}
-          <div className="absolute top-4 left-4 z-20 pointer-events-none">
-            <span className="bg-white/95 backdrop-blur-md text-slate-900 text-xs font-bold px-4 py-2 rounded-full border border-slate-200 shadow-sm flex items-center gap-2">
-              <FaApple className="text-slate-900 text-sm" /> Authentic Infosystem Distribution
-            </span>
-          </div>
-
-          {/* Banner Photo */}
-          <div className="relative w-full aspect-[21/9] min-h-[300px] sm:min-h-[420px] lg:min-h-[520px] flex items-center justify-center overflow-hidden bg-slate-950">
-            <img
-              src={bannerImgSrc}
-              alt="Apple iPhone 18 Pro Official Banner"
-              width="1400"
-              height="600"
-              loading="lazy"
-              className="w-full h-full object-cover sm:object-contain object-center transition-transform duration-700 group-hover:scale-[1.02]"
-            />
-          </div>
-        </motion.div>
 
         {/* OFFICIAL APPLE PHOTO SHOWCASE & FEATURE GRID */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-14">
@@ -106,7 +131,7 @@ export default function Iphone18ProAdSection() {
           >
             <div className="p-7 pb-3">
               <span className="text-xs font-bold text-slate-500 uppercase tracking-wider block mb-1">
-                New 4-Color Pro & Duo Lineup
+                New 4-Color Pro &amp; Duo Lineup
               </span>
               <h3 className="text-2xl font-black text-slate-950 mb-2">
                 Forged in Titanium
@@ -205,7 +230,7 @@ export default function Iphone18ProAdSection() {
             </div>
             <h4 className="text-base font-bold text-slate-950 mb-1">2nm A20 Pro Silicon</h4>
             <p className="text-xs sm:text-sm text-slate-500 leading-relaxed">
-              Industry-leading CPU & GPU architecture with high-speed on-device neural processing.
+              Industry-leading CPU &amp; GPU architecture with high-speed on-device neural processing.
             </p>
           </div>
 
@@ -247,7 +272,7 @@ export default function Iphone18ProAdSection() {
               Authentic Infosystem Priority Commercial Allocation
             </span>
             <h3 className="text-2xl sm:text-3xl font-black text-white">
-              Reserve Your iPhone 18 Pro & iPhone Duo
+              Reserve Your iPhone 18 Pro &amp; iPhone Duo
             </h3>
             <p className="text-xs sm:text-sm text-neutral-300 max-w-xl">
               Official corporate GST tax invoicing, day-1 priority serial numbers, and dedicated account management.

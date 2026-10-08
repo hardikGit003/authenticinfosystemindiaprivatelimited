@@ -35,7 +35,6 @@ const navLinks = [
 ];
 
 const productItems = [
-  { href: "/amazon", label: "Amazon Storefront" },
   { href: "/laptops", label: "Laptops" },
   { href: "/desktops", label: "Desktops" },
   { href: "/phones", label: "Smartphones" },

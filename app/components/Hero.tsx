@@ -1,48 +1,19 @@
 "use client";
 
-import { useEffect } from "react";
 import Link from "next/link";
-import { 
-  FaArrowRight 
-} from "react-icons/fa";
+import { FaArrowRight } from "react-icons/fa";
 
 export default function Hero() {
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollY = window.scrollY;
-      const video = document.querySelector(".background-video") as HTMLVideoElement | null;
-      if (video) {
-        const scale = 1 + scrollY * 0.0003;
-        video.style.transform = `scale(${scale})`;
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
   return (
-    <section id="home" className="hero">
-      {/* VIDEO BACKGROUND */}
-      <div className="video-wrapper">
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="background-video"
-        >
-          <source src="/hero.mp4" type="video/mp4" />
-        </video>
-      </div>
-
-      {/* OVERLAY */}
-      <div className="hero-overlay"></div>
+    <section id="home" className="hero bg-white border-b border-slate-200">
+      {/* Subtle clean neutral grid backdrop */}
+      <div 
+        className="absolute inset-0 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:28px_28px] opacity-40 pointer-events-none" 
+        aria-hidden="true"
+      />
 
       {/* CONTENT */}
-      <div className="hero-content">
+      <div className="hero-content relative z-10">
         {/* PRIMARY HEADLINE (H1) */}
         <h1 className="hero-heading">
           Technology Products and{" "}
