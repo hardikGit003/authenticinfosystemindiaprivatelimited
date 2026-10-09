@@ -10,14 +10,12 @@ import WhyChooseUs from "./components/WhyChooseUs";
 import ContactSection from "./components/ContactSection";
 import FinalSection from "./components/FinalSection";
 import CustomerReviewsSection from "./components/CustomerReviewsSection";
-import ProvideSection from "./components/ProvideSection";
 import Footer from "./components/Footer";
 
 export default function Home() {
   return (
     <main>
       <Navbar />
-
       {/* iPhone 18 Launch Popup Advertisement Modal */}
       <Iphone18PopupModal />
 
@@ -41,8 +39,6 @@ export default function Home() {
 
       {/* What Customer Say About Us - Google Reviews Showcase */}
       <CustomerReviewsSection />
-
-      <ProvideSection />
 
       <ContactSection />
 

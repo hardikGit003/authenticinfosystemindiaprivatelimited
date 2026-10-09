@@ -206,6 +206,188 @@ section {
 }
 
 /* ========================================
+   BENQ BANNER & IPHONE SHOWCASE SECTIONS
+======================================== */
+
+.benq-banner-section {
+  width: 100%;
+  min-height: calc(100vh - 78px);
+  background: #ffffff;
+  display: grid;
+  grid-template-columns: 0.9fr 1fr;
+  align-items: center;
+  gap: 50px;
+  padding: 130px 90px 90px;
+  overflow: hidden;
+  position: relative;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.benq-banner-left {
+  max-width: 760px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  z-index: 10;
+}
+
+.benq-banner-brand-title {
+  font-size: 2.75rem;
+  font-weight: 900;
+  letter-spacing: -1.5px;
+  color: #0f172a;
+  line-height: 1;
+}
+
+.benq-banner-brand-sub {
+  color: #5c1048;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin-top: 8px;
+  display: block;
+}
+
+.benq-banner-heading {
+  font-size: 3.6rem;
+  line-height: 1.08;
+  font-weight: 800;
+  letter-spacing: -2px;
+  color: #0f172a;
+  margin-bottom: 24px;
+  max-width: 660px;
+}
+
+.benq-banner-description {
+  font-size: 1.02rem;
+  line-height: 1.8;
+  color: #475569;
+  max-width: 700px;
+  margin-bottom: 28px;
+  font-weight: 400;
+}
+
+.benq-banner-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.benq-banner-right {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.benq-banner-frame {
+  width: 95%;
+  max-width: 950px;
+  height: 460px;
+  border-radius: 28px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  position: relative;
+  background: #020617;
+  transition: all 0.5s ease;
+}
+
+.benq-banner-frame:hover {
+  transform: scale(1.02);
+}
+
+.iphone-ad-section {
+  width: 100%;
+  background: #ffffff;
+  padding: 100px 90px 90px;
+  overflow: hidden;
+  position: relative;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.iphone-ad-top {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 0.9fr 1fr;
+  align-items: center;
+  gap: 50px;
+  margin-bottom: 60px;
+}
+
+.iphone-ad-left {
+  max-width: 760px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  z-index: 10;
+}
+
+.iphone-ad-brand-title {
+  font-size: 2.75rem;
+  font-weight: 900;
+  letter-spacing: -1.5px;
+  color: #0f172a;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.iphone-ad-brand-sub {
+  color: #0f172a;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin-top: 8px;
+  display: block;
+}
+
+.iphone-ad-heading {
+  font-size: 3.6rem;
+  line-height: 1.08;
+  font-weight: 800;
+  letter-spacing: -2px;
+  color: #0f172a;
+  margin-bottom: 24px;
+  max-width: 660px;
+}
+
+.iphone-ad-description {
+  font-size: 1.02rem;
+  line-height: 1.8;
+  color: #475569;
+  max-width: 700px;
+  margin-bottom: 28px;
+  font-weight: 400;
+}
+
+.iphone-ad-right {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.iphone-ad-frame {
+  width: 95%;
+  max-width: 950px;
+  height: 460px;
+  border-radius: 28px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  position: relative;
+  background: #020617;
+  transition: all 0.5s ease;
+}
+
+.iphone-ad-frame:hover {
+  transform: scale(1.02);
+}
+
+/* ========================================
    ABOUT SECTION
 ======================================== */
 
@@ -297,7 +479,7 @@ section {
   width: 100%;
   min-height: 100vh;
   background: #f8fafc;
-  padding: 100px 60px;
+  padding: 120px 90px 100px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -484,8 +666,15 @@ section {
   width: 100%;
   min-height: 100vh;
   background: #ffffff;
-  padding: 100px 60px;
+  padding: 120px 90px 100px;
   display: block;
+  overflow: hidden;
+}
+
+.configuration-section-custom {
+  width: 100%;
+  padding: 120px 90px 100px;
+  position: relative;
   overflow: hidden;
 }
 
@@ -500,7 +689,7 @@ section {
 }
 
 .config-container {
-  max-width: 1280px;
+  max-width: 100%;
   margin: 0 auto;
 }
 
@@ -797,7 +986,7 @@ section {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 52px 0 56px;
+  padding: 70px 0;
   background: #f8fafc;
   border-top: 1px solid #e2e8f0;
   border-bottom: 1px solid #e2e8f0;
@@ -810,10 +999,10 @@ section {
 .brands-content {
   position: relative;
   z-index: 3;
-  width: 96%;
+  width: 100%;
   margin: 0 auto;
-  padding-left: 42px;
-  padding-right: 42px;
+  padding-left: 90px;
+  padding-right: 90px;
 }
 
 .brands-mini-text {
@@ -920,7 +1109,7 @@ section {
 
 .why-section {
   min-height: 100vh;
-  padding: 120px 90px;
+  padding: 120px 90px 100px;
   background: #ffffff;
   display: flex;
   align-items: center;
@@ -935,8 +1124,8 @@ section {
   z-index: 2;
   width: 100%;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 80px;
+  grid-template-columns: 0.9fr 1fr;
+  gap: 50px;
   align-items: center;
 }
 
@@ -1129,6 +1318,7 @@ section {
   width: 100%;
   min-height: 0;
   background: #000000;
+  padding: 100px 90px 90px;
   display: flex;
   align-items: center;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
@@ -1143,12 +1333,12 @@ section {
   position: relative;
   z-index: 10;
   width: 100%;
-  max-width: 1350px;
+  max-width: 100%;
   margin: auto;
-  padding: 56px 40px;
+  padding: 0;
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
-  gap: 48px;
+  gap: 50px;
   align-items: center;
 }
 
@@ -1272,7 +1462,7 @@ section {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 100px 60px;
+  padding: 120px 90px 100px;
   background: #ffffff;
 }
 
@@ -1404,12 +1594,23 @@ section {
 }
 
 /* ========================================
-   PROVIDE SECTION
+   PROVIDE & REVIEWS SECTIONS
 ======================================== */
 
 .provide-section {
+  width: 100%;
+  padding: 100px 90px 90px;
   background: #ffffff;
   border-top: 1px solid #e2e8f0;
+  position: relative;
+  overflow: hidden;
+}
+
+.customer-reviews-section {
+  width: 100%;
+  padding: 100px 90px 90px;
+  position: relative;
+  overflow: hidden;
 }
 
 /* ========================================
@@ -1553,14 +1754,14 @@ section {
   position: relative;
   z-index: 100;
   background: #ffffff;
-  padding: 36px 32px 20px;
+  padding: 48px 90px 24px;
   border-top: 1px solid #e2e8f0;
   color: #0f172a;
   overflow: hidden;
 }
 
 .footer-container {
-  max-width: 1320px;
+  max-width: 100%;
   margin: 0 auto;
   width: 100%;
 }
@@ -1851,6 +2052,8 @@ section {
 
 @media (max-width: 1200px) {
   .hero-content h1,
+  .benq-banner-heading,
+  .iphone-ad-heading,
   .about-heading,
   .services-heading,
   .brands-heading,
@@ -1859,17 +2062,45 @@ section {
   .final-content h2 {
     font-size: 3.2rem !important;
   }
-  .about-section {
-    grid-template-columns: 1fr;
-    padding: 100px 40px;
-  }
-  .why-container {
-    grid-template-columns: 1fr;
-    gap: 50px;
-  }
+  .benq-banner-section,
+  .iphone-ad-top,
+  .about-section,
+  .why-container,
   .contact-content {
-    grid-template-columns: 1fr;
-    padding: 80px 40px;
+    grid-template-columns: 1fr !important;
+    gap: 40px !important;
+  }
+  .benq-banner-section,
+  .iphone-ad-section,
+  .about-section,
+  .services-section,
+  .configuration-section,
+  .configuration-section-custom,
+  .why-section,
+  .final-section,
+  .provide-section,
+  .customer-reviews-section,
+  .contact-section {
+    padding: 100px 40px 80px !important;
+  }
+  .brands-content {
+    padding-left: 40px !important;
+    padding-right: 40px !important;
+  }
+  .footer {
+    padding: 36px 40px 20px !important;
+  }
+  .benq-banner-right,
+  .iphone-ad-right,
+  .about-right {
+    justify-content: center;
+  }
+  .benq-banner-frame,
+  .iphone-ad-frame,
+  .about-right img {
+    width: 100%;
+    max-width: 100%;
+    height: 420px;
   }
 }
 
@@ -1877,19 +2108,37 @@ section {
   .hero {
     padding: 105px 16px 40px !important;
   }
+  .benq-banner-section {
+    padding: 100px 16px 40px !important;
+    min-height: auto;
+  }
+  .iphone-ad-section,
   .about-section,
   .services-section,
+  .configuration-section,
+  .configuration-section-custom,
   .why-section,
-  .contact-section,
   .final-section,
-  .provide-section {
+  .provide-section,
+  .customer-reviews-section,
+  .contact-section {
     padding: 50px 16px !important;
-  }
-  .configuration-section {
-    padding: 40px 14px !important;
   }
   .brands-section {
     padding: 36px 0 !important;
+  }
+  .brands-content {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+  .benq-banner-frame,
+  .iphone-ad-frame,
+  .about-right img {
+    height: 290px !important;
+    border-radius: 18px !important;
+  }
+  .configuration-section {
+    padding: 40px 14px !important;
   }
   .brand-card {
     min-width: 150px !important;
@@ -1912,7 +2161,14 @@ section {
     line-height: 1.3 !important;
   }
 
+  .benq-banner-brand-title,
+  .iphone-ad-brand-title {
+    font-size: 2rem !important;
+  }
+
   .hero-content h1,
+  .benq-banner-heading,
+  .iphone-ad-heading,
   .about-heading,
   .services-heading,
   .brands-heading,
@@ -1926,6 +2182,8 @@ section {
   }
 
   .hero-description,
+  .benq-banner-description,
+  .iphone-ad-description,
   .about-description,
   .why-description,
   .contact-description,
@@ -2035,13 +2293,30 @@ section {
     height: 32px !important;
     max-height: 34px !important;
   }
+  .benq-banner-section {
+    padding: 90px 12px 36px !important;
+  }
+  .iphone-ad-section,
   .about-section,
   .services-section,
+  .configuration-section,
+  .configuration-section-custom,
   .why-section,
-  .contact-section,
   .final-section,
-  .provide-section {
+  .provide-section,
+  .customer-reviews-section,
+  .contact-section {
     padding: 40px 12px !important;
+  }
+  .brands-content {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+  }
+  .benq-banner-frame,
+  .iphone-ad-frame,
+  .about-right img {
+    height: 230px !important;
+    border-radius: 14px !important;
   }
   .hero-buttons {
     flex-direction: column;

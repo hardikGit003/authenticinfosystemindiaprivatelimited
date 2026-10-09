@@ -113,13 +113,13 @@ export default function ConfigurationSection() {
   return (
     <section
       id="configuration"
-      className="w-full bg-black py-16 sm:py-20 lg:py-28 relative border-t border-white/10 overflow-hidden"
+      className="configuration-section-custom bg-black border-t border-white/10"
     >
       {/* Background Ambience Glows */}
       <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-blue-600/5 rounded-full blur-[140px] pointer-events-none" />
       <div className="absolute bottom-10 right-10 w-[500px] h-[300px] bg-purple-600/5 rounded-full blur-[120px] pointer-events-none" />
 
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="w-full relative z-10">
 
         {/* MAIN SECTION HEADER */}
         <div className="text-center mb-12 sm:mb-16 max-w-4xl mx-auto">

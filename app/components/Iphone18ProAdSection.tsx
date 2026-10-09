@@ -20,104 +20,73 @@ export default function Iphone18ProAdSection() {
   );
 
   return (
-    <section id="iphone18-ad" className="relative py-12 sm:py-16 lg:py-20 bg-white text-slate-900 overflow-hidden border-b border-slate-200">
-      {/* Subtle clean neutral backdrop */}
-      <div 
-        className="absolute inset-0 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:28px_28px] opacity-40 pointer-events-none" 
-        aria-hidden="true"
-      />
-
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="iphone18-ad" className="iphone-ad-section">
+      {/* TOP TWO-COLUMN SHOWCASE: Content Left | Photo Right (matching BenQ & About section layout) */}
+      <div className="iphone-ad-top">
         
-        {/* TOP TWO-COLUMN SHOWCASE: Content Left | Photo Right (matching BenQ section layout) */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center mb-14 sm:mb-16">
-          
-          {/* LEFT COLUMN: Brand, Heading, Description, CTA */}
-          <div className="lg:col-span-5 flex flex-col justify-center z-10">
-            
-            {/* Top Brand Lockup */}
-            <motion.div 
-              initial={{ opacity: 0, y: -8 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4 }}
-              className="mb-4 sm:mb-6"
-            >
-              <div className="flex flex-col">
-                <span className="text-3xl sm:text-4xl lg:text-[40px] font-black tracking-tight text-slate-950 uppercase leading-none font-sans">
-                  Apple
-                </span>
-                <span className="text-sm sm:text-base lg:text-lg font-black tracking-wider text-slate-800 uppercase mt-1.5">
-                  iPhone 18 Pro &amp; Duo Launch
-                </span>
-              </div>
-            </motion.div>
-
-            {/* Main Headline */}
-            <motion.h2 
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: 0.1 }}
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-[44px] xl:text-[48px] font-black text-slate-950 tracking-tight leading-[1.12]"
-            >
-              Order iPhone 18 Pro &amp; iPhone Duo
-            </motion.h2>
-
-            {/* Description Text */}
-            <motion.p 
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: 0.2 }}
-              className="mt-4 sm:mt-6 text-sm sm:text-base lg:text-[16px] text-slate-700 leading-relaxed font-normal"
-            >
-              Titanium 18 Pro Flagship &amp; All-New Foldable iPhone Duo. Reserve Your Priority Day-1 Allocation with official GST tax invoicing and dedicated account allocation.
-            </motion.p>
-
-            {/* CTA Actions */}
-            <motion.div 
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: 0.3 }}
-              className="mt-8 flex flex-wrap items-center gap-4"
-            >
-              <a
-                href={`https://wa.me/919643990077?text=${whatsappInquiryMsg}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full bg-slate-950 hover:bg-slate-800 text-white font-bold text-sm sm:text-base shadow-lg transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
-                aria-label="Order iPhone 18 Pro on WhatsApp"
-              >
-                <FaWhatsapp className="text-emerald-400 text-base" />
-                <span>Reserve via WhatsApp</span>
-              </a>
-            </motion.div>
-
+        {/* LEFT COLUMN: Brand, Heading, Description, CTA */}
+        <motion.div 
+          className="iphone-ad-left"
+          initial={{ opacity: 0, x: -80 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1 }}
+        >
+          {/* Top Brand Lockup */}
+          <div className="iphone-ad-brand">
+            <span className="iphone-ad-brand-title">Apple</span>
+            <span className="iphone-ad-brand-sub">
+              iPhone 18 Pro &amp; Duo Launch
+            </span>
           </div>
 
-          {/* RIGHT COLUMN: Featured Photo Display Frame */}
-          <div className="lg:col-span-7 flex flex-col items-center">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.98 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="relative w-full aspect-[16/10] sm:aspect-[16/9] rounded-2xl sm:rounded-3xl overflow-hidden bg-slate-950 shadow-2xl shadow-slate-300/60 border border-slate-200 group flex items-center justify-center"
+          {/* Main Headline */}
+          <h2 className="iphone-ad-heading">
+            Order iPhone 18 Pro &amp; iPhone Duo
+          </h2>
+
+          {/* Description Text */}
+          <p className="iphone-ad-description">
+            Titanium 18 Pro Flagship &amp; All-New Foldable iPhone Duo. Reserve Your Priority Day-1 Allocation with official GST tax invoicing and dedicated account allocation.
+          </p>
+
+          {/* CTA Actions */}
+          <div className="benq-banner-actions">
+            <a
+              href={`https://wa.me/919643990077?text=${whatsappInquiryMsg}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2.5 px-8 py-3.5 rounded-full bg-slate-950 hover:bg-slate-800 text-white font-bold text-sm sm:text-base shadow-lg transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
+              aria-label="Order iPhone 18 Pro on WhatsApp"
             >
-              <img
-                src={bannerImgSrc}
-                alt="Apple iPhone 18 Pro Official Banner"
-                width="1400"
-                height="600"
-                loading="lazy"
-                className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-[1.02]"
-              />
-            </motion.div>
+              <FaWhatsapp className="text-emerald-400 text-base" />
+              <span>Reserve via WhatsApp</span>
+            </a>
           </div>
 
-        </div>
+        </motion.div>
+
+        {/* RIGHT COLUMN: Featured Photo Display Frame */}
+        <motion.div 
+          className="iphone-ad-right"
+          initial={{ opacity: 0, x: 80 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1 }}
+        >
+          <div className="iphone-ad-frame group flex items-center justify-center">
+            <img
+              src={bannerImgSrc}
+              alt="Apple iPhone 18 Pro Official Banner"
+              width="1400"
+              height="600"
+              loading="lazy"
+              className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-[1.02]"
+            />
+          </div>
+        </motion.div>
+
+      </div>
 
         {/* OFFICIAL APPLE PHOTO SHOWCASE & FEATURE GRID */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-14">
@@ -265,7 +234,6 @@ export default function Iphone18ProAdSection() {
           </div>
         </div>
 
-      </div>
     </section>
   );
 }

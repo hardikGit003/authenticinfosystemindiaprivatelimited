@@ -17,7 +17,7 @@ interface ReviewItem {
 const reviewsData: ReviewItem[] = [
   {
     id: 1,
-    image: "/reviews/review-1.png",
+    image: "/reviews/customer-review-1.png",
     name: "Anshika Dhiman",
     rating: 5,
     timeAgo: "2 months ago",
@@ -26,7 +26,7 @@ const reviewsData: ReviewItem[] = [
   },
   {
     id: 2,
-    image: "/reviews/review-2.png",
+    image: "/reviews/customer-review-2.png",
     name: "Roshani Yadav",
     rating: 5,
     timeAgo: "2 months ago",
@@ -35,7 +35,7 @@ const reviewsData: ReviewItem[] = [
   },
   {
     id: 3,
-    image: "/reviews/review-3.png",
+    image: "/reviews/customer-review-3.png",
     name: "Sadhna Kumari",
     rating: 5,
     timeAgo: "2 months ago",
@@ -44,7 +44,7 @@ const reviewsData: ReviewItem[] = [
   },
   {
     id: 4,
-    image: "/reviews/review-4.png",
+    image: "/reviews/customer-review-4.png",
     name: "Nidhi Verma",
     rating: 5,
     timeAgo: "2 months ago",
@@ -53,7 +53,7 @@ const reviewsData: ReviewItem[] = [
   },
   {
     id: 5,
-    image: "/reviews/review-5.png",
+    image: "/reviews/customer-review-5.png",
     name: "Mannu Tyagi",
     rating: 5,
     timeAgo: "2 months ago",
@@ -62,7 +62,7 @@ const reviewsData: ReviewItem[] = [
   },
   {
     id: 6,
-    image: "/reviews/review-6.png",
+    image: "/reviews/customer-review-6.png",
     name: "Pragati Gupta",
     rating: 5,
     timeAgo: "a month ago",
@@ -71,7 +71,7 @@ const reviewsData: ReviewItem[] = [
   },
   {
     id: 7,
-    image: "/reviews/review-7.png",
+    image: "/reviews/customer-review-7.png",
     name: "Aadesh Pal",
     rating: 5,
     timeAgo: "2 months ago",
@@ -84,12 +84,12 @@ export default function CustomerReviewsSection() {
   return (
     <section
       id="customer-reviews"
-      className="relative py-12 sm:py-18 px-4 sm:px-6 lg:px-8 bg-slate-50/60 overflow-hidden border-t border-slate-200"
+      className="customer-reviews-section bg-slate-50/60 border-t border-slate-200"
     >
       {/* Background Subtle Grid Texture */}
       <div className="absolute inset-0 bg-[radial-gradient(#cbd5e1_1px,transparent_1px)] [background-size:22px_22px] opacity-30 pointer-events-none" />
 
-      <div className="max-w-6xl mx-auto relative z-10">
+      <div className="w-full relative z-10">
         
         {/* SECTION HEADER - COMPACT & CLEAN */}
         <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-12">
@@ -155,6 +155,7 @@ export default function CustomerReviewsSection() {
                     alt={`Google review by ${review.name}`}
                     width={400}
                     height={400}
+                    unoptimized
                     className="w-full h-auto object-contain"
                     priority={review.id <= 4}
                   />

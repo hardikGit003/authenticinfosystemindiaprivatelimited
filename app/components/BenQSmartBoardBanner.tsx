@@ -78,7 +78,7 @@ export default function BenQSmartBoardBanner() {
     <section 
       id="benq-smart-board"
       aria-label="BenQ Smart Interactive Displays"
-      className="relative bg-white text-slate-900 pt-28 sm:pt-32 lg:pt-36 pb-12 sm:pb-16 lg:pb-20 border-b border-slate-200 overflow-hidden"
+      className="benq-banner-section"
     >
       {/* Hidden image preloader to keep transitions instant and seamless */}
       <div className="hidden" aria-hidden="true">
@@ -87,151 +87,107 @@ export default function BenQSmartBoardBanner() {
         ))}
       </div>
 
-      {/* Subtle clean neutral backdrop */}
-      <div 
-        className="absolute inset-0 opacity-40 pointer-events-none bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:24px_24px]" 
-        aria-hidden="true"
-      />
-      <div 
-        className="absolute -top-32 -right-32 w-96 h-96 rounded-full bg-slate-100/70 blur-3xl pointer-events-none" 
-        aria-hidden="true"
-      />
-      <div 
-        className="absolute -bottom-32 -left-32 w-96 h-96 rounded-full bg-slate-100/70 blur-3xl pointer-events-none" 
-        aria-hidden="true"
-      />
-
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* TOP TWO-COLUMN LAYOUT: Content Left | Slider Right */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-          
-          {/* LEFT COLUMN: Brand, Heading, Description, CTA */}
-          <div className="lg:col-span-5 flex flex-col justify-center z-10">
-            
-            {/* Top Brand Lockup */}
-            <motion.div 
-              initial={{ opacity: 0, y: -8 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4 }}
-              className="mb-4 sm:mb-6"
-            >
-              <div className="flex flex-col">
-                <span className="text-3xl sm:text-4xl lg:text-[42px] font-black tracking-tight text-slate-950 leading-none">
-                  BenQ
-                </span>
-                <span className="text-sm sm:text-base lg:text-lg font-black tracking-wider text-[#5c1048] uppercase mt-1.5">
-                  Classroom Innovation &apos;26
-                </span>
-              </div>
-            </motion.div>
-
-            {/* Main Headline */}
-            <motion.h2 
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: 0.1 }}
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-[44px] xl:text-[48px] font-black text-slate-950 tracking-tight leading-[1.12]"
-            >
-              Smart Interactive Displays for Modern Classrooms
-            </motion.h2>
-
-            {/* Description Text */}
-            <motion.p 
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: 0.2 }}
-              className="mt-4 sm:mt-6 text-sm sm:text-base lg:text-[16px] text-slate-700 leading-relaxed font-normal"
-            >
-              Make every lesson more engaging with interactive display technology built for teaching, 
-              collaboration, and digital learning. Bring lessons, online resources, presentations, 
-              and classroom activities together on one intuitive smart board.
-            </motion.p>
-
-            {/* CTA Actions */}
-            <motion.div 
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: 0.3 }}
-              className="mt-8 flex flex-wrap items-center gap-4"
-            >
-              {/* Primary Pill Button */}
-              <button 
-                onClick={() => setIsModalOpen(true)}
-                className="px-7 py-3.5 rounded-full bg-[#6b1456] hover:bg-[#530e42] text-white font-bold text-sm sm:text-base shadow-lg shadow-purple-950/20 hover:shadow-xl transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
-                aria-label="Learn more about BenQ Smart Interactive Displays"
-              >
-                Learn more
-              </button>
-
-              {/* WhatsApp Quick Inquiry Button */}
-              <a
-                href={`https://wa.me/919643990077?text=${whatsappMessage}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-md transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
-                aria-label="Contact on WhatsApp for BenQ Displays"
-              >
-                <FaWhatsapp className="text-base" />
-                <span>Get Demo / Quote</span>
-              </a>
-            </motion.div>
-
-          </div>
-
-          {/* RIGHT COLUMN: Auto-swiping Photo Showcase */}
-          <div className="lg:col-span-7 flex flex-col items-center">
-            
-            {/* Carousel Display Frame */}
-            <div className="relative w-full aspect-[16/10] sm:aspect-[16/9] rounded-2xl sm:rounded-3xl overflow-hidden bg-slate-950 shadow-2xl shadow-slate-300/60 border border-slate-200 group">
-              {/* Image Slides with AnimatePresence */}
-              <AnimatePresence initial={false} custom={direction} mode="wait">
-                <motion.div
-                  key={currentIndex}
-                  custom={direction}
-                  variants={slideVariants}
-                  initial="enter"
-                  animate="center"
-                  exit="exit"
-                  className="absolute inset-0 w-full h-full flex items-center justify-center bg-slate-950"
-                >
-                  <img
-                    src={slideImages[currentIndex]}
-                    alt={`BenQ Smart Interactive Board Photo ${currentIndex + 1}`}
-                    className="w-full h-full object-cover object-center select-none"
-                    draggable={false}
-                    loading="eager"
-                  />
-                </motion.div>
-              </AnimatePresence>
-
-              {/* In-Card Quick Left / Right Click Controls on Hover */}
-              <button
-                onClick={handlePrev}
-                aria-label="Previous slide"
-                className="absolute left-3 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-black/40 hover:bg-black/80 text-white backdrop-blur-md border border-white/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer"
-              >
-                <FaChevronLeft className="text-xs sm:text-sm" />
-              </button>
-
-              <button
-                onClick={handleNext}
-                aria-label="Next slide"
-                className="absolute right-3 top-1/2 -translate-y-1/2 z-20 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-black/40 hover:bg-black/80 text-white backdrop-blur-md border border-white/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer"
-              >
-                <FaChevronRight className="text-xs sm:text-sm" />
-              </button>
-            </div>
-
-          </div>
-
+      {/* LEFT COLUMN: Brand, Heading, Description, CTA */}
+      <motion.div 
+        className="benq-banner-left"
+        initial={{ opacity: 0, x: -80 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        transition={{ duration: 1 }}
+        viewport={{ once: true }}
+      >
+        {/* Top Brand Lockup */}
+        <div className="benq-banner-brand">
+          <span className="benq-banner-brand-title">BenQ</span>
+          <span className="benq-banner-brand-sub">
+            Classroom Innovation &apos;26
+          </span>
         </div>
 
-      </div>
+        {/* Main Headline */}
+        <h2 className="benq-banner-heading">
+          Smart Interactive Displays for Modern Classrooms
+        </h2>
+
+        {/* Description Text */}
+        <p className="benq-banner-description">
+          Make every lesson more engaging with interactive display technology built for teaching, 
+          collaboration, and digital learning. Bring lessons, online resources, presentations, 
+          and classroom activities together on one intuitive smart board.
+        </p>
+
+        {/* CTA Actions */}
+        <div className="benq-banner-actions">
+          {/* Primary Pill Button */}
+          <button 
+            onClick={() => setIsModalOpen(true)}
+            className="px-8 py-3.5 rounded-full bg-[#6b1456] hover:bg-[#530e42] text-white font-bold text-sm sm:text-base shadow-lg shadow-purple-950/20 hover:shadow-xl transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
+            aria-label="Learn more about BenQ Smart Interactive Displays"
+          >
+            Learn more
+          </button>
+
+          {/* WhatsApp Quick Inquiry Button */}
+          <a
+            href={`https://wa.me/919643990077?text=${whatsappMessage}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm sm:text-base shadow-md transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
+            aria-label="Contact on WhatsApp for BenQ Displays"
+          >
+            <FaWhatsapp className="text-base" />
+            <span>Get Demo / Quote</span>
+          </a>
+        </div>
+      </motion.div>
+
+      {/* RIGHT COLUMN: Auto-swiping Photo Showcase Frame */}
+      <motion.div 
+        className="benq-banner-right"
+        initial={{ opacity: 0, x: 80 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        transition={{ duration: 1 }}
+        viewport={{ once: true }}
+      >
+        <div className="benq-banner-frame group">
+          {/* Image Slides with AnimatePresence */}
+          <AnimatePresence initial={false} custom={direction} mode="wait">
+            <motion.div
+              key={currentIndex}
+              custom={direction}
+              variants={slideVariants}
+              initial="enter"
+              animate="center"
+              exit="exit"
+              className="absolute inset-0 w-full h-full flex items-center justify-center bg-slate-950"
+            >
+              <img
+                src={slideImages[currentIndex]}
+                alt={`BenQ Smart Interactive Board Photo ${currentIndex + 1}`}
+                className="w-full h-full object-cover object-center select-none"
+                draggable={false}
+                loading="eager"
+              />
+            </motion.div>
+          </AnimatePresence>
+
+          {/* In-Card Quick Left / Right Click Controls on Hover */}
+          <button
+            onClick={handlePrev}
+            aria-label="Previous slide"
+            className="absolute left-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-black/40 hover:bg-black/80 text-white backdrop-blur-md border border-white/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer"
+          >
+            <FaChevronLeft className="text-xs sm:text-sm" />
+          </button>
+
+          <button
+            onClick={handleNext}
+            aria-label="Next slide"
+            className="absolute right-4 top-1/2 -translate-y-1/2 z-20 w-10 h-10 rounded-full bg-black/40 hover:bg-black/80 text-white backdrop-blur-md border border-white/20 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer"
+          >
+            <FaChevronRight className="text-xs sm:text-sm" />
+          </button>
+        </div>
+      </motion.div>
 
       {/* QUICK SPECS & DEMO REQUEST MODAL */}
       <AnimatePresence>

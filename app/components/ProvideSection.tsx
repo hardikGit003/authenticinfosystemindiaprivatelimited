@@ -73,9 +73,9 @@ export default function ProvideSection() {
   return (
     <section
       id="what-we-provide"
-      className="provide-section relative py-8 sm:py-12 px-4 sm:px-6 lg:px-8 bg-white overflow-hidden border-t border-slate-200"
+      className="provide-section relative bg-white border-t border-slate-200"
     >
-      <div className="max-w-6xl mx-auto relative z-10">
+      <div className="w-full relative z-10">
         {/* SECTION HEADER */}
         <div className="text-center max-w-3xl mx-auto mb-6 sm:mb-8">
           <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold tracking-tight text-slate-900 mb-2">
