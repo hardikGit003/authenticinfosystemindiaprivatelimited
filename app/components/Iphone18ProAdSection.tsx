@@ -223,7 +223,7 @@ export default function Iphone18ProAdSection() {
         </div>
 
         {/* 4 ARCHITECTURAL METRICS */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           <div className="p-6 rounded-2xl bg-white border border-slate-200 shadow-sm hover:border-slate-300 transition-all">
             <div className="w-11 h-11 rounded-xl bg-slate-100 text-slate-950 flex items-center justify-center text-xl mb-3">
               <FaMicrochip />
@@ -263,31 +263,6 @@ export default function Iphone18ProAdSection() {
               High-density solid state cell architecture with 45W MagSafe ultra-fast charging.
             </p>
           </div>
-        </div>
-
-        {/* BOTTOM ENTERPRISE INQUIRY BANNER */}
-        <div className="rounded-3xl bg-black text-white p-7 sm:p-10 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-2xl border border-neutral-800">
-          <div className="space-y-1.5 text-center sm:text-left">
-            <span className="text-xs font-bold text-neutral-400 uppercase tracking-wider">
-              Authentic Infosystem Priority Commercial Allocation
-            </span>
-            <h3 className="text-2xl sm:text-3xl font-black text-white">
-              Reserve Your iPhone 18 Pro &amp; iPhone Duo
-            </h3>
-            <p className="text-xs sm:text-sm text-neutral-300 max-w-xl">
-              Official corporate GST tax invoicing, day-1 priority serial numbers, and dedicated account management.
-            </p>
-          </div>
-
-          <a
-            href={`https://wa.me/919643990077?text=${whatsappInquiryMsg}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="shrink-0 inline-flex items-center gap-3 px-8 py-4 rounded-full bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-black text-sm sm:text-base shadow-lg transition-all hover:scale-105 cursor-pointer"
-          >
-            <FaWhatsapp size={20} />
-            <span>Order Now via WhatsApp</span>
-          </a>
         </div>
 
       </div>
