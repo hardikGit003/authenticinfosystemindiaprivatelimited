@@ -390,16 +390,25 @@ export default function AmazonStorefrontPage() {
           <main className="flex-1 min-w-0">
             
             {/* Section Header */}
-            <div className="mb-4">
-              <h2 className="text-[18px] font-bold text-[#0f1111]">
-                Popular Products
-              </h2>
+            <div className="mb-4 flex flex-wrap items-center justify-between gap-2 border-b border-[#e7e7e7] pb-3">
+              <div>
+                <h2 className="text-[18px] font-bold text-[#0f1111]">
+                  Popular Products ({filteredProducts.length})
+                </h2>
+                <p className="text-[12px] text-[#565959] mt-0.5">
+                  Official inventory fulfilled directly via Amazon India with Prime delivery
+                </p>
+              </div>
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 text-[11px] font-semibold">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                <span>Live Prices Synced with Amazon Seller Account</span>
+              </div>
             </div>
 
-            {/* 5-Column Product Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+            {/* Product Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
               {filteredProducts.map((product) => {
-                const amazonRedirectUrl = `https://www.amazon.in/l/27943762031?ie=UTF8&marketplaceID=A21TJRUUN4KGV&product=${product.asin}&me=A26NUGXR8IFFOO`;
+                const amazonRedirectUrl = product.amazonUrl || `https://www.amazon.in/dp/${product.asin}?me=A26NUGXR8IFFOO`;
 
                 return (
                   <div
