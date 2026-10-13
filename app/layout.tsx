@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Lato } from "next/font/google";
 import "./globals.css";
 import JsonLd from "./components/shared/JsonLd";
 import {
@@ -16,6 +16,13 @@ const inter = Inter({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-inter",
+});
+
+const lato = Lato({
+  subsets: ["latin"],
+  weight: ["300", "400", "700", "900"],
+  display: "swap",
+  variable: "--font-lato",
 });
 
 export const metadata: Metadata = {
@@ -98,7 +105,7 @@ export default function RootLayout({
   ];
 
   return (
-    <html lang="en" className={inter.variable} suppressHydrationWarning>
+    <html lang="en" className={`${inter.variable} ${lato.variable}`} suppressHydrationWarning>
       <body
         suppressHydrationWarning
         className={`${inter.className} font-sans overflow-x-hidden w-full bg-white text-slate-900 selection:bg-blue-500/30 selection:text-inherit`}

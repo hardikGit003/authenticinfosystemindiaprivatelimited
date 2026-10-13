@@ -205,20 +205,29 @@ export default function Navbar() {
       <header className={`main-navbar ${isScrolled ? "scrolled" : ""}`}>
         <div className="w-full max-w-[1560px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 h-full flex items-center justify-between gap-4">
           
-          {/* LEFT: BRAND LOGO & WORDMARK */}
+          {/* LEFT: BRAND LOGO & TAGLINE */}
           <div className="flex items-center shrink-0">
-            <Link href="/" className="nav-logo flex items-center gap-2.5 py-1 group" aria-label="Authentic Infosystem Home">
+            <Link 
+              href="/" 
+              className="nav-logo flex items-center gap-2.5 sm:gap-3 py-1 group" 
+              aria-label="Authentic Infosystem - Solutions that Empower"
+            >
               <img 
-                src="/ai_icon.png" 
+                src="/Full%20Logo.png" 
                 alt="Authentic Infosystem" 
-                width="36"
-                height="36"
+                width="68"
+                height="52"
                 loading="eager"
                 decoding="async"
-                className="h-[32px] sm:h-[36px] w-auto object-contain shrink-0 group-hover:scale-105 transition-transform" 
+                className="h-[38px] sm:h-[44px] md:h-[48px] w-auto object-contain shrink-0 group-hover:scale-105 transition-transform" 
               />
-              <span className="text-[12.5px] sm:text-[14px] lg:text-[15px] font-bold tracking-tight text-slate-950 leading-tight select-none">
-                Authentic Infosystem India Private Limited
+
+              {/* Tagline separator */}
+              <div className="h-5 sm:h-6 w-[1.5px] bg-slate-300/80 rounded-full shrink-0" />
+
+              {/* Tagline */}
+              <span className="text-[12px] sm:text-[13px] md:text-[13.5px] font-semibold text-[#0e3262] tracking-wide italic leading-none select-none whitespace-nowrap">
+                Solutions that Empower
               </span>
             </Link>
           </div>
