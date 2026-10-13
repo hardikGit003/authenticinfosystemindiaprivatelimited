@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { FaSyncAlt, FaArrowRight } from "react-icons/fa";
 
 export default function ServicesSection() {
   const [flippedIndex, setFlippedIndex] = useState<number | null>(null);
@@ -90,19 +89,7 @@ export default function ServicesSection() {
                   <div className="mb-3 border-b border-slate-100 pb-2.5">
                     <h3 className="text-xl font-bold text-slate-900 m-0">{service.title}</h3>
                   </div>
-                  <p className="text-slate-600 text-sm leading-relaxed mb-4 flex-1">{service.description}</p>
-                  <div className="pt-2">
-                    <a
-                      href={`https://wa.me/919643990077?text=${encodeURIComponent(`Hi Authentic Infosystem, I would like to inquire about ${service.title}.`)}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      onClick={(e) => e.stopPropagation()}
-                      className="inline-flex items-center gap-2 text-xs font-bold text-white bg-slate-950 hover:bg-slate-800 px-4 py-2 rounded-lg transition-colors shadow-xs"
-                    >
-                      <span>Inquire Solution</span>
-                      <FaArrowRight size={10} />
-                    </a>
-                  </div>
+                  <p className="text-slate-600 text-sm leading-relaxed m-0 flex-1">{service.description}</p>
                 </div>
               </div>
             </motion.div>
