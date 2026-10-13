@@ -1,7 +1,6 @@
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import BenQSmartBoardBanner from "./components/BenQSmartBoardBanner";
-import Iphone18PopupModal from "./components/Iphone18PopupModal";
 import Iphone18ProAdSection from "./components/Iphone18ProAdSection";
 import AboutSection from "./components/AboutSection";
 import ServicesSection from "./components/ServicesSection";
@@ -17,8 +16,6 @@ export default function Home() {
   return (
     <main>
       <Navbar />
-      {/* iPhone 18 Launch Popup Advertisement Modal */}
-      <Iphone18PopupModal />
 
       {/* Hero Section */}
       <Hero />
