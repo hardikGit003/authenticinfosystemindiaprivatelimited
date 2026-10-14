@@ -1,20 +1,39 @@
 "use client";
 
+import { useState, useMemo, useEffect } from "react";
+import Link from "next/link";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import PageHero from "../components/shared/PageHero";
-import SectionHeader from "../components/shared/SectionHeader";
-import ProductCard from "../components/shared/ProductCard";
-import { useState, useMemo, useEffect } from "react";
-import { FaSearch, FaTimes, FaNetworkWired, FaWhatsapp } from "react-icons/fa";
+import NetworkingCard from "./components/NetworkingCard";
+import QuoteModal from "../laptops/components/QuoteModal";
+import { surveillanceItems, networkingProducts, NetworkingProduct } from "../data/networkingData";
+import { FaSearch, FaTimes, FaNetworkWired, FaCheckCircle, FaWhatsapp, FaPhoneAlt } from "react-icons/fa";
 
-import { surveillanceItems, networkingProducts } from "../data/networkingData";
-
-const categories = ['All', 'Enterprise Networking', 'Wireless Access Points', 'Managed Switches', 'Firewalls', 'Routers', 'Fiber Solutions', 'Server Racks', 'Cabling'];
+const categories = [
+  "All Hardware",
+  "Managed Switches",
+  "Wireless Access Points",
+  "Firewalls",
+  "Routers",
+  "Fiber & Transceivers",
+  "Server Racks",
+  "Structured Cabling",
+];
 
 export default function NetworkingPage() {
   const [searchQuery, setSearchQuery] = useState("");
-  const [activeCategory, setActiveCategory] = useState("All");
+  const [activeCategory, setActiveCategory] = useState("All Hardware");
+
+  // Quote modal state
+  const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
+  const [quoteBrand, setQuoteBrand] = useState("");
+  const [quoteModel, setQuoteModel] = useState("");
+
+  const handleOpenQuote = (brand = "", model = "") => {
+    setQuoteBrand(brand);
+    setQuoteModel(model);
+    setIsQuoteModalOpen(true);
+  };
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -41,12 +60,54 @@ export default function NetworkingPage() {
         ) ||
         product.badges.some((b) => b.toLowerCase().includes(q));
 
-      const matchesCat =
-        activeCategory === "All" ||
-        product.name.toLowerCase().includes(activeCategory.toLowerCase()) ||
-        product.description.toLowerCase().includes(activeCategory.toLowerCase()) ||
-        product.badges.some((b) => b.toLowerCase().includes(activeCategory.toLowerCase())) ||
-        product.specs.some((s) => s.value.toLowerCase().includes(activeCategory.toLowerCase()));
+      const matchesCat = (() => {
+        if (activeCategory === "All Hardware") return true;
+        const cat = activeCategory.toLowerCase();
+        if (cat.includes("switch")) {
+          return (
+            product.specs.some((s) => s.value.toLowerCase().includes("switch")) ||
+            product.name.toLowerCase().includes("switch") ||
+            product.badges.some((b) => b.toLowerCase().includes("managed"))
+          );
+        }
+        if (cat.includes("wireless") || cat.includes("access point")) {
+          return (
+            product.specs.some((s) => s.value.toLowerCase().includes("ap") || s.value.toLowerCase().includes("wi-fi")) ||
+            product.badges.some((b) => b.toLowerCase().includes("wireless"))
+          );
+        }
+        if (cat.includes("firewall")) {
+          return (
+            product.specs.some((s) => s.value.toLowerCase().includes("firewall")) ||
+            product.badges.some((b) => b.toLowerCase().includes("security"))
+          );
+        }
+        if (cat.includes("router")) {
+          return (
+            product.specs.some((s) => s.value.toLowerCase().includes("router")) ||
+            product.badges.some((b) => b.toLowerCase().includes("routing"))
+          );
+        }
+        if (cat.includes("fiber") || cat.includes("transceiver")) {
+          return (
+            product.specs.some((s) => s.value.toLowerCase().includes("fiber")) ||
+            product.badges.some((b) => b.toLowerCase().includes("fiber"))
+          );
+        }
+        if (cat.includes("rack")) {
+          return (
+            product.specs.some((s) => s.value.toLowerCase().includes("rack") || s.label.toLowerCase().includes("capacity")) ||
+            product.badges.some((b) => b.toLowerCase().includes("datacenter"))
+          );
+        }
+        if (cat.includes("cabling")) {
+          return (
+            product.specs.some((s) => s.value.toLowerCase().includes("patch") || s.value.toLowerCase().includes("cat6")) ||
+            product.badges.some((b) => b.toLowerCase().includes("cabling"))
+          );
+        }
+        return product.name.toLowerCase().includes(cat) || product.description.toLowerCase().includes(cat);
+      })();
 
       return matchesSearch && matchesCat;
     });
@@ -54,218 +115,299 @@ export default function NetworkingPage() {
 
   const clearAllFilters = () => {
     setSearchQuery("");
-    setActiveCategory("All");
+    setActiveCategory("All Hardware");
   };
 
+  const hasActiveFilters = searchQuery.trim().length > 0 || activeCategory !== "All Hardware";
+
   return (
-    <main className="min-h-screen bg-white text-slate-900">
+    <main className="min-h-screen bg-white text-slate-900 pt-24 sm:pt-28">
       <Navbar />
 
-      <PageHero
-        title="The Backbone of Modern Business."
-        subtitle="Enterprise networking, Wi-Fi, surveillance, structured cabling, and security solutions designed for businesses of every size."
-        miniText="NETWORKING & INFRASTRUCTURE"
-        primaryButtonText="Explore Solutions"
-        secondaryButtonText="Request Consultation"
-      />
+      {/* EXPANDED CONTAINER (1720px matching laptops & desktops) */}
+      <div className="w-full max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 py-5 sm:py-7">
 
-      {/* Solution Categories & Search Bar */}
-      <section className="py-6 sm:py-8 page-container border-b border-slate-200 bg-slate-50/50">
-        <div className="max-w-md mx-auto mb-4">
-          <div className="relative">
-            <FaSearch className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" size={13} />
-            <input
-              type="text"
-              placeholder="Search networking (e.g., Cisco switch, Fortinet firewall, Wi-Fi 6)..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-9 pr-9 py-2.5 bg-white border border-slate-200 rounded-xl text-xs sm:text-sm focus:outline-none focus:border-black text-slate-900 shadow-2xs"
-            />
-            {searchQuery && (
-              <button
-                onClick={() => setSearchQuery("")}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 cursor-pointer"
-              >
-                <FaTimes size={12} />
-              </button>
-            )}
+        {/* BREADCRUMB */}
+        <nav className="flex items-center gap-2 text-xs text-slate-500 mb-3 select-none">
+          <Link href="/" className="hover:text-black transition-colors">Home</Link>
+          <span>/</span>
+          <span className="text-slate-800 font-medium">Enterprise Networking & Smart Surveillance (CCTV)</span>
+        </nav>
+
+        {/* PAGE TITLE & SUBTITLE */}
+        <div className="mb-6">
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-950 tracking-tight mb-1.5">
+            Enterprise Networking & Smart Surveillance (CCTV)
+          </h1>
+          <p className="text-xs sm:text-sm text-slate-600 max-w-4xl leading-relaxed">
+            Enterprise-grade Cisco managed switches, Fortinet firewalls, Aruba access points, Ubiquiti UniFi Wi-Fi 6/7, optical fiber transceivers, server rack infrastructure, and AI-powered CCTV surveillance systems. Backed by pan-India onsite deployment, certified OEM warranties, and official GST invoicing.
+          </p>
+        </div>
+
+        {/* CATEGORY SELECTOR PILLS (Lenovo Corporate Style) */}
+        <div className="mb-6 pb-2 border-b border-slate-200">
+          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
+            {categories.map((cat, i) => {
+              const isActive = activeCategory === cat;
+              return (
+                <button
+                  key={i}
+                  onClick={() => setActiveCategory(cat)}
+                  className={`px-4 py-2 text-xs sm:text-sm font-bold whitespace-nowrap transition-all duration-200 cursor-pointer rounded-md border ${
+                    isActive
+                      ? "bg-[#1546a0] text-white border-[#1546a0] shadow-xs"
+                      : "bg-white text-slate-700 border-slate-300 hover:border-slate-400 hover:text-black"
+                  }`}
+                >
+                  {cat}
+                </button>
+              );
+            })}
           </div>
         </div>
 
-        <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
-          {categories.map((cat, i) => (
+        {/* TOP SEARCH BAR */}
+        <div className="relative mb-4">
+          <input
+            type="text"
+            placeholder="Search networking & CCTV (e.g., Cisco switch, Fortinet firewall, Wi-Fi 6, server rack)..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="w-full bg-white border border-slate-300 py-2.5 pl-10 pr-10 text-xs sm:text-sm text-slate-900 rounded-md focus:outline-none focus:border-[#1546a0] transition-colors"
+          />
+          <FaSearch className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs" />
+          {searchQuery && (
             <button
-              key={i}
-              onClick={() => setActiveCategory(cat)}
-              className={`px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-full border transition-all text-xs sm:text-sm font-medium cursor-pointer ${
-                activeCategory === cat
-                  ? "bg-black border-black text-white"
-                  : "bg-white border-slate-200 hover:bg-slate-100 text-slate-700"
-              }`}
+              onClick={() => setSearchQuery("")}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-black cursor-pointer"
             >
-              {cat}
-            </button>
-          ))}
-        </div>
-      </section>
-
-      {/* Featured Hardware */}
-      <section className="py-10 sm:py-14 page-container">
-        <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
-          <SectionHeader title="Featured Hardware" subtitle="Industry-leading equipment from trusted global partners." />
-          {(searchQuery || activeCategory !== "All") && (
-            <button
-              onClick={clearAllFilters}
-              className="text-xs font-semibold text-black hover:underline cursor-pointer"
-            >
-              Reset Filters
+              <FaTimes size={12} />
             </button>
           )}
         </div>
 
-        {filteredProducts.length === 0 ? (
-          <div className="text-center py-16 bg-slate-50 rounded-2xl border border-slate-200 p-8 shadow-xs my-6">
-            <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-zinc-100 border border-zinc-200 text-zinc-900 mb-3 shadow-2xs">
-              <FaNetworkWired size={26} />
-            </div>
-            <div className="inline-block px-3 py-1 mb-2.5 rounded-full bg-black text-white text-[11px] font-bold uppercase tracking-wider shadow-2xs">
-              ⚡ Will be available soon
-            </div>
-            <h3 className="text-lg sm:text-xl font-extrabold text-slate-900 mb-2">
-              {searchQuery ? `"${searchQuery}" will be available soon` : "Will be available soon"}
-            </h3>
-            <p className="text-xs sm:text-sm text-slate-600 max-w-md mx-auto mb-6 leading-relaxed">
-              {searchQuery ? (
-                <>
-                  We currently don't have <span className="font-bold text-slate-900">"{searchQuery}"</span> in our active online catalogue, but it will be available soon. Contact our enterprise infrastructure team for custom B2B procurement.
-                </>
-              ) : (
-                <>
-                  No hardware matches the selected category right now. We regularly expand our partner portfolio and these configurations will be available soon.
-                </>
+        {/* RESULTS HEADER BAR */}
+        <div className="pb-3 border-b border-slate-200 mb-5">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div className="flex items-center gap-3">
+              <span className="text-sm sm:text-base font-extrabold text-slate-950">
+                {filteredProducts.length} Matching results
+              </span>
+              {hasActiveFilters && (
+                <button
+                  onClick={clearAllFilters}
+                  className="text-xs font-bold text-[#0f3e99] hover:underline cursor-pointer"
+                >
+                  Clear All
+                </button>
               )}
-            </p>
-            <div className="flex flex-wrap items-center justify-center gap-3">
-              <a
-                href={`https://wa.me/919643990077?text=Hi%2C%20I%20am%20looking%20for%20a%20quote%20for%20${encodeURIComponent(searchQuery || activeCategory || 'networking hardware')}.%20Please%20let%20me%20know%20availability.`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs transition-all shadow-sm cursor-pointer"
-              >
-                <FaWhatsapp size={14} />
-                <span>Inquire on WhatsApp</span>
-              </a>
-              <button
-                onClick={clearAllFilters}
-                className="px-5 py-2.5 bg-black hover:bg-zinc-800 text-white font-semibold rounded-xl text-xs transition-all shadow-xs cursor-pointer"
-              >
-                Reset Filters
-              </button>
             </div>
           </div>
-        ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mt-6">
-            {filteredProducts.map((product, index) => (
-              <ProductCard
+
+          {/* ACTIVE FILTER CHIPS */}
+          {hasActiveFilters && (
+            <div className="flex flex-wrap items-center gap-2 mt-3 pt-2.5 border-t border-slate-100">
+              {activeCategory !== "All Hardware" && (
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-slate-100 text-slate-800 text-xs font-medium rounded-xs border border-slate-200">
+                  <span>Category: {activeCategory}</span>
+                  <button onClick={() => setActiveCategory("All Hardware")} className="text-slate-500 hover:text-black cursor-pointer">
+                    <FaTimes size={10} />
+                  </button>
+                </span>
+              )}
+
+              {searchQuery && (
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-slate-100 text-slate-800 text-xs font-medium rounded-xs border border-slate-200">
+                  <span>Search: "{searchQuery}"</span>
+                  <button onClick={() => setSearchQuery("")} className="text-slate-500 hover:text-black cursor-pointer">
+                    <FaTimes size={10} />
+                  </button>
+                </span>
+              )}
+            </div>
+          )}
+        </div>
+
+        {/* PRODUCT GRID (Full width 4-column responsive, matching laptops & desktops) */}
+        {filteredProducts.length > 0 ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5 mb-14">
+            {filteredProducts.map((product) => (
+              <NetworkingCard
                 key={product.id}
-                {...product}
-                delay={index * 0.05}
+                product={product}
+                onOpenQuote={(brand, model) => handleOpenQuote(brand, model)}
               />
             ))}
           </div>
-        )}
-      </section>
-
-      {/* CCTV Section */}
-      <section className="py-12 sm:py-16 bg-slate-50 page-container border-t border-b border-slate-200">
-        <SectionHeader title="Smart Surveillance (CCTV)" subtitle="Protect your assets with advanced AI-powered video security." />
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-3 sm:gap-4 mt-6">
-          {surveillanceItems.map((cam, i) => (
-            <a
-              key={i}
-              href={`https://wa.me/919643990077?text=${encodeURIComponent(`Hi, I am interested in ${cam.title} CCTV & smart surveillance solutions from Authentic Infosystem.`)}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="relative rounded-[18px] overflow-hidden aspect-square flex items-center justify-center p-2.5 border border-slate-200 shadow-sm cursor-pointer group hover:shadow-md hover:border-black hover:-translate-y-1 transition-all duration-300 block"
+        ) : (
+          <div className="bg-slate-50 border border-slate-200 rounded-lg p-12 text-center my-6 mb-14">
+            <FaNetworkWired size={32} className="mx-auto text-slate-400 mb-3" />
+            <h3 className="text-base font-bold text-slate-900 mb-2">No networking hardware matches your search</h3>
+            <p className="text-xs text-slate-600 mb-4">Try adjusting your search query or reset category filters.</p>
+            <button
+              onClick={clearAllFilters}
+              className="px-5 py-2.5 bg-[#1546a0] text-white font-bold text-xs uppercase tracking-wider rounded-md cursor-pointer"
             >
-              <img
-                src={cam.image}
-                alt={cam.title}
-                width="400"
-                height="400"
-                loading="lazy"
-                className="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-500 ease-out"
-              />
-              <div className="absolute inset-0 bg-black/50 group-hover:bg-black/40 transition-colors duration-300" />
-              <span className="relative z-10 text-white font-bold text-xs sm:text-xs md:text-sm text-center px-1 tracking-tight drop-shadow-md group-hover:scale-105 transition-all duration-300">
-                {cam.title}
-              </span>
-            </a>
-          ))}
-        </div>
-      </section>
+              Clear All Filters
+            </button>
+          </div>
+        )}
 
-      {/* Solution Process Timeline */}
-      <section className="py-12 sm:py-16 page-container">
-        <SectionHeader title="Our Deployment Process" align="center" />
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6 mt-8 relative">
-          <div className="hidden lg:block absolute top-1/2 left-0 w-full h-1 bg-slate-200 -translate-y-1/2 z-0"></div>
-          {['Site Survey', 'Requirement Analysis', 'Network Design', 'Installation & Testing', 'Maintenance & Support'].map((step, i) => (
-            <div key={i} className="relative z-10 bg-white border border-slate-200 rounded-2xl shadow-sm p-5 sm:p-6 text-center">
-              <div className="w-12 h-12 mx-auto bg-black text-white rounded-full flex items-center justify-center font-bold text-xl mb-4 border-4 border-slate-50 shadow-sm">
-                {i + 1}
-              </div>
-              <h4 className="font-bold text-slate-900 text-sm sm:text-base">{step}</h4>
-            </div>
-          ))}
-        </div>
-      </section>
+      </div>
 
-      {/* Case Study */}
-      <section className="py-12 sm:py-16 page-container border-t border-slate-200">
-        <div className="bg-slate-50 border border-slate-200 rounded-3xl p-8 sm:p-10 lg:p-14 flex flex-col lg:flex-row items-center gap-8 lg:gap-12 shadow-sm">
-          <div className="lg:w-1/2">
-            <span className="text-black font-extrabold tracking-wider uppercase text-xs sm:text-sm mb-2 block">Case Study</span>
-            <h3 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 mb-4">Network Deployment for a 300-User Corporate Office</h3>
-            <p className="text-slate-600 text-sm sm:text-base leading-relaxed mb-6">
-              Authentic Infosystem successfully overhauled the legacy infrastructure for a leading tech firm, implementing a fully redundant Cisco-based core network with Wi-Fi 6 coverage across 3 floors.
+      {/* SMART SURVEILLANCE (CCTV) SECTION (Expanded to 1720px) */}
+      <section className="py-14 bg-slate-50 border-t border-slate-200">
+        <div className="max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10">
+          <div className="text-center max-w-3xl mx-auto mb-8">
+            <h2 className="text-2xl sm:text-3xl font-black text-slate-950 tracking-tight">
+              Smart Surveillance & AI CCTV Solutions
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-600 mt-1">
+              Protect your enterprise assets, warehouses, and commercial spaces with high-definition IP cameras, smart PTZ domes, bullet cameras, NVRs, and AI video analytics.
             </p>
-            <button className="px-6 py-2.5 sm:py-3 bg-white hover:bg-slate-100 rounded-xl transition-colors font-bold text-sm border border-slate-300 text-slate-800 shadow-xs cursor-pointer">Read Full Case Study</button>
           </div>
-          <div className="lg:w-1/2 grid grid-cols-2 gap-3 sm:gap-4 w-full">
-            <div className="bg-white border border-slate-200 rounded-2xl p-5 sm:p-6 shadow-sm">
-              <h4 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mb-1">99.9%</h4>
-              <p className="text-slate-500 text-xs sm:text-sm">Uptime Achieved</p>
+          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3 sm:gap-4">
+            {surveillanceItems.map((cam, i) => (
+              <button
+                key={i}
+                onClick={() => handleOpenQuote("CCTV Surveillance", `${cam.title} Setup`)}
+                className="relative rounded-xl overflow-hidden aspect-square flex items-center justify-center p-3 border border-slate-200 shadow-xs cursor-pointer group hover:shadow-md hover:border-black transition-all text-left block w-full"
+              >
+                <img
+                  src={cam.image}
+                  alt={cam.title}
+                  width="400"
+                  height="400"
+                  loading="lazy"
+                  className="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-500 ease-out"
+                />
+                <div className="absolute inset-0 bg-black/55 group-hover:bg-black/45 transition-colors duration-300" />
+                <h3 className="relative z-10 text-white font-extrabold text-xs sm:text-sm text-center px-1 tracking-wide drop-shadow-md">
+                  {cam.title}
+                </h3>
+              </button>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* DEPLOYMENT PROCESS (5 STEPS) */}
+      <section className="py-14 bg-white border-t border-slate-200">
+        <div className="max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10">
+          <div className="text-center max-w-3xl mx-auto mb-8">
+            <h2 className="text-2xl sm:text-3xl font-black text-slate-950 tracking-tight">
+              Enterprise Deployment Workflow
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-600 mt-1">
+              Comprehensive turnkey network engineering and structured cabling from blueprint design to 24/7 post-deployment maintenance.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+            {[
+              { num: "01", title: "Site Survey & RF Audit", desc: "Physical premise inspection, fiber path tracing, and wireless heatmapping." },
+              { num: "02", title: "Architecture & Design", desc: "VLAN segmentation, firewall policies, Layer 3 routing, and PoE power budgets." },
+              { num: "03", title: "Hardware Procurement", desc: "Tier-1 OEM certified sourcing with 18% GST tax invoices and serial tracking." },
+              { num: "04", title: "Installation & Commissioning", desc: "Rack mounting, structured Cat6/fiber termination, and throughput stress testing." },
+              { num: "05", title: "SLA Support & Monitoring", desc: "Pan-India onsite RMA support, firmware updates, and 24/7 network monitoring." },
+            ].map((step, i) => (
+              <div key={i} className="bg-slate-50 border border-slate-200 rounded-lg p-5 flex flex-col justify-between transition-all hover:border-slate-400 hover:shadow-xs">
+                <div>
+                  <div className="w-8 h-8 bg-[#1546a0] text-white font-black text-xs flex items-center justify-center mb-3 rounded-md">
+                    {step.num}
+                  </div>
+                  <h3 className="font-bold text-slate-900 text-sm mb-1.5">{step.title}</h3>
+                  <p className="text-slate-600 text-xs leading-relaxed">{step.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CASE STUDY SECTION */}
+      <section className="py-14 bg-slate-50 border-t border-slate-200">
+        <div className="max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10">
+          <div className="bg-white border border-slate-200 rounded-xl p-6 sm:p-10 flex flex-col lg:flex-row items-center gap-8 shadow-xs">
+            <div className="lg:w-1/2">
+              <span className="text-[#1546a0] font-extrabold tracking-wider uppercase text-xs mb-1.5 block">
+                Enterprise Deployment Case Study
+              </span>
+              <h2 className="text-xl sm:text-3xl font-extrabold text-slate-900 mb-3 tracking-tight">
+                High-Density Network & Surveillance Deployment for 300+ Users
+              </h2>
+              <p className="text-slate-600 text-xs sm:text-sm leading-relaxed mb-5">
+                Authentic Infosystem engineered and executed a fully redundant Cisco core network, Fortinet multi-WAN SD-WAN security perimeter, and unified AI CCTV surveillance infrastructure across 3 floors with zero downtime cutover.
+              </p>
+              <button
+                onClick={() => handleOpenQuote("Enterprise", "Corporate Network Overhaul")}
+                className="px-6 py-2.5 bg-[#1546a0] hover:bg-[#003d7e] text-white font-bold text-xs uppercase tracking-wider rounded-md cursor-pointer transition-colors shadow-xs"
+              >
+                Consult Our Solution Architect
+              </button>
             </div>
-            <div className="bg-white border border-slate-200 rounded-2xl p-5 sm:p-6 shadow-sm">
-              <h4 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mb-1">35%</h4>
-              <p className="text-slate-500 text-xs sm:text-sm">Faster Speeds</p>
-            </div>
-            <div className="bg-white border border-slate-200 rounded-2xl p-5 sm:p-6 shadow-sm">
-              <h4 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mb-1">24×7</h4>
-              <p className="text-slate-500 text-xs sm:text-sm">Active Monitoring</p>
-            </div>
-            <div className="bg-white border border-slate-200 rounded-2xl p-5 sm:p-6 shadow-sm">
-              <h4 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mb-1">Zero</h4>
-              <p className="text-slate-500 text-xs sm:text-sm">Downtime Migration</p>
+
+            <div className="lg:w-1/2 grid grid-cols-2 gap-3 sm:gap-4 w-full">
+              <div className="bg-slate-50 border border-slate-200 rounded-lg p-4 sm:p-5">
+                <div className="text-2xl sm:text-3xl font-black text-slate-950 mb-1">99.99%</div>
+                <p className="text-slate-600 text-xs">Uptime SLA Guaranteed</p>
+              </div>
+              <div className="bg-slate-50 border border-slate-200 rounded-lg p-4 sm:p-5">
+                <div className="text-2xl sm:text-3xl font-black text-slate-950 mb-1">10 Gbps</div>
+                <p className="text-slate-600 text-xs">Fiber Backbone Throughput</p>
+              </div>
+              <div className="bg-slate-50 border border-slate-200 rounded-lg p-4 sm:p-5">
+                <div className="text-2xl sm:text-3xl font-black text-slate-950 mb-1">128+</div>
+                <p className="text-slate-600 text-xs">AI Smart IP Cameras</p>
+              </div>
+              <div className="bg-slate-50 border border-slate-200 rounded-lg p-4 sm:p-5">
+                <div className="text-2xl sm:text-3xl font-black text-slate-950 mb-1">Zero</div>
+                <p className="text-slate-600 text-xs">Business Interruption Migration</p>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-12 sm:py-16 text-center page-container border-t border-slate-200">
-        <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 mb-3 sm:mb-4">Need a complete networking solution?</h2>
-        <p className="text-slate-600 text-sm sm:text-base mb-6 sm:mb-8 max-w-2xl mx-auto">Let our certified network engineers design the perfect infrastructure for your business needs.</p>
-        <a
-          href="https://wa.me/919643990077?text=Hi%2C%20I%20want%20to%20book%20a%20site%20visit%20for%20an%20enterprise%20networking%20solution."
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-block px-6 sm:px-8 py-3.5 bg-black hover:bg-zinc-800 text-white rounded-full font-bold text-sm transition-all shadow-md cursor-pointer"
-        >
-          Book Site Visit
-        </a>
+      {/* CUSTOM NETWORK INFRASTRUCTURE CTA (Expanded to 1720px) */}
+      <section className="py-16 text-center bg-black text-white border-t border-white/10 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 relative z-10">
+          <div className="max-w-3xl mx-auto">
+            <p className="text-xs font-bold text-zinc-400 tracking-[4px] uppercase mb-3">INFRASTRUCTURE SOLUTIONS</p>
+            <h2 className="text-2xl sm:text-4xl md:text-5xl font-extrabold mb-4 tracking-tight">
+              Design Your Enterprise Network & Security Infrastructure
+            </h2>
+            <p className="text-zinc-300 text-xs sm:text-sm md:text-base mb-8 max-w-2xl mx-auto leading-relaxed">
+              Need custom multi-site VPNs, 10G/40G fiber aggregation, high-density Wi-Fi 7 access, or centralized AI video surveillance? Our certified Cisco & Fortinet engineers craft tailored architectures with manufacturer warranty.
+            </p>
+            <div className="flex flex-wrap items-center justify-center gap-4">
+              <button
+                onClick={() => handleOpenQuote("Enterprise", "Full Network & CCTV Solution")}
+                className="px-8 py-3.5 bg-[#1546a0] hover:bg-[#003d7e] text-white font-bold text-xs uppercase tracking-wider rounded-md shadow-md transition-all cursor-pointer"
+              >
+                Request Infrastructure Quote
+              </button>
+              <a
+                href="https://wa.me/919643990077?text=Hi%2C%20I%20want%20to%20request%20a%20commercial%20quote%20for%20networking%20and%20CCTV%20solutions."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-8 py-3.5 bg-white text-slate-950 hover:bg-slate-100 font-bold text-xs uppercase tracking-wider rounded-md shadow-md transition-all cursor-pointer"
+              >
+                Chat on WhatsApp
+              </a>
+            </div>
+          </div>
+        </div>
       </section>
+
+      {/* Quote Modal */}
+      <QuoteModal
+        isOpen={isQuoteModalOpen}
+        onClose={() => setIsQuoteModalOpen(false)}
+        initialBrand={quoteBrand}
+        initialModel={quoteModel}
+      />
 
       <Footer />
     </main>

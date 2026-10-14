@@ -213,7 +213,6 @@ export default function PhonesPage() {
 
   const hasActiveFilters =
     searchQuery !== "" ||
-    activeCategory !== "All" ||
     activeBrand !== "All" ||
     activeRAM !== "All" ||
     activeStorage !== "All";
@@ -230,19 +229,19 @@ export default function PhonesPage() {
           align="center" 
         />
 
-        {/* Category Filter Pills */}
+        {/* Brand Filter Pills */}
         <div className="flex overflow-x-auto sm:flex-wrap justify-start sm:justify-center gap-2 mb-8 mt-4 sm:mt-6 pb-2 sm:pb-0 scrollbar-hide w-full">
-          {categories.map((cat, i) => (
+          {brands.map((brand, i) => (
             <button
               key={i}
-              onClick={() => setActiveCategory(cat)}
+              onClick={() => setActiveBrand(brand)}
               className={`whitespace-nowrap px-4 py-1.5 rounded-full border transition-all text-xs font-semibold shrink-0 cursor-pointer ${
-                activeCategory === cat
+                activeBrand === brand
                   ? "bg-black border-black text-white shadow-xs"
                   : "bg-slate-100 border-slate-200 hover:bg-slate-200 text-slate-700"
               }`}
             >
-              {cat}
+              {brand}
             </button>
           ))}
         </div>
@@ -313,38 +312,6 @@ export default function PhonesPage() {
                 </div>
               </div>
 
-              {/* Brand Filter */}
-              <div>
-                <div className="flex items-center justify-between mb-2">
-                  <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">
-                    Brand
-                  </label>
-                  {activeBrand !== "All" && (
-                    <button
-                      onClick={() => setActiveBrand("All")}
-                      className="text-[11px] text-black font-semibold hover:underline"
-                    >
-                      Reset
-                    </button>
-                  )}
-                </div>
-                <div className="space-y-1">
-                  {brands.map((brand) => (
-                    <button
-                      key={brand}
-                      onClick={() => setActiveBrand(brand)}
-                      className={`w-full text-left px-3 py-2 rounded-xl text-xs font-medium transition-all flex items-center justify-between cursor-pointer ${
-                        activeBrand === brand
-                          ? "bg-black text-white font-semibold shadow-xs"
-                          : "text-slate-700 hover:bg-slate-200/60 bg-white/60 border border-slate-200/50"
-                      }`}
-                    >
-                      <span>{brand}</span>
-                      {activeBrand === brand && <FaCheckCircle size={11} />}
-                    </button>
-                  ))}
-                </div>
-              </div>
 
               {/* RAM Filter */}
               <div>
@@ -453,11 +420,7 @@ export default function PhonesPage() {
                     {activeBrand}
                   </span>
                 )}
-                {activeCategory !== "All" && (
-                  <span className="bg-slate-100 text-slate-700 text-[11px] px-2 py-0.5 rounded-full font-semibold border border-slate-200">
-                    {activeCategory}
-                  </span>
-                )}
+
               </div>
 
               {hasActiveFilters && (
@@ -591,38 +554,6 @@ export default function PhonesPage() {
                 </button>
               </div>
 
-              {/* Brand Filter */}
-              <div>
-                <div className="flex items-center justify-between mb-2">
-                  <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">
-                    Brand
-                  </label>
-                  {activeBrand !== "All" && (
-                    <button
-                      onClick={() => setActiveBrand("All")}
-                      className="text-[11px] text-black font-semibold hover:underline"
-                    >
-                      Reset
-                    </button>
-                  )}
-                </div>
-                <div className="space-y-1">
-                  {brands.map((brand) => (
-                    <button
-                      key={brand}
-                      onClick={() => setActiveBrand(brand)}
-                      className={`w-full text-left px-3 py-2 rounded-xl text-xs font-medium transition-all flex items-center justify-between cursor-pointer ${
-                        activeBrand === brand
-                          ? "bg-black text-white font-semibold shadow-xs"
-                          : "text-slate-700 hover:bg-slate-100 bg-slate-50 border border-slate-200"
-                      }`}
-                    >
-                      <span>{brand}</span>
-                      {activeBrand === brand && <FaCheckCircle size={11} />}
-                    </button>
-                  ))}
-                </div>
-              </div>
 
               {/* RAM Filter */}
               <div>

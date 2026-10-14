@@ -4,13 +4,24 @@ import { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { 
-  FaCheckCircle, 
-  FaWhatsapp, 
-  FaPhoneAlt, 
-  FaUndoAlt, 
-  FaSlidersH
+  FaSearch, 
+  FaTimes, 
+  FaChevronDown, 
+  FaChevronUp, 
+  FaFilter,
+  FaMicrochip, 
+  FaMemory, 
+  FaDesktop, 
+  FaServer, 
+  FaWindows, 
+  FaApple,
+  FaStar, 
+  FaStarHalfAlt, 
+  FaRegStar,
+  FaWhatsapp
 } from "react-icons/fa";
 import { laptopProducts, desktopProducts, Product } from "../data/products";
+import QuoteModal from "../laptops/components/QuoteModal";
 
 export type SystemType =
   | "all"
@@ -29,11 +40,9 @@ interface WorkflowData {
   id: string;
   tabKey: SystemType;
   tabLabel: string;
-  kicker: string;
   title: string;
   description: string;
   targetCategories: string[];
-  accentGradient: string;
 }
 
 const workflows: WorkflowData[] = [
@@ -41,56 +50,46 @@ const workflows: WorkflowData[] = [
     id: "all",
     tabKey: "all",
     tabLabel: "All Systems",
-    kicker: "CUSTOM PC & WORKSTATION CONFIGURATOR · OEM HARDWARE",
-    title: "Custom PC, AI Workstation & Enterprise Hardware Configurator",
+    title: "Custom PC Configurator & Workstation Builder",
     description:
-      "Configure and customize custom desktop PCs, AI workstations, high-performance creator rigs, and enterprise business laptops from certified OEM partners including Lenovo, HP, Dell, ASUS, Acer, and Apple. All systems backed by pan-India onsite warranty, direct OEM component sourcing, and official 18% GST tax invoices.",
+      "Configure and build custom desktop PCs, AI workstations, high-performance creator rigs, and enterprise systems from certified OEM partners including Lenovo, HP, Dell, ASUS, Acer, and Apple. All systems backed by pan-India onsite warranty and official GST invoicing.",
     targetCategories: ["Basic", "Gaming", "Editing", "Enterprise"],
-    accentGradient: "from-blue-600/10 to-indigo-600/5",
   },
   {
     id: "everyday-productivity",
     tabKey: "basic",
     tabLabel: "Everyday Productivity",
-    kicker: "WORKFLOW TIER 01 · EVERYDAY PRODUCTIVITY & OFFICE COMPUTING",
-    title: "Custom Everyday Productivity Systems & Office PC Configurator",
+    title: "Everyday Productivity & Office Computing Rigs",
     description:
-      "Curated high-efficiency desktop and laptop configurations engineered for smooth daily office multitasking, ERP accounting software (Tally, SAP, Zoho), browser workflows, documentation, and institutional computing with low power consumption and rock-solid reliability.",
+      "Curated high-efficiency desktop and laptop configurations engineered for smooth daily office multitasking, ERP accounting software (Tally, SAP, Zoho), browser workflows, documentation, and institutional computing with low power consumption.",
     targetCategories: ["Basic"],
-    accentGradient: "from-amber-500/10 to-orange-500/5",
   },
   {
     id: "performance-workflows",
     tabKey: "gaming",
     tabLabel: "Performance & Creator",
-    kicker: "WORKFLOW TIER 02 · HIGH PERFORMANCE GAMING & CREATOR RIGS",
-    title: "High-Performance Gaming, Video Editing & Developer Rig Configurator",
+    title: "High-Performance Gaming & Video Editing Systems",
     description:
-      "Custom high-clock multi-core CPU builds paired with dedicated NVIDIA GeForce RTX & AMD Radeon GPUs, ultra-fast PCIe Gen4 NVMe SSDs, high-speed DDR5 RAM, and high-efficiency thermal cooling for esports, 4K video editing, game development, and high-throughput compilation.",
+      "Custom high-clock multi-core CPU builds paired with dedicated NVIDIA GeForce RTX & AMD Radeon GPUs, ultra-fast PCIe Gen4 NVMe SSDs, high-speed DDR5 RAM, and high-efficiency thermal cooling for esports, 4K video editing, and content creation.",
     targetCategories: ["Gaming", "Editing"],
-    accentGradient: "from-cyan-500/10 to-blue-500/5",
   },
   {
     id: "professional-computing",
     tabKey: "workstation",
     tabLabel: "AI & Workstations",
-    kicker: "WORKFLOW TIER 03 · PROFESSIONAL AI, CAD & HIGH-COMPUTE WORKSTATIONS",
-    title: "Professional AI, Deep Learning & CAD Workstation Configurator",
+    title: "Professional AI, Deep Learning & CAD Workstations",
     description:
-      "ISV-certified enterprise workstations tailored for machine learning model training, LLM inference, AutoCAD, SolidWorks, Revit BIM modeling, ANSYS simulations, and complex data science pipelines. Powered by multi-core Intel Core Ultra, Xeon, and NVIDIA RTX Ada Generation professional GPUs.",
+      "ISV-certified enterprise workstations tailored for machine learning model training, LLM inference, AutoCAD, SolidWorks, Revit BIM modeling, ANSYS simulations, and complex data science pipelines with enterprise hardware reliability.",
     targetCategories: ["Editing", "Enterprise", "Gaming"],
-    accentGradient: "from-purple-500/10 to-fuchsia-500/5",
   },
   {
     id: "modern-businesses",
     tabKey: "enterprise",
     tabLabel: "Modern Businesses",
-    kicker: "WORKFLOW TIER 04 · ENTERPRISE IT FLEET & COMMERCIAL PROCUREMENT",
-    title: "Enterprise Business PC & Commercial Hardware Fleet Configurator",
+    title: "Enterprise Business PC & Commercial Hardware Fleet",
     description:
-      "Standardized enterprise laptops and desktop fleets built for startups, corporate offices, educational institutions, and government tenders. Featuring vPro hardware security, Lenovo ThinkCentre/ThinkPad, HP ProDesk/EliteBook, and Dell OptiPlex/Latitude with bulk B2B pricing, pan-India SLA support, and 18% GST tax invoices.",
+      "Standardized enterprise laptops and desktop fleets built for startups, corporate offices, educational institutions, and government tenders. Featuring vPro hardware security, Lenovo ThinkCentre/ThinkPad, HP ProDesk, and Dell OptiPlex/Latitude.",
     targetCategories: ["Enterprise"],
-    accentGradient: "from-emerald-500/10 to-teal-500/5",
   },
 ];
 
@@ -104,21 +103,211 @@ function normalizeSystemKey(raw: string): SystemType {
   return "all";
 }
 
-const formFactors = ["All Hardware", "Laptops", "Desktops"];
-const brands = ["All", "Lenovo", "HP", "Dell", "Asus", "Acer", "Apple"];
-const processors = [
-  "All",
+const BRANDS = ["All", "Lenovo", "HP", "Dell", "Asus", "Acer", "Apple"];
+const FORM_FACTORS = ["All Hardware", "Laptops", "Desktops"];
+const PROCESSOR_GROUPS = [
+  "All Intel® Processors",
   "Intel Core i3",
   "Intel Core i5",
   "Intel Core i7",
   "Intel Core i9",
   "Intel Core Ultra",
+  "All AMD Processors",
   "AMD Ryzen 5",
   "AMD Ryzen 7",
+  "Apple M-Series",
   "Intel Xeon",
 ];
-const rams = ["All", "8GB", "16GB", "32GB", "64GB"];
-const storages = ["All", "256GB", "512GB", "1TB", "2TB"];
+const RAM_OPTIONS = ["8GB", "16GB", "32GB", "64GB"];
+const STORAGE_OPTIONS = ["256GB SSD", "512GB SSD", "1TB SSD", "2TB SSD"];
+
+const popularConfigs = [
+  {
+    title: "Office Package",
+    image: "/Desktop%20Subpage/Office%20Package.jpg",
+  },
+  {
+    title: "Developer Package",
+    image: "/Desktop%20Subpage/Developer%20Package.jpg",
+  },
+  {
+    title: "Video Editing Package",
+    image: "/Desktop%20Subpage/Video%20Editing%20Package.jpg",
+  },
+  {
+    title: "AI Training Package",
+    image: "/Desktop%20Subpage/AI%20Training%20.jpg",
+  },
+  {
+    title: "AutoCAD Package",
+    image: "/Desktop%20Subpage/Autocad%20Package.jpg",
+  },
+  {
+    title: "Enterprise Package",
+    image: "/Desktop%20Subpage/Enterprise%20Package.jpg",
+  },
+];
+
+type TaggedProduct = Product & { formFactor: "Laptops" | "Desktops" };
+
+function ConfigProductCard({
+  product,
+  onOpenQuote,
+}: {
+  product: TaggedProduct;
+  onOpenQuote: (brand: string, model: string) => void;
+}) {
+  const getSpecValue = (label: string) => {
+    const found = product.specs.find((s) => s.label.toLowerCase() === label.toLowerCase());
+    return found ? found.value : "";
+  };
+
+  const processor = getSpecValue("Processor") || "High-Performance Processor";
+  const ram = getSpecValue("RAM") || "16GB High-Speed System Memory";
+  const storage = getSpecValue("Storage") || "512GB NVMe SSD";
+  const gpu = getSpecValue("GPU") || getSpecValue("Graphics") || (product.formFactor === "Laptops" ? "Integrated High-Definition Graphics" : "Integrated / Dedicated Graphics");
+  const formFactorOrOS = product.formFactor === "Laptops" 
+    ? (product.brand.toLowerCase() === "apple" ? "macOS Sonoma / Sequoia" : "Windows 11 Pro 64-bit")
+    : (getSpecValue("Form Factor") || "Tower Workstation");
+
+  const rating = 4.7;
+  const reviewCount = Math.floor(130 + ((product.name.length * 19) % 360));
+
+  const handleQuoteClick = () => {
+    onOpenQuote(product.brand || "Custom Hardware", `${product.name} (${product.modelNumber || product.formFactor})`);
+  };
+
+  const renderStars = (score: number) => {
+    const stars = [];
+    for (let i = 1; i <= 5; i++) {
+      if (score >= i) {
+        stars.push(<FaStar key={i} className="text-amber-400" size={11} />);
+      } else if (score >= i - 0.5) {
+        stars.push(<FaStarHalfAlt key={i} className="text-amber-400" size={11} />);
+      } else {
+        stars.push(<FaRegStar key={i} className="text-amber-300" size={11} />);
+      }
+    }
+    return stars;
+  };
+
+  const features = [
+    product.formFactor === "Laptops"
+      ? "High-efficiency anti-glare display with low blue-light certification"
+      : `${formFactorOrOS} chassis engineered for whisper-quiet acoustics & airflow`,
+    product.formFactor === "Laptops"
+      ? "Discrete enterprise hardware security chip & camera privacy shutter"
+      : "Tool-less expansion bays supporting enterprise PCIe & memory upgrades",
+    product.warranty || "Includes manufacturer comprehensive onsite 3-year enterprise warranty",
+  ];
+
+  return (
+    <div className="bg-white border border-slate-200 hover:border-slate-400 rounded-lg p-4 sm:p-4.5 flex flex-col justify-between transition-all duration-200 hover:shadow-lg relative group h-full">
+      <div>
+        {/* MODEL TITLE (Lenovo Navy Blue) */}
+        <div className="mb-1">
+          <button onClick={handleQuoteClick} className="block text-left group/title w-full cursor-pointer">
+            <h3 className="text-[#0f3e99] group-hover/title:underline font-bold text-xs sm:text-sm leading-snug line-clamp-2 min-h-[36px]">
+              {product.brand} {product.name} - {processor.split("(")[0].trim()}, {ram}, {storage}
+            </h3>
+          </button>
+        </div>
+
+        {/* STAR RATING */}
+        <div className="flex items-center gap-1.5 mb-2.5 text-xs">
+          <div className="flex items-center gap-0.5">{renderStars(rating)}</div>
+          <span className="font-bold text-slate-900 text-[11px]">{rating.toFixed(1)}</span>
+          <span className="text-slate-500 text-[11px]">({reviewCount})</span>
+        </div>
+
+        {/* PRODUCT IMAGE (Centered on Clean Background) */}
+        <div 
+          onClick={handleQuoteClick}
+          className="relative w-full h-40 sm:h-44 bg-white flex items-center justify-center p-2 mb-3 overflow-hidden group-hover:scale-102 transition-transform duration-300 cursor-pointer"
+        >
+          <img
+            src={product.image}
+            alt={`${product.name} - ${product.modelNumber}`}
+            width="280"
+            height="190"
+            loading="lazy"
+            className="max-h-full max-w-full object-contain drop-shadow-sm"
+          />
+        </div>
+
+        {/* TECH SPECS WITH ICONS */}
+        <div className="mt-3 space-y-2 py-2.5 border-t border-slate-100 text-[11px] text-slate-700">
+          {/* Processor */}
+          <div className="flex items-start gap-2">
+            <FaMicrochip className="text-slate-800 shrink-0 mt-0.5" size={12} />
+            <span className="line-clamp-2 leading-tight text-slate-900 font-medium">{processor}</span>
+          </div>
+
+          {/* Form Factor / OS */}
+          <div className="flex items-center gap-2">
+            {product.formFactor === "Laptops" ? (
+              product.brand.toLowerCase() === "apple" ? (
+                <FaApple className="text-slate-800 shrink-0" size={12} />
+              ) : (
+                <FaWindows className="text-slate-800 shrink-0" size={12} />
+              )
+            ) : (
+              <FaServer className="text-slate-800 shrink-0" size={12} />
+            )}
+            <span className="truncate text-slate-900 font-medium">{formFactorOrOS}</span>
+          </div>
+
+          {/* GPU */}
+          <div className="flex items-center gap-2">
+            <FaDesktop className="text-slate-800 shrink-0" size={12} />
+            <span className="truncate text-slate-900 font-medium">{gpu}</span>
+          </div>
+
+          {/* Memory & Storage */}
+          <div className="flex items-center gap-2">
+            <FaMemory className="text-slate-800 shrink-0" size={12} />
+            <span className="truncate text-slate-900 font-medium">{ram} | {storage}</span>
+          </div>
+        </div>
+
+        {/* ADDITIONAL SPECS LINK */}
+        <div className="pt-1 pb-2">
+          <button
+            onClick={handleQuoteClick}
+            className="text-[11px] font-bold text-[#0f3e99] hover:underline inline-block cursor-pointer"
+          >
+            Additional Specs & Configs
+          </button>
+        </div>
+
+        {/* FEATURES BULLET LIST */}
+        <div className="pt-2 border-t border-slate-100 text-xs text-slate-700 mb-3">
+          <div className="font-bold text-slate-900 text-[11px] uppercase tracking-wider mb-1.5">
+            Features
+          </div>
+          <ul className="space-y-1 text-slate-600 text-[11px] leading-relaxed">
+            {features.map((feat, idx) => (
+              <li key={idx} className="flex items-start gap-1.5">
+                <span className="text-slate-400 select-none">•</span>
+                <span className="line-clamp-2">{feat}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+
+      {/* PRIMARY CTA BUTTON (Full Width Corporate Lenovo Blue) */}
+      <div className="mt-auto pt-2">
+        <button
+          onClick={handleQuoteClick}
+          className="w-full bg-[#1546a0] hover:bg-[#003d7e] active:bg-[#00285a] text-white font-bold py-2.5 px-3 text-xs tracking-wider rounded-md transition-colors shadow-xs flex items-center justify-center gap-2 cursor-pointer uppercase"
+        >
+          <span>Request Quote</span>
+        </button>
+      </div>
+    </div>
+  );
+}
 
 export default function Configurator({
   defaultSystem = "all",
@@ -128,16 +317,40 @@ export default function Configurator({
   const searchParams = useSearchParams();
   const systemQuery = searchParams.get("system");
 
+  // Filters state
   const [activeTab, setActiveTab] = useState<SystemType>(() => {
     if (systemQuery) return normalizeSystemKey(systemQuery);
     return normalizeSystemKey(defaultSystem);
   });
-  const [activeFormFactor, setActiveFormFactor] = useState("All Hardware");
-  const [activeBrand, setActiveBrand] = useState("All");
-  const [activeProcessor, setActiveProcessor] = useState("All");
-  const [activeRAM, setActiveRAM] = useState("All");
-  const [activeStorage, setActiveStorage] = useState("All");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [processorSearch, setProcessorSearch] = useState("");
+  const [selectedFormFactor, setSelectedFormFactor] = useState("All Hardware");
+  const [selectedBrand, setSelectedBrand] = useState("All");
+  const [selectedProcessors, setSelectedProcessors] = useState<string[]>([]);
+  const [selectedRams, setSelectedRams] = useState<string[]>([]);
+  const [selectedStorages, setSelectedStorages] = useState<string[]>([]);
   const [showMobileFilters, setShowMobileFilters] = useState(false);
+
+  // Accordion state
+  const [accordions, setAccordions] = useState({
+    formFactor: true,
+    workflow: true,
+    brand: true,
+    processor: true,
+    ram: true,
+    storage: true,
+  });
+
+  // Quote modal state
+  const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
+  const [quoteBrand, setQuoteBrand] = useState("");
+  const [quoteModel, setQuoteModel] = useState("");
+
+  const handleOpenQuote = (brand = "", model = "") => {
+    setQuoteBrand(brand);
+    setQuoteModel(model);
+    setIsQuoteModalOpen(true);
+  };
 
   // Sync state if URL query param or defaultSystem prop changes
   useEffect(() => {
@@ -161,9 +374,9 @@ export default function Configurator({
   };
 
   // Combine products with form factor tagging
-  const allProducts = useMemo(() => {
-    const laptopsWithTag = laptopProducts.map((p) => ({ ...p, formFactor: "Laptops" }));
-    const desktopsWithTag = desktopProducts.map((p) => ({ ...p, formFactor: "Desktops" }));
+  const allProducts: TaggedProduct[] = useMemo(() => {
+    const laptopsWithTag: TaggedProduct[] = laptopProducts.map((p) => ({ ...p, formFactor: "Laptops" }));
+    const desktopsWithTag: TaggedProduct[] = desktopProducts.map((p) => ({ ...p, formFactor: "Desktops" }));
     return [...laptopsWithTag, ...desktopsWithTag];
   }, []);
 
@@ -171,447 +384,768 @@ export default function Configurator({
   const filteredProducts = useMemo(() => {
     const targetCats = currentWorkflow.targetCategories;
 
-    return allProducts.filter((product) => {
+    const result = allProducts.filter((product) => {
       // Workflow Category Filter
       const matchesCategory = targetCats.includes(product.category);
+      if (!matchesCategory) return false;
+
+      // Text search query
+      if (searchQuery.trim()) {
+        const query = searchQuery.toLowerCase();
+        const matchesName = product.name.toLowerCase().includes(query);
+        const matchesBrand = product.brand.toLowerCase().includes(query);
+        const matchesModel = product.modelNumber.toLowerCase().includes(query);
+        const matchesSpecs = product.specs.some(
+          (s) => s.label.toLowerCase().includes(query) || s.value.toLowerCase().includes(query)
+        );
+        if (!matchesName && !matchesBrand && !matchesModel && !matchesSpecs) return false;
+      }
 
       // Form Factor Filter
-      const matchesFormFactor =
-        activeFormFactor === "All Hardware" ||
-        (activeFormFactor === "Laptops" && product.formFactor === "Laptops") ||
-        (activeFormFactor === "Desktops" && product.formFactor === "Desktops");
+      if (selectedFormFactor !== "All Hardware") {
+        if (selectedFormFactor === "Laptops" && product.formFactor !== "Laptops") return false;
+        if (selectedFormFactor === "Desktops" && product.formFactor !== "Desktops") return false;
+      }
 
       // Brand Filter
-      const matchesBrand =
-        activeBrand === "All" ||
-        product.brand.toLowerCase() === activeBrand.toLowerCase();
+      if (selectedBrand !== "All" && product.brand.toLowerCase() !== selectedBrand.toLowerCase()) {
+        return false;
+      }
 
-      // Processor Filter
-      const matchesProcessor =
-        activeProcessor === "All" ||
-        product.specs.some(
-          (spec) =>
-            spec.label === "Processor" &&
-            spec.value.toLowerCase().includes(activeProcessor.toLowerCase())
-        );
+      // Processor group filter
+      if (selectedProcessors.length > 0) {
+        const procSpec = product.specs.find((s) => s.label.toLowerCase() === "processor")?.value || "";
+        const procLower = procSpec.toLowerCase();
 
-      // RAM Filter
-      const matchesRAM =
-        activeRAM === "All" ||
-        product.specs.some(
-          (spec) =>
-            spec.label === "RAM" &&
-            spec.value.toLowerCase().includes(activeRAM.toLowerCase())
-        );
+        const matchesProc = selectedProcessors.some((pGroup) => {
+          if (pGroup === "All Intel® Processors") return procLower.includes("intel");
+          if (pGroup === "Intel Core i3") return procLower.includes("i3");
+          if (pGroup === "Intel Core i5") return procLower.includes("i5");
+          if (pGroup === "Intel Core i7") return procLower.includes("i7");
+          if (pGroup === "Intel Core i9") return procLower.includes("i9");
+          if (pGroup === "Intel Core Ultra") return procLower.includes("ultra");
+          if (pGroup === "All AMD Processors") return procLower.includes("amd") || procLower.includes("ryzen");
+          if (pGroup === "AMD Ryzen 5") return procLower.includes("ryzen 5") || procLower.includes("r5");
+          if (pGroup === "AMD Ryzen 7") return procLower.includes("ryzen 7") || procLower.includes("r7");
+          if (pGroup === "Apple M-Series") return procLower.includes("apple") || procLower.includes("m1") || procLower.includes("m2") || procLower.includes("m3");
+          if (pGroup === "Intel Xeon") return procLower.includes("xeon");
+          return procLower.includes(pGroup.toLowerCase());
+        });
 
-      // Storage Filter
-      const matchesStorage =
-        activeStorage === "All" ||
-        product.specs.some(
-          (spec) =>
-            spec.label === "Storage" &&
-            spec.value.toLowerCase().includes(activeStorage.toLowerCase())
-        );
+        if (!matchesProc) return false;
+      }
 
-      return (
-        matchesCategory &&
-        matchesFormFactor &&
-        matchesBrand &&
-        matchesProcessor &&
-        matchesRAM &&
-        matchesStorage
-      );
+      // RAM filter
+      if (selectedRams.length > 0) {
+        const ramSpec = product.specs.find((s) => s.label.toLowerCase() === "ram")?.value || "";
+        const matchesRam = selectedRams.some((r) => ramSpec.toLowerCase().includes(r.toLowerCase()));
+        if (!matchesRam) return false;
+      }
+
+      // Storage filter
+      if (selectedStorages.length > 0) {
+        const stSpec = product.specs.find((s) => s.label.toLowerCase() === "storage")?.value || "";
+        const matchesSt = selectedStorages.some((s) => stSpec.toLowerCase().includes(s.toLowerCase().replace(" ssd", "")));
+        if (!matchesSt) return false;
+      }
+
+      return true;
     });
+
+    // Default alphabetical sorting
+    result.sort((a, b) => a.name.localeCompare(b.name));
+
+    return result;
   }, [
     allProducts,
     currentWorkflow,
-    activeFormFactor,
-    activeBrand,
-    activeProcessor,
-    activeRAM,
-    activeStorage,
+    searchQuery,
+    selectedFormFactor,
+    selectedBrand,
+    selectedProcessors,
+    selectedRams,
+    selectedStorages,
   ]);
 
-  const resetFilters = () => {
-    setActiveFormFactor("All Hardware");
-    setActiveBrand("All");
-    setActiveProcessor("All");
-    setActiveRAM("All");
-    setActiveStorage("All");
+  // Compute counts for UI checkboxes
+  const counts = useMemo(() => {
+    return {
+      total: allProducts.length,
+      brands: BRANDS.reduce((acc, brand) => {
+        acc[brand] = brand === "All"
+          ? allProducts.length
+          : allProducts.filter((p) => p.brand.toLowerCase() === brand.toLowerCase()).length;
+        return acc;
+      }, {} as Record<string, number>),
+      formFactors: {
+        "All Hardware": allProducts.length,
+        "Laptops": allProducts.filter((p) => p.formFactor === "Laptops").length,
+        "Desktops": allProducts.filter((p) => p.formFactor === "Desktops").length,
+      },
+      rams: RAM_OPTIONS.reduce((acc, ram) => {
+        acc[ram] = allProducts.filter((p) => {
+          const spec = p.specs.find((s) => s.label.toLowerCase() === "ram")?.value || "";
+          return spec.toLowerCase().includes(ram.toLowerCase());
+        }).length;
+        return acc;
+      }, {} as Record<string, number>),
+      storages: STORAGE_OPTIONS.reduce((acc, st) => {
+        const cleanSt = st.toLowerCase().replace(" ssd", "");
+        acc[st] = allProducts.filter((p) => {
+          const spec = p.specs.find((s) => s.label.toLowerCase() === "storage")?.value || "";
+          return spec.toLowerCase().includes(cleanSt);
+        }).length;
+        return acc;
+      }, {} as Record<string, number>),
+      processors: PROCESSOR_GROUPS.reduce((acc, pg) => {
+        acc[pg] = allProducts.filter((p) => {
+          const proc = (p.specs.find((s) => s.label.toLowerCase() === "processor")?.value || "").toLowerCase();
+          if (pg === "All Intel® Processors") return proc.includes("intel");
+          if (pg === "Intel Core i3") return proc.includes("i3");
+          if (pg === "Intel Core i5") return proc.includes("i5");
+          if (pg === "Intel Core i7") return proc.includes("i7");
+          if (pg === "Intel Core i9") return proc.includes("i9");
+          if (pg === "Intel Core Ultra") return proc.includes("ultra");
+          if (pg === "All AMD Processors") return proc.includes("amd") || proc.includes("ryzen");
+          if (pg === "AMD Ryzen 5") return proc.includes("ryzen 5") || proc.includes("r5");
+          if (pg === "AMD Ryzen 7") return proc.includes("ryzen 7") || proc.includes("r7");
+          if (pg === "Apple M-Series") return proc.includes("apple") || proc.includes("m1") || proc.includes("m2") || proc.includes("m3");
+          if (pg === "Intel Xeon") return proc.includes("xeon");
+          return proc.includes(pg.toLowerCase());
+        }).length;
+        return acc;
+      }, {} as Record<string, number>),
+    };
+  }, [allProducts]);
+
+  const toggleAccordion = (key: keyof typeof accordions) => {
+    setAccordions((prev) => ({ ...prev, [key]: !prev[key] }));
+  };
+
+  const toggleAllAccordions = (expand: boolean) => {
+    setAccordions({
+      formFactor: expand,
+      workflow: expand,
+      brand: expand,
+      processor: expand,
+      ram: expand,
+      storage: expand,
+    });
+  };
+
+  const toggleProcessor = (proc: string) => {
+    setSelectedProcessors((prev) =>
+      prev.includes(proc) ? prev.filter((p) => p !== proc) : [...prev, proc]
+    );
+  };
+
+  const toggleRam = (ram: string) => {
+    setSelectedRams((prev) =>
+      prev.includes(ram) ? prev.filter((r) => r !== ram) : [...prev, ram]
+    );
+  };
+
+  const toggleStorage = (st: string) => {
+    setSelectedStorages((prev) =>
+      prev.includes(st) ? prev.filter((s) => s !== st) : [...prev, st]
+    );
+  };
+
+  const clearAllFilters = () => {
+    setActiveTab("all");
+    setSelectedFormFactor("All Hardware");
+    setSelectedBrand("All");
+    setSelectedProcessors([]);
+    setSelectedRams([]);
+    setSelectedStorages([]);
+    setSearchQuery("");
+    setProcessorSearch("");
+    window.history.pushState(null, "", "/configuration");
   };
 
   const hasActiveFilters =
-    activeFormFactor !== "All Hardware" ||
-    activeBrand !== "All" ||
-    activeProcessor !== "All" ||
-    activeRAM !== "All" ||
-    activeStorage !== "All";
+    activeTab !== "all" ||
+    selectedFormFactor !== "All Hardware" ||
+    selectedBrand !== "All" ||
+    selectedProcessors.length > 0 ||
+    selectedRams.length > 0 ||
+    selectedStorages.length > 0 ||
+    searchQuery.trim().length > 0;
+
+  const filteredProcessorGroups = useMemo(() => {
+    if (!processorSearch.trim()) return PROCESSOR_GROUPS;
+    return PROCESSOR_GROUPS.filter((pg) =>
+      pg.toLowerCase().includes(processorSearch.toLowerCase())
+    );
+  }, [processorSearch]);
 
   return (
-    <main className="min-h-screen bg-slate-50 text-slate-900 pt-24 sm:pt-28 pb-16">
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* TOP SEO & WORKFLOW HEADER (DARK THEME) */}
-        <div className="relative bg-black rounded-2xl sm:rounded-3xl p-6 sm:p-8 md:p-10 border border-zinc-800 shadow-2xl mb-8 overflow-hidden transition-all">
-          {/* Subtle Ambient Glows */}
-          <div className="absolute -top-24 -right-24 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl pointer-events-none" />
+    <main className="min-h-screen bg-white text-slate-900 pt-24 sm:pt-28">
+      {/* EXPANDED CONTAINER (1720px matching laptops & desktops) */}
+      <div className="w-full max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 py-5 sm:py-7">
 
-          <div className="relative z-10 max-w-4xl">
-            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-[1.15] mb-4">
-              {currentWorkflow.title}
-            </h1>
+        {/* BREADCRUMB */}
+        <nav className="flex items-center gap-2 text-xs text-slate-500 mb-3 select-none">
+          <Link href="/" className="hover:text-black transition-colors">Home</Link>
+          <span>/</span>
+          <span className="text-slate-800 font-medium">Custom PC & Workstation Configurator</span>
+        </nav>
 
-            <p className="text-zinc-300 text-sm sm:text-base md:text-lg leading-relaxed font-normal">
-              {currentWorkflow.description}
-            </p>
-          </div>
+        {/* HERO HEADER */}
+        <div className="mb-6">
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-950 tracking-tight mb-1.5">
+            {currentWorkflow.title}
+          </h1>
+          <p className="text-xs sm:text-sm text-slate-600 max-w-4xl leading-relaxed">
+            {currentWorkflow.description}
+          </p>
         </div>
 
-        {/* WORKFLOW CATEGORY SELECTOR TABS (Matching 4 Home Page Cards + All Systems) */}
-        <div className="mb-8">
-          <div className="flex items-center justify-between mb-3">
-            <p className="text-xs uppercase tracking-widest font-extrabold text-slate-500">
-              Select Build Workflow Category
-            </p>
-            <span className="text-xs font-semibold text-slate-500">
-              Showing {filteredProducts.length} Configured Systems
-            </span>
-          </div>
-
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5 sm:gap-3">
+        {/* WORKFLOW TABS SELECTOR (Lenovo Corporate Style Pills) */}
+        <div className="mb-6 pb-2 border-b border-slate-200">
+          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
             {workflows.map((wf) => {
               const isActive = activeTab === wf.tabKey;
               return (
                 <button
                   key={wf.id}
                   onClick={() => handleTabSelect(wf.tabKey)}
-                  className={`py-3 px-4 rounded-xl sm:rounded-2xl border text-center transition-all duration-200 flex items-center justify-center ${
+                  className={`px-4 py-2 text-xs sm:text-sm font-bold whitespace-nowrap transition-all duration-200 cursor-pointer rounded-md border ${
                     isActive
-                      ? "bg-slate-950 text-white border-slate-950 shadow-md ring-2 ring-slate-950/20"
-                      : "bg-white text-slate-800 border-slate-200 hover:border-slate-400 hover:bg-slate-50 shadow-xs"
+                      ? "bg-[#1546a0] text-white border-[#1546a0] shadow-xs"
+                      : "bg-white text-slate-700 border-slate-300 hover:border-slate-400 hover:text-black"
                   }`}
                 >
-                  <span className="text-xs sm:text-sm font-bold leading-tight block">
-                    {wf.tabLabel}
-                  </span>
+                  {wf.tabLabel}
                 </button>
               );
             })}
           </div>
         </div>
 
-        {/* MOBILE FILTERS TOGGLE */}
-        <div className="lg:hidden mb-6">
+        {/* MOBILE FILTER TRIGGER */}
+        <div className="lg:hidden mb-4">
           <button
-            onClick={() => setShowMobileFilters((prev) => !prev)}
-            className="w-full py-3 px-4 rounded-xl bg-white border border-slate-200 text-slate-800 font-bold flex items-center justify-between text-sm shadow-xs"
+            onClick={() => setShowMobileFilters(true)}
+            className="w-full py-2.5 px-4 bg-slate-100 hover:bg-slate-200 border border-slate-300 text-slate-900 font-bold text-xs uppercase tracking-wider flex items-center justify-between cursor-pointer"
           >
             <span className="flex items-center gap-2">
-              <FaSlidersH className="text-slate-900" />
-              Hardware Filters ({hasActiveFilters ? "Active" : "Default"})
+              <FaFilter size={12} className="text-[#1546a0]" />
+              Filter Systems & Hardware
             </span>
-            <span className="text-xs font-semibold text-blue-600">
-              {showMobileFilters ? "Hide Filters ▲" : "Show Filters ▼"}
+            <span className="text-[11px] text-[#0f3e99] font-semibold">
+              {filteredProducts.length} Results
             </span>
           </button>
         </div>
 
-        {/* MAIN LAYOUT: SIDEBAR FILTERS + PRODUCT GRID */}
-        <div className="grid grid-cols-12 gap-6 lg:gap-8 items-start">
+        {/* MAIN 12-COLUMN LAYOUT */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">
           
-          {/* LEFT SIDEBAR FILTERS */}
-          <aside
-            className={`col-span-12 lg:col-span-3 ${
-              showMobileFilters ? "block" : "hidden lg:block"
-            }`}
-          >
-            <div className="bg-white border border-slate-200/90 rounded-2xl p-6 sticky top-28 shadow-xs space-y-6">
-              <div className="flex items-center justify-between border-b border-slate-100 pb-4">
-                <h2 className="text-base font-extrabold text-slate-900 uppercase tracking-wider flex items-center gap-2">
-                  <FaSlidersH className="text-slate-700 text-sm" />
-                  Hardware Filters
-                </h2>
-                {hasActiveFilters && (
-                  <button
-                    onClick={resetFilters}
-                    className="text-xs font-bold text-blue-600 hover:text-blue-800 inline-flex items-center gap-1"
-                  >
-                    <FaUndoAlt className="text-[10px]" />
-                    Reset
-                  </button>
-                )}
+          {/* ================= LEFT ACCORDION FILTERS ================= */}
+          <aside className="hidden lg:block lg:col-span-3 xl:col-span-3 sticky top-28 space-y-3">
+            
+            {/* Header with collapse/expand */}
+            <div className="flex items-center justify-between pb-2 border-b border-slate-200">
+              <h2 className="text-base font-black text-slate-950 uppercase tracking-wider">
+                Filters
+              </h2>
+              <button
+                onClick={() => toggleAllAccordions(false)}
+                className="text-xs font-semibold text-slate-500 hover:text-black cursor-pointer"
+              >
+                Collapse All
+              </button>
+            </div>
+
+            {/* ACCORDION 1: Form Factor / Hardware Type */}
+            <div className="border-b border-slate-200 pb-3">
+              <button
+                onClick={() => toggleAccordion("formFactor")}
+                className="w-full flex items-center justify-between py-2 text-xs font-bold text-slate-900 hover:text-[#0f3e99] cursor-pointer text-left uppercase tracking-wider"
+              >
+                <span>Hardware Type</span>
+                {accordions.formFactor ? <FaChevronUp size={11} /> : <FaChevronDown size={11} />}
+              </button>
+              {accordions.formFactor && (
+                <div className="space-y-1.5 mt-2 pl-0.5">
+                  {FORM_FACTORS.map((ff) => {
+                    const isChecked = selectedFormFactor === ff;
+                    const count = counts.formFactors[ff as keyof typeof counts.formFactors] || 0;
+                    return (
+                      <label key={ff} className="flex items-center justify-between text-xs text-slate-700 cursor-pointer hover:text-black">
+                        <div className="flex items-center gap-2">
+                          <input
+                            type="radio"
+                            name="formFactorRadio"
+                            checked={isChecked}
+                            onChange={() => setSelectedFormFactor(ff)}
+                            className="w-4 h-4 accent-[#1546a0] cursor-pointer"
+                          />
+                          <span className={isChecked ? "font-bold text-slate-950" : ""}>{ff}</span>
+                        </div>
+                        <span className="text-slate-400 text-[11px]">({count})</span>
+                      </label>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+
+            {/* ACCORDION 2: Brand */}
+            <div className="border-b border-slate-200 pb-3">
+              <button
+                onClick={() => toggleAccordion("brand")}
+                className="w-full flex items-center justify-between py-2 text-xs font-bold text-slate-900 hover:text-[#0f3e99] cursor-pointer text-left uppercase tracking-wider"
+              >
+                <span>Brand</span>
+                {accordions.brand ? <FaChevronUp size={11} /> : <FaChevronDown size={11} />}
+              </button>
+              {accordions.brand && (
+                <div className="space-y-1.5 mt-2 pl-0.5">
+                  {BRANDS.filter((b) => b !== "All").map((brand) => {
+                    const isChecked = selectedBrand.toLowerCase() === brand.toLowerCase();
+                    const count = counts.brands[brand] || 0;
+                    return (
+                      <label key={brand} className="flex items-center justify-between text-xs text-slate-700 cursor-pointer hover:text-black">
+                        <div className="flex items-center gap-2">
+                          <input
+                            type="checkbox"
+                            checked={isChecked}
+                            onChange={() => setSelectedBrand(isChecked ? "All" : brand)}
+                            className="w-4 h-4 accent-[#1546a0] rounded-xs cursor-pointer"
+                          />
+                          <span className={isChecked ? "font-bold text-slate-950" : ""}>{brand}</span>
+                        </div>
+                        <span className="text-slate-400 text-[11px]">({count})</span>
+                      </label>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+
+            {/* ACCORDION 3: Processor */}
+            <div className="border-b border-slate-200 pb-3">
+              <button
+                onClick={() => toggleAccordion("processor")}
+                className="w-full flex items-center justify-between py-2 text-xs font-bold text-slate-900 hover:text-[#0f3e99] cursor-pointer text-left uppercase tracking-wider"
+              >
+                <span>Processor</span>
+                {accordions.processor ? <FaChevronUp size={11} /> : <FaChevronDown size={11} />}
+              </button>
+              {accordions.processor && (
+                <div className="mt-2 pl-0.5 space-y-2">
+                  <div className="relative mb-2">
+                    <input
+                      type="text"
+                      placeholder="Search Processor"
+                      value={processorSearch}
+                      onChange={(e) => setProcessorSearch(e.target.value)}
+                      className="w-full text-xs py-1.5 pl-7 pr-6 border border-slate-300 rounded-none focus:outline-none focus:border-[#1546a0]"
+                    />
+                    <FaSearch className="absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400 text-[10px]" />
+                    {processorSearch && (
+                      <button onClick={() => setProcessorSearch("")} className="absolute right-2 top-1/2 -translate-y-1/2 text-slate-400 hover:text-black">
+                        <FaTimes size={10} />
+                      </button>
+                    )}
+                  </div>
+
+                  <div className="space-y-1.5 max-h-48 overflow-y-auto pr-1">
+                    {filteredProcessorGroups.map((pg) => {
+                      const isChecked = selectedProcessors.includes(pg);
+                      const count = counts.processors[pg] || 0;
+                      return (
+                        <label key={pg} className="flex items-center justify-between text-xs text-slate-700 cursor-pointer hover:text-black">
+                          <div className="flex items-center gap-2">
+                            <input
+                              type="checkbox"
+                              checked={isChecked}
+                              onChange={() => toggleProcessor(pg)}
+                              className="w-4 h-4 accent-[#1546a0] rounded-xs cursor-pointer"
+                            />
+                            <span className={isChecked ? "font-bold text-slate-950" : ""}>{pg}</span>
+                          </div>
+                          <span className="text-slate-400 text-[11px]">({count})</span>
+                        </label>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* ACCORDION 4: RAM */}
+            <div className="border-b border-slate-200 pb-3">
+              <button
+                onClick={() => toggleAccordion("ram")}
+                className="w-full flex items-center justify-between py-2 text-xs font-bold text-slate-900 hover:text-[#0f3e99] cursor-pointer text-left uppercase tracking-wider"
+              >
+                <span>Memory (RAM)</span>
+                {accordions.ram ? <FaChevronUp size={11} /> : <FaChevronDown size={11} />}
+              </button>
+              {accordions.ram && (
+                <div className="space-y-1.5 mt-2 pl-0.5">
+                  {RAM_OPTIONS.map((ram) => {
+                    const isChecked = selectedRams.includes(ram);
+                    const count = counts.rams[ram] || 0;
+                    return (
+                      <label key={ram} className="flex items-center justify-between text-xs text-slate-700 cursor-pointer hover:text-black">
+                        <div className="flex items-center gap-2">
+                          <input
+                            type="checkbox"
+                            checked={isChecked}
+                            onChange={() => toggleRam(ram)}
+                            className="w-4 h-4 accent-[#1546a0] rounded-xs cursor-pointer"
+                          />
+                          <span className={isChecked ? "font-bold text-slate-950" : ""}>{ram}</span>
+                        </div>
+                        <span className="text-slate-400 text-[11px]">({count})</span>
+                      </label>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+
+            {/* ACCORDION 5: Storage */}
+            <div className="border-b border-slate-200 pb-3">
+              <button
+                onClick={() => toggleAccordion("storage")}
+                className="w-full flex items-center justify-between py-2 text-xs font-bold text-slate-900 hover:text-[#0f3e99] cursor-pointer text-left uppercase tracking-wider"
+              >
+                <span>Storage</span>
+                {accordions.storage ? <FaChevronUp size={11} /> : <FaChevronDown size={11} />}
+              </button>
+              {accordions.storage && (
+                <div className="space-y-1.5 mt-2 pl-0.5">
+                  {STORAGE_OPTIONS.map((st) => {
+                    const isChecked = selectedStorages.includes(st);
+                    const count = counts.storages[st] || 0;
+                    return (
+                      <label key={st} className="flex items-center justify-between text-xs text-slate-700 cursor-pointer hover:text-black">
+                        <div className="flex items-center gap-2">
+                          <input
+                            type="checkbox"
+                            checked={isChecked}
+                            onChange={() => toggleStorage(st)}
+                            className="w-4 h-4 accent-[#1546a0] rounded-xs cursor-pointer"
+                          />
+                          <span className={isChecked ? "font-bold text-slate-950" : ""}>{st}</span>
+                        </div>
+                        <span className="text-slate-400 text-[11px]">({count})</span>
+                      </label>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+
+            {/* Quick B2B Assistance Box */}
+            <div className="pt-2">
+              <div className="bg-slate-50 border border-slate-200 p-3.5 text-xs">
+                <div className="font-bold text-slate-900 mb-1">Need Custom Fleet Configuration?</div>
+                <p className="text-slate-600 mb-2.5 text-[11px] leading-relaxed">
+                  Direct OEM component sourcing, bulk discounts, and GST 18% invoicing across India.
+                </p>
+                <button
+                  onClick={() => handleOpenQuote("Custom", "Configurator Request")}
+                  className="w-full py-1.5 bg-[#1546a0] hover:bg-[#003d7e] text-white font-bold text-[11px] uppercase tracking-wider rounded-none cursor-pointer"
+                >
+                  Request Quote
+                </button>
+              </div>
+            </div>
+
+          </aside>
+
+          {/* ================= RIGHT PRODUCTS SECTION ================= */}
+          <div className="lg:col-span-9 xl:col-span-9">
+
+            {/* TOP SEARCH BAR */}
+            <div className="relative mb-4">
+              <input
+                type="text"
+                placeholder="Search custom configurations, processors, GPUs, model numbers..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full bg-white border border-slate-300 py-2.5 pl-10 pr-10 text-xs sm:text-sm text-slate-900 rounded-md focus:outline-none focus:border-[#1546a0] transition-colors"
+              />
+              <FaSearch className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs" />
+              {searchQuery && (
+                <button
+                  onClick={() => setSearchQuery("")}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-black cursor-pointer"
+                >
+                  <FaTimes size={12} />
+                </button>
+              )}
+            </div>
+
+            {/* RESULTS HEADER BAR */}
+            <div className="pb-3 border-b border-slate-200 mb-4">
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <div className="flex items-center gap-3">
+                  <span className="text-sm sm:text-base font-extrabold text-slate-950">
+                    {filteredProducts.length} Matching results
+                  </span>
+                  {hasActiveFilters && (
+                    <button
+                      onClick={clearAllFilters}
+                      className="text-xs font-bold text-[#0f3e99] hover:underline cursor-pointer"
+                    >
+                      Clear All
+                    </button>
+                  )}
+                </div>
               </div>
 
-              {/* Form Factor Filter */}
+              {/* ACTIVE FILTER CHIPS */}
+              {hasActiveFilters && (
+                <div className="flex flex-wrap items-center gap-2 mt-3 pt-2.5 border-t border-slate-100">
+                  {activeTab !== "all" && (
+                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-slate-100 text-slate-800 text-xs font-medium rounded-xs border border-slate-200">
+                      <span>Workflow: {currentWorkflow.tabLabel}</span>
+                      <button onClick={() => handleTabSelect("all")} className="text-slate-500 hover:text-black cursor-pointer">
+                        <FaTimes size={10} />
+                      </button>
+                    </span>
+                  )}
+
+                  {selectedFormFactor !== "All Hardware" && (
+                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-slate-100 text-slate-800 text-xs font-medium rounded-xs border border-slate-200">
+                      <span>Type: {selectedFormFactor}</span>
+                      <button onClick={() => setSelectedFormFactor("All Hardware")} className="text-slate-500 hover:text-black cursor-pointer">
+                        <FaTimes size={10} />
+                      </button>
+                    </span>
+                  )}
+
+                  {selectedBrand !== "All" && (
+                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-slate-100 text-slate-800 text-xs font-medium rounded-xs border border-slate-200">
+                      <span>Brand: {selectedBrand}</span>
+                      <button onClick={() => setSelectedBrand("All")} className="text-slate-500 hover:text-black cursor-pointer">
+                        <FaTimes size={10} />
+                      </button>
+                    </span>
+                  )}
+
+                  {selectedProcessors.map((p) => (
+                    <span key={p} className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-slate-100 text-slate-800 text-xs font-medium rounded-xs border border-slate-200">
+                      <span>Processor: {p}</span>
+                      <button onClick={() => toggleProcessor(p)} className="text-slate-500 hover:text-black cursor-pointer">
+                        <FaTimes size={10} />
+                      </button>
+                    </span>
+                  ))}
+
+                  {selectedRams.map((r) => (
+                    <span key={r} className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-slate-100 text-slate-800 text-xs font-medium rounded-xs border border-slate-200">
+                      <span>RAM: {r}</span>
+                      <button onClick={() => toggleRam(r)} className="text-slate-500 hover:text-black cursor-pointer">
+                        <FaTimes size={10} />
+                      </button>
+                    </span>
+                  ))}
+
+                  {selectedStorages.map((s) => (
+                    <span key={s} className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-slate-100 text-slate-800 text-xs font-medium rounded-xs border border-slate-200">
+                      <span>Storage: {s}</span>
+                      <button onClick={() => toggleStorage(s)} className="text-slate-500 hover:text-black cursor-pointer">
+                        <FaTimes size={10} />
+                      </button>
+                    </span>
+                  ))}
+
+                  {searchQuery && (
+                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-slate-100 text-slate-800 text-xs font-medium rounded-xs border border-slate-200">
+                      <span>Search: "{searchQuery}"</span>
+                      <button onClick={() => setSearchQuery("")} className="text-slate-500 hover:text-black cursor-pointer">
+                        <FaTimes size={10} />
+                      </button>
+                    </span>
+                  )}
+                </div>
+              )}
+            </div>
+
+            {/* PRODUCT GRID (Standard 4-column responsive) */}
+            {filteredProducts.length > 0 ? (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5">
+                {filteredProducts.map((product) => (
+                  <ConfigProductCard
+                    key={product.id}
+                    product={product}
+                    onOpenQuote={(brand, model) => handleOpenQuote(brand, model)}
+                  />
+                ))}
+              </div>
+            ) : (
+              <div className="bg-slate-50 border border-slate-200 p-12 text-center my-6">
+                <FaDesktop size={32} className="mx-auto text-slate-400 mb-3" />
+                <h3 className="text-base font-bold text-slate-900 mb-2">No configurations match your selected filters</h3>
+                <p className="text-xs text-slate-600 mb-4">Try adjusting your filters or search for another configuration.</p>
+                <button
+                  onClick={clearAllFilters}
+                  className="px-5 py-2.5 bg-[#1546a0] text-white font-bold text-xs uppercase tracking-wider rounded-md cursor-pointer"
+                >
+                  Clear All Filters
+                </button>
+              </div>
+            )}
+
+          </div>
+        </div>
+
+        {/* MOBILE DRAWER */}
+        {showMobileFilters && (
+          <div className="fixed inset-0 z-50 flex bg-black/60 backdrop-blur-xs lg:hidden">
+            <div className="w-80 max-w-[85%] bg-white h-full p-5 overflow-y-auto space-y-4">
+              <div className="flex items-center justify-between pb-3 border-b border-slate-200">
+                <h3 className="font-extrabold text-slate-900 text-sm uppercase tracking-wider">Filter Hardware</h3>
+                <button onClick={() => setShowMobileFilters(false)} className="text-slate-500 hover:text-black">
+                  <FaTimes size={16} />
+                </button>
+              </div>
+
+              {/* Mobile Hardware Type */}
               <div>
-                <label className="text-xs font-bold text-slate-600 uppercase tracking-wider mb-2 block">
-                  Form Factor
-                </label>
-                <div className="grid grid-cols-3 gap-1.5 bg-slate-100 p-1 rounded-lg">
-                  {formFactors.map((ff) => (
+                <h4 className="text-xs font-bold text-slate-900 uppercase mb-2">Hardware Type</h4>
+                <div className="space-y-1">
+                  {FORM_FACTORS.map((ff) => (
                     <button
                       key={ff}
-                      onClick={() => setActiveFormFactor(ff)}
-                      className={`py-1.5 text-center text-xs font-bold rounded-md transition-all ${
-                        activeFormFactor === ff
-                          ? "bg-white text-slate-950 shadow-xs"
-                          : "text-slate-600 hover:text-slate-900"
+                      onClick={() => {
+                        setSelectedFormFactor(ff);
+                        setShowMobileFilters(false);
+                      }}
+                      className={`w-full text-left px-3 py-1.5 text-xs rounded-none ${
+                        selectedFormFactor === ff ? "bg-[#1546a0] text-white font-bold" : "text-slate-700 hover:bg-slate-100"
                       }`}
                     >
-                      {ff === "All Hardware" ? "All" : ff}
+                      {ff}
                     </button>
                   ))}
                 </div>
               </div>
 
-              {/* Brand Filter */}
+              {/* Mobile Brand */}
               <div>
-                <label className="text-xs font-bold text-slate-600 uppercase tracking-wider mb-2 block">
-                  Brand OEM
-                </label>
-                <select
-                  value={activeBrand}
-                  onChange={(e) => setActiveBrand(e.target.value)}
-                  className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3.5 py-2.5 text-sm text-slate-900 font-semibold focus:outline-none focus:bg-white focus:border-slate-900 transition-colors appearance-none cursor-pointer"
-                >
-                  {brands.map((b) => (
-                    <option key={b} value={b}>
-                      {b === "All" ? "All Brands (Lenovo, HP, Dell, Asus, Acer, Apple)" : b}
-                    </option>
+                <h4 className="text-xs font-bold text-slate-900 uppercase mb-2">Brand OEM</h4>
+                <div className="space-y-1">
+                  {BRANDS.map((br) => (
+                    <button
+                      key={br}
+                      onClick={() => {
+                        setSelectedBrand(br);
+                        setShowMobileFilters(false);
+                      }}
+                      className={`w-full text-left px-3 py-1.5 text-xs rounded-none ${
+                        selectedBrand === br ? "bg-[#1546a0] text-white font-bold" : "text-slate-700 hover:bg-slate-100"
+                      }`}
+                    >
+                      {br}
+                    </button>
                   ))}
-                </select>
+                </div>
               </div>
 
-              {/* Processor Filter */}
-              <div>
-                <label className="text-xs font-bold text-slate-600 uppercase tracking-wider mb-2 block">
-                  Processor Architecture
-                </label>
-                <select
-                  value={activeProcessor}
-                  onChange={(e) => setActiveProcessor(e.target.value)}
-                  className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3.5 py-2.5 text-sm text-slate-900 font-semibold focus:outline-none focus:bg-white focus:border-slate-900 transition-colors appearance-none cursor-pointer"
+              <div className="pt-4 border-t border-slate-200">
+                <button
+                  onClick={() => {
+                    clearAllFilters();
+                    setShowMobileFilters(false);
+                  }}
+                  className="w-full py-2 bg-slate-200 text-slate-800 text-xs font-bold uppercase rounded-none cursor-pointer"
                 >
-                  {processors.map((p) => (
-                    <option key={p} value={p}>
-                      {p === "All" ? "All Processors (Intel / AMD / Xeon)" : p}
-                    </option>
-                  ))}
-                </select>
+                  Clear All Filters
+                </button>
               </div>
-
-              {/* RAM Memory Filter */}
-              <div>
-                <label className="text-xs font-bold text-slate-600 uppercase tracking-wider mb-2 block">
-                  RAM Capacity
-                </label>
-                <select
-                  value={activeRAM}
-                  onChange={(e) => setActiveRAM(e.target.value)}
-                  className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3.5 py-2.5 text-sm text-slate-900 font-semibold focus:outline-none focus:bg-white focus:border-slate-900 transition-colors appearance-none cursor-pointer"
-                >
-                  {rams.map((r) => (
-                    <option key={r} value={r}>
-                      {r === "All" ? "All Memory (8GB - 64GB+)" : r}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              {/* Storage Filter */}
-              <div>
-                <label className="text-xs font-bold text-slate-600 uppercase tracking-wider mb-2 block">
-                  Storage (NVMe SSD / ROM)
-                </label>
-                <select
-                  value={activeStorage}
-                  onChange={(e) => setActiveStorage(e.target.value)}
-                  className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3.5 py-2.5 text-sm text-slate-900 font-semibold focus:outline-none focus:bg-white focus:border-slate-900 transition-colors appearance-none cursor-pointer"
-                >
-                  {storages.map((s) => (
-                    <option key={s} value={s}>
-                      {s === "All" ? "All Storage (256GB - 2TB NVMe)" : s}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              {/* Quick Enterprise Consultation Card */}
-              <div className="bg-slate-900 text-white rounded-xl p-4 sm:p-5 mt-6">
-                <p className="text-[11px] uppercase tracking-wider text-cyan-400 font-black mb-1">
-                  Custom Architecture?
-                </p>
-                <h3 className="text-sm font-bold text-white mb-2 leading-tight">
-                  Need Custom Specs or Bulk Fleet Quote?
-                </h3>
-                <p className="text-xs text-slate-300 mb-4 leading-relaxed">
-                  Our certified solutions team designs multi-GPU AI servers, custom RAM/storage expansions, and corporate bulk orders.
-                </p>
-                <a
-                  href={`https://wa.me/919643990077?text=${encodeURIComponent(
-                    "Hi Authentic Infosystem, I need a custom system build and quote for our enterprise / custom workload."
-                  )}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full inline-flex items-center justify-center gap-2 px-3.5 py-2.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs transition-colors shadow-xs"
-                >
-                  <FaWhatsapp className="text-sm" />
-                  Chat With Solution Architect
-                </a>
-              </div>
-
             </div>
-          </aside>
-
-          {/* RIGHT PRODUCT GRID */}
-          <div className="col-span-12 lg:col-span-9">
-            
-            {filteredProducts.length === 0 ? (
-              <div className="text-center py-20 bg-white rounded-2xl sm:rounded-3xl border border-slate-200 p-8 shadow-xs">
-                <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4 text-slate-400">
-                  <FaSlidersH className="text-2xl" />
-                </div>
-                <h3 className="text-xl sm:text-2xl font-bold text-slate-900 mb-2">
-                  No Exact Match Found For Selected Filters
-                </h3>
-                <p className="text-slate-600 text-sm max-w-md mx-auto mb-6">
-                  We custom-build and configure any configuration on demand. Reset your filters or contact our hardware desk directly.
-                </p>
-                <div className="flex flex-wrap items-center justify-center gap-3">
-                  <button
-                    onClick={resetFilters}
-                    className="px-6 py-2.5 bg-slate-900 hover:bg-black text-white rounded-lg font-bold text-sm transition-all shadow-xs"
-                  >
-                    Reset Hardware Filters
-                  </button>
-                  <a
-                    href="https://wa.me/919643990077?text=Hi%20Authentic%20Infosystem%2C%20I%20am%20looking%20for%20a%20specific%20custom%20system%20configuration."
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-6 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg font-bold text-sm transition-all shadow-xs inline-flex items-center gap-2"
-                  >
-                    <FaWhatsapp />
-                    Request Custom Spec
-                  </a>
-                </div>
-              </div>
-            ) : (
-              <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 sm:gap-6">
-                {filteredProducts.map((product) => (
-                  <div
-                    key={product.id}
-                    className="bg-white rounded-2xl border border-slate-200 hover:border-slate-400 hover:shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden group"
-                  >
-                    {/* PRODUCT IMAGE */}
-                    <div className="relative w-full aspect-[16/11] bg-slate-50 p-6 flex items-center justify-center border-b border-slate-100 overflow-hidden">
-                      <img
-                        src={product.image}
-                        alt={`${product.name} - Authentic Infosystem Custom Hardware`}
-                        width="340"
-                        height="240"
-                        loading="lazy"
-                        className="object-contain w-full h-full max-h-[160px] drop-shadow-md group-hover:scale-105 transition-transform duration-300"
-                      />
-                    </div>
-
-                      {/* CARD CONTENT */}
-                      <div className="p-5 sm:p-6 flex flex-col flex-grow justify-between">
-                        <div>
-                          <p className="text-[11px] font-bold text-slate-500 uppercase tracking-wider mb-1">
-                            {product.modelNumber || `${product.brand} Hardware`}
-                          </p>
-                          <h3 className="text-lg font-extrabold text-slate-950 leading-snug mb-4 group-hover:text-blue-600 transition-colors">
-                            {product.name}
-                          </h3>
-
-                          {/* SPECS LIST */}
-                          <div className="space-y-2 mb-5">
-                            {product.specs.slice(0, 4).map((spec, sIdx) => (
-                              <div
-                                key={sIdx}
-                                className="flex justify-between items-center text-xs py-1 border-b border-slate-100 last:border-0"
-                              >
-                                <span className="text-slate-500 font-medium">{spec.label}</span>
-                                <span className="text-slate-950 font-bold text-right truncate max-w-[62%]">
-                                  {spec.value}
-                                </span>
-                              </div>
-                            ))}
-                          </div>
-
-                          {/* WARRANTY TAG */}
-                          <div className="inline-flex items-center gap-1.5 text-[11px] text-slate-600 font-semibold mb-5 bg-slate-50 px-2.5 py-1 rounded-md border border-slate-200/60 w-full">
-                            <FaCheckCircle className="text-emerald-600 text-xs flex-shrink-0" />
-                            <span className="truncate">{product.warranty || "1 Year Onsite Warranty"}</span>
-                          </div>
-                        </div>
-
-                        {/* CARD ACTION BUTTONS */}
-                        <div className="pt-2 border-t border-slate-100">
-                          <a
-                            href={`https://wa.me/919643990077?text=${encodeURIComponent(
-                              `Hi Authentic Infosystem, I would like to request the latest quote, configuration options, and availability for:
-Product: ${product.name} (${product.modelNumber})
-Workflow Category: ${product.category}
-Specs: ${product.specs.map((s) => `${s.label}: ${s.value}`).join(", ")}`
-                            )}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="w-full inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-slate-950 hover:bg-blue-600 text-white font-bold text-xs sm:text-sm transition-all duration-200 shadow-xs text-center"
-                          >
-                            <FaWhatsapp className="text-emerald-400 text-base" />
-                            <span>Request Custom Quote</span>
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              )}
-
+            <div className="flex-1" onClick={() => setShowMobileFilters(false)} />
           </div>
-        </div>
-
-        {/* BOTTOM ENTERPRISE & BULK PROCUREMENT BANNER */}
-        <div className="mt-16 bg-gradient-to-br from-slate-950 via-slate-900 to-black text-white rounded-2xl sm:rounded-3xl p-8 sm:p-12 border border-slate-800 relative overflow-hidden shadow-2xl">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
-          <div className="relative z-10 max-w-4xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-cyan-300 text-xs font-bold uppercase tracking-wider mb-4">
-              <span>B2B & Enterprise Hardware Deployment</span>
-            </div>
-
-            <h2 className="text-2xl sm:text-4xl font-extrabold text-white tracking-tight mb-4 leading-tight">
-              Looking for Non-Standard Specs, Multi-GPU AI Clusters, or Institutional Fleet Sourcing?
-            </h2>
-
-            <p className="text-slate-300 text-sm sm:text-base leading-relaxed mb-8 max-w-3xl">
-              Authentic Infosystem provides tailored IT solutions for businesses, research labs, universities, and creative studios. We source direct from authorized OEM tier-1 distributors with complete GST invoicing, bulk commercial credit terms, and custom SLA agreements across India.
-            </p>
-
-            <div className="flex flex-wrap items-center gap-4">
-              <a
-                href="https://wa.me/919643990077?text=Hi%20Authentic%20Infosystem%2C%20we%20require%20a%20commercial%20quote%20for%20enterprise%20systems%20and%20hardware."
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold text-sm transition-all shadow-lg"
-              >
-                <FaWhatsapp className="text-lg" />
-                <span>Contact Enterprise Hardware Desk</span>
-              </a>
-
-              <a
-                href="tel:+919643990077"
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-sm border border-white/20 transition-all"
-              >
-                <FaPhoneAlt className="text-xs" />
-                <span>Call +91 96439 90077</span>
-              </a>
-            </div>
-          </div>
-        </div>
+        )}
 
       </div>
+
+      {/* POPULAR CONFIGURATIONS (Expanded to 1720px) */}
+      <section className="py-14 bg-slate-50 border-t border-slate-200">
+        <div className="max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10">
+          <div className="text-center max-w-3xl mx-auto mb-8">
+            <h2 className="text-2xl sm:text-3xl font-black text-slate-950 tracking-tight">
+              Popular Pre-Configured Packages
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-600 mt-1">
+              Purpose-built turnkey workstation packages ready for rapid commercial deployment with full warranty.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
+            {popularConfigs.map((pkg, i) => (
+              <a
+                key={i}
+                href={`https://wa.me/919643990077?text=${encodeURIComponent(`Hi, I am interested in the ${pkg.title} custom hardware configuration from Authentic Infosystem.`)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="relative rounded-xl overflow-hidden min-h-[140px] flex items-center justify-center p-4 border border-slate-200 shadow-xs cursor-pointer group hover:shadow-md hover:border-black transition-all block"
+              >
+                <img
+                  src={pkg.image}
+                  alt={pkg.title}
+                  width="400"
+                  height="200"
+                  loading="lazy"
+                  className="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-500 ease-out"
+                />
+                <div className="absolute inset-0 bg-black/55 group-hover:bg-black/45 transition-colors duration-300" />
+                <h3 className="relative z-10 text-white font-extrabold text-sm sm:text-base text-center px-2 tracking-wide drop-shadow-md">
+                  {pkg.title}
+                </h3>
+              </a>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CUSTOM WORKSTATION BUILDER CTA (Expanded to 1720px) */}
+      <section className="py-16 text-center bg-black text-white border-t border-white/10 relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 relative z-10">
+          <div className="max-w-3xl mx-auto">
+            <p className="text-xs font-bold text-zinc-400 tracking-[4px] uppercase mb-3">CUSTOM WORKSTATIONS</p>
+            <h2 className="text-2xl sm:text-4xl md:text-5xl font-extrabold mb-4 tracking-tight">
+              Build Your Custom Workstation Lab
+            </h2>
+            <p className="text-zinc-300 text-xs sm:text-sm md:text-base mb-8 max-w-2xl mx-auto leading-relaxed">
+              Need custom GPU clusters, dual-socket processors, high-capacity ECC RAM, or liquid-cooled render racks? Our systems engineers craft tailored enterprise rigs with manufacturer warranty.
+            </p>
+            <div className="flex flex-wrap items-center justify-center gap-4">
+              <button
+                onClick={() => handleOpenQuote("Custom", "Workstation Lab")}
+                className="px-8 py-3.5 bg-[#1546a0] hover:bg-[#003d7e] text-white font-bold text-xs uppercase tracking-wider rounded-md shadow-md transition-all cursor-pointer"
+              >
+                Request Custom Architecture
+              </button>
+              <a
+                href="https://wa.me/919643990077?text=Hi%2C%20I%20want%20to%20request%20a%20custom%20workstation%20build%20quote."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-8 py-3.5 bg-white text-slate-950 hover:bg-slate-100 font-bold text-xs uppercase tracking-wider rounded-md shadow-md transition-all cursor-pointer"
+              >
+                Chat on WhatsApp
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Quote Modal */}
+      <QuoteModal
+        isOpen={isQuoteModalOpen}
+        onClose={() => setIsQuoteModalOpen(false)}
+        initialBrand={quoteBrand}
+        initialModel={quoteModel}
+      />
     </main>
   );
 }

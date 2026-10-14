@@ -577,6 +577,84 @@ export const desktopProducts: Product[] = [
 
 export const phoneProducts: Product[] = [
   // ================= APPLE =================
+  // --- iPhone 18 Series ---
+  {
+    id: "p_app_18pm_burgundy",
+    name: "Apple iPhone 18 Pro Max",
+    modelNumber: "APL-IP18-PM",
+    brand: "Apple",
+    category: "Flagship",
+    price: 169900,
+    image: "/products/phones/iphone-18-pro-max-burgundy.png",
+    specs: [
+      { label: "Processor", value: "Apple A20 Pro (2nm Silicon)" },
+      { label: "RAM", value: "12GB Unified" },
+      { label: "Storage", value: "256GB / 512GB / 1TB / 2TB" },
+      { label: "Display", value: "6.9\" Super Retina XDR 120Hz ProMotion" },
+      { label: "Camera", value: "48MP Fusion Triple Camera w/ 10x Tetraprism Visor" },
+      { label: "Battery", value: "40 Hours Video Playback w/ 45W MagSafe" },
+    ],
+    badges: ["Day-1 Priority", "A20 Pro (2nm)", "Crimson Burgundy"],
+    warranty: "1 Year Official AppleCare Warranty",
+  },
+  {
+    id: "p_app_18pm_glacier",
+    name: "Apple iPhone 18 Pro Max (Glacier Sky Blue)",
+    modelNumber: "APL-IP18-PM-GLC",
+    brand: "Apple",
+    category: "Flagship",
+    price: 169900,
+    image: "/products/phones/iphone-18-pro-max-glacier.png",
+    specs: [
+      { label: "Processor", value: "Apple A20 Pro (2nm Silicon)" },
+      { label: "RAM", value: "12GB Unified" },
+      { label: "Storage", value: "256GB / 512GB / 1TB / 2TB" },
+      { label: "Display", value: "6.9\" Super Retina XDR 120Hz ProMotion" },
+      { label: "Camera", value: "48MP Fusion Visor Island w/ 10x Optical Zoom" },
+      { label: "Battery", value: "40 Hours Video Playback w/ 45W MagSafe" },
+    ],
+    badges: ["New Colorway", "Glacier Blue", "Visor Island"],
+    warranty: "1 Year Official AppleCare Warranty",
+  },
+  {
+    id: "p_app_18p_black",
+    name: "Apple iPhone 18 Pro (Space Black)",
+    modelNumber: "APL-IP18-P-BLK",
+    brand: "Apple",
+    category: "Flagship",
+    price: 144900,
+    image: "/products/phones/iphone-18-pro-max-black.png",
+    specs: [
+      { label: "Processor", value: "Apple A20 Pro (2nm Silicon)" },
+      { label: "RAM", value: "12GB Unified" },
+      { label: "Storage", value: "128GB / 256GB / 512GB / 1TB" },
+      { label: "Display", value: "6.3\" Super Retina XDR 120Hz ProMotion" },
+      { label: "Camera", value: "48MP Pro Visor Triple Camera System" },
+      { label: "Battery", value: "Up to 34 Hours Video Playback" },
+    ],
+    badges: ["Pro Flagship", "Space Black", "Under-Display FaceID"],
+    warranty: "1 Year Official AppleCare Warranty",
+  },
+  {
+    id: "p_app_18p_silver",
+    name: "Apple iPhone 18 Pro (Frost Silver)",
+    modelNumber: "APL-IP18-P-SLV",
+    brand: "Apple",
+    category: "Flagship",
+    price: 144900,
+    image: "/products/phones/iphone-18-pro-max-silver.png",
+    specs: [
+      { label: "Processor", value: "Apple A20 Pro (2nm Silicon)" },
+      { label: "RAM", value: "12GB Unified" },
+      { label: "Storage", value: "128GB / 256GB / 512GB / 1TB" },
+      { label: "Display", value: "6.3\" Super Retina XDR 120Hz ProMotion" },
+      { label: "Camera", value: "48MP Pro Triple Camera w/ Variable Aperture" },
+      { label: "Battery", value: "Up to 34 Hours Video Playback" },
+    ],
+    badges: ["Frost Silver", "Forged Titanium", "A20 Pro"],
+    warranty: "1 Year Official AppleCare Warranty",
+  },
+
   // --- iPhone 17 Series ---
   {
     id: "p_app_17pm",
@@ -820,7 +898,7 @@ export const phoneProducts: Product[] = [
     brand: "Samsung",
     category: "Flagship",
     price: 149999,
-    image: "/products/phones/samsung-s26-ultra.jpg",
+    image: "/products/phones/samsung-s26-ultra.png",
     specs: [
       { label: "Processor", value: "Snapdragon 8 Elite Gen 2 (2nm)" },
       { label: "RAM", value: "16GB LPDDR5X" },
@@ -839,7 +917,7 @@ export const phoneProducts: Product[] = [
     brand: "Samsung",
     category: "Flagship",
     price: 109999,
-    image: "/products/phones/samsung-s26-plus.jpg",
+    image: "/products/phones/samsung-s26-plus.png",
     specs: [
       { label: "Processor", value: "Snapdragon 8 Elite Gen 2 (2nm)" },
       { label: "RAM", value: "12GB LPDDR5X" },
@@ -858,7 +936,7 @@ export const phoneProducts: Product[] = [
     brand: "Samsung",
     category: "Performance",
     price: 84999,
-    image: "/products/phones/samsung-s26.jpg",
+    image: "/products/phones/samsung-s26.png",
     specs: [
       { label: "Processor", value: "Snapdragon 8 Elite Gen 2 (2nm)" },
       { label: "RAM", value: "12GB LPDDR5X" },
@@ -879,7 +957,7 @@ export const phoneProducts: Product[] = [
     brand: "Samsung",
     category: "Flagship",
     price: 139999,
-    image: "/products/phones/samsung-s25-ultra.jpg",
+    image: "/products/phones/samsung-s25-ultra.png",
     specs: [
       { label: "Processor", value: "Snapdragon 8 Elite (3nm) for Galaxy" },
       { label: "RAM", value: "16GB / 12GB LPDDR5X" },
@@ -898,7 +976,7 @@ export const phoneProducts: Product[] = [
     brand: "Samsung",
     category: "Flagship",
     price: 99999,
-    image: "/products/phones/samsung-s25-plus.jpg",
+    image: "/products/phones/samsung-s25-plus.png",
     specs: [
       { label: "Processor", value: "Snapdragon 8 Elite (3nm) for Galaxy" },
       { label: "RAM", value: "12GB LPDDR5X" },
@@ -917,7 +995,7 @@ export const phoneProducts: Product[] = [
     brand: "Samsung",
     category: "Performance",
     price: 79999,
-    image: "/products/phones/samsung-s25.jpg",
+    image: "/products/phones/samsung-s25.png",
     specs: [
       { label: "Processor", value: "Snapdragon 8 Elite (3nm) for Galaxy" },
       { label: "RAM", value: "12GB LPDDR5X" },
