@@ -663,7 +663,7 @@ export const phoneProducts: Product[] = [
     brand: "Apple",
     category: "Flagship",
     price: 159900,
-    image: "/products/phones/iphone-17-pro-max.png",
+    image: "/products/phones/iPhone-17-Pro-Max.png",
     specs: [
       { label: "Processor", value: "Apple A19 Pro (2nm)" },
       { label: "RAM", value: "12GB Unified" },
@@ -701,7 +701,7 @@ export const phoneProducts: Product[] = [
     brand: "Apple",
     category: "Performance",
     price: 99900,
-    image: "/products/phones/iphone-17-air.png",
+    image: "/products/phones/Iphone-17-air.png",
     specs: [
       { label: "Processor", value: "Apple A19 Chip (3nm)" },
       { label: "RAM", value: "8GB Unified" },
