@@ -113,83 +113,85 @@ export default function ConfigurationSection() {
   return (
     <section
       id="configuration"
-      className="configuration-section-custom bg-black border-t border-white/10"
+      className="configuration-section-custom bg-white"
     >
-      {/* Background Ambience Glows */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-blue-600/5 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute bottom-10 right-10 w-[500px] h-[300px] bg-purple-600/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="w-full bg-[#09090b] text-white rounded-[24px] sm:rounded-[28px] border border-zinc-800 shadow-2xl relative overflow-hidden p-8 sm:p-12 lg:p-16">
+        {/* Background Ambience Glows */}
+        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-blue-600/10 rounded-full blur-[140px] pointer-events-none" />
+        <div className="absolute bottom-10 right-10 w-[500px] h-[300px] bg-purple-600/10 rounded-full blur-[120px] pointer-events-none" />
 
-      <div className="w-full relative z-10">
+        <div className="w-full relative z-10">
 
-        {/* MAIN SECTION HEADER */}
-        <div className="text-center mb-12 sm:mb-16 max-w-4xl mx-auto">
-          <p className="text-xs sm:text-sm md:text-base uppercase tracking-[4px] sm:tracking-[6px] font-bold text-zinc-400 mb-3 sm:mb-4">
-            CUSTOM WORKSTATIONS
-          </p>
+          {/* MAIN SECTION HEADER */}
+          <div className="text-center mb-10 sm:mb-14 max-w-4xl mx-auto">
+            <p className="text-xs sm:text-sm md:text-base uppercase tracking-[4px] sm:tracking-[6px] font-bold text-zinc-400 mb-3 sm:mb-4">
+              CUSTOM WORKSTATIONS
+            </p>
 
-          <h2 className="text-3xl sm:text-5xl md:text-6xl font-extrabold text-white mb-4 sm:mb-6 tracking-tight leading-[1.1]">
-            Start Your Build.
-          </h2>
+            <h2 className="text-3xl sm:text-5xl md:text-6xl font-extrabold text-white mb-4 sm:mb-6 tracking-tight leading-[1.1]">
+              Start Your Build.
+            </h2>
 
-          <p className="text-zinc-300 text-sm sm:text-base md:text-lg max-w-3xl mx-auto font-normal leading-relaxed">
-            Select the perfect computing category matching your exact workflow. We guide you to dependable daily setups, high-performance creator rigs, AI workstations, and enterprise deployments.
-          </p>
-        </div>
+            <p className="text-zinc-300 text-sm sm:text-base md:text-lg max-w-3xl mx-auto font-normal leading-relaxed">
+              Select the perfect computing category matching your exact workflow. We guide you to dependable daily setups, high-performance creator rigs, AI workstations, and enterprise deployments.
+            </p>
+          </div>
 
-        {/* 4 MODERN LENOVO-STYLE CARDS GRID */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 xl:gap-7 items-stretch">
-          {buildCategories.map((item) => (
-            <div
-              key={item.id}
-              className="bg-white rounded-lg sm:rounded-xl border border-zinc-800/80 hover:border-zinc-600 shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden group hover:-translate-y-1"
-            >
-              {/* TOP IMAGE AREA */}
-              <div className="relative w-full aspect-[2.2/1] sm:aspect-[2/1] bg-black overflow-hidden">
-                {/* Accent Gradient Glow */}
-                <div
-                  className={`absolute inset-0 bg-gradient-to-t ${item.accentGradient} opacity-60 z-10 pointer-events-none`}
-                />
+          {/* 4 MODERN LENOVO-STYLE CARDS GRID */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 xl:gap-7 items-stretch">
+            {buildCategories.map((item) => (
+              <div
+                key={item.id}
+                className="bg-white rounded-lg sm:rounded-xl border border-zinc-800/80 hover:border-zinc-600 shadow-xl transition-all duration-300 flex flex-col justify-between overflow-hidden group hover:-translate-y-1"
+              >
+                {/* TOP IMAGE AREA */}
+                <div className="relative w-full aspect-[2.2/1] sm:aspect-[2/1] bg-black overflow-hidden">
+                  {/* Accent Gradient Glow */}
+                  <div
+                    className={`absolute inset-0 bg-gradient-to-t ${item.accentGradient} opacity-60 z-10 pointer-events-none`}
+                  />
 
-                {/* Product Image */}
-                <img
-                  src={item.image}
-                  alt={`${item.title} - Authentic Infosystem Custom Build`}
-                  width="800"
-                  height="360"
-                  loading="lazy"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
-                />
-              </div>
-
-              {/* CARD CONTENT */}
-              <div className="p-6 sm:p-7 flex flex-col flex-grow justify-between bg-white">
-                <div>
-                  {/* Category Title */}
-                  <h3 className="text-xl sm:text-2xl font-extrabold text-slate-950 mb-3 tracking-tight leading-snug group-hover:text-black transition-colors">
-                    {item.title}
-                  </h3>
-
-                  {/* Description */}
-                  <p className="text-slate-600 text-xs sm:text-sm leading-relaxed mb-6 font-normal">
-                    {item.description}
-                  </p>
+                  {/* Product Image */}
+                  <img
+                    src={item.image}
+                    alt={`${item.title} - Authentic Infosystem Custom Build`}
+                    width="800"
+                    height="360"
+                    loading="lazy"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                  />
                 </div>
 
-                {/* LENOVO STYLE ACTION BUTTON */}
-                <div className="mt-auto pt-2">
-                  <Link
-                    href={item.link}
-                    className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg border-2 border-slate-900 bg-transparent text-slate-950 hover:bg-slate-950 hover:text-white font-bold text-sm transition-all duration-200 shadow-xs group/btn text-center"
-                  >
-                    <span>{item.buttonText}</span>
-                    <FaArrowRight className="text-xs group-hover/btn:translate-x-1 transition-transform duration-200" />
-                  </Link>
+                {/* CARD CONTENT */}
+                <div className="p-6 sm:p-7 flex flex-col flex-grow justify-between bg-white">
+                  <div>
+                    {/* Category Title */}
+                    <h3 className="text-xl sm:text-2xl font-extrabold text-slate-950 mb-3 tracking-tight leading-snug group-hover:text-black transition-colors">
+                      {item.title}
+                    </h3>
+
+                    {/* Description */}
+                    <p className="text-slate-600 text-xs sm:text-sm leading-relaxed mb-6 font-normal">
+                      {item.description}
+                    </p>
+                  </div>
+
+                  {/* LENOVO STYLE ACTION BUTTON */}
+                  <div className="mt-auto pt-2">
+                    <Link
+                      href={item.link}
+                      className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg border-2 border-slate-900 bg-transparent text-slate-950 hover:bg-slate-950 hover:text-white font-bold text-sm transition-all duration-200 shadow-xs group/btn text-center"
+                    >
+                      <span>{item.buttonText}</span>
+                      <FaArrowRight className="text-xs group-hover/btn:translate-x-1 transition-transform duration-200" />
+                    </Link>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
 
+        </div>
       </div>
     </section>
   );

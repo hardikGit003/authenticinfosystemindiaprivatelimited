@@ -87,9 +87,8 @@ export default function DesktopsPage() {
   const [quoteModel, setQuoteModel] = useState("");
 
   const handleOpenQuote = (brand = "", model = "") => {
-    setQuoteBrand(brand);
-    setQuoteModel(model);
-    setIsQuoteModalOpen(true);
+    const msg = `Hi Authentic Infosystem, I would like to request an official B2B quote and availability for ${brand} ${model}.`;
+    window.open(`https://wa.me/919643990077?text=${encodeURIComponent(msg)}`, "_blank");
   };
 
   useEffect(() => {
@@ -289,37 +288,46 @@ export default function DesktopsPage() {
   }, [processorSearch]);
 
   return (
-    <main className="min-h-screen bg-white text-slate-900 selection:bg-slate-900 selection:text-white">
+    <main className="min-h-screen bg-white text-slate-900 selection:bg-rose-950 selection:text-white">
       <Navbar />
 
-      {/* EXPANDED CONTAINER: Wide e-commerce canvas to eliminate dead margins */}
-      <div className="max-w-[1720px] w-full mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 pt-28 sm:pt-30 pb-16">
-        
-        {/* TOP BREADCRUMB & HEADER */}
-        <div className="pb-4 mb-4 border-b border-slate-200">
-          <div className="flex items-center gap-2 text-xs text-slate-500 mb-1.5">
-            <Link href="/" className="hover:underline">Home</Link>
-            <span>/</span>
-            <span className="text-slate-900 font-semibold">Desktops & Workstation Deals</span>
+      {/* FULL-WIDTH MAROON HEADER SECTION (Left to Right) */}
+      <section className="w-full bg-gradient-to-r from-[#4A0A16] via-[#650E20] to-[#3B0712] text-white pt-28 sm:pt-32 pb-8 sm:pb-10 border-b border-[#30050e] shadow-xs relative overflow-hidden">
+        {/* Subtle ambient luxury highlight */}
+        <div 
+          className="absolute inset-0 pointer-events-none opacity-25"
+          style={{
+            backgroundImage: "radial-gradient(ellipse 65% 85% at 20% 0%, rgba(255, 255, 255, 0.3) 0%, transparent 65%)"
+          }}
+        />
+
+        <div className="max-w-[1720px] w-full mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 relative z-10">
+          {/* Top Breadcrumb */}
+          <div className="flex items-center gap-2 text-xs text-rose-200/80 mb-2.5">
+            <Link href="/" className="hover:text-white transition-colors">Home</Link>
+            <span className="text-rose-300/40">/</span>
+            <span className="text-white font-medium">Desktops & Workstation Deals</span>
           </div>
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-3">
+
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
             <div>
-              <h1 className="text-2xl sm:text-3xl font-black text-slate-950 tracking-tight">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl font-black text-white tracking-tight leading-tight">
                 Desktops, All-in-Ones & Official Workstation Deals
               </h1>
-              <p className="text-xs sm:text-sm text-slate-600 mt-1 max-w-4xl">
+              <p className="text-xs sm:text-sm text-rose-100/90 mt-2 max-w-4xl leading-relaxed">
                 Commercial tower workstations, ultra-compact mini PCs, enterprise all-in-ones, and AI rendering rigs with 3-year onsite support and GST invoicing.
               </p>
             </div>
+
             {/* Quick Search on Top */}
-            <div className="relative w-full md:w-80">
+            <div className="relative w-full md:w-80 shrink-0">
               <FaSearch className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" size={13} />
               <input
                 type="text"
                 placeholder="Search desktop, series, CPU..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-9 pr-8 py-2 bg-slate-50 border border-slate-300 rounded-md text-xs focus:outline-none focus:border-[#1546a0] focus:bg-white"
+                className="w-full pl-9 pr-8 py-2.5 bg-white text-slate-900 border border-rose-900/30 rounded-md text-xs placeholder:text-slate-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-rose-400/50 focus:border-rose-400"
               />
               {searchQuery && (
                 <button
@@ -332,6 +340,10 @@ export default function DesktopsPage() {
             </div>
           </div>
         </div>
+      </section>
+
+      {/* EXPANDED CONTAINER: Wide e-commerce canvas to eliminate dead margins */}
+      <div className="max-w-[1720px] w-full mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 pt-6 sm:pt-8 pb-16">
 
         {/* MOBILE FILTER TRIGGER */}
         <div className="lg:hidden flex items-center justify-between mb-4 pb-2 border-b border-slate-200">
@@ -788,33 +800,38 @@ export default function DesktopsPage() {
         </div>
       </section>
 
-      {/* CUSTOM DESKTOP BUILDER CTA (Expanded to 1720px) */}
-      <section className="py-16 text-center bg-black text-white border-t border-white/10 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 relative z-10">
-          <div className="max-w-3xl mx-auto">
-            <p className="text-xs font-bold text-zinc-400 tracking-[4px] uppercase mb-3">CUSTOM WORKSTATIONS</p>
-            <h2 className="text-2xl sm:text-4xl md:text-5xl font-extrabold mb-4 tracking-tight">
-              Build Your Custom Workstation Lab
-            </h2>
-            <p className="text-zinc-300 text-xs sm:text-sm md:text-base mb-8 max-w-2xl mx-auto leading-relaxed">
-              Need custom GPU clusters, dual-socket processors, high-capacity ECC RAM, or liquid-cooled render racks? Our systems engineers craft tailored enterprise rigs with manufacturer warranty.
-            </p>
-            <div className="flex flex-wrap items-center justify-center gap-4">
-              <button
-                onClick={() => handleOpenQuote("Custom", "Workstation Lab")}
-                className="px-8 py-3.5 bg-[#1546a0] hover:bg-[#003d7e] text-white font-bold text-xs uppercase tracking-wider rounded-md shadow-md transition-all cursor-pointer"
-              >
-                Request Custom Architecture
-              </button>
-              <a
-                href="https://wa.me/919643990077?text=Hi%2C%20I%20want%20to%20request%20a%20custom%20desktop%20quote."
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-8 py-3.5 bg-white text-slate-950 hover:bg-slate-100 font-bold text-xs uppercase tracking-wider rounded-md shadow-md transition-all cursor-pointer"
-              >
-                Chat on WhatsApp
-              </a>
+      {/* CUSTOM DESKTOP BUILDER CTA (Card matching 1720px span width on white background) */}
+      <section className="pt-2 pb-16 bg-white">
+        <div className="max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10">
+          <div className="p-8 sm:p-12 lg:p-14 rounded-2xl sm:rounded-3xl border border-[#7fc1f8] shadow-xl relative overflow-hidden bg-gradient-to-r from-[#b3dbfc] via-[#90CAF9] to-[#67aef5] text-slate-950 text-center">
+            {/* Atmospheric ambient glow */}
+            <div className="absolute -top-20 -right-20 w-96 h-96 bg-white/45 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute -bottom-20 -left-20 w-96 h-96 bg-[#42A5F5]/35 rounded-full blur-3xl pointer-events-none" />
+
+            <div className="max-w-3xl mx-auto relative z-10">
+              <p className="text-xs font-black text-[#0B2545] tracking-[4px] uppercase mb-3">CUSTOM WORKSTATIONS</p>
+              <h2 className="text-2xl sm:text-4xl md:text-5xl font-black mb-4 tracking-tight text-slate-950">
+                Build Your Custom Workstation Lab
+              </h2>
+              <p className="text-slate-800 text-xs sm:text-sm md:text-base mb-8 max-w-2xl mx-auto leading-relaxed font-medium">
+                Need custom GPU clusters, dual-socket processors, high-capacity ECC RAM, or liquid-cooled render racks? Our systems engineers craft tailored enterprise rigs with manufacturer warranty.
+              </p>
+              <div className="flex flex-wrap items-center justify-center gap-4">
+                <button
+                  onClick={() => handleOpenQuote("Custom", "Workstation Lab")}
+                  className="px-8 py-3.5 bg-[#0D254C] hover:bg-[#071731] text-white font-bold text-xs uppercase tracking-wider rounded-md shadow-md hover:shadow-lg transition-all cursor-pointer"
+                >
+                  Request Custom Architecture
+                </button>
+                <a
+                  href="https://wa.me/919643990077?text=Hi%2C%20I%20want%20to%20request%20a%20custom%20desktop%20quote."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-8 py-3.5 bg-white text-slate-950 hover:bg-slate-100 font-bold text-xs uppercase tracking-wider rounded-md shadow-md hover:shadow-lg transition-all cursor-pointer border border-white/60"
+                >
+                  Chat on WhatsApp
+                </a>
+              </div>
             </div>
           </div>
         </div>

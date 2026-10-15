@@ -72,13 +72,16 @@ export default function LaptopCard({ laptop, onOpenQuote, isCompact = false }: L
 
   const productUrl = `/laptops/${laptop.brandSlug}/${laptop.slug}`;
 
-  const handleQuoteClick = () => {
-    if (onOpenQuote) {
-      onOpenQuote(laptop.brand, laptop.model);
-    } else {
-      const msg = `Hi Authentic Infosystem, I would like to request an official B2B quote for ${laptop.brand} ${laptop.model} (${laptop.modelNumber}).`;
-      window.open(`https://wa.me/919643990077?text=${encodeURIComponent(msg)}`, "_blank");
-    }
+  const displayName = laptop.brand && !laptop.model.toLowerCase().startsWith(laptop.brand.toLowerCase())
+    ? `${laptop.brand} ${laptop.model}`
+    : laptop.model;
+
+  const whatsappMessage = `Hi Authentic Infosystem, I would like to request an official B2B quote and availability for ${displayName} (${laptop.modelNumber || laptop.series || ""}).`;
+  const whatsappUrl = `https://wa.me/919643990077?text=${encodeURIComponent(whatsappMessage)}`;
+
+  const handleQuoteClick = (e?: React.MouseEvent) => {
+    if (e) e.preventDefault();
+    window.open(whatsappUrl, "_blank");
   };
 
   // Render 5-star rating
@@ -201,14 +204,17 @@ export default function LaptopCard({ laptop, onOpenQuote, isCompact = false }: L
 
       </div>
 
-      {/* PRIMARY CTA BUTTON (Full Width Corporate Lenovo Blue) */}
+      {/* PRIMARY CTA BUTTON (Full Width Corporate Lenovo Blue - Directly to WhatsApp) */}
       <div className="mt-auto pt-2">
-        <button
-          onClick={handleQuoteClick}
-          className="w-full bg-[#1546a0] hover:bg-[#003d7e] active:bg-[#00285a] text-white font-bold py-2.5 px-3 text-xs tracking-wider rounded-md transition-colors shadow-xs flex items-center justify-center gap-2 cursor-pointer uppercase"
+        <a
+          href={whatsappUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="w-full bg-[#1546a0] hover:bg-[#003d7e] active:bg-[#00285a] text-white font-bold py-2.5 px-3 text-xs tracking-wider rounded-md transition-colors shadow-xs flex items-center justify-center gap-2 cursor-pointer uppercase text-center"
         >
+          <FaWhatsapp size={14} className="text-emerald-400" />
           <span>Request Quote</span>
-        </button>
+        </a>
       </div>
     </div>
   );

@@ -39,8 +39,8 @@ export default function BrandClientPage({ brand, laptops }: BrandClientPageProps
   }, [laptops, activeSeries]);
 
   const handleOpenQuote = (model = "") => {
-    setQuoteModel(model);
-    setIsQuoteModalOpen(true);
+    const msg = `Hi Authentic Infosystem, I would like to request an official B2B quote and availability for ${brand.name} ${model}.`;
+    window.open(`https://wa.me/919643990077?text=${encodeURIComponent(msg)}`, "_blank");
   };
 
   const otherBrands = LAPTOP_BRANDS.filter((b) => b.slug !== brand.slug);

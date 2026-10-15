@@ -7,7 +7,8 @@ import {
   FaHdd,
   FaStar, 
   FaStarHalfAlt, 
-  FaRegStar 
+  FaRegStar,
+  FaWhatsapp 
 } from "react-icons/fa";
 import { NetworkingProduct } from "../../data/networkingData";
 
@@ -30,8 +31,12 @@ export default function NetworkingCard({ product, onOpenQuote }: NetworkingCardP
   const rating = 4.8;
   const reviewCount = Math.floor(95 + ((product.name.length * 23) % 280));
 
-  const handleQuoteClick = () => {
-    onOpenQuote(product.brand || "Networking", `${product.name} (${product.modelNumber})`);
+  const whatsappMessage = `Hi Authentic Infosystem, I would like to request an official quote and availability for ${product.brand || "Networking"} ${product.name} (${product.modelNumber}).`;
+  const whatsappUrl = `https://wa.me/919643990077?text=${encodeURIComponent(whatsappMessage)}`;
+
+  const handleQuoteClick = (e?: React.MouseEvent) => {
+    if (e) e.preventDefault();
+    window.open(whatsappUrl, "_blank");
   };
 
   const renderStars = (score: number) => {
@@ -143,14 +148,17 @@ export default function NetworkingCard({ product, onOpenQuote }: NetworkingCardP
         </div>
       </div>
 
-      {/* PRIMARY CTA BUTTON (Full Width Corporate Lenovo Blue) */}
+      {/* PRIMARY CTA BUTTON (Full Width Corporate Lenovo Blue - Directly to WhatsApp) */}
       <div className="mt-auto pt-2">
-        <button
-          onClick={handleQuoteClick}
-          className="w-full bg-[#1546a0] hover:bg-[#003d7e] active:bg-[#00285a] text-white font-bold py-2.5 px-3 text-xs tracking-wider rounded-md transition-colors shadow-xs flex items-center justify-center gap-2 cursor-pointer uppercase"
+        <a
+          href={whatsappUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="w-full bg-[#1546a0] hover:bg-[#003d7e] active:bg-[#00285a] text-white font-bold py-2.5 px-3 text-xs tracking-wider rounded-md transition-colors shadow-xs flex items-center justify-center gap-2 cursor-pointer uppercase text-center"
         >
+          <FaWhatsapp size={14} className="text-emerald-400" />
           <span>Request Quote</span>
-        </button>
+        </a>
       </div>
     </div>
   );

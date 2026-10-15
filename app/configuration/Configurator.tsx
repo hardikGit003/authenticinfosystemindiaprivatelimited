@@ -347,9 +347,8 @@ export default function Configurator({
   const [quoteModel, setQuoteModel] = useState("");
 
   const handleOpenQuote = (brand = "", model = "") => {
-    setQuoteBrand(brand);
-    setQuoteModel(model);
-    setIsQuoteModalOpen(true);
+    const msg = `Hi Authentic Infosystem, I would like to request an official custom build quote for ${brand} ${model}.`;
+    window.open(`https://wa.me/919643990077?text=${encodeURIComponent(msg)}`, "_blank");
   };
 
   // Sync state if URL query param or defaultSystem prop changes
@@ -580,26 +579,38 @@ export default function Configurator({
   }, [processorSearch]);
 
   return (
-    <main className="min-h-screen bg-white text-slate-900 pt-24 sm:pt-28">
-      {/* EXPANDED CONTAINER (1720px matching laptops & desktops) */}
-      <div className="w-full max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 py-5 sm:py-7">
+    <main className="min-h-screen bg-white text-slate-900 selection:bg-rose-950 selection:text-white">
+      {/* FULL-WIDTH MAROON HEADER SECTION (Left to Right) */}
+      <section className="w-full bg-gradient-to-r from-[#4A0A16] via-[#650E20] to-[#3B0712] text-white pt-28 sm:pt-32 pb-8 sm:pb-10 border-b border-[#30050e] shadow-xs relative overflow-hidden">
+        {/* Subtle ambient luxury highlight */}
+        <div 
+          className="absolute inset-0 pointer-events-none opacity-25"
+          style={{
+            backgroundImage: "radial-gradient(ellipse 65% 85% at 20% 0%, rgba(255, 255, 255, 0.3) 0%, transparent 65%)"
+          }}
+        />
 
-        {/* BREADCRUMB */}
-        <nav className="flex items-center gap-2 text-xs text-slate-500 mb-3 select-none">
-          <Link href="/" className="hover:text-black transition-colors">Home</Link>
-          <span>/</span>
-          <span className="text-slate-800 font-medium">Custom PC & Workstation Configurator</span>
-        </nav>
+        <div className="max-w-[1720px] w-full mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 relative z-10">
+          {/* Top Breadcrumb */}
+          <nav className="flex items-center gap-2 text-xs text-rose-200/80 mb-2.5 select-none">
+            <Link href="/" className="hover:text-white transition-colors">Home</Link>
+            <span className="text-rose-300/40">/</span>
+            <span className="text-white font-medium">Custom PC & Workstation Configurator</span>
+          </nav>
 
-        {/* HERO HEADER */}
-        <div className="mb-6">
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-950 tracking-tight mb-1.5">
-            {currentWorkflow.title}
-          </h1>
-          <p className="text-xs sm:text-sm text-slate-600 max-w-4xl leading-relaxed">
-            {currentWorkflow.description}
-          </p>
+          <div>
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-black text-white tracking-tight leading-tight">
+              {currentWorkflow.title}
+            </h1>
+            <p className="text-xs sm:text-sm text-rose-100/90 mt-2 max-w-4xl leading-relaxed">
+              {currentWorkflow.description}
+            </p>
+          </div>
         </div>
+      </section>
+
+      {/* EXPANDED CONTAINER (1720px matching laptops & desktops) */}
+      <div className="w-full max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 pt-6 sm:pt-8 pb-16">
 
         {/* WORKFLOW TABS SELECTOR (Lenovo Corporate Style Pills) */}
         <div className="mb-6 pb-2 border-b border-slate-200">
@@ -842,50 +853,14 @@ export default function Configurator({
               )}
             </div>
 
-            {/* Quick B2B Assistance Box */}
-            <div className="pt-2">
-              <div className="bg-slate-50 border border-slate-200 p-3.5 text-xs">
-                <div className="font-bold text-slate-900 mb-1">Need Custom Fleet Configuration?</div>
-                <p className="text-slate-600 mb-2.5 text-[11px] leading-relaxed">
-                  Direct OEM component sourcing, bulk discounts, and GST 18% invoicing across India.
-                </p>
-                <button
-                  onClick={() => handleOpenQuote("Custom", "Configurator Request")}
-                  className="w-full py-1.5 bg-[#1546a0] hover:bg-[#003d7e] text-white font-bold text-[11px] uppercase tracking-wider rounded-none cursor-pointer"
-                >
-                  Request Quote
-                </button>
-              </div>
-            </div>
-
           </aside>
 
           {/* ================= RIGHT PRODUCTS SECTION ================= */}
           <div className="lg:col-span-9 xl:col-span-9">
 
-            {/* TOP SEARCH BAR */}
-            <div className="relative mb-4">
-              <input
-                type="text"
-                placeholder="Search custom configurations, processors, GPUs, model numbers..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full bg-white border border-slate-300 py-2.5 pl-10 pr-10 text-xs sm:text-sm text-slate-900 rounded-md focus:outline-none focus:border-[#1546a0] transition-colors"
-              />
-              <FaSearch className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-xs" />
-              {searchQuery && (
-                <button
-                  onClick={() => setSearchQuery("")}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-black cursor-pointer"
-                >
-                  <FaTimes size={12} />
-                </button>
-              )}
-            </div>
-
-            {/* RESULTS HEADER BAR */}
+            {/* RESULTS HEADER BAR WITH COMPACT SEARCH */}
             <div className="pb-3 border-b border-slate-200 mb-4">
-              <div className="flex flex-wrap items-center justify-between gap-3">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                 <div className="flex items-center gap-3">
                   <span className="text-sm sm:text-base font-extrabold text-slate-950">
                     {filteredProducts.length} Matching results
@@ -896,6 +871,27 @@ export default function Configurator({
                       className="text-xs font-bold text-[#0f3e99] hover:underline cursor-pointer"
                     >
                       Clear All
+                    </button>
+                  )}
+                </div>
+
+                {/* Compact & Professional Search Bar */}
+                <div className="relative w-full sm:w-80 shrink-0">
+                  <FaSearch className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" size={13} />
+                  <input
+                    type="text"
+                    placeholder="Search custom configurations, CPUs, GPUs..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="w-full pl-9 pr-8 py-2 bg-slate-50 border border-slate-300 rounded-md text-xs focus:outline-none focus:border-[#1546a0] focus:bg-white text-slate-900 transition-colors"
+                  />
+                  {searchQuery && (
+                    <button
+                      onClick={() => setSearchQuery("")}
+                      className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 cursor-pointer"
+                      aria-label="Clear search"
+                    >
+                      <FaTimes size={11} />
                     </button>
                   )}
                 </div>
@@ -1107,33 +1103,38 @@ export default function Configurator({
         </div>
       </section>
 
-      {/* CUSTOM WORKSTATION BUILDER CTA (Expanded to 1720px) */}
-      <section className="py-16 text-center bg-black text-white border-t border-white/10 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 relative z-10">
-          <div className="max-w-3xl mx-auto">
-            <p className="text-xs font-bold text-zinc-400 tracking-[4px] uppercase mb-3">CUSTOM WORKSTATIONS</p>
-            <h2 className="text-2xl sm:text-4xl md:text-5xl font-extrabold mb-4 tracking-tight">
-              Build Your Custom Workstation Lab
-            </h2>
-            <p className="text-zinc-300 text-xs sm:text-sm md:text-base mb-8 max-w-2xl mx-auto leading-relaxed">
-              Need custom GPU clusters, dual-socket processors, high-capacity ECC RAM, or liquid-cooled render racks? Our systems engineers craft tailored enterprise rigs with manufacturer warranty.
-            </p>
-            <div className="flex flex-wrap items-center justify-center gap-4">
-              <button
-                onClick={() => handleOpenQuote("Custom", "Workstation Lab")}
-                className="px-8 py-3.5 bg-[#1546a0] hover:bg-[#003d7e] text-white font-bold text-xs uppercase tracking-wider rounded-md shadow-md transition-all cursor-pointer"
-              >
-                Request Custom Architecture
-              </button>
-              <a
-                href="https://wa.me/919643990077?text=Hi%2C%20I%20want%20to%20request%20a%20custom%20workstation%20build%20quote."
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-8 py-3.5 bg-white text-slate-950 hover:bg-slate-100 font-bold text-xs uppercase tracking-wider rounded-md shadow-md transition-all cursor-pointer"
-              >
-                Chat on WhatsApp
-              </a>
+      {/* CUSTOM WORKSTATION BUILDER CTA (Card matching 1720px span width on white background) */}
+      <section className="pt-2 pb-16 bg-white">
+        <div className="max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10">
+          <div className="p-8 sm:p-12 lg:p-14 rounded-2xl sm:rounded-3xl border border-[#7fc1f8] shadow-xl relative overflow-hidden bg-gradient-to-r from-[#b3dbfc] via-[#90CAF9] to-[#67aef5] text-slate-950 text-center">
+            {/* Atmospheric ambient glow */}
+            <div className="absolute -top-20 -right-20 w-96 h-96 bg-white/45 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute -bottom-20 -left-20 w-96 h-96 bg-[#42A5F5]/35 rounded-full blur-3xl pointer-events-none" />
+
+            <div className="max-w-3xl mx-auto relative z-10">
+              <p className="text-xs font-black text-[#0B2545] tracking-[4px] uppercase mb-3">CUSTOM WORKSTATIONS</p>
+              <h2 className="text-2xl sm:text-4xl md:text-5xl font-black mb-4 tracking-tight text-slate-950">
+                Build Your Custom Workstation Lab
+              </h2>
+              <p className="text-slate-800 text-xs sm:text-sm md:text-base mb-8 max-w-2xl mx-auto leading-relaxed font-medium">
+                Need custom GPU clusters, dual-socket processors, high-capacity ECC RAM, or liquid-cooled render racks? Our systems engineers craft tailored enterprise rigs with manufacturer warranty.
+              </p>
+              <div className="flex flex-wrap items-center justify-center gap-4">
+                <button
+                  onClick={() => handleOpenQuote("Custom", "Workstation Lab")}
+                  className="px-8 py-3.5 bg-[#0D254C] hover:bg-[#071731] text-white font-bold text-xs uppercase tracking-wider rounded-md shadow-md hover:shadow-lg transition-all cursor-pointer"
+                >
+                  Request Custom Architecture
+                </button>
+                <a
+                  href="https://wa.me/919643990077?text=Hi%2C%20I%20want%20to%20request%20a%20custom%20workstation%20build%20quote."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-8 py-3.5 bg-white text-slate-950 hover:bg-slate-100 font-bold text-xs uppercase tracking-wider rounded-md shadow-md hover:shadow-lg transition-all cursor-pointer border border-white/60"
+                >
+                  Chat on WhatsApp
+                </a>
+              </div>
             </div>
           </div>
         </div>

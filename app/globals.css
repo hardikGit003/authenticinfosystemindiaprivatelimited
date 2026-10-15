@@ -714,7 +714,8 @@ section {
 
 .configuration-section-custom {
   width: 100%;
-  padding: 120px 90px 100px;
+  background: #ffffff;
+  padding: 40px 90px 60px;
   position: relative;
   overflow: hidden;
 }
@@ -1358,12 +1359,9 @@ section {
 .contact-section {
   width: 100%;
   min-height: 0;
-  background: #000000;
-  padding: 100px 90px 90px;
-  display: flex;
-  align-items: center;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: #ffffff;
+  padding: 40px 90px 60px;
+  display: block;
 }
 
 .contact-overlay {
@@ -1794,10 +1792,10 @@ section {
 .footer {
   position: relative;
   z-index: 100;
-  background: #ffffff;
+  background: linear-gradient(135deg, #f0f0f0 0%, #e2e2e2 45%, #cfcfcf 100%);
   padding: 48px 90px 24px;
-  border-top: 1px solid #e2e8f0;
-  color: #0f172a;
+  border-top: 1px solid #cfcfcf;
+  color: #171717;
   overflow: hidden;
 }
 
@@ -1883,7 +1881,7 @@ section {
 .footer-line {
   width: 100%;
   height: 1px;
-  background: #f1f5f9;
+  background: rgba(0, 0, 0, 0.08);
   margin: 14px 0 22px;
 }
 
@@ -1905,7 +1903,7 @@ section {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1px;
-  color: #0f172a;
+  color: #171717;
   margin-bottom: 12px;
   position: relative;
   display: inline-block;
@@ -1918,14 +1916,14 @@ section {
   bottom: -4px;
   width: 16px;
   height: 2px;
-  background: #2563eb;
+  background: #171717;
   border-radius: 2px;
 }
 
 .footer-column a {
   display: block;
   font-size: 0.84rem;
-  color: #64748b;
+  color: #404040;
   text-decoration: none;
   margin-bottom: 7px;
   line-height: 1.45;
@@ -1934,14 +1932,14 @@ section {
 }
 
 .footer-column a:hover {
-  color: #2563eb;
+  color: #000000;
   transform: translateX(2px);
 }
 
 .footer-bottom {
   margin-top: 24px;
   padding-top: 16px;
-  border-top: 1px solid #f1f5f9;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -1952,7 +1950,7 @@ section {
 
 .footer-bottom p {
   font-size: 0.8rem;
-  color: #64748b;
+  color: #525252;
   line-height: 1.5;
   margin: 0;
 }
@@ -1967,13 +1965,13 @@ section {
 .footer-policy a {
   display: inline-block;
   text-decoration: none;
-  color: #64748b;
+  color: #525252;
   font-size: 0.8rem;
   transition: color 0.2s ease;
 }
 
 .footer-policy a:hover {
-  color: #0f172a;
+  color: #000000;
 }
 
 /* ========================================
@@ -2118,13 +2116,15 @@ section {
   .about-section,
   .services-section,
   .configuration-section,
-  .configuration-section-custom,
   .why-section,
   .final-section,
   .provide-section,
-  .customer-reviews-section,
-  .contact-section {
+  .customer-reviews-section {
     padding: 80px 40px 80px !important;
+  }
+  .configuration-section-custom,
+  .contact-section {
+    padding: 40px 40px 50px !important;
   }
   .brands-content {
     padding-left: 40px !important;
@@ -2159,13 +2159,15 @@ section {
   .about-section,
   .services-section,
   .configuration-section,
-  .configuration-section-custom,
   .why-section,
   .final-section,
   .provide-section,
-  .customer-reviews-section,
-  .contact-section {
+  .customer-reviews-section {
     padding: 50px 16px !important;
+  }
+  .configuration-section-custom,
+  .contact-section {
+    padding: 30px 16px 40px !important;
   }
   .brands-section {
     padding: 36px 0 !important;

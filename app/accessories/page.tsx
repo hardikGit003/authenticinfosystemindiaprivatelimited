@@ -1,20 +1,50 @@
 "use client";
 
+import { useState, useMemo, useEffect, useRef } from "react";
+import Link from "next/link";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import SectionHeader from "../components/shared/SectionHeader";
-import ProductCard from "../components/shared/ProductCard";
-import { useState, useMemo, useEffect, useRef } from "react";
-import { FaSearch, FaTimes, FaKeyboard, FaWhatsapp } from "react-icons/fa";
-
+import AccessoryCard from "./components/AccessoryCard";
+import QuoteModal from "../laptops/components/QuoteModal";
 import { buyingGuides, accessoriesProducts } from "../data/accessoriesData";
+import { 
+  FaSearch, 
+  FaTimes, 
+  FaKeyboard, 
+  FaWhatsapp, 
+  FaCheckCircle,
+  FaShieldAlt
+} from "react-icons/fa";
 
-const categories = ['All', 'Keyboard', 'Mouse', 'Monitor', 'Docking Station', 'USB Hub', 'Webcam', 'Headsets', 'Conference Devices', 'Power Backup', 'External Storage', 'Cables'];
+const categories = [
+  "All", 
+  "Keyboard", 
+  "Mouse", 
+  "Monitor", 
+  "Docking Station", 
+  "USB Hub", 
+  "Webcam", 
+  "Headsets", 
+  "Conference Devices", 
+  "Power Backup", 
+  "External Storage", 
+  "Cables"
+];
 
 export default function AccessoriesPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState("All");
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  // Quote modal state
+  const [isQuoteModalOpen, setIsQuoteModalOpen] = useState(false);
+  const [quoteBrand, setQuoteBrand] = useState("");
+  const [quoteModel, setQuoteModel] = useState("");
+
+  const handleOpenQuote = (brand = "", model = "") => {
+    const msg = `Hi Authentic Infosystem, I would like to request an official quote and availability for ${brand} ${model}.`;
+    window.open(`https://wa.me/919643990077?text=${encodeURIComponent(msg)}`, "_blank");
+  };
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -34,6 +64,7 @@ export default function AccessoriesPage() {
         product.name.toLowerCase().includes(q) ||
         product.modelNumber.toLowerCase().includes(q) ||
         product.description.toLowerCase().includes(q) ||
+        (product.brand && product.brand.toLowerCase().includes(q)) ||
         product.specs.some(
           (s) =>
             s.value.toLowerCase().includes(q) ||
@@ -57,77 +88,145 @@ export default function AccessoriesPage() {
     setActiveCategory("All");
   };
 
-  const scroll = (direction: 'left' | 'right') => {
+  const hasActiveFilters = searchQuery.trim().length > 0 || activeCategory !== "All";
+
+  const scroll = (direction: "left" | "right") => {
     if (scrollContainerRef.current) {
-      const scrollAmount = direction === 'left' ? -350 : 350;
-      scrollContainerRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+      const scrollAmount = direction === "left" ? -350 : 350;
+      scrollContainerRef.current.scrollBy({ left: scrollAmount, behavior: "smooth" });
     }
   };
 
   return (
-    <main className="min-h-screen bg-white text-slate-900">
+    <main className="min-h-screen bg-white text-slate-900 selection:bg-rose-950 selection:text-white">
       <Navbar />
 
-      {/* Categories & Search Bar */}
-      <section className="pt-28 sm:pt-32 pb-6 sm:pb-8 page-container border-b border-slate-200 bg-slate-50/50">
-        <div className="max-w-md mx-auto mb-4">
-          <div className="relative">
-            <FaSearch className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" size={13} />
-            <input
-              type="text"
-              placeholder="Search accessories (e.g., 4K Monitor, MX Master, USB-C Dock)..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-9 pr-9 py-2.5 bg-white border border-slate-200 rounded-xl text-xs sm:text-sm focus:outline-none focus:border-black text-slate-900 shadow-2xs"
-            />
-            {searchQuery && (
-              <button
-                onClick={() => setSearchQuery("")}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 cursor-pointer"
-              >
-                <FaTimes size={12} />
-              </button>
-            )}
-          </div>
-        </div>
+      {/* FULL-WIDTH MAROON HEADER SECTION (Left to Right) */}
+      <section className="w-full bg-gradient-to-r from-[#4A0A16] via-[#650E20] to-[#3B0712] text-white pt-28 sm:pt-32 pb-8 sm:pb-10 border-b border-[#30050e] shadow-xs relative overflow-hidden">
+        {/* Subtle ambient luxury highlight */}
+        <div 
+          className="absolute inset-0 pointer-events-none opacity-25"
+          style={{
+            backgroundImage: "radial-gradient(ellipse 65% 85% at 20% 0%, rgba(255, 255, 255, 0.3) 0%, transparent 65%)"
+          }}
+        />
 
-        <div className="flex overflow-x-auto sm:flex-wrap justify-start sm:justify-center gap-2 sm:gap-3 pb-2 sm:pb-0 scrollbar-hide w-full">
-          {categories.map((cat, i) => (
-            <button 
-              key={i} 
-              onClick={() => setActiveCategory(cat)}
-              className={`px-4 sm:px-5 py-2 sm:py-2.5 rounded-full border transition-all text-xs sm:text-sm font-medium whitespace-nowrap shrink-0 shadow-xs cursor-pointer ${
-                activeCategory === cat
-                  ? "bg-black border-black text-white"
-                  : "bg-white border-slate-200 hover:bg-slate-100 text-slate-700"
-              }`}
-            >
-              {cat}
-            </button>
-          ))}
+        <div className="max-w-[1720px] w-full mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 relative z-10">
+          {/* Top Breadcrumb */}
+          <nav className="flex items-center gap-2 text-xs text-rose-200/80 mb-2.5 select-none">
+            <Link href="/" className="hover:text-white transition-colors">Home</Link>
+            <span className="text-rose-300/40">/</span>
+            <span className="text-white font-medium">Enterprise PC Accessories & IT Peripherals</span>
+          </nav>
+
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+            <div>
+              <h1 className="text-2xl sm:text-3xl md:text-4xl font-black text-white tracking-tight leading-tight">
+                Enterprise PC Accessories & IT Peripherals
+              </h1>
+              <p className="text-xs sm:text-sm text-rose-100/90 mt-2 max-w-4xl leading-relaxed">
+                Professional ultra-sharp 4K monitors, ergonomic mechanical keyboards, precision mice, universal Thunderbolt docks, conference audio, and enterprise power backup systems for modern workplace productivity. Backed by pan-India dispatch, official GST invoicing, and manufacturer warranty.
+              </p>
+            </div>
+
+            {/* QUICK SEARCH INPUT */}
+            <div className="relative w-full md:w-80 shrink-0">
+              <FaSearch className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" size={13} />
+              <input
+                type="text"
+                placeholder="Search accessories (e.g. 4K Monitor, MX Master, Dock)..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full pl-9 pr-8 py-2.5 bg-white text-slate-900 border border-rose-900/30 rounded-md text-xs placeholder:text-slate-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-rose-400/50 focus:border-rose-400"
+              />
+              {searchQuery && (
+                <button
+                  onClick={() => setSearchQuery("")}
+                  className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 cursor-pointer"
+                  aria-label="Clear search"
+                >
+                  <FaTimes size={11} />
+                </button>
+              )}
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* Featured Products Grid */}
-      <section className="py-10 sm:py-14 page-container">
-        <div className="flex flex-wrap items-center justify-between gap-4 mb-6">
-          <SectionHeader title="Featured Accessories" subtitle="Hand-picked tools to maximize your daily productivity." />
-          {(searchQuery || activeCategory !== "All") && (
-            <button
-              onClick={clearAllFilters}
-              className="text-xs font-semibold text-black hover:underline cursor-pointer"
-            >
-              Reset Filters
-            </button>
+      {/* EXPANDED CONTAINER (1720px matching laptops, desktops & networking) */}
+      <div className="w-full max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 pt-6 sm:pt-8 pb-16">
+
+        {/* CATEGORY SELECTOR PILLS (Corporate Lenovo Style) */}
+        <div className="mb-6 pb-2 border-b border-slate-200">
+          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
+            {categories.map((cat, i) => {
+              const isActive = activeCategory === cat;
+              return (
+                <button
+                  key={i}
+                  onClick={() => setActiveCategory(cat)}
+                  className={`px-4 py-2 text-xs sm:text-sm font-bold whitespace-nowrap transition-all duration-200 cursor-pointer rounded-md border ${
+                    isActive
+                      ? "bg-[#1546a0] text-white border-[#1546a0] shadow-xs"
+                      : "bg-white text-slate-700 border-slate-300 hover:border-slate-400 hover:text-black"
+                  }`}
+                >
+                  {cat}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* RESULTS HEADER BAR */}
+        <div className="pb-3 border-b border-slate-200 mb-5">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div className="flex items-center gap-3">
+              <span className="text-sm sm:text-base font-extrabold text-slate-950">
+                {filteredProducts.length} Matching results
+              </span>
+              {hasActiveFilters && (
+                <button
+                  onClick={clearAllFilters}
+                  className="text-xs font-bold text-[#0f3e99] hover:underline cursor-pointer"
+                >
+                  Clear All
+                </button>
+              )}
+            </div>
+          </div>
+
+          {/* ACTIVE FILTER CHIPS */}
+          {hasActiveFilters && (
+            <div className="flex flex-wrap items-center gap-2 mt-3 pt-2.5 border-t border-slate-100">
+              {activeCategory !== "All" && (
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-slate-100 text-slate-800 text-xs font-medium rounded-xs border border-slate-200">
+                  <span>Category: {activeCategory}</span>
+                  <button onClick={() => setActiveCategory("All")} className="text-slate-500 hover:text-black cursor-pointer">
+                    <FaTimes size={10} />
+                  </button>
+                </span>
+              )}
+
+              {searchQuery && (
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-slate-100 text-slate-800 text-xs font-medium rounded-xs border border-slate-200">
+                  <span>Search: "{searchQuery}"</span>
+                  <button onClick={() => setSearchQuery("")} className="text-slate-500 hover:text-black cursor-pointer">
+                    <FaTimes size={10} />
+                  </button>
+                </span>
+              )}
+            </div>
           )}
         </div>
 
+        {/* PRODUCT GRID */}
         {filteredProducts.length === 0 ? (
-          <div className="text-center py-16 bg-slate-50 rounded-2xl border border-slate-200 p-8 shadow-xs my-6">
-            <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-zinc-100 border border-zinc-200 text-zinc-900 mb-3 shadow-2xs">
+          <div className="text-center py-16 bg-slate-50 rounded-lg border border-slate-200 p-8 shadow-xs my-6">
+            <div className="inline-flex items-center justify-center w-14 h-14 rounded-lg bg-zinc-100 border border-zinc-200 text-zinc-900 mb-3 shadow-2xs">
               <FaKeyboard size={26} />
             </div>
-            <div className="inline-block px-3 py-1 mb-2.5 rounded-full bg-black text-white text-[11px] font-bold uppercase tracking-wider shadow-2xs">
+            <div className="inline-block px-3 py-1 mb-2.5 rounded-full bg-slate-900 text-white text-[11px] font-bold uppercase tracking-wider shadow-2xs">
               ⚡ Will be available soon
             </div>
             <h3 className="text-lg sm:text-xl font-extrabold text-slate-900 mb-2">
@@ -136,7 +235,7 @@ export default function AccessoriesPage() {
             <p className="text-xs sm:text-sm text-slate-600 max-w-md mx-auto mb-6 leading-relaxed">
               {searchQuery ? (
                 <>
-                  We currently don't have <span className="font-bold text-slate-900">"{searchQuery}"</span> in our standard online inventory, but it will be available soon. Contact our procurement desk for immediate corporate sourcing.
+                  We currently don't have <span className="font-bold text-slate-900">"{searchQuery}"</span> in our standard online catalog, but it will be available soon. Contact our procurement desk for immediate corporate sourcing.
                 </>
               ) : (
                 <>
@@ -145,159 +244,275 @@ export default function AccessoriesPage() {
               )}
             </p>
             <div className="flex flex-wrap items-center justify-center gap-3">
-              <a
-                href={`https://wa.me/919643990077?text=Hi%2C%20I%20am%20looking%20for%20a%20quote%20for%20${encodeURIComponent(searchQuery || activeCategory || 'accessories')}.%20Please%20let%20me%20know%20availability.`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs transition-all shadow-sm cursor-pointer"
+              <button
+                onClick={() => handleOpenQuote("Accessories", searchQuery || activeCategory)}
+                className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#1546a0] hover:bg-[#003d7e] text-white font-bold rounded-md text-xs uppercase tracking-wider transition-all shadow-sm cursor-pointer"
               >
-                <FaWhatsapp size={14} />
-                <span>Inquire on WhatsApp</span>
-              </a>
+                <FaShieldAlt size={12} />
+                <span>Request Custom Sourcing</span>
+              </button>
               <button
                 onClick={clearAllFilters}
-                className="px-5 py-2.5 bg-black hover:bg-zinc-800 text-white font-semibold rounded-xl text-xs transition-all shadow-xs cursor-pointer"
+                className="px-5 py-2.5 bg-slate-900 hover:bg-black text-white font-semibold rounded-md text-xs transition-all shadow-xs cursor-pointer"
               >
                 Reset Filters
               </button>
             </div>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6 mt-6">
-            {filteredProducts.map((product, index) => (
-              <ProductCard
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5">
+            {filteredProducts.map((product) => (
+              <AccessoryCard
                 key={product.id}
-                {...product}
-                delay={index * 0.05}
+                product={product}
+                onOpenQuote={handleOpenQuote}
               />
             ))}
           </div>
         )}
-      </section>
 
-      {/* Workspace Collections */}
-      <section className="py-12 sm:py-16 bg-slate-50 page-container border-y border-slate-200">
-        <SectionHeader title="Workspace Collections" align="center" subtitle="Curated setups for every type of professional." />
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mt-6 sm:mt-8">
-          {['Work From Home Kit', 'Developer Desk', 'Executive Office', 'Gaming Setup', 'Conference Room', 'Student Essentials'].map((collection, i) => (
-            <div key={i} className="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 group cursor-pointer relative overflow-hidden shadow-xs hover:border-black hover:shadow-lg transition-all duration-300">
-              <div className="absolute inset-0 bg-black/[0.03] translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
-              <h3 className="text-xl sm:text-2xl font-bold text-slate-900 mb-2 relative z-10">{collection}</h3>
-              <p className="text-black font-bold text-sm sm:text-base relative z-10 group-hover:underline">View Bundle →</p>
+        {/* WORKSPACE COLLECTIONS (Corporate Style with Skin-to-Pink Gradient) */}
+        <section className="mt-16 pt-12 border-t border-slate-200">
+          <div className="p-6 sm:p-8 lg:p-10 rounded-2xl border border-[#ecd2c5] shadow-md relative overflow-hidden bg-gradient-to-br from-[#f8d7c7] via-[#fadfd6] to-pink-200/90">
+            {/* Atmospheric ambient glow */}
+            <div className="absolute -top-24 -right-24 w-96 h-96 bg-gradient-to-br from-[#f8d7c7]/30 to-pink-400/25 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-gradient-to-tr from-[#f3c8b4]/30 to-rose-300/25 rounded-full blur-3xl pointer-events-none" />
+
+            <div className="relative z-10">
+              <div className="mb-6">
+                <h2 className="text-xl sm:text-3xl font-extrabold text-slate-950 tracking-tight">
+                  Curated Workplace Collections
+                </h2>
+                <p className="text-xs sm:text-sm text-slate-700 mt-1 max-w-3xl leading-relaxed">
+                  Turnkey peripheral combinations tailored for developers, remote staff, and executive boardrooms.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+                {[
+                  { title: "Work From Home Kit", desc: "Dual display hub, noise-canceling headset & wireless combo" },
+                  { title: "Developer Desk", desc: "4K IPS display, mechanical tactile keyboard & high-DPI mouse" },
+                  { title: "Executive Office", desc: "Curved Ultrawide monitor, premium noise-isolating audio & Thunderbolt dock" },
+                  { title: "Creator & 3D Rig", desc: "Color-accurate 4K HDR display, fast NVMe external drive & monitor arm" },
+                  { title: "Conference Room", desc: "Steerable multi-mic speakerphone, 4K HDR webcam & HDMI pass-through" },
+                  { title: "Enterprise Fleet Setup", desc: "Bulk standard peripherals with unified asset tagging & deployment" },
+                ].map((collection, i) => (
+                  <div 
+                    key={i} 
+                    onClick={() => handleOpenQuote("Workspace Collection", collection.title)}
+                    className="bg-white/90 hover:bg-white rounded-xl border border-white/80 hover:border-[#dfb5a2] p-5 sm:p-6 flex flex-col justify-between shadow-xs hover:shadow-md transition-all duration-200 cursor-pointer group"
+                  >
+                    <div>
+                      <h3 className="text-base sm:text-lg font-bold text-slate-900 group-hover:text-[#0f3e99] transition-colors mb-1.5">
+                        {collection.title}
+                      </h3>
+                      <p className="text-xs text-slate-600 leading-relaxed">
+                        {collection.desc}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
-          ))}
-        </div>
-      </section>
+          </div>
+        </section>
 
-      {/* Buying Guide Carousel */}
-      <section className="py-12 sm:py-16 page-container border-b border-slate-200">
-        <SectionHeader title="Accessory Buying Guides" />
-        
-        <div className="relative mt-6">
-          {/* Left Arrow */}
-          <button 
-            onClick={() => scroll('left')}
-            className="absolute -left-5 top-1/2 -translate-y-1/2 z-10 hidden md:flex items-center justify-center w-12 h-12 rounded-full bg-white border border-slate-200 text-slate-700 hover:bg-black hover:text-white hover:border-black hover:scale-110 transition-all shadow-md cursor-pointer"
-            aria-label="Scroll left"
-          >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
-          </button>
+        {/* BUYING GUIDE CAROUSEL (Corporate Style) */}
+        <section className="mt-16 pt-12 border-t border-slate-200">
+          <div className="flex items-end justify-between mb-6">
+            <div>
+              <span className="text-xs font-bold text-slate-500 uppercase tracking-wider block mb-1">
+                Hardware Procurement Insights
+              </span>
+              <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">
+                Accessory Sourcing & Buying Guides
+              </h2>
+            </div>
+            {/* Scroll Navigation */}
+            <div className="hidden sm:flex items-center gap-2">
+              <button 
+                onClick={() => scroll("left")}
+                className="w-9 h-9 rounded-md border border-slate-200 bg-white hover:bg-slate-100 text-slate-700 flex items-center justify-center transition-colors cursor-pointer shadow-xs"
+                aria-label="Scroll left"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" /></svg>
+              </button>
+              <button 
+                onClick={() => scroll("right")}
+                className="w-9 h-9 rounded-md border border-slate-200 bg-white hover:bg-slate-100 text-slate-700 flex items-center justify-center transition-colors cursor-pointer shadow-xs"
+                aria-label="Scroll right"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
+              </button>
+            </div>
+          </div>
 
           <div 
             ref={scrollContainerRef}
-            className="flex overflow-x-auto gap-4 sm:gap-6 scrollbar-hide relative z-0 px-2 md:px-0 h-fit items-start pb-2"
+            className="flex overflow-x-auto gap-4 sm:gap-5 no-scrollbar pb-2"
           >
             {buyingGuides.map((guide, i) => (
-            <div 
-              key={i} 
-              className="min-w-[280px] sm:min-w-[320px] h-[210px] sm:h-[230px] rounded-[22px] overflow-hidden relative border border-slate-200 shadow-[0_4px_20px_rgba(0,0,0,0.06)] p-6 sm:p-7 shrink-0 flex flex-col justify-end hover:shadow-xl hover:border-black hover:-translate-y-1.5 transition-all duration-300 group cursor-pointer"
-            >
-              {/* Background Photo */}
-              <img
-                src={guide.image}
-                alt={guide.title}
-                width="400"
-                height="260"
-                loading="lazy"
-                className="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-700 ease-out"
-              />
-
-              {/* Light Vignette / Bottom Gradient Overlay for Readability */}
-              <div className="absolute inset-0 bg-black/30 group-hover:bg-black/20 transition-colors duration-300" />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/45 to-transparent" />
-
-              {/* Text Scenario: Heading & Description */}
-              <div className="relative z-10">
-                <h3 className="text-lg sm:text-xl font-bold text-white mb-1.5 drop-shadow-[0_2px_8px_rgba(0,0,0,1)] [text-shadow:_0_2px_12px_rgba(0,0,0,0.95)] transition-colors">
-                  {guide.title}
-                </h3>
-                <p className="text-gray-200 text-xs sm:text-sm leading-relaxed drop-shadow-[0_1px_6px_rgba(0,0,0,0.9)] [text-shadow:_0_1px_8px_rgba(0,0,0,0.9)]">
-                  {guide.desc}
-                </p>
-              </div>
-            </div>
-          ))}
-          </div>
-
-          {/* Right Arrow */}
-          <button 
-            onClick={() => scroll('right')}
-            className="absolute -right-5 top-1/2 -translate-y-1/2 z-10 hidden md:flex items-center justify-center w-12 h-12 rounded-full bg-white border border-slate-200 text-slate-700 hover:bg-black hover:text-white hover:border-black hover:scale-110 transition-all shadow-md cursor-pointer"
-            aria-label="Scroll right"
-          >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" /></svg>
-          </button>
-        </div>
-      </section>
-
-      {/* Special Bundle */}
-      <section className="py-12 sm:py-16 page-container">
-        <div className="bg-white p-8 sm:p-12 lg:p-14 rounded-[22px] border border-slate-200 shadow-[0_8px_32px_rgba(0,0,0,0.06)] relative overflow-hidden">
-          {/* Subtle accent gradient inside the white card */}
-          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-gradient-to-bl from-slate-100 to-transparent rounded-full opacity-60 blur-3xl -z-0 translate-x-1/3 -translate-y-1/4 pointer-events-none"></div>
-          
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center relative z-10">
-            {/* Left Column: Text & Features */}
-            <div className="lg:col-span-7">
-              <span className="px-3.5 py-1 bg-zinc-100 text-slate-900 rounded-full text-xs sm:text-sm font-bold uppercase tracking-wider mb-4 inline-block border border-zinc-300">Special Bundle</span>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3 sm:mb-4 text-slate-900">Professional Workstation Bundle</h2>
-              <p className="text-slate-600 text-sm sm:text-base mb-6 leading-relaxed">Equip your team with a complete, fully compatible workstation setup featuring top-tier components. Perfect for new hires and office upgrades.</p>
-              
-              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3.5 mb-7 text-slate-700 text-sm sm:text-base font-medium">
-                <li className="flex items-center gap-3"><span className="text-black font-bold">✓</span> 27" 4K Monitor</li>
-                <li className="flex items-center gap-3"><span className="text-black font-bold">✓</span> Mechanical Keyboard</li>
-                <li className="flex items-center gap-3"><span className="text-black font-bold">✓</span> Ergonomic Mouse</li>
-                <li className="flex items-center gap-3"><span className="text-black font-bold">✓</span> Universal USB-C Dock</li>
-                <li className="flex items-center gap-3"><span className="text-black font-bold">✓</span> Wireless Headset</li>
-                <li className="flex items-center gap-3"><span className="text-black font-bold">✓</span> Adjustable Laptop Stand</li>
-              </ul>
-
-              <a
-                href="https://wa.me/919643990077?text=Hi%2C%20I%20want%20to%20request%20corporate%20pricing%20for%20the%20Professional%20Workstation%20Bundle%20from%20Authentic%20Infosystem."
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block px-6 sm:px-8 py-3.5 bg-black text-white text-sm sm:text-base font-semibold rounded-xl hover:bg-zinc-800 transition-all shadow-md hover:shadow-lg hover:-translate-y-0.5 cursor-pointer"
+              <div 
+                key={i} 
+                onClick={() => handleOpenQuote("Buying Guide Consultation", guide.title)}
+                className="min-w-[280px] sm:min-w-[320px] h-[200px] sm:h-[220px] rounded-lg overflow-hidden relative border border-slate-200 p-5 sm:p-6 shrink-0 flex flex-col justify-end hover:shadow-xl hover:border-slate-400 transition-all duration-300 group cursor-pointer"
               >
-                Request Corporate Pricing
-              </a>
-            </div>
-
-            {/* Right Column: Bundle Photo */}
-            <div className="lg:col-span-5 flex justify-center items-center">
-              <div className="rounded-[20px] overflow-hidden shadow-xl border border-slate-200 w-full max-w-md group bg-slate-100">
+                {/* Background Photo */}
                 <img
-                  src="/Accessories/Professional%20Workstation%20Bundle.jpeg"
-                  alt="Professional Workstation Bundle"
-                  width="500"
-                  height="333"
+                  src={guide.image}
+                  alt={guide.title}
+                  width="400"
+                  height="260"
                   loading="lazy"
-                  className="w-full h-auto aspect-[500/333] object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                  className="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 ease-out"
                 />
+
+                {/* Dark Vignette Overlay for Crisp Readability */}
+                <div className="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition-colors duration-300" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/45 to-transparent" />
+
+                {/* Text Content */}
+                <div className="relative z-10">
+                  <h3 className="text-base sm:text-lg font-bold text-white mb-1 drop-shadow-sm">
+                    {guide.title}
+                  </h3>
+                  <p className="text-slate-200 text-xs leading-relaxed line-clamp-2">
+                    {guide.desc}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* SPECIAL WORKSTATION BUNDLE SHOWCASE (Corporate Style) */}
+        <section className="mt-16 pt-12 border-t border-slate-200">
+          <div className="p-6 sm:p-8 lg:p-10 rounded-2xl border border-rose-300/80 shadow-md relative overflow-hidden bg-gradient-to-br from-red-100 via-rose-100 to-pink-200/90">
+            {/* Atmospheric ambient glow */}
+            <div className="absolute -top-24 -right-24 w-96 h-96 bg-gradient-to-br from-rose-500/20 to-pink-500/25 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-gradient-to-tr from-red-500/20 to-rose-400/25 rounded-full blur-3xl pointer-events-none" />
+
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
+              {/* Left Column: Text & Features */}
+              <div className="lg:col-span-7">
+                <h2 className="text-xl sm:text-3xl font-extrabold mb-3 text-slate-950 tracking-tight">
+                  Professional Workstation Ecosystem Bundle
+                </h2>
+                <p className="text-slate-700 text-xs sm:text-sm mb-6 leading-relaxed">
+                  Equip entire departments with fully certified, pre-configured workstation peripherals. Includes comprehensive OEM warranties, bulk GST tax invoicing, and Pan-India unified office dispatch.
+                </p>
+                
+                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3 mb-7 text-slate-800 text-xs sm:text-sm font-medium">
+                  <li className="flex items-center gap-2.5">
+                    <FaCheckCircle className="text-emerald-600 shrink-0" size={13} />
+                    <span>27" 4K UHD IPS Black Monitor</span>
+                  </li>
+                  <li className="flex items-center gap-2.5">
+                    <FaCheckCircle className="text-emerald-600 shrink-0" size={13} />
+                    <span>Programmable Mechanical Keyboard</span>
+                  </li>
+                  <li className="flex items-center gap-2.5">
+                    <FaCheckCircle className="text-emerald-600 shrink-0" size={13} />
+                    <span>8K DPI Ergonomic Multi-Device Mouse</span>
+                  </li>
+                  <li className="flex items-center gap-2.5">
+                    <FaCheckCircle className="text-emerald-600 shrink-0" size={13} />
+                    <span>Universal Dual 4K USB-C Dock</span>
+                  </li>
+                  <li className="flex items-center gap-2.5">
+                    <FaCheckCircle className="text-emerald-600 shrink-0" size={13} />
+                    <span>Noise-Canceling UC Wireless Headset</span>
+                  </li>
+                  <li className="flex items-center gap-2.5">
+                    <FaCheckCircle className="text-emerald-600 shrink-0" size={13} />
+                    <span>Heavy-Duty Articulating Monitor Arm</span>
+                  </li>
+                </ul>
+
+                <div className="flex flex-wrap items-center gap-3">
+                  <button
+                    onClick={() => handleOpenQuote("Workstation Bundle", "Complete Professional Workplace Bundle")}
+                    className="px-6 py-2.5 bg-[#1546a0] hover:bg-[#003d7e] text-white font-bold text-xs uppercase tracking-wider rounded-md transition-all shadow-xs cursor-pointer"
+                  >
+                    Request Corporate Pricing
+                  </button>
+                  <a
+                    href="https://wa.me/919643990077?text=Hi%2C%20I%20want%20to%20request%20corporate%20pricing%20for%20the%20Professional%20Workstation%20Bundle%20from%20Authentic%20Infosystem."
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 bg-slate-900 hover:bg-black text-white text-xs font-bold uppercase tracking-wider rounded-md transition-all shadow-xs cursor-pointer"
+                  >
+                    <FaWhatsapp size={13} className="text-emerald-400" />
+                    <span>Quick WhatsApp Inquiry</span>
+                  </a>
+                </div>
+              </div>
+
+              {/* Right Column: Bundle Photo */}
+              <div className="lg:col-span-5 flex justify-center items-center">
+                <div className="rounded-xl overflow-hidden border border-rose-200/80 w-full max-w-md group bg-white shadow-md">
+                  <img
+                    src="/Accessories/Professional%20Workstation%20Bundle.jpeg"
+                    alt="Professional Workstation Bundle - Authentic Infosystem"
+                    width="500"
+                    height="333"
+                    loading="lazy"
+                    className="w-full h-auto aspect-[500/333] object-cover group-hover:scale-102 transition-transform duration-500 ease-out"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+
+      {/* CUSTOM IT ACCESSORIES INFRASTRUCTURE CTA (Card matching 1720px span width on white background) */}
+      <section className="pt-2 pb-16 bg-white">
+        <div className="max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10">
+          <div className="p-8 sm:p-12 lg:p-14 rounded-2xl sm:rounded-3xl border border-zinc-800 shadow-2xl relative overflow-hidden bg-[#09090b] text-white text-center">
+            {/* Atmospheric ambient glow */}
+            <div className="absolute top-0 right-0 w-96 h-96 bg-blue-600/15 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl pointer-events-none" />
+
+            <div className="max-w-3xl mx-auto relative z-10">
+              <p className="text-xs font-bold text-zinc-400 tracking-[4px] uppercase mb-3">
+                BULK IT PROCUREMENT DESK
+              </p>
+              <h2 className="text-2xl sm:text-4xl md:text-5xl font-extrabold mb-4 tracking-tight">
+                Scale Your Workplace Peripherals & Hardware Supply
+              </h2>
+              <p className="text-zinc-300 text-xs sm:text-sm md:text-base mb-8 max-w-2xl mx-auto leading-relaxed">
+                Need bulk procurement for multi-city branches, standard employee onboard kits, or specialized CAD/editing peripherals? Consult our corporate hardware sourcing desk for direct OEM pricing.
+              </p>
+              <div className="flex flex-wrap items-center justify-center gap-4">
+                <button
+                  onClick={() => handleOpenQuote("Enterprise", "Bulk Peripheral Fleet Procurement")}
+                  className="px-8 py-3.5 bg-[#1546a0] hover:bg-[#003d7e] text-white font-bold text-xs uppercase tracking-wider rounded-md shadow-md transition-all cursor-pointer"
+                >
+                  Request Corporate Quote
+                </button>
+                <a
+                  href="https://wa.me/919643990077?text=Hi%2C%20I%20want%20to%20request%20a%20commercial%20quote%20for%20enterprise%20accessories%20and%20hardware."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-8 py-3.5 bg-white text-slate-950 hover:bg-slate-100 font-bold text-xs uppercase tracking-wider rounded-md shadow-md transition-all cursor-pointer"
+                >
+                  Chat on WhatsApp
+                </a>
               </div>
             </div>
           </div>
         </div>
       </section>
+
+      {/* Quote Modal */}
+      <QuoteModal
+        isOpen={isQuoteModalOpen}
+        onClose={() => setIsQuoteModalOpen(false)}
+        initialBrand={quoteBrand}
+        initialModel={quoteModel}
+      />
 
       <Footer />
     </main>

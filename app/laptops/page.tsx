@@ -66,9 +66,8 @@ export default function LaptopsPage() {
   const [quoteModel, setQuoteModel] = useState("");
 
   const handleOpenQuote = (brand = "", model = "") => {
-    setQuoteBrand(brand);
-    setQuoteModel(model);
-    setIsQuoteModalOpen(true);
+    const msg = `Hi Authentic Infosystem, I would like to request an official B2B quote and availability for ${brand} ${model}.`;
+    window.open(`https://wa.me/919643990077?text=${encodeURIComponent(msg)}`, "_blank");
   };
 
   // Toggle single accordion
@@ -262,37 +261,46 @@ export default function LaptopsPage() {
   }, [processorSearch]);
 
   return (
-    <main className="min-h-screen bg-white text-slate-900 selection:bg-slate-900 selection:text-white">
+    <main className="min-h-screen bg-white text-slate-900 selection:bg-rose-950 selection:text-white">
       <Navbar />
 
-      {/* EXPANDED CONTAINER: Wide e-commerce canvas to eliminate dead margins */}
-      <div className="max-w-[1720px] w-full mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 pt-28 sm:pt-30 pb-16">
-        
-        {/* TOP BREADCRUMB & HEADER */}
-        <div className="pb-4 mb-4 border-b border-slate-200">
-          <div className="flex items-center gap-2 text-xs text-slate-500 mb-1.5">
-            <Link href="/" className="hover:underline">Home</Link>
-            <span>/</span>
-            <span className="text-slate-900 font-semibold">Laptops & Commercial Deals</span>
+      {/* FULL-WIDTH MAROON HEADER SECTION (Left to Right) */}
+      <section className="w-full bg-gradient-to-r from-[#4A0A16] via-[#650E20] to-[#3B0712] text-white pt-28 sm:pt-32 pb-8 sm:pb-10 border-b border-[#30050e] shadow-xs relative overflow-hidden">
+        {/* Subtle ambient luxury highlight */}
+        <div 
+          className="absolute inset-0 pointer-events-none opacity-25"
+          style={{
+            backgroundImage: "radial-gradient(ellipse 65% 85% at 20% 0%, rgba(255, 255, 255, 0.3) 0%, transparent 65%)"
+          }}
+        />
+
+        <div className="max-w-[1720px] w-full mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 relative z-10">
+          {/* Top Breadcrumb */}
+          <div className="flex items-center gap-2 text-xs text-rose-200/80 mb-2.5">
+            <Link href="/" className="hover:text-white transition-colors">Home</Link>
+            <span className="text-rose-300/40">/</span>
+            <span className="text-white font-medium">Laptops & Commercial Deals</span>
           </div>
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-3">
+
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
             <div>
-              <h1 className="text-2xl sm:text-3xl font-black text-slate-950 tracking-tight">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl font-black text-white tracking-tight leading-tight">
                 Laptops & Official Fleet Deals
               </h1>
-              <p className="text-xs sm:text-sm text-slate-600 mt-1 max-w-4xl">
+              <p className="text-xs sm:text-sm text-rose-100/90 mt-2 max-w-4xl leading-relaxed">
                 Certified commercial ThinkPad, IdeaPad, Latitude, EliteBook, MacBook & ROG fleets with 3-year premier onsite warranty, GST invoicing, and volume discounts.
               </p>
             </div>
+
             {/* Quick Search on Top */}
-            <div className="relative w-full md:w-80">
+            <div className="relative w-full md:w-80 shrink-0">
               <FaSearch className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" size={13} />
               <input
                 type="text"
                 placeholder="Search model, series, CPU..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-9 pr-8 py-2 bg-slate-50 border border-slate-300 rounded-md text-xs focus:outline-none focus:border-[#1546a0] focus:bg-white"
+                className="w-full pl-9 pr-8 py-2.5 bg-white text-slate-900 border border-rose-900/30 rounded-md text-xs placeholder:text-slate-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-rose-400/50 focus:border-rose-400"
               />
               {searchQuery && (
                 <button
@@ -305,6 +313,10 @@ export default function LaptopsPage() {
             </div>
           </div>
         </div>
+      </section>
+
+      {/* EXPANDED CONTAINER: Wide e-commerce canvas to eliminate dead margins */}
+      <div className="max-w-[1720px] w-full mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 pt-6 sm:pt-8 pb-16">
 
         {/* MOBILE FILTER TRIGGER BUTTON */}
         <div className="lg:hidden flex items-center justify-between mb-4 pb-2 border-b border-slate-200">
@@ -734,12 +746,15 @@ export default function LaptopsPage() {
       </div>
 
       {/* SECTION 3: WHY ENTERPRISES PARTNER (DARK FULL-WIDTH WORKSTATIONS STYLE) */}
-      <section className="w-full bg-black py-16 sm:py-20 lg:py-28 relative border-t border-white/10 overflow-hidden">
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-blue-600/5 rounded-full blur-[140px] pointer-events-none" />
-        <div className="absolute bottom-10 right-10 w-[500px] h-[300px] bg-purple-600/5 rounded-full blur-[120px] pointer-events-none" />
+      <section className="w-full bg-white py-10 sm:py-14 lg:py-16 relative overflow-hidden">
+        <div className="max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10">
+          <div className="w-full bg-[#09090b] text-white rounded-[24px] sm:rounded-[28px] border border-zinc-800 shadow-2xl relative overflow-hidden p-8 sm:p-12 lg:p-16">
+            {/* Background Ambience Glows */}
+            <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-blue-600/10 rounded-full blur-[140px] pointer-events-none" />
+            <div className="absolute bottom-10 right-10 w-[500px] h-[300px] bg-purple-600/10 rounded-full blur-[120px] pointer-events-none" />
 
-        <div className="max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 relative z-10">
-          <div className="text-center mb-12 sm:mb-16 max-w-4xl mx-auto">
+            <div className="relative z-10">
+              <div className="text-center mb-10 sm:mb-14 max-w-4xl mx-auto">
             <p className="text-xs sm:text-sm md:text-base uppercase tracking-[4px] sm:tracking-[6px] font-bold text-zinc-400 mb-3 sm:mb-4">
               CUSTOM WORKSTATIONS & FLEET PROCUREMENT
             </p>
@@ -887,9 +902,11 @@ export default function LaptopsPage() {
                 </div>
               </div>
             </div>
+            </div>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
       {/* Quote Modal */}
       <QuoteModal

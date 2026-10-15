@@ -190,13 +190,15 @@ export default function ProductClientPage({ laptop, brand }: ProductClientPagePr
 
             {/* Action Buttons */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
-              <button
-                onClick={() => setIsQuoteModalOpen(true)}
+              <a
+                href={whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="w-full py-3.5 px-4 rounded-2xl bg-slate-950 hover:bg-black text-white font-bold text-sm transition-all shadow-sm flex items-center justify-center gap-2 cursor-pointer"
               >
                 <FaBuilding size={14} />
                 <span>Request B2B Quote</span>
-              </button>
+              </a>
               <a
                 href={whatsappUrl}
                 target="_blank"
@@ -461,12 +463,14 @@ export default function ProductClientPage({ laptop, brand }: ProductClientPagePr
                   <h4 className="text-base font-bold text-white">Need a customized quote for this model?</h4>
                   <p className="text-xs text-slate-400">Tell us your fleet size and required delivery timeline.</p>
                 </div>
-                <button
-                  onClick={() => setIsQuoteModalOpen(true)}
-                  className="px-6 py-2.5 bg-white text-slate-950 hover:bg-slate-100 font-bold text-xs rounded-xl cursor-pointer"
+                <a
+                  href={whatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-6 py-2.5 bg-white text-slate-950 hover:bg-slate-100 font-bold text-xs rounded-xl cursor-pointer inline-flex items-center justify-center"
                 >
                   Request B2B Quote
-                </button>
+                </a>
               </div>
             </div>
           )}
@@ -500,7 +504,7 @@ export default function ProductClientPage({ laptop, brand }: ProductClientPagePr
               <LaptopCard
                 key={item.id}
                 laptop={item}
-                onOpenQuote={() => setIsQuoteModalOpen(true)}
+                onOpenQuote={() => window.open(whatsappUrl, "_blank")}
               />
             ))}
           </div>
