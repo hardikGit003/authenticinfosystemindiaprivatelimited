@@ -5,18 +5,12 @@ import Link from "next/link";
 interface FlipkartCard {
   id: string;
   themeClass: string;
-  starburstTitle: string;
-  starburstSub: string;
   ribbonTitle: string;
   ribbonSub: string;
   headline: string;
   price: string;
   features: string;
-  bank1: string;
-  bank1Class: string;
-  bank2: string;
-  bank2Class: string;
-  bankOffer: string;
+  ctaText: string;
   imageSrc: string;
   imageAlt: string;
   href: string;
@@ -27,18 +21,12 @@ const flipkartCards: FlipkartCard[] = [
   {
     id: "benq",
     themeClass: "fk-theme-benq",
-    starburstTitle: "BIG BILLION",
-    starburstSub: "DEALS",
     ribbonTitle: "NOW OR NEVER",
     ribbonSub: "Prices lower than ever",
     headline: "Top Deals on BenQ Smart Boards",
     price: "From ₹84,990*",
     features: "Google EDLA Certified | 4K UHD Antimicrobial Touch",
-    bank1: "AXIS BANK",
-    bank1Class: "fk-bank-axis",
-    bank2: "ICICI Bank",
-    bank2Class: "fk-bank-icici",
-    bankOffer: "10% Instant Discount* + 18% GST Credit",
+    ctaText: "Explore Smart Boards",
     imageSrc: "/BenQ Smart Screen/BenQ1.avif",
     imageAlt: "BenQ 4K Smart Board Display",
     href: "#benq-smart-board"
@@ -48,18 +36,12 @@ const flipkartCards: FlipkartCard[] = [
   {
     id: "logitech",
     themeClass: "fk-theme-logi",
-    starburstTitle: "BIG BILLION",
-    starburstSub: "DAYS",
     ribbonTitle: "NOW OR NEVER",
     ribbonSub: "Lowest prices ever",
     headline: "Logitech Video & MX Series",
     price: "From ₹2,995*",
     features: "Rally Bar 4K | MeetUp Camera | MX Master 3S",
-    bank1: "AXIS BANK",
-    bank1Class: "fk-bank-axis",
-    bank2: "ICICI Bank",
-    bank2Class: "fk-bank-icici",
-    bankOffer: "10% Instant Discount* | Official Warranty",
+    ctaText: "Explore Logitech",
     imageSrc: "/products/accessories/logitech-workspace-solutions.jpg",
     imageAlt: "Logitech Video Conferencing & MX Series Workspace",
     href: "/amazon"
@@ -69,18 +51,12 @@ const flipkartCards: FlipkartCard[] = [
   {
     id: "loq-laptop",
     themeClass: "fk-theme-loq",
-    starburstTitle: "BIG BILLION",
-    starburstSub: "DAYS",
     ribbonTitle: "NOW OR NEVER",
     ribbonSub: "Prices lower than ever",
     headline: "Top Deals on Lenovo LOQ AI",
     price: "From ₹64,990*",
     features: "NVIDIA RTX 40-Series | Intel 14th Gen & Ryzen AI",
-    bank1: "AXIS BANK",
-    bank1Class: "fk-bank-axis",
-    bank2: "ICICI Bank",
-    bank2Class: "fk-bank-icici",
-    bankOffer: "10% Instant Discount* | No Cost EMI",
+    ctaText: "Shop LOQ Laptops",
     imageSrc: "/products/laptops/lenovo-loq-15.jpg",
     imageAlt: "Lenovo LOQ AI Gaming Laptop",
     href: "/laptops/lenovo"
@@ -90,18 +66,12 @@ const flipkartCards: FlipkartCard[] = [
   {
     id: "18-pro-series",
     themeClass: "fk-theme-apple",
-    starburstTitle: "FLAGSHIP",
-    starburstSub: "LAUNCH",
     ribbonTitle: "DAY-1 ALLOCATION",
     ribbonSub: "Reserve priority stock",
     headline: "Apple iPhone 18 Pro Series",
     price: "From ₹1,34,900*",
     features: "A20 Pro 2nm Silicon | 48MP Visor Quad-Prism",
-    bank1: "AXIS BANK",
-    bank1Class: "fk-bank-axis",
-    bank2: "ICICI Bank",
-    bank2Class: "fk-bank-icici",
-    bankOffer: "10% Instant Savings* | 1-Yr AppleCare",
+    ctaText: "Order 18 Pro",
     imageSrc: "/Home Screen Advertisement/Iphone18PRoBanner.png",
     imageAlt: "Apple iPhone 18 Pro Titanium Flagship",
     href: "/phones"
@@ -111,18 +81,12 @@ const flipkartCards: FlipkartCard[] = [
   {
     id: "customize-your-pc",
     themeClass: "fk-theme-pc",
-    starburstTitle: "CUSTOM RIG",
-    starburstSub: "BUILDER",
     ribbonTitle: "NOW OR NEVER",
     ribbonSub: "Free 48H burn-in test",
     headline: "Custom Built PC Workstations",
     price: "From ₹38,990*",
     features: "RTX 4090 / 4080 | Liquid Cooled | 3Y Warranty",
-    bank1: "AXIS BANK",
-    bank1Class: "fk-bank-axis",
-    bank2: "ICICI Bank",
-    bank2Class: "fk-bank-icici",
-    bankOffer: "10% Instant Discount* | Doorstep Warranty",
+    ctaText: "Configure Your PC",
     imageSrc: "/products/desktops/custom-pc-configurator-rig.jpg",
     imageAlt: "Custom Liquid Cooled Workstation Rig",
     href: "/configuration"
@@ -132,18 +96,12 @@ const flipkartCards: FlipkartCard[] = [
   {
     id: "accessories",
     themeClass: "fk-theme-acc",
-    starburstTitle: "MEGA SALE",
-    starburstSub: "OFFERS",
     ribbonTitle: "NOW OR NEVER",
     ribbonSub: "Lowest prices ever",
     headline: "4K Displays, Docks & Storage",
     price: "From ₹1,499*",
     features: "Dell UltraSharp | Thunderbolt 4 | NVMe Fast SSDs",
-    bank1: "AXIS BANK",
-    bank1Class: "fk-bank-axis",
-    bank2: "ICICI Bank",
-    bank2Class: "fk-bank-icici",
-    bankOffer: "10% Instant Discount* | Express Dispatch",
+    ctaText: "Shop Accessories",
     imageSrc: "/products/accessories/enterprise-accessories-bundle.jpg",
     imageAlt: "Enterprise IT Accessories Displays and Docks",
     href: "/accessories"
@@ -164,24 +122,8 @@ export default function FeaturedShowcaseGrid() {
               className={`fk-card ${card.themeClass}`}
               title={card.headline}
             >
-              {/* Background festive lanterns and sparkles */}
+              {/* Background festive glow */}
               <div className="fk-bg-decor" />
-
-              {/* Top-Left Starburst "The Big Billion Days" Badge */}
-              <div className="fk-starburst-wrapper">
-                <svg viewBox="0 0 100 100" className="fk-starburst-svg" aria-hidden="true">
-                  <polygon 
-                    points="50,0 62,10 77,5 82,20 97,23 93,38 100,50 93,62 97,77 82,80 77,95 62,90 50,100 38,90 23,95 18,80 3,77 7,62 0,50 7,38 3,23 18,20 23,5 38,10" 
-                    fill="#FFDF00"
-                    stroke="#D97706"
-                    strokeWidth="1.5"
-                  />
-                </svg>
-                <div className="fk-starburst-label">
-                  <span>{card.starburstTitle}</span>
-                  <span className="fk-starburst-sub">{card.starburstSub}</span>
-                </div>
-              </div>
 
               {/* Top-Right "NOW OR NEVER" Ribbon */}
               <div className="fk-ribbon">
@@ -195,11 +137,10 @@ export default function FeaturedShowcaseGrid() {
                 <div className="fk-price">{card.price}</div>
                 <div className="fk-features">{card.features}</div>
 
-                {/* Bottom Bank Offer Strip */}
-                <div className="fk-bank-strip">
-                  <span className={`fk-bank-badge ${card.bank1Class}`}>{card.bank1}</span>
-                  <span className={`fk-bank-badge ${card.bank2Class}`}>{card.bank2}</span>
-                  <span className="fk-bank-text">{card.bankOffer}</span>
+                {/* Direct CTA Link Button */}
+                <div className="fk-cta">
+                  <span>{card.ctaText}</span>
+                  <span className="fk-cta-arrow">→</span>
                 </div>
               </div>
 
