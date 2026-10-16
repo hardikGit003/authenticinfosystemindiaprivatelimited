@@ -128,7 +128,7 @@ export const amazonProducts: AmazonProduct[] = [
     rating: 3.5,
     reviewCount: 10,
     reviewCountFormatted: "10",
-    image: "https://m.media-amazon.com/images/I/71I+5x+kkTL._SL1500_.jpg",
+    image: "/products/accessories/lenovo-k11-tablet.png",
     deliveryDate: "FREE delivery Tomorrow",
     amazonUrl: "https://www.amazon.in/dp/B0D5MLJ29D?me=A26NUGXR8IFFOO",
   },
