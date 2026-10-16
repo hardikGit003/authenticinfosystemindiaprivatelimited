@@ -1,249 +1,221 @@
 "use client";
 
 import Link from "next/link";
-import { 
-  FaTv, 
-  FaVideo, 
-  FaLaptop, 
-  FaMobileAlt, 
-  FaCogs, 
-  FaKeyboard, 
-  FaCheckCircle, 
-  FaArrowRight, 
-  FaWhatsapp,
-  FaShieldAlt,
-  FaFire
-} from "react-icons/fa";
 
-interface ShowcaseCard {
+interface FlipkartCard {
   id: string;
-  pillLabel: string;
-  pillClass: string;
-  statusLabel: string;
-  title: string;
-  subtitle: string;
+  themeClass: string;
+  starburstTitle: string;
+  starburstSub: string;
+  ribbonTitle: string;
+  ribbonSub: string;
+  headline: string;
+  price: string;
+  features: string;
+  bank1: string;
+  bank1Class: string;
+  bank2: string;
+  bank2Class: string;
+  bankOffer: string;
   imageSrc: string;
   imageAlt: string;
-  primaryFeatures: string[];
-  ctaLabel: string;
-  ctaHref: string;
-  isExternal?: boolean;
-  ctaIcon?: "arrow" | "whatsapp";
+  href: string;
 }
 
-const cardsData: ShowcaseCard[] = [
-  // 1. BenQ (Card 1)
+const flipkartCards: FlipkartCard[] = [
+  // 1. BenQ
   {
     id: "benq",
-    pillLabel: "BenQ Official Partner",
-    pillClass: "pill-benq",
-    statusLabel: "Official Warranty",
-    title: "BenQ Smart Displays & Boards",
-    subtitle: "4K Interactive Flat Panels for Smart Classrooms & Hybrid Boardrooms",
+    themeClass: "fk-theme-benq",
+    starburstTitle: "BIG BILLION",
+    starburstSub: "DEALS",
+    ribbonTitle: "NOW OR NEVER",
+    ribbonSub: "Prices lower than ever",
+    headline: "Top Deals on BenQ Smart Boards",
+    price: "From ₹84,990*",
+    features: "Google EDLA Certified | 4K UHD Antimicrobial Touch",
+    bank1: "AXIS BANK",
+    bank1Class: "fk-bank-axis",
+    bank2: "ICICI Bank",
+    bank2Class: "fk-bank-icici",
+    bankOffer: "10% Instant Discount* + 18% GST Credit",
     imageSrc: "/BenQ Smart Screen/BenQ1.avif",
-    imageAlt: "BenQ 4K Interactive Flat Panel Display",
-    primaryFeatures: [
-      "4K UHD Antimicrobial Touchscreen with EZWrite Whiteboard Collaboration",
-      "Google EDLA Certified with native Play Store & Google Workspace access",
-      "On-site deployment, authorized warranty & corporate GST invoicing"
-    ],
-    ctaLabel: "Explore BenQ Smart Boards",
-    ctaHref: "#benq-smart-board",
-    ctaIcon: "arrow"
+    imageAlt: "BenQ 4K Smart Board Display",
+    href: "#benq-smart-board"
   },
 
-  // 2. Logitech (Card 2)
+  // 2. Logitech
   {
     id: "logitech",
-    pillLabel: "Logitech Workspace",
-    pillClass: "pill-logi",
-    statusLabel: "In Stock Ready Dispatch",
-    title: "Logitech Enterprise Solutions",
-    subtitle: "Conference Cameras, Video Bars & Ergonomic MX Series Workspace",
+    themeClass: "fk-theme-logi",
+    starburstTitle: "BIG BILLION",
+    starburstSub: "DAYS",
+    ribbonTitle: "NOW OR NEVER",
+    ribbonSub: "Lowest prices ever",
+    headline: "Logitech Video & MX Series",
+    price: "From ₹2,995*",
+    features: "Rally Bar 4K | MeetUp Camera | MX Master 3S",
+    bank1: "AXIS BANK",
+    bank1Class: "fk-bank-axis",
+    bank2: "ICICI Bank",
+    bank2Class: "fk-bank-icici",
+    bankOffer: "10% Instant Discount* | Official Warranty",
     imageSrc: "/products/accessories/logitech-workspace-solutions.jpg",
-    imageAlt: "Logitech Video Conferencing & MX Workspace Peripherals",
-    primaryFeatures: [
-      "Rally Bar & MeetUp 4K Ultra-HD Intelligent Conference Video Systems",
-      "Logitech MX Master 3S Ergonomic Mice & MX Mechanical Keyboards",
-      "Certified bundles for Microsoft Teams, Zoom & Google Meet rooms"
-    ],
-    ctaLabel: "Explore Logitech Store",
-    ctaHref: "/amazon",
-    ctaIcon: "arrow"
+    imageAlt: "Logitech Video Conferencing & MX Series Workspace",
+    href: "/amazon"
   },
 
-  // 3. LoQ Laptop (Card 3)
+  // 3. LoQ Laptop
   {
     id: "loq-laptop",
-    pillLabel: "Lenovo LOQ Series",
-    pillClass: "pill-lenovo",
-    statusLabel: "AI Tuned • RTX 40-Series",
-    title: "Lenovo LOQ AI Gaming Laptops",
-    subtitle: "High-Performance Computing for Heavy Workflows, Creators & Gamers",
+    themeClass: "fk-theme-loq",
+    starburstTitle: "BIG BILLION",
+    starburstSub: "DAYS",
+    ribbonTitle: "NOW OR NEVER",
+    ribbonSub: "Prices lower than ever",
+    headline: "Top Deals on Lenovo LOQ AI",
+    price: "From ₹64,990*",
+    features: "NVIDIA RTX 40-Series | Intel 14th Gen & Ryzen AI",
+    bank1: "AXIS BANK",
+    bank1Class: "fk-bank-axis",
+    bank2: "ICICI Bank",
+    bank2Class: "fk-bank-icici",
+    bankOffer: "10% Instant Discount* | No Cost EMI",
     imageSrc: "/products/laptops/lenovo-loq-15.jpg",
-    imageAlt: "Lenovo LOQ AI High-Performance Gaming Laptop",
-    primaryFeatures: [
-      "Intel 13th/14th Gen & AMD Ryzen Processors with Lenovo LA1 AI chip",
-      "NVIDIA GeForce RTX 40-Series Dedicated GPUs with 144Hz FHD/QHD Display",
-      "Hyperchamber Thermal Architecture with On-Site Lenovo India Warranty"
-    ],
-    ctaLabel: "Explore Lenovo LOQ & Laptops",
-    ctaHref: "/laptops/lenovo",
-    ctaIcon: "arrow"
+    imageAlt: "Lenovo LOQ AI Gaming Laptop",
+    href: "/laptops/lenovo"
   },
 
-  // 4. 18 Pro Series (Card 4)
+  // 4. 18 Pro Series
   {
-    id: "iphone-18-pro",
-    pillLabel: "Apple Flagship Launch",
-    pillClass: "pill-apple",
-    statusLabel: "Priority Allocation",
-    title: "Apple iPhone 18 Pro Series",
-    subtitle: "Forged in Aerospace Titanium with A20 Pro Silicon & Apple Intelligence",
+    id: "18-pro-series",
+    themeClass: "fk-theme-apple",
+    starburstTitle: "FLAGSHIP",
+    starburstSub: "LAUNCH",
+    ribbonTitle: "DAY-1 ALLOCATION",
+    ribbonSub: "Reserve priority stock",
+    headline: "Apple iPhone 18 Pro Series",
+    price: "From ₹1,34,900*",
+    features: "A20 Pro 2nm Silicon | 48MP Visor Quad-Prism",
+    bank1: "AXIS BANK",
+    bank1Class: "fk-bank-axis",
+    bank2: "ICICI Bank",
+    bank2Class: "fk-bank-icici",
+    bankOffer: "10% Instant Savings* | 1-Yr AppleCare",
     imageSrc: "/Home Screen Advertisement/Iphone18PRoBanner.png",
     imageAlt: "Apple iPhone 18 Pro Titanium Flagship",
-    primaryFeatures: [
-      "Next-Gen Apple A20 Pro (2nm Silicon) with Deep Neural Apple Intelligence",
-      "48MP Quad-Reflecting Visor Island Camera System with 10x Optical Zoom",
-      "Day-1 Corporate Fleet Allocation with Bulk GST Tax Invoicing & AppleCare"
-    ],
-    ctaLabel: "Order iPhone 18 Pro",
-    ctaHref: "/phones",
-    ctaIcon: "arrow"
+    href: "/phones"
   },
 
-  // 5. Customize Your Pc (Card 5)
+  // 5. Customize Your Pc
   {
-    id: "custom-pc",
-    pillLabel: "PC Configurator",
-    pillClass: "pill-pc",
-    statusLabel: "Live Compatibility",
-    title: "Customize Your Dream PC",
-    subtitle: "Tailored Rig Builder for Gaming, 8K Video Editing, AI & Workstations",
+    id: "customize-your-pc",
+    themeClass: "fk-theme-pc",
+    starburstTitle: "CUSTOM RIG",
+    starburstSub: "BUILDER",
+    ribbonTitle: "NOW OR NEVER",
+    ribbonSub: "Free 48H burn-in test",
+    headline: "Custom Built PC Workstations",
+    price: "From ₹38,990*",
+    features: "RTX 4090 / 4080 | Liquid Cooled | 3Y Warranty",
+    bank1: "AXIS BANK",
+    bank1Class: "fk-bank-axis",
+    bank2: "ICICI Bank",
+    bank2Class: "fk-bank-icici",
+    bankOffer: "10% Instant Discount* | Doorstep Warranty",
     imageSrc: "/products/desktops/custom-pc-configurator-rig.jpg",
-    imageAlt: "Custom Liquid-Cooled High-End Workstation & Gaming PC Rig",
-    primaryFeatures: [
-      "Interactive 3D Configurator with Real-Time Component Compatibility",
-      "Intel Core Ultra & AMD Ryzen 9 + NVIDIA RTX 4090 / RTX 4080 builds",
-      "48-Hour Thermal Stress Testing, 3-Year Doorstep Warranty & Nationwide Dispatch"
-    ],
-    ctaLabel: "Start Custom PC Build",
-    ctaHref: "/configuration",
-    ctaIcon: "arrow"
+    imageAlt: "Custom Liquid Cooled Workstation Rig",
+    href: "/configuration"
   },
 
-  // 6. Accesories (Card 6)
+  // 6. Accesories
   {
     id: "accessories",
-    pillLabel: "Enterprise Essentials",
-    pillClass: "pill-acc",
-    statusLabel: "Bulk Corporate Pricing",
-    title: "Business IT Accessories",
-    subtitle: "Displays, Thunderbolt Docks, Storage, Audio & Ergonomic Peripherals",
+    themeClass: "fk-theme-acc",
+    starburstTitle: "MEGA SALE",
+    starburstSub: "OFFERS",
+    ribbonTitle: "NOW OR NEVER",
+    ribbonSub: "Lowest prices ever",
+    headline: "4K Displays, Docks & Storage",
+    price: "From ₹1,499*",
+    features: "Dell UltraSharp | Thunderbolt 4 | NVMe Fast SSDs",
+    bank1: "AXIS BANK",
+    bank1Class: "fk-bank-axis",
+    bank2: "ICICI Bank",
+    bank2Class: "fk-bank-icici",
+    bankOffer: "10% Instant Discount* | Express Dispatch",
     imageSrc: "/products/accessories/enterprise-accessories-bundle.jpg",
-    imageAlt: "Enterprise Workstation Displays, Docks, Keyboards and Accessories",
-    primaryFeatures: [
-      "Dell UltraSharp & LG 4K Curved USB-C Hub Professional IPS Displays",
-      "Thunderbolt 4 Enterprise Docking Stations with 100W Laptop Power Delivery",
-      "High-Speed NVMe External Storage, Mechanical Keyboards & Ergonomic Mounts"
-    ],
-    ctaLabel: "Browse All Accessories",
-    ctaHref: "/accessories",
-    ctaIcon: "arrow"
+    imageAlt: "Enterprise IT Accessories Displays and Docks",
+    href: "/accessories"
   }
 ];
 
 export default function FeaturedShowcaseGrid() {
   return (
-    <section id="featured-showcase" className="featured-showcase-section">
-      {/* Background Radial Glow */}
-      <div className="featured-showcase-glow-bg" />
-
-      <div className="featured-showcase-container">
+    <section id="flipkart-showcase" className="fk-section">
+      <div className="fk-container">
         
-        {/* Section Header */}
-        <div className="featured-showcase-header">
-          <div className="featured-showcase-eyebrow">
-            <FaFire className="text-amber-500" />
-            <span>Featured Solutions &amp; Flagship Hardware</span>
-          </div>
+        {/* 6 Flipkart Scenario Advertising Cards Grid (3 Columns Desktop, 2 Columns Tablet, 1 Column Mobile) */}
+        <div className="fk-grid">
+          {flipkartCards.map((card) => (
+            <Link 
+              key={card.id} 
+              href={card.href}
+              className={`fk-card ${card.themeClass}`}
+              title={card.headline}
+            >
+              {/* Background festive lanterns and sparkles */}
+              <div className="fk-bg-decor" />
 
-          <h2 className="featured-showcase-title">
-            Enterprise Solutions &amp;{" "}
-            <span className="featured-showcase-title-gradient">Next-Gen Technology</span>
-          </h2>
-
-          <p className="featured-showcase-desc">
-            Direct manufacturer partnerships, authorized IT hardware distribution, custom computing architectures, and priority corporate allocations across India.
-          </p>
-        </div>
-
-        {/* 6-Card Grid: 3 columns desktop, 2 columns tablet, 1 column mobile */}
-        <div className="featured-showcase-grid">
-          {cardsData.map((card) => (
-            <div key={card.id} className="featured-card group">
-              <div>
-                {/* Card Topbar */}
-                <div className="featured-card-topbar">
-                  <span className={`featured-card-brand-pill ${card.pillClass}`}>
-                    {card.pillLabel}
-                  </span>
-                  <div className="featured-card-status-badge">
-                    <span className="featured-card-status-dot" />
-                    <span>{card.statusLabel}</span>
-                  </div>
-                </div>
-
-                {/* Card Media Preview */}
-                <Link 
-                  href={card.ctaHref} 
-                  className="featured-card-media block cursor-pointer"
-                  title={card.title}
-                >
-                  <img 
-                    src={card.imageSrc} 
-                    alt={card.imageAlt}
-                    width={400}
-                    height={260}
-                    loading="lazy"
-                    className="featured-card-media-img"
+              {/* Top-Left Starburst "The Big Billion Days" Badge */}
+              <div className="fk-starburst-wrapper">
+                <svg viewBox="0 0 100 100" className="fk-starburst-svg" aria-hidden="true">
+                  <polygon 
+                    points="50,0 62,10 77,5 82,20 97,23 93,38 100,50 93,62 97,77 82,80 77,95 62,90 50,100 38,90 23,95 18,80 3,77 7,62 0,50 7,38 3,23 18,20 23,5 38,10" 
+                    fill="#FFDF00"
+                    stroke="#D97706"
+                    strokeWidth="1.5"
                   />
-                </Link>
-
-                {/* Card Content Body */}
-                <div className="featured-card-body">
-                  <h3 className="featured-card-title">
-                    <Link href={card.ctaHref} className="hover:text-blue-600 transition-colors">
-                      {card.title}
-                    </Link>
-                  </h3>
-                  <p className="featured-card-subtitle">
-                    {card.subtitle}
-                  </p>
-
-                  {/* Bullet Highlights */}
-                  <ul className="featured-card-features-list">
-                    {card.primaryFeatures.map((feat, idx) => (
-                      <li key={idx} className="featured-card-feature-item">
-                        <FaCheckCircle className="featured-card-feature-icon" />
-                        <span>{feat}</span>
-                      </li>
-                    ))}
-                  </ul>
+                </svg>
+                <div className="fk-starburst-label">
+                  <span>{card.starburstTitle}</span>
+                  <span className="fk-starburst-sub">{card.starburstSub}</span>
                 </div>
               </div>
 
-              {/* Card Footer Action */}
-              <div className="featured-card-footer">
-                <Link 
-                  href={card.ctaHref}
-                  className="featured-card-cta-btn btn-accent"
-                >
-                  <span>{card.ctaLabel}</span>
-                  <FaArrowRight className="text-xs transition-transform group-hover:translate-x-1" />
-                </Link>
+              {/* Top-Right "NOW OR NEVER" Ribbon */}
+              <div className="fk-ribbon">
+                <span className="fk-ribbon-title">{card.ribbonTitle}</span>
+                <span className="fk-ribbon-sub">{card.ribbonSub}</span>
               </div>
-            </div>
+
+              {/* Left Content Area (~60% width) */}
+              <div className="fk-content">
+                <h3 className="fk-title">{card.headline}</h3>
+                <div className="fk-price">{card.price}</div>
+                <div className="fk-features">{card.features}</div>
+
+                {/* Bottom Bank Offer Strip */}
+                <div className="fk-bank-strip">
+                  <span className={`fk-bank-badge ${card.bank1Class}`}>{card.bank1}</span>
+                  <span className={`fk-bank-badge ${card.bank2Class}`}>{card.bank2}</span>
+                  <span className="fk-bank-text">{card.bankOffer}</span>
+                </div>
+              </div>
+
+              {/* Right Media with 3D Illuminated Stage (~40% width) */}
+              <div className="fk-media-wrap">
+                <div className="fk-podium" />
+                <img 
+                  src={card.imageSrc} 
+                  alt={card.imageAlt}
+                  width={280}
+                  height={180}
+                  loading="lazy"
+                  className="fk-product-img"
+                />
+              </div>
+            </Link>
           ))}
         </div>
 
