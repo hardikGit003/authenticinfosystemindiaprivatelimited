@@ -1,4 +1,5 @@
 import Navbar from "./components/Navbar";
+import FeaturedShowcaseGrid from "./components/FeaturedShowcaseGrid";
 import Hero from "./components/Hero";
 import BenQSmartBoardBanner from "./components/BenQSmartBoardBanner";
 import Iphone18ProAdSection from "./components/Iphone18ProAdSection";
@@ -17,7 +18,10 @@ export default function Home() {
     <main>
       <Navbar />
 
-      {/* Hero Section */}
+      {/* 1. First Look: 6-Card Advertising Showcase (BenQ, Logitech, LOQ Laptop, 18 Pro Series, Customize Your PC, Accessories) */}
+      <FeaturedShowcaseGrid />
+
+      {/* 2. Intro Section (Hero with Video Background & Company Introduction) */}
       <Hero />
 
       {/* BenQ Smart Board Top Banner Showcase */}
