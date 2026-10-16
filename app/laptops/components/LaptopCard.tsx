@@ -107,28 +107,28 @@ export default function LaptopCard({ laptop, onOpenQuote, isCompact = false }: L
   ];
 
   return (
-    <div className="bg-white border border-slate-200 hover:border-slate-400 rounded-lg p-4 sm:p-4.5 flex flex-col justify-between transition-all duration-200 hover:shadow-lg relative group h-full">
+    <div className="corp-card">
       <div>
         {/* MODEL TITLE (Lenovo Navy Blue) */}
-        <div className="mb-1">
-          <Link href={productUrl} className="block group/title">
-            <h3 className="text-[#0f3e99] group-hover/title:underline font-bold text-xs sm:text-sm leading-snug line-clamp-2 min-h-[36px]">
+        <div className="corp-card-title-link">
+          <Link href={productUrl} className="corp-card-title-link">
+            <h3 className="corp-card-title">
               {laptop.brand} {laptop.model} - {processor.split("(")[0].trim()}, {ram}, {storage}
             </h3>
           </Link>
         </div>
 
         {/* STAR RATING */}
-        <div className="flex items-center gap-1.5 mb-2.5 text-xs">
-          <div className="flex items-center gap-0.5">{renderStars(rating)}</div>
-          <span className="font-bold text-slate-900 text-[11px]">{rating.toFixed(1)}</span>
-          <span className="text-slate-500 text-[11px]">({reviewCount})</span>
+        <div className="corp-card-rating-row">
+          <div className="corp-card-stars">{renderStars(rating)}</div>
+          <span className="corp-card-score">{rating.toFixed(1)}</span>
+          <span className="corp-card-reviews">({reviewCount})</span>
         </div>
 
         {/* PRODUCT IMAGE (Centered on Clean Background) */}
         <Link 
           href={productUrl} 
-          className="block relative w-full h-40 sm:h-44 bg-white flex items-center justify-center p-2 mb-3 overflow-hidden group-hover:scale-102 transition-transform duration-300"
+          className="corp-card-media-box"
         >
           <img
             src={laptop.image}
@@ -136,67 +136,72 @@ export default function LaptopCard({ laptop, onOpenQuote, isCompact = false }: L
             width="280"
             height="190"
             loading="lazy"
-            className="max-h-full max-w-full object-contain drop-shadow-sm"
           />
         </Link>
 
-
-
         {/* TECH SPECS WITH ICONS */}
-        <div className="mt-3 space-y-2 py-2.5 border-t border-slate-100 text-[11px] text-slate-700">
+        <div className="corp-card-specs-box">
           {/* Processor */}
-          <div className="flex items-start gap-2">
-            <FaMicrochip className="text-slate-800 shrink-0 mt-0.5" size={12} />
-            <span className="line-clamp-2 leading-tight text-slate-900 font-medium">
+          <div className="corp-card-spec-row">
+            <FaMicrochip className="corp-card-spec-icon" size={12} />
+            <span className="corp-card-spec-val">
+              <span className="corp-card-spec-label">CPU: </span>
               {laptop.detailedSpecs?.processor || processor}
             </span>
           </div>
 
           {/* Operating System */}
-          <div className="flex items-center gap-2">
+          <div className="corp-card-spec-row">
             {laptop.brandSlug === "apple" ? (
-              <FaApple className="text-slate-800 shrink-0" size={12} />
+              <FaApple className="corp-card-spec-icon" size={12} />
             ) : (
-              <FaWindows className="text-slate-800 shrink-0" size={12} />
+              <FaWindows className="corp-card-spec-icon" size={12} />
             )}
-            <span className="truncate text-slate-900 font-medium">{operatingSystem}</span>
+            <span className="corp-card-spec-val">
+              <span className="corp-card-spec-label">OS: </span>
+              {operatingSystem}
+            </span>
           </div>
 
           {/* Graphics */}
-          <div className="flex items-center gap-2">
-            <FaDesktop className="text-slate-800 shrink-0" size={12} />
-            <span className="truncate text-slate-900 font-medium">{graphics || "Integrated High-Definition Graphics"}</span>
+          <div className="corp-card-spec-row">
+            <FaDesktop className="corp-card-spec-icon" size={12} />
+            <span className="corp-card-spec-val">
+              <span className="corp-card-spec-label">GPU: </span>
+              {graphics || "Integrated High-Definition Graphics"}
+            </span>
           </div>
 
           {/* Memory */}
-          <div className="flex items-center gap-2">
-            <FaMemory className="text-slate-800 shrink-0" size={12} />
-            <span className="truncate text-slate-900 font-medium">
-              {laptop.detailedSpecs?.ram || `${ram} High-Speed System Memory`}
+          <div className="corp-card-spec-row">
+            <FaMemory className="corp-card-spec-icon" size={12} />
+            <span className="corp-card-spec-val">
+              <span className="corp-card-spec-label">RAM: </span>
+              {laptop.detailedSpecs?.ram || `${ram} System Memory`}
             </span>
           </div>
         </div>
 
         {/* ADDITIONAL SPECS LINK */}
-        <div className="pt-1 pb-2">
+        <div>
           <Link
             href={productUrl}
-            className="text-[11px] font-bold text-[#0f3e99] hover:underline inline-block"
+            className="corp-card-more-specs-link"
           >
-            Additional Specs
+            Additional Specs & Configs
           </Link>
         </div>
 
         {/* FEATURES BULLET LIST */}
-        <div className="pt-2 border-t border-slate-100 text-xs text-slate-700 mb-3">
-          <div className="font-bold text-slate-900 text-[11px] uppercase tracking-wider mb-1.5">
+        <div className="corp-card-features-box">
+          <div className="corp-card-features-header">
             Features
           </div>
-          <ul className="space-y-1 text-slate-600 text-[11px] leading-relaxed">
+          <ul className="corp-card-features-list">
             {features.map((feat, idx) => (
-              <li key={idx} className="flex items-start gap-1.5">
-                <span className="text-slate-400 select-none">•</span>
-                <span className="line-clamp-2">{feat}</span>
+              <li key={idx}>
+                <span className="corp-card-bullet">•</span>
+                <span>{feat}</span>
               </li>
             ))}
           </ul>
@@ -204,13 +209,13 @@ export default function LaptopCard({ laptop, onOpenQuote, isCompact = false }: L
 
       </div>
 
-      {/* PRIMARY CTA BUTTON (Full Width Corporate Lenovo Blue - Directly to WhatsApp) */}
-      <div className="mt-auto pt-2">
+      {/* PRIMARY CTA BUTTON */}
+      <div>
         <a
           href={whatsappUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="w-full bg-[#1546a0] hover:bg-[#003d7e] active:bg-[#00285a] text-white font-bold py-2.5 px-3 text-xs tracking-wider rounded-md transition-colors shadow-xs flex items-center justify-center gap-2 cursor-pointer uppercase text-center"
+          className="corp-card-btn-action"
         >
           <FaWhatsapp size={14} className="text-emerald-400" />
           <span>Request Quote</span>

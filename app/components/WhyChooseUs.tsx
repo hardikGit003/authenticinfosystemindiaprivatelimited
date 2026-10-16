@@ -81,10 +81,13 @@ export default function WhyChooseUs() {
               >
                 <div className="why-flip-inner">
                   {/* FRONT */}
-                  <div
-                    className="why-card-front"
-                    style={{ backgroundImage: `url('${card.image}')` }}
-                  >
+                  <div className="why-card-front">
+                    <img
+                      src={card.image}
+                      alt={card.frontTitle}
+                      className="why-card-bg-img"
+                      loading="lazy"
+                    />
                     <div className="why-card-overlay"></div>
                     <div className="why-card-content">
                       <h3>{card.frontTitle}</h3>

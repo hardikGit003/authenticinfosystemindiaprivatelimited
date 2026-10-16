@@ -264,48 +264,44 @@ export default function LaptopsPage() {
     <main className="min-h-screen bg-white text-slate-900 selection:bg-rose-950 selection:text-white">
       <Navbar />
 
-      {/* FULL-WIDTH MAROON HEADER SECTION (Left to Right) */}
-      <section className="w-full bg-gradient-to-r from-[#4A0A16] via-[#650E20] to-[#3B0712] text-white pt-28 sm:pt-32 pb-8 sm:pb-10 border-b border-[#30050e] shadow-xs relative overflow-hidden">
+      {/* FULL-WIDTH MAROON HEADER SECTION */}
+      <section className="maroon-hero-section">
         {/* Subtle ambient luxury highlight */}
-        <div 
-          className="absolute inset-0 pointer-events-none opacity-25"
-          style={{
-            backgroundImage: "radial-gradient(ellipse 65% 85% at 20% 0%, rgba(255, 255, 255, 0.3) 0%, transparent 65%)"
-          }}
-        />
+        <div className="maroon-hero-glow" />
 
-        <div className="max-w-[1720px] w-full mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 relative z-10">
+        <div className="maroon-hero-container">
           {/* Top Breadcrumb */}
-          <div className="flex items-center gap-2 text-xs text-rose-200/80 mb-2.5">
-            <Link href="/" className="hover:text-white transition-colors">Home</Link>
-            <span className="text-rose-300/40">/</span>
-            <span className="text-white font-medium">Laptops & Commercial Deals</span>
-          </div>
+          <nav className="maroon-hero-breadcrumb">
+            <Link href="/">Home</Link>
+            <span className="maroon-hero-breadcrumb-sep">/</span>
+            <span className="maroon-hero-breadcrumb-current">Laptops & Commercial Deals</span>
+          </nav>
 
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+          <div className="maroon-hero-layout">
             <div>
-              <h1 className="text-2xl sm:text-3xl md:text-4xl font-black text-white tracking-tight leading-tight">
+              <h1 className="maroon-hero-title">
                 Laptops & Official Fleet Deals
               </h1>
-              <p className="text-xs sm:text-sm text-rose-100/90 mt-2 max-w-4xl leading-relaxed">
+              <p className="maroon-hero-desc">
                 Certified commercial ThinkPad, IdeaPad, Latitude, EliteBook, MacBook & ROG fleets with 3-year premier onsite warranty, GST invoicing, and volume discounts.
               </p>
             </div>
 
             {/* Quick Search on Top */}
-            <div className="relative w-full md:w-80 shrink-0">
-              <FaSearch className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" size={13} />
+            <div className="maroon-hero-search-box">
+              <FaSearch className="maroon-hero-search-icon" size={13} />
               <input
                 type="text"
                 placeholder="Search model, series, CPU..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-9 pr-8 py-2.5 bg-white text-slate-900 border border-rose-900/30 rounded-md text-xs placeholder:text-slate-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-rose-400/50 focus:border-rose-400"
+                className="maroon-hero-search-input"
               />
               {searchQuery && (
                 <button
                   onClick={() => setSearchQuery("")}
-                  className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 cursor-pointer"
+                  className="maroon-hero-search-clear"
+                  aria-label="Clear search"
                 >
                   <FaTimes size={11} />
                 </button>
@@ -316,56 +312,56 @@ export default function LaptopsPage() {
       </section>
 
       {/* EXPANDED CONTAINER: Wide e-commerce canvas to eliminate dead margins */}
-      <div className="max-w-[1720px] w-full mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 pt-6 sm:pt-8 pb-16">
+      <div className="catalog-main-content">
 
         {/* MOBILE FILTER TRIGGER BUTTON */}
-        <div className="lg:hidden flex items-center justify-between mb-4 pb-2 border-b border-slate-200">
+        <div className="catalog-mobile-trigger">
           <button
             onClick={() => setShowMobileFilterDrawer(true)}
-            className="inline-flex items-center gap-2 px-4 py-2 bg-[#1546a0] text-white text-xs font-bold uppercase tracking-wider rounded-md"
+            className="catalog-mobile-btn"
           >
             <FaFilter size={11} />
             <span>Filters ({hasActiveFilters ? "Active" : "All"})</span>
           </button>
-          <span className="text-xs font-bold text-slate-900">
+          <span className="results-count-text">
             {filteredLaptops.length} Matching results
           </span>
         </div>
 
         {/* MAIN 2-COLUMN CATALOG LAYOUT */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 xl:gap-8 items-start">
+        <div className="catalog-layout-2col">
           
           {/* ================= LEFT SIDEBAR FILTERS (Lenovo Accordion Style) ================= */}
-          <aside className="hidden lg:block lg:col-span-3 xl:col-span-3 sticky top-24 space-y-4 select-none">
+          <aside className="catalog-sidebar-col">
             {/* Filters Sidebar Header */}
-            <div className="flex items-center justify-between pb-3 border-b-2 border-slate-900">
-              <h2 className="text-base font-extrabold text-slate-950 tracking-tight">Filters</h2>
+            <div className="catalog-sidebar-header">
+              <h2 className="catalog-sidebar-title">Filters</h2>
               <button
                 onClick={toggleAllAccordions}
-                className="text-xs font-bold text-[#0f3e99] hover:underline cursor-pointer"
+                className="catalog-sidebar-toggle-all"
               >
                 {areAllExpanded ? "Collapse All" : "Expand All"}
               </button>
             </div>
 
             {/* ACCORDION 1: Product Type */}
-            <div className="border-b border-slate-200 pb-3">
+            <div className="catalog-accordion-item">
               <button
                 onClick={() => toggleAccordion("productType")}
-                className="w-full flex items-center justify-between py-2 text-xs font-bold text-slate-900 hover:text-[#0f3e99] cursor-pointer text-left uppercase tracking-wider"
+                className="catalog-accordion-btn"
               >
                 <span>Product Type</span>
                 {accordions.productType ? <FaChevronUp size={11} /> : <FaChevronDown size={11} />}
               </button>
               {accordions.productType && (
-                <div className="space-y-1.5 mt-2 pl-0.5">
+                <div className="catalog-accordion-body">
                   {PRODUCT_TYPES.map((type) => (
-                    <label key={type} className="flex items-center gap-2 text-xs text-slate-700 cursor-pointer hover:text-black">
+                    <label key={type} className="catalog-accordion-label">
                       <input
                         type="checkbox"
                         checked={selectedProductType === type}
                         onChange={() => setSelectedProductType(selectedProductType === type ? "All" : type)}
-                        className="w-4 h-4 accent-[#1546a0] rounded-xs cursor-pointer"
+                        className="catalog-accordion-checkbox"
                       />
                       <span>{type}</span>
                     </label>
@@ -375,31 +371,31 @@ export default function LaptopsPage() {
             </div>
 
             {/* ACCORDION 2: Product Category */}
-            <div className="border-b border-slate-200 pb-3">
+            <div className="catalog-accordion-item">
               <button
                 onClick={() => toggleAccordion("category")}
-                className="w-full flex items-center justify-between py-2 text-xs font-bold text-slate-900 hover:text-[#0f3e99] cursor-pointer text-left uppercase tracking-wider"
+                className="catalog-accordion-btn"
               >
                 <span>Product Category</span>
                 {accordions.category ? <FaChevronUp size={11} /> : <FaChevronDown size={11} />}
               </button>
               {accordions.category && (
-                <div className="space-y-1.5 mt-2 pl-0.5">
+                <div className="catalog-accordion-body">
                   {CATEGORIES.filter((c) => c !== "All").map((cat) => {
                     const isChecked = selectedCategory.toLowerCase() === cat.toLowerCase();
                     const count = counts.categories[cat] || 0;
                     return (
-                      <label key={cat} className="flex items-center justify-between text-xs text-slate-700 cursor-pointer hover:text-black">
+                      <label key={cat} className="catalog-accordion-label justify-between">
                         <div className="flex items-center gap-2">
                           <input
                             type="checkbox"
                             checked={isChecked}
                             onChange={() => setSelectedCategory(isChecked ? "All" : cat)}
-                            className="w-4 h-4 accent-[#1546a0] rounded-xs cursor-pointer"
+                            className="catalog-accordion-checkbox"
                           />
                           <span className={isChecked ? "font-bold text-slate-950" : ""}>{cat}</span>
                         </div>
-                        <span className="text-slate-400 text-[11px]">({count})</span>
+                        <span className="catalog-accordion-count">({count})</span>
                       </label>
                     );
                   })}
@@ -408,31 +404,31 @@ export default function LaptopsPage() {
             </div>
 
             {/* ACCORDION 3: Brand */}
-            <div className="border-b border-slate-200 pb-3">
+            <div className="catalog-accordion-item">
               <button
                 onClick={() => toggleAccordion("brand")}
-                className="w-full flex items-center justify-between py-2 text-xs font-bold text-slate-900 hover:text-[#0f3e99] cursor-pointer text-left uppercase tracking-wider"
+                className="catalog-accordion-btn"
               >
                 <span>Brand</span>
                 {accordions.brand ? <FaChevronUp size={11} /> : <FaChevronDown size={11} />}
               </button>
               {accordions.brand && (
-                <div className="space-y-1.5 mt-2 pl-0.5">
+                <div className="catalog-accordion-body">
                   {BRANDS.filter((b) => b !== "All").map((br) => {
                     const isChecked = selectedBrand.toLowerCase() === br.toLowerCase();
                     const count = counts.brands[br] || 0;
                     return (
-                      <label key={br} className="flex items-center justify-between text-xs text-slate-700 cursor-pointer hover:text-black">
+                      <label key={br} className="catalog-accordion-label justify-between">
                         <div className="flex items-center gap-2">
                           <input
                             type="checkbox"
                             checked={isChecked}
                             onChange={() => setSelectedBrand(isChecked ? "All" : br)}
-                            className="w-4 h-4 accent-[#1546a0] rounded-xs cursor-pointer"
+                            className="catalog-accordion-checkbox"
                           />
                           <span className={isChecked ? "font-bold text-slate-950" : ""}>{br}</span>
                         </div>
-                        <span className="text-slate-400 text-[11px]">({count})</span>
+                        <span className="catalog-accordion-count">({count})</span>
                       </label>
                     );
                   })}
@@ -440,11 +436,11 @@ export default function LaptopsPage() {
               )}
             </div>
 
-            {/* ACCORDION 4: Processor (with Search Box inside!) */}
-            <div className="border-b border-slate-200 pb-3">
+            {/* ACCORDION 4: Processor */}
+            <div className="catalog-accordion-item">
               <button
                 onClick={() => toggleAccordion("processor")}
-                className="w-full flex items-center justify-between py-2 text-xs font-bold text-slate-900 hover:text-[#0f3e99] cursor-pointer text-left uppercase tracking-wider"
+                className="catalog-accordion-btn"
               >
                 <span>Processor</span>
                 {accordions.processor ? <FaChevronUp size={11} /> : <FaChevronDown size={11} />}
@@ -452,14 +448,13 @@ export default function LaptopsPage() {
               {accordions.processor && (
                 <div className="mt-2 space-y-2">
                   {/* Search inside processor accordion */}
-                  <div className="relative">
+                  <div className="catalog-accordion-search">
                     <FaSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={10} />
                     <input
                       type="text"
                       placeholder="Search Processor"
                       value={processorSearch}
                       onChange={(e) => setProcessorSearch(e.target.value)}
-                      className="w-full pl-7 pr-3 py-1.5 bg-slate-100 rounded-full text-[11px] focus:outline-none focus:bg-white focus:ring-1 focus:ring-slate-400"
                     />
                   </div>
 
@@ -468,19 +463,19 @@ export default function LaptopsPage() {
                       const isChecked = selectedProcessors.includes(proc);
                       const count = counts.processors[proc] || 0;
                       return (
-                        <label key={proc} className="flex items-center justify-between text-xs text-slate-700 cursor-pointer hover:text-black">
+                        <label key={proc} className="catalog-accordion-label justify-between">
                           <div className="flex items-center gap-2 truncate">
                             <input
                               type="checkbox"
                               checked={isChecked}
                               onChange={() => toggleProcessor(proc)}
-                              className="w-4 h-4 accent-[#1546a0] rounded-xs cursor-pointer"
+                              className="catalog-accordion-checkbox"
                             />
                             <span className={`truncate text-xs ${isChecked ? "font-bold text-slate-950" : ""}`}>
                               {proc}
                             </span>
                           </div>
-                          <span className="text-slate-400 text-[11px] shrink-0 ml-1">({count})</span>
+                          <span className="catalog-accordion-count shrink-0 ml-1">({count})</span>
                         </label>
                       );
                     })}
@@ -490,31 +485,31 @@ export default function LaptopsPage() {
             </div>
 
             {/* ACCORDION 5: Memory / RAM */}
-            <div className="border-b border-slate-200 pb-3">
+            <div className="catalog-accordion-item">
               <button
                 onClick={() => toggleAccordion("ram")}
-                className="w-full flex items-center justify-between py-2 text-xs font-bold text-slate-900 hover:text-[#0f3e99] cursor-pointer text-left uppercase tracking-wider"
+                className="catalog-accordion-btn"
               >
                 <span>Memory</span>
                 {accordions.ram ? <FaChevronUp size={11} /> : <FaChevronDown size={11} />}
               </button>
               {accordions.ram && (
-                <div className="space-y-1.5 mt-2 pl-0.5">
+                <div className="catalog-accordion-body">
                   {RAM_OPTIONS.map((ram) => {
                     const isChecked = selectedRams.includes(ram);
                     const count = counts.rams[ram] || 0;
                     return (
-                      <label key={ram} className="flex items-center justify-between text-xs text-slate-700 cursor-pointer hover:text-black">
+                      <label key={ram} className="catalog-accordion-label justify-between">
                         <div className="flex items-center gap-2">
                           <input
                             type="checkbox"
                             checked={isChecked}
                             onChange={() => toggleRam(ram)}
-                            className="w-4 h-4 accent-[#1546a0] rounded-xs cursor-pointer"
+                            className="catalog-accordion-checkbox"
                           />
                           <span className={isChecked ? "font-bold text-slate-950" : ""}>{ram}</span>
                         </div>
-                        <span className="text-slate-400 text-[11px]">({count})</span>
+                        <span className="catalog-accordion-count">({count})</span>
                       </label>
                     );
                   })}
@@ -523,31 +518,31 @@ export default function LaptopsPage() {
             </div>
 
             {/* ACCORDION 6: Storage */}
-            <div className="border-b border-slate-200 pb-3">
+            <div className="catalog-accordion-item">
               <button
                 onClick={() => toggleAccordion("storage")}
-                className="w-full flex items-center justify-between py-2 text-xs font-bold text-slate-900 hover:text-[#0f3e99] cursor-pointer text-left uppercase tracking-wider"
+                className="catalog-accordion-btn"
               >
                 <span>Storage</span>
                 {accordions.storage ? <FaChevronUp size={11} /> : <FaChevronDown size={11} />}
               </button>
               {accordions.storage && (
-                <div className="space-y-1.5 mt-2 pl-0.5">
+                <div className="catalog-accordion-body">
                   {STORAGE_OPTIONS.map((st) => {
                     const isChecked = selectedStorages.includes(st);
                     const count = counts.storages[st] || 0;
                     return (
-                      <label key={st} className="flex items-center justify-between text-xs text-slate-700 cursor-pointer hover:text-black">
+                      <label key={st} className="catalog-accordion-label justify-between">
                         <div className="flex items-center gap-2">
                           <input
                             type="checkbox"
                             checked={isChecked}
                             onChange={() => toggleStorage(st)}
-                            className="w-4 h-4 accent-[#1546a0] rounded-xs cursor-pointer"
+                            className="catalog-accordion-checkbox"
                           />
                           <span className={isChecked ? "font-bold text-slate-950" : ""}>{st}</span>
                         </div>
-                        <span className="text-slate-400 text-[11px]">({count})</span>
+                        <span className="catalog-accordion-count">({count})</span>
                       </label>
                     );
                   })}
@@ -557,20 +552,19 @@ export default function LaptopsPage() {
           </aside>
 
           {/* ================= RIGHT PRODUCTS SECTION (Lenovo Catalog Style) ================= */}
-          <div className="lg:col-span-9 xl:col-span-9">
+          <div className="catalog-products-col">
             
             {/* RESULTS HEADER BAR */}
-            <div className="pb-3 border-b border-slate-200 mb-4">
-              <div className="flex flex-wrap items-center justify-between gap-3">
-                {/* Result count & Clear All */}
+            <div className="results-summary-bar">
+              <div className="results-summary-row">
                 <div className="flex items-center gap-3">
-                  <span className="text-sm sm:text-base font-extrabold text-slate-950">
+                  <span className="results-count-text">
                     {filteredLaptops.length} Matching results
                   </span>
                   {hasActiveFilters && (
                     <button
                       onClick={clearAllFilters}
-                      className="text-xs font-bold text-[#0f3e99] hover:underline cursor-pointer"
+                      className="results-clear-btn"
                     >
                       Clear All
                     </button>
@@ -580,65 +574,65 @@ export default function LaptopsPage() {
 
               {/* ACTIVE FILTER CHIPS (Removable tags) */}
               {hasActiveFilters && (
-                <div className="flex flex-wrap items-center gap-2 mt-3 pt-2.5 border-t border-slate-100">
+                <div className="active-chips-row">
                   {selectedCategory !== "All" && (
-                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-slate-100 text-slate-800 text-xs font-medium rounded-xs border border-slate-200">
+                    <span className="filter-chip">
                       <span>Category: {selectedCategory}</span>
-                      <button onClick={() => setSelectedCategory("All")} className="text-slate-500 hover:text-black cursor-pointer">
+                      <button onClick={() => setSelectedCategory("All")} className="filter-chip-remove" aria-label="Remove category filter">
                         <FaTimes size={10} />
                       </button>
                     </span>
                   )}
 
                   {selectedBrand !== "All" && (
-                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-slate-100 text-slate-800 text-xs font-medium rounded-xs border border-slate-200">
+                    <span className="filter-chip">
                       <span>Brand: {selectedBrand}</span>
-                      <button onClick={() => setSelectedBrand("All")} className="text-slate-500 hover:text-black cursor-pointer">
+                      <button onClick={() => setSelectedBrand("All")} className="filter-chip-remove" aria-label="Remove brand filter">
                         <FaTimes size={10} />
                       </button>
                     </span>
                   )}
 
                   {selectedProductType !== "All" && (
-                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-slate-100 text-slate-800 text-xs font-medium rounded-xs border border-slate-200">
+                    <span className="filter-chip">
                       <span>Type: {selectedProductType}</span>
-                      <button onClick={() => setSelectedProductType("All")} className="text-slate-500 hover:text-black cursor-pointer">
+                      <button onClick={() => setSelectedProductType("All")} className="filter-chip-remove" aria-label="Remove type filter">
                         <FaTimes size={10} />
                       </button>
                     </span>
                   )}
 
                   {selectedProcessors.map((p) => (
-                    <span key={p} className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-slate-100 text-slate-800 text-xs font-medium rounded-xs border border-slate-200">
+                    <span key={p} className="filter-chip">
                       <span>Processor: {p}</span>
-                      <button onClick={() => toggleProcessor(p)} className="text-slate-500 hover:text-black cursor-pointer">
+                      <button onClick={() => toggleProcessor(p)} className="filter-chip-remove" aria-label={`Remove processor ${p}`}>
                         <FaTimes size={10} />
                       </button>
                     </span>
                   ))}
 
                   {selectedRams.map((r) => (
-                    <span key={r} className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-slate-100 text-slate-800 text-xs font-medium rounded-xs border border-slate-200">
+                    <span key={r} className="filter-chip">
                       <span>RAM: {r}</span>
-                      <button onClick={() => toggleRam(r)} className="text-slate-500 hover:text-black cursor-pointer">
+                      <button onClick={() => toggleRam(r)} className="filter-chip-remove" aria-label={`Remove ram ${r}`}>
                         <FaTimes size={10} />
                       </button>
                     </span>
                   ))}
 
                   {selectedStorages.map((s) => (
-                    <span key={s} className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-slate-100 text-slate-800 text-xs font-medium rounded-xs border border-slate-200">
+                    <span key={s} className="filter-chip">
                       <span>Storage: {s}</span>
-                      <button onClick={() => toggleStorage(s)} className="text-slate-500 hover:text-black cursor-pointer">
+                      <button onClick={() => toggleStorage(s)} className="filter-chip-remove" aria-label={`Remove storage ${s}`}>
                         <FaTimes size={10} />
                       </button>
                     </span>
                   ))}
 
                   {searchQuery && (
-                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-slate-100 text-slate-800 text-xs font-medium rounded-xs border border-slate-200">
+                    <span className="filter-chip">
                       <span>Search: "{searchQuery}"</span>
-                      <button onClick={() => setSearchQuery("")} className="text-slate-500 hover:text-black cursor-pointer">
+                      <button onClick={() => setSearchQuery("")} className="filter-chip-remove" aria-label="Clear search query">
                         <FaTimes size={10} />
                       </button>
                     </span>
@@ -649,7 +643,7 @@ export default function LaptopsPage() {
 
             {/* PRODUCT CARDS GRID */}
             {filteredLaptops.length > 0 ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5">
+              <div className="catalog-cards-grid">
                 {filteredLaptops.map((laptop) => (
                   <LaptopCard
                     key={laptop.id}
@@ -659,12 +653,12 @@ export default function LaptopsPage() {
                 ))}
               </div>
             ) : (
-              <div className="bg-slate-50 border border-slate-200 p-12 text-center my-6">
-                <h3 className="text-base font-bold text-slate-900 mb-2">No laptops match your selected filters</h3>
-                <p className="text-xs text-slate-600 mb-4">Try removing some filter criteria or clearing all filters.</p>
+              <div className="catalog-empty-box">
+                <h3 className="catalog-empty-title">No laptops match your selected filters</h3>
+                <p className="catalog-empty-desc">Try removing some filter criteria or clearing all filters.</p>
                 <button
                   onClick={clearAllFilters}
-                  className="px-5 py-2.5 bg-[#1546a0] text-white font-bold text-xs uppercase tracking-wider rounded-md cursor-pointer"
+                  className="catalog-empty-btn"
                 >
                   Clear All Filters
                 </button>

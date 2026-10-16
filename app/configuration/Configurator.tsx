@@ -580,29 +580,24 @@ export default function Configurator({
 
   return (
     <main className="min-h-screen bg-white text-slate-900 selection:bg-rose-950 selection:text-white">
-      {/* FULL-WIDTH MAROON HEADER SECTION (Left to Right) */}
-      <section className="w-full bg-gradient-to-r from-[#4A0A16] via-[#650E20] to-[#3B0712] text-white pt-28 sm:pt-32 pb-8 sm:pb-10 border-b border-[#30050e] shadow-xs relative overflow-hidden">
+      {/* FULL-WIDTH MAROON HEADER SECTION */}
+      <section className="maroon-hero-section">
         {/* Subtle ambient luxury highlight */}
-        <div 
-          className="absolute inset-0 pointer-events-none opacity-25"
-          style={{
-            backgroundImage: "radial-gradient(ellipse 65% 85% at 20% 0%, rgba(255, 255, 255, 0.3) 0%, transparent 65%)"
-          }}
-        />
+        <div className="maroon-hero-glow" />
 
-        <div className="max-w-[1720px] w-full mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 relative z-10">
+        <div className="maroon-hero-container">
           {/* Top Breadcrumb */}
-          <nav className="flex items-center gap-2 text-xs text-rose-200/80 mb-2.5 select-none">
-            <Link href="/" className="hover:text-white transition-colors">Home</Link>
-            <span className="text-rose-300/40">/</span>
-            <span className="text-white font-medium">Custom PC & Workstation Configurator</span>
+          <nav className="maroon-hero-breadcrumb">
+            <Link href="/">Home</Link>
+            <span className="maroon-hero-breadcrumb-sep">/</span>
+            <span className="maroon-hero-breadcrumb-current">Custom PC & Workstation Configurator</span>
           </nav>
 
           <div>
-            <h1 className="text-2xl sm:text-3xl md:text-4xl font-black text-white tracking-tight leading-tight">
+            <h1 className="maroon-hero-title">
               {currentWorkflow.title}
             </h1>
-            <p className="text-xs sm:text-sm text-rose-100/90 mt-2 max-w-4xl leading-relaxed">
+            <p className="maroon-hero-desc">
               {currentWorkflow.description}
             </p>
           </div>

@@ -13,8 +13,7 @@ import {
   FaHeadset, 
   FaTimes, 
   FaSearch, 
-  FaWhatsapp, 
-  FaCheckCircle 
+  FaWhatsapp 
 } from "react-icons/fa";
 
 const BRANDS = ["All", "Apple", "Samsung", "Vivo", "Oppo", "Realme"];
@@ -41,7 +40,6 @@ export default function PhonesPage() {
   // Filtered smartphones based on search and brand
   const filteredProducts = useMemo(() => {
     return phoneProducts.filter((product) => {
-      // Free text search
       if (searchQuery.trim()) {
         const q = searchQuery.toLowerCase();
         const matchesName = product.name.toLowerCase().includes(q);
@@ -53,7 +51,6 @@ export default function PhonesPage() {
         if (!matchesName && !matchesBrand && !matchesModel && !matchesSpecs) return false;
       }
 
-      // Brand filter
       if (selectedBrand !== "All") {
         if ((product.brand || "").toLowerCase() !== selectedBrand.toLowerCase()) {
           return false;
@@ -68,48 +65,42 @@ export default function PhonesPage() {
     <main className="min-h-screen bg-white text-slate-900 selection:bg-rose-950 selection:text-white">
       <Navbar />
 
-      {/* FULL-WIDTH MAROON HEADER SECTION (Left to Right) */}
-      <section className="w-full bg-gradient-to-r from-[#4A0A16] via-[#650E20] to-[#3B0712] text-white pt-28 sm:pt-32 pb-8 sm:pb-10 border-b border-[#30050e] shadow-xs relative overflow-hidden">
-        {/* Subtle ambient luxury highlight */}
-        <div 
-          className="absolute inset-0 pointer-events-none opacity-25"
-          style={{
-            backgroundImage: "radial-gradient(ellipse 65% 85% at 20% 0%, rgba(255, 255, 255, 0.3) 0%, transparent 65%)"
-          }}
-        />
+      {/* FULL-WIDTH MAROON HEADER SECTION (External CSS) */}
+      <section className="maroon-hero-section">
+        <div className="maroon-hero-glow" />
 
-        <div className="max-w-[1720px] w-full mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 relative z-10">
+        <div className="maroon-hero-container">
           {/* Top Breadcrumb */}
-          <div className="flex items-center gap-2 text-xs text-rose-200/80 mb-2.5 select-none">
-            <Link href="/" className="hover:text-white transition-colors">Home</Link>
-            <span className="text-rose-300/40">/</span>
-            <span className="text-white font-medium">Smartphones & Enterprise Mobile Devices</span>
+          <div className="maroon-hero-breadcrumb">
+            <Link href="/">Home</Link>
+            <span className="maroon-hero-breadcrumb-sep">/</span>
+            <span className="maroon-hero-breadcrumb-current">Smartphones & Enterprise Mobile Devices</span>
           </div>
 
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+          <div className="maroon-hero-layout">
             <div>
-              <h1 className="text-2xl sm:text-3xl md:text-4xl font-black text-white tracking-tight leading-tight">
+              <h1 className="maroon-hero-title">
                 Official Smartphones & Enterprise Mobile Devices
               </h1>
-              <p className="text-xs sm:text-sm text-rose-100/90 mt-2 max-w-4xl leading-relaxed">
+              <p className="maroon-hero-desc">
                 Direct manufacturer sourcing with authentic brand warranty, IMEI serial tracking, bulk GST tax invoicing, AppleCare / Samsung Care coverage, and nationwide secure dispatch.
               </p>
             </div>
 
             {/* Quick Search on Top */}
-            <div className="relative w-full md:w-80 shrink-0">
-              <FaSearch className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" size={13} />
+            <div className="maroon-hero-search-box">
+              <FaSearch className="maroon-hero-search-icon" size={13} />
               <input
                 type="text"
                 placeholder="Search smartphone, brand, processor..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-9 pr-8 py-2.5 bg-white text-slate-900 border border-rose-900/30 rounded-md text-xs placeholder:text-slate-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-rose-400/50 focus:border-rose-400"
+                className="maroon-hero-search-input"
               />
               {searchQuery && (
                 <button
                   onClick={() => setSearchQuery("")}
-                  className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 cursor-pointer"
+                  className="maroon-hero-search-clear"
                   aria-label="Clear search"
                 >
                   <FaTimes size={11} />
@@ -120,23 +111,19 @@ export default function PhonesPage() {
         </div>
       </section>
 
-      {/* EXPANDED FULL-WIDTH CONTAINER (1720px matching laptops, desktops & accessories) */}
-      <div className="w-full max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 pt-6 sm:pt-8 pb-16">
+      {/* EXPANDED FULL-WIDTH CATALOG CONTAINER */}
+      <div className="catalog-main-content">
 
-        {/* BRAND SELECTOR PILLS (Corporate Lenovo Style) */}
-        <div className="mb-6 pb-2 border-b border-slate-200">
-          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
+        {/* BRAND SELECTOR PILLS */}
+        <div className="filter-pill-bar">
+          <div className="filter-pill-list">
             {BRANDS.map((brand, i) => {
               const isActive = selectedBrand === brand;
               return (
                 <button
                   key={i}
                   onClick={() => setSelectedBrand(brand)}
-                  className={`px-4 py-2 text-xs sm:text-sm font-bold whitespace-nowrap transition-all duration-200 cursor-pointer rounded-md border ${
-                    isActive
-                      ? "bg-[#1546a0] text-white border-[#1546a0] shadow-xs"
-                      : "bg-white text-slate-700 border-slate-300 hover:border-slate-400 hover:text-black"
-                  }`}
+                  className={`filter-pill-btn ${isActive ? "active" : ""}`}
                 >
                   {brand}
                 </button>
@@ -146,16 +133,16 @@ export default function PhonesPage() {
         </div>
 
         {/* RESULTS HEADER BAR */}
-        <div className="pb-3 border-b border-slate-200 mb-5">
-          <div className="flex flex-wrap items-center justify-between gap-3">
+        <div className="results-summary-bar">
+          <div className="results-summary-row">
             <div className="flex items-center gap-3">
-              <span className="text-sm sm:text-base font-extrabold text-slate-950">
+              <span className="results-count-text">
                 {filteredProducts.length} Matching devices
               </span>
               {hasActiveFilters && (
                 <button
                   onClick={clearAllFilters}
-                  className="text-xs font-bold text-[#0f3e99] hover:underline cursor-pointer"
+                  className="results-clear-btn"
                 >
                   Clear All
                 </button>
@@ -165,20 +152,20 @@ export default function PhonesPage() {
 
           {/* ACTIVE FILTER CHIPS */}
           {hasActiveFilters && (
-            <div className="flex flex-wrap items-center gap-2 mt-3 pt-2.5 border-t border-slate-100">
+            <div className="active-chips-row">
               {selectedBrand !== "All" && (
-                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-slate-100 text-slate-800 text-xs font-medium rounded-xs border border-slate-200">
+                <span className="filter-chip">
                   <span>Brand: {selectedBrand}</span>
-                  <button onClick={() => setSelectedBrand("All")} className="text-slate-500 hover:text-black cursor-pointer">
+                  <button onClick={() => setSelectedBrand("All")} className="filter-chip-remove">
                     <FaTimes size={10} />
                   </button>
                 </span>
               )}
 
               {searchQuery && (
-                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-slate-100 text-slate-800 text-xs font-medium rounded-xs border border-slate-200">
+                <span className="filter-chip">
                   <span>Search: "{searchQuery}"</span>
-                  <button onClick={() => setSearchQuery("")} className="text-slate-500 hover:text-black cursor-pointer">
+                  <button onClick={() => setSearchQuery("")} className="filter-chip-remove">
                     <FaTimes size={10} />
                   </button>
                 </span>
@@ -187,9 +174,9 @@ export default function PhonesPage() {
           )}
         </div>
 
-        {/* FULL-WIDTH PRODUCT GRID (4 Columns across 1720px, exactly like Accessories) */}
+        {/* FULL-WIDTH PRODUCT GRID (External CSS) */}
         {filteredProducts.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5">
+          <div className="catalog-cards-grid">
             {filteredProducts.map((product) => (
               <PhoneCard
                 key={product.id}
@@ -239,47 +226,47 @@ export default function PhonesPage() {
           </div>
         )}
 
-        {/* WHY PROCURE FROM AUTHENTIC INFOSYSTEM (Corporate Style) */}
-        <section className="mt-16 pt-12 border-t border-slate-200">
-          <div className="mb-8">
-            <span className="text-xs font-bold text-slate-500 uppercase tracking-wider block mb-1">
+        {/* WHY PROCURE FROM AUTHENTIC INFOSYSTEM (External CSS) */}
+        <section className="catalog-trust-section">
+          <div>
+            <span className="catalog-trust-badge">
               Direct OEM Procurement
             </span>
-            <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">
+            <h2 className="catalog-trust-title">
               Why Procure Smartphones From Authentic Infosystem
             </h2>
-            <p className="text-xs sm:text-sm text-slate-600 mt-0.5">
+            <p className="catalog-trust-desc">
               Direct distributor access, authentic IMEI serial tracking, enterprise billing, and official brand warranty.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            <div className="bg-white p-6 rounded-lg border border-slate-200 shadow-xs hover:border-slate-400 hover:shadow-md transition-all">
-              <div className="w-11 h-11 bg-slate-100 text-slate-900 rounded-md flex items-center justify-center mb-4 text-lg">
+          <div className="catalog-trust-grid">
+            <div className="catalog-trust-card">
+              <div className="catalog-trust-icon-box">
                 <FaShieldAlt />
               </div>
-              <h3 className="text-base font-bold text-slate-900 mb-1.5">100% Genuine Brand Sourcing</h3>
-              <p className="text-xs text-slate-600 leading-relaxed">
+              <h3 className="catalog-trust-card-title">100% Genuine Brand Sourcing</h3>
+              <p className="catalog-trust-card-desc">
                 Sealed retail boxes with valid manufacturer serial numbers, AppleCare / Samsung Care eligibility, and GST input credit.
               </p>
             </div>
 
-            <div className="bg-white p-6 rounded-lg border border-slate-200 shadow-xs hover:border-slate-400 hover:shadow-md transition-all">
-              <div className="w-11 h-11 bg-slate-100 text-slate-900 rounded-md flex items-center justify-center mb-4 text-lg">
+            <div className="catalog-trust-card">
+              <div className="catalog-trust-icon-box">
                 <FaTruck />
               </div>
-              <h3 className="text-base font-bold text-slate-900 mb-1.5">Pan-India Insured Dispatch</h3>
-              <p className="text-xs text-slate-600 leading-relaxed">
+              <h3 className="catalog-trust-card-title">Pan-India Insured Dispatch</h3>
+              <p className="catalog-trust-card-desc">
                 Express insured door-to-door delivery with live tracking for single devices and multi-location corporate consignments.
               </p>
             </div>
 
-            <div className="bg-white p-6 rounded-lg border border-slate-200 shadow-xs hover:border-slate-400 hover:shadow-md transition-all">
-              <div className="w-11 h-11 bg-slate-100 text-slate-900 rounded-md flex items-center justify-center mb-4 text-lg">
+            <div className="catalog-trust-card">
+              <div className="catalog-trust-icon-box">
                 <FaHeadset />
               </div>
-              <h3 className="text-base font-bold text-slate-900 mb-1.5">Enterprise Mobility Support</h3>
-              <p className="text-xs text-slate-600 leading-relaxed">
+              <h3 className="catalog-trust-card-title">Enterprise Mobility Support</h3>
+              <p className="catalog-trust-card-desc">
                 Assistance with MDM configuration, corporate trade-ins, accessory bundling, and post-purchase priority support.
               </p>
             </div>

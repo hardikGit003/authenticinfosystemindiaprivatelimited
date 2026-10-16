@@ -102,47 +102,43 @@ export default function AccessoriesPage() {
       <Navbar />
 
       {/* FULL-WIDTH MAROON HEADER SECTION (Left to Right) */}
-      <section className="w-full bg-gradient-to-r from-[#4A0A16] via-[#650E20] to-[#3B0712] text-white pt-28 sm:pt-32 pb-8 sm:pb-10 border-b border-[#30050e] shadow-xs relative overflow-hidden">
+      {/* FULL-WIDTH MAROON HEADER SECTION */}
+      <section className="maroon-hero-section">
         {/* Subtle ambient luxury highlight */}
-        <div 
-          className="absolute inset-0 pointer-events-none opacity-25"
-          style={{
-            backgroundImage: "radial-gradient(ellipse 65% 85% at 20% 0%, rgba(255, 255, 255, 0.3) 0%, transparent 65%)"
-          }}
-        />
+        <div className="maroon-hero-glow" />
 
-        <div className="max-w-[1720px] w-full mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 relative z-10">
+        <div className="maroon-hero-container">
           {/* Top Breadcrumb */}
-          <nav className="flex items-center gap-2 text-xs text-rose-200/80 mb-2.5 select-none">
-            <Link href="/" className="hover:text-white transition-colors">Home</Link>
-            <span className="text-rose-300/40">/</span>
-            <span className="text-white font-medium">Enterprise PC Accessories & IT Peripherals</span>
+          <nav className="maroon-hero-breadcrumb">
+            <Link href="/">Home</Link>
+            <span className="maroon-hero-breadcrumb-sep">/</span>
+            <span className="maroon-hero-breadcrumb-current">Enterprise PC Accessories & IT Peripherals</span>
           </nav>
 
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+          <div className="maroon-hero-layout">
             <div>
-              <h1 className="text-2xl sm:text-3xl md:text-4xl font-black text-white tracking-tight leading-tight">
+              <h1 className="maroon-hero-title">
                 Enterprise PC Accessories & IT Peripherals
               </h1>
-              <p className="text-xs sm:text-sm text-rose-100/90 mt-2 max-w-4xl leading-relaxed">
+              <p className="maroon-hero-desc">
                 Professional ultra-sharp 4K monitors, ergonomic mechanical keyboards, precision mice, universal Thunderbolt docks, conference audio, and enterprise power backup systems for modern workplace productivity. Backed by pan-India dispatch, official GST invoicing, and manufacturer warranty.
               </p>
             </div>
 
             {/* QUICK SEARCH INPUT */}
-            <div className="relative w-full md:w-80 shrink-0">
-              <FaSearch className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" size={13} />
+            <div className="maroon-hero-search-box">
+              <FaSearch className="maroon-hero-search-icon" size={13} />
               <input
                 type="text"
                 placeholder="Search accessories (e.g. 4K Monitor, MX Master, Dock)..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-9 pr-8 py-2.5 bg-white text-slate-900 border border-rose-900/30 rounded-md text-xs placeholder:text-slate-400 shadow-sm focus:outline-none focus:ring-2 focus:ring-rose-400/50 focus:border-rose-400"
+                className="maroon-hero-search-input"
               />
               {searchQuery && (
                 <button
                   onClick={() => setSearchQuery("")}
-                  className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 cursor-pointer"
+                  className="maroon-hero-search-clear"
                   aria-label="Clear search"
                 >
                   <FaTimes size={11} />
@@ -154,22 +150,18 @@ export default function AccessoriesPage() {
       </section>
 
       {/* EXPANDED CONTAINER (1720px matching laptops, desktops & networking) */}
-      <div className="w-full max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 pt-6 sm:pt-8 pb-16">
+      <div className="catalog-main-content">
 
-        {/* CATEGORY SELECTOR PILLS (Corporate Lenovo Style) */}
-        <div className="mb-6 pb-2 border-b border-slate-200">
-          <div className="flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
+        {/* CATEGORY SELECTOR PILLS */}
+        <div className="filter-pill-bar">
+          <div className="filter-pill-list">
             {categories.map((cat, i) => {
               const isActive = activeCategory === cat;
               return (
                 <button
                   key={i}
                   onClick={() => setActiveCategory(cat)}
-                  className={`px-4 py-2 text-xs sm:text-sm font-bold whitespace-nowrap transition-all duration-200 cursor-pointer rounded-md border ${
-                    isActive
-                      ? "bg-[#1546a0] text-white border-[#1546a0] shadow-xs"
-                      : "bg-white text-slate-700 border-slate-300 hover:border-slate-400 hover:text-black"
-                  }`}
+                  className={`filter-pill-btn ${isActive ? "active" : ""}`}
                 >
                   {cat}
                 </button>
@@ -179,16 +171,16 @@ export default function AccessoriesPage() {
         </div>
 
         {/* RESULTS HEADER BAR */}
-        <div className="pb-3 border-b border-slate-200 mb-5">
-          <div className="flex flex-wrap items-center justify-between gap-3">
+        <div className="results-summary-bar">
+          <div className="results-summary-row">
             <div className="flex items-center gap-3">
-              <span className="text-sm sm:text-base font-extrabold text-slate-950">
+              <span className="results-count-text">
                 {filteredProducts.length} Matching results
               </span>
               {hasActiveFilters && (
                 <button
                   onClick={clearAllFilters}
-                  className="text-xs font-bold text-[#0f3e99] hover:underline cursor-pointer"
+                  className="results-clear-btn"
                 >
                   Clear All
                 </button>
@@ -198,20 +190,20 @@ export default function AccessoriesPage() {
 
           {/* ACTIVE FILTER CHIPS */}
           {hasActiveFilters && (
-            <div className="flex flex-wrap items-center gap-2 mt-3 pt-2.5 border-t border-slate-100">
+            <div className="active-chips-row">
               {activeCategory !== "All" && (
-                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-slate-100 text-slate-800 text-xs font-medium rounded-xs border border-slate-200">
+                <span className="filter-chip">
                   <span>Category: {activeCategory}</span>
-                  <button onClick={() => setActiveCategory("All")} className="text-slate-500 hover:text-black cursor-pointer">
+                  <button onClick={() => setActiveCategory("All")} className="filter-chip-remove" aria-label="Remove category filter">
                     <FaTimes size={10} />
                   </button>
                 </span>
               )}
 
               {searchQuery && (
-                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 bg-slate-100 text-slate-800 text-xs font-medium rounded-xs border border-slate-200">
+                <span className="filter-chip">
                   <span>Search: "{searchQuery}"</span>
-                  <button onClick={() => setSearchQuery("")} className="text-slate-500 hover:text-black cursor-pointer">
+                  <button onClick={() => setSearchQuery("")} className="filter-chip-remove" aria-label="Clear search query">
                     <FaTimes size={10} />
                   </button>
                 </span>
@@ -260,7 +252,7 @@ export default function AccessoriesPage() {
             </div>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5">
+          <div className="catalog-cards-grid">
             {filteredProducts.map((product) => (
               <AccessoryCard
                 key={product.id}
