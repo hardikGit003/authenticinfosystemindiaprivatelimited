@@ -455,6 +455,7 @@ export default function LaptopsPage() {
                       placeholder="Search Processor"
                       value={processorSearch}
                       onChange={(e) => setProcessorSearch(e.target.value)}
+                      style={{ paddingLeft: "2.25rem" }}
                     />
                   </div>
 

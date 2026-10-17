@@ -749,7 +749,8 @@ export default function Configurator({
                       placeholder="Search Processor"
                       value={processorSearch}
                       onChange={(e) => setProcessorSearch(e.target.value)}
-                      className="w-full text-xs py-1.5 pl-8.5 pr-6 border border-slate-300 rounded-none focus:outline-none focus:border-[#1546a0]"
+                      className="w-full text-xs py-1.5 pl-9 pr-6 border border-slate-300 rounded-none focus:outline-none focus:border-[#1546a0]"
+                      style={{ paddingLeft: "2.25rem" }}
                     />
                     {processorSearch && (
                       <button onClick={() => setProcessorSearch("")} className="absolute right-2 top-1/2 -translate-y-1/2 text-slate-400 hover:text-black">
@@ -879,6 +880,7 @@ export default function Configurator({
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     className="w-full pl-10 pr-8 py-2 bg-slate-50 border border-slate-300 rounded-md text-xs focus:outline-none focus:border-[#1546a0] focus:bg-white text-slate-900 transition-colors"
+                    style={{ paddingLeft: "2.5rem" }}
                   />
                   {searchQuery && (
                     <button
