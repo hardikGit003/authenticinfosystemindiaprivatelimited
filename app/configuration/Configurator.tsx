@@ -743,14 +743,14 @@ export default function Configurator({
               {accordions.processor && (
                 <div className="mt-2 pl-0.5 space-y-2">
                   <div className="relative mb-2">
+                    <FaSearch className="absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400 text-[11px] pointer-events-none" />
                     <input
                       type="text"
                       placeholder="Search Processor"
                       value={processorSearch}
                       onChange={(e) => setProcessorSearch(e.target.value)}
-                      className="w-full text-xs py-1.5 pl-7 pr-6 border border-slate-300 rounded-none focus:outline-none focus:border-[#1546a0]"
+                      className="w-full text-xs py-1.5 pl-8.5 pr-6 border border-slate-300 rounded-none focus:outline-none focus:border-[#1546a0]"
                     />
-                    <FaSearch className="absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400 text-[10px]" />
                     {processorSearch && (
                       <button onClick={() => setProcessorSearch("")} className="absolute right-2 top-1/2 -translate-y-1/2 text-slate-400 hover:text-black">
                         <FaTimes size={10} />
@@ -872,13 +872,13 @@ export default function Configurator({
 
                 {/* Compact & Professional Search Bar */}
                 <div className="relative w-full sm:w-80 shrink-0">
-                  <FaSearch className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" size={13} />
+                  <FaSearch className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" size={13} />
                   <input
                     type="text"
                     placeholder="Search custom configurations, CPUs, GPUs..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full pl-9 pr-8 py-2 bg-slate-50 border border-slate-300 rounded-md text-xs focus:outline-none focus:border-[#1546a0] focus:bg-white text-slate-900 transition-colors"
+                    className="w-full pl-10 pr-8 py-2 bg-slate-50 border border-slate-300 rounded-md text-xs focus:outline-none focus:border-[#1546a0] focus:bg-white text-slate-900 transition-colors"
                   />
                   {searchQuery && (
                     <button

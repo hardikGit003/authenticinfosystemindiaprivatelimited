@@ -449,7 +449,7 @@ export default function DesktopsPage() {
               {accordions.processor && (
                 <div className="mt-2 space-y-2">
                   <div className="catalog-accordion-search">
-                    <FaSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={10} />
+                    <FaSearch className="absolute left-2.5 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" size={11} />
                     <input
                       type="text"
                       placeholder="Search Processor"
