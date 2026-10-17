@@ -24,10 +24,10 @@ const flipkartCards: FlipkartCard[] = [
     ribbonTitle: "NOW OR NEVER",
     ribbonSub: "Prices lower than ever",
     headline: "Top Deals on BenQ Smart Boards",
-    price: "From ₹84,990*",
+    price: "From ₹1,10,999*",
     features: "Google EDLA Certified | 4K UHD Antimicrobial Touch",
     ctaText: "Explore Smart Boards",
-    imageSrc: "/BenQ Smart Screen/BenQ1.avif",
+    imageSrc: "/Front Cards Advertisement/Benq Display Board Photo.avif",
     imageAlt: "BenQ 4K Smart Board Display",
     href: "#benq-smart-board"
   },
@@ -38,11 +38,11 @@ const flipkartCards: FlipkartCard[] = [
     themeClass: "fk-theme-logi",
     ribbonTitle: "NOW OR NEVER",
     ribbonSub: "Lowest prices ever",
-    headline: "Logitech Video & MX Series",
+    headline: "Logitech Professional Mouses",
     price: "From ₹2,995*",
     features: "Rally Bar 4K | MeetUp Camera | MX Master 3S",
     ctaText: "Explore Logitech",
-    imageSrc: "/products/accessories/logitech-workspace-solutions.jpg",
+    imageSrc: "/Front Cards Advertisement/Logitech Mouses Photos.jpg",
     imageAlt: "Logitech Video Conferencing & MX Series Workspace",
     href: "/amazon"
   },
@@ -54,7 +54,7 @@ const flipkartCards: FlipkartCard[] = [
     ribbonTitle: "NOW OR NEVER",
     ribbonSub: "Prices lower than ever",
     headline: "Top Deals on Lenovo LOQ AI",
-    price: "From ₹64,990*",
+    price: "From ₹74,999*",
     features: "NVIDIA RTX 40-Series | Intel 14th Gen & Ryzen AI",
     ctaText: "Shop LOQ Laptops",
     imageSrc: "/products/laptops/lenovo-loq-15.jpg",
@@ -67,12 +67,12 @@ const flipkartCards: FlipkartCard[] = [
     id: "18-pro-series",
     themeClass: "fk-theme-apple",
     ribbonTitle: "DAY-1 ALLOCATION",
-    ribbonSub: "Reserve priority stock",
+    ribbonSub: "Reserve priority",
     headline: "Apple iPhone 18 Pro Series",
     price: "From ₹1,34,900*",
     features: "A20 Pro 2nm Silicon | 48MP Visor Quad-Prism",
     ctaText: "Order 18 Pro",
-    imageSrc: "/Home Screen Advertisement/Iphone18PRoBanner.png",
+    imageSrc: "/Front Cards Advertisement/Iphone 18 Series Photos.avif",
     imageAlt: "Apple iPhone 18 Pro Titanium Flagship",
     href: "/phones"
   },
@@ -84,7 +84,7 @@ const flipkartCards: FlipkartCard[] = [
     ribbonTitle: "NOW OR NEVER",
     ribbonSub: "Free 48H burn-in test",
     headline: "Custom Built PC Workstations",
-    price: "From ₹38,990*",
+    price: "From ₹38,999*",
     features: "RTX 4090 / 4080 | Liquid Cooled | 3Y Warranty",
     ctaText: "Configure Your PC",
     imageSrc: "/products/desktops/custom-pc-configurator-rig.jpg",
@@ -99,10 +99,10 @@ const flipkartCards: FlipkartCard[] = [
     ribbonTitle: "NOW OR NEVER",
     ribbonSub: "Lowest prices ever",
     headline: "4K Displays, Docks & Storage",
-    price: "From ₹1,499*",
+    price: "From ₹3,XXX*",
     features: "Dell UltraSharp | Thunderbolt 4 | NVMe Fast SSDs",
     ctaText: "Shop Accessories",
-    imageSrc: "/products/accessories/enterprise-accessories-bundle.jpg",
+    imageSrc: "/Front Cards Advertisement/Accessories Photos.jpg",
     imageAlt: "Enterprise IT Accessories Displays and Docks",
     href: "/accessories"
   }
@@ -112,12 +112,12 @@ export default function FeaturedShowcaseGrid() {
   return (
     <section id="flipkart-showcase" className="fk-section">
       <div className="fk-container">
-        
+
         {/* 6 Flipkart Scenario Advertising Cards Grid (3 Columns Desktop, 2 Columns Tablet, 1 Column Mobile) */}
         <div className="fk-grid">
           {flipkartCards.map((card) => (
-            <Link 
-              key={card.id} 
+            <Link
+              key={card.id}
               href={card.href}
               className={`fk-card ${card.themeClass}`}
               title={card.headline}
@@ -147,8 +147,8 @@ export default function FeaturedShowcaseGrid() {
               {/* Right Media with 3D Illuminated Stage (~40% width) */}
               <div className="fk-media-wrap">
                 <div className="fk-podium" />
-                <img 
-                  src={card.imageSrc} 
+                <img
+                  src={card.imageSrc}
                   alt={card.imageAlt}
                   width={280}
                   height={180}

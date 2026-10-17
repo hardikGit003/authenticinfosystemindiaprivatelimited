@@ -13,7 +13,8 @@ import {
   FaChevronDown, 
   FaChevronUp, 
   FaFilter,
-  FaDesktop
+  FaDesktop,
+  FaWhatsapp
 } from "react-icons/fa";
 
 const CATEGORIES = ["All", "Basic", "Gaming", "Editing", "Enterprise"];
@@ -797,23 +798,28 @@ export default function DesktopsPage() {
       {/* CUSTOM DESKTOP BUILDER CTA (Card matching 1720px span width on white background) */}
       <section className="pt-2 pb-16 bg-white">
         <div className="max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10">
-          <div className="p-8 sm:p-12 lg:p-14 rounded-2xl sm:rounded-3xl border border-[#7fc1f8] shadow-xl relative overflow-hidden bg-gradient-to-r from-[#b3dbfc] via-[#90CAF9] to-[#67aef5] text-slate-950 text-center">
-            {/* Atmospheric ambient glow */}
-            <div className="absolute -top-20 -right-20 w-96 h-96 bg-white/45 rounded-full blur-3xl pointer-events-none" />
-            <div className="absolute -bottom-20 -left-20 w-96 h-96 bg-[#42A5F5]/35 rounded-full blur-3xl pointer-events-none" />
+          <div className="p-8 sm:p-12 lg:p-16 rounded-2xl sm:rounded-3xl border border-rose-200/90 shadow-xl shadow-rose-950/5 relative overflow-hidden bg-gradient-to-br from-[#FFF1F3] via-[#FFE4E8] to-[#FED2D9] text-center">
+            {/* Atmospheric ambient glows */}
+            <div className="absolute -top-24 -right-24 w-96 h-96 bg-gradient-to-br from-rose-400/20 to-pink-500/20 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-gradient-to-tr from-amber-300/25 to-rose-300/20 rounded-full blur-3xl pointer-events-none" />
 
             <div className="max-w-3xl mx-auto relative z-10">
-              <p className="text-xs font-black text-[#0B2545] tracking-[4px] uppercase mb-3">CUSTOM WORKSTATIONS</p>
+              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-rose-900/10 border border-rose-900/15 mb-3.5">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#650E20] animate-pulse" />
+                <span className="text-[11px] font-black tracking-[3px] text-[#4A0A16] uppercase">
+                  Custom Workstations
+                </span>
+              </div>
               <h2 className="text-2xl sm:text-4xl md:text-5xl font-black mb-4 tracking-tight text-slate-950">
                 Build Your Custom Workstation Lab
               </h2>
-              <p className="text-slate-800 text-xs sm:text-sm md:text-base mb-8 max-w-2xl mx-auto leading-relaxed font-medium">
+              <p className="text-slate-700 text-xs sm:text-sm md:text-base mb-8 max-w-2xl mx-auto leading-relaxed font-medium">
                 Need custom GPU clusters, dual-socket processors, high-capacity ECC RAM, or liquid-cooled render racks? Our systems engineers craft tailored enterprise rigs with manufacturer warranty.
               </p>
               <div className="flex flex-wrap items-center justify-center gap-4">
                 <button
                   onClick={() => handleOpenQuote("Custom", "Workstation Lab")}
-                  className="px-8 py-3.5 bg-[#0D254C] hover:bg-[#071731] text-white font-bold text-xs uppercase tracking-wider rounded-md shadow-md hover:shadow-lg transition-all cursor-pointer"
+                  className="px-8 py-3.5 bg-gradient-to-r from-[#4A0A16] via-[#650E20] to-[#3B0712] hover:from-[#3B0712] hover:to-[#4A0A16] text-white font-extrabold text-xs uppercase tracking-wider rounded-md shadow-md hover:shadow-lg hover:scale-[1.02] active:scale-[0.99] transition-all cursor-pointer"
                 >
                   Request Custom Architecture
                 </button>
@@ -821,9 +827,10 @@ export default function DesktopsPage() {
                   href="https://wa.me/919643990077?text=Hi%2C%20I%20want%20to%20request%20a%20custom%20desktop%20quote."
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-8 py-3.5 bg-white text-slate-950 hover:bg-slate-100 font-bold text-xs uppercase tracking-wider rounded-md shadow-md hover:shadow-lg transition-all cursor-pointer border border-white/60"
+                  className="px-8 py-3.5 bg-white hover:bg-slate-50 text-slate-950 font-extrabold text-xs uppercase tracking-wider rounded-md shadow-md hover:shadow-lg transition-all cursor-pointer border border-rose-200/90 inline-flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-[0.99]"
                 >
-                  Chat on WhatsApp
+                  <FaWhatsapp className="text-base text-emerald-600" />
+                  <span>Chat on WhatsApp</span>
                 </a>
               </div>
             </div>

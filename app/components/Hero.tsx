@@ -1,43 +1,9 @@
-"use client";
-
-import { useEffect } from "react";
 import Link from "next/link";
 import { FaArrowRight } from "react-icons/fa";
 
 export default function Hero() {
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollY = window.scrollY;
-      const video = document.querySelector(".background-video") as HTMLVideoElement | null;
-      if (video) {
-        const scale = 1 + scrollY * 0.0003;
-        video.style.transform = `scale(${scale})`;
-      }
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
   return (
     <section id="home" className="hero hero-intro">
-      {/* VIDEO BACKGROUND */}
-      <div className="video-wrapper">
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="background-video"
-        >
-          <source src="/hero.mp4" type="video/mp4" />
-        </video>
-      </div>
-
-      {/* OVERLAY */}
-      <div className="hero-overlay"></div>
 
       {/* CONTENT */}
       <div className="hero-content">
