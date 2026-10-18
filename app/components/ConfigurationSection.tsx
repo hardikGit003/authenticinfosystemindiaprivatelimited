@@ -115,7 +115,7 @@ export default function ConfigurationSection() {
       id="configuration"
       className="configuration-section-custom bg-white"
     >
-      <div className="w-full bg-[#09090b] text-white rounded-[24px] sm:rounded-[28px] border border-zinc-800 shadow-2xl relative overflow-hidden p-8 sm:p-12 lg:p-16">
+      <div className="w-full bg-[#09090b] text-white rounded-[20px] sm:rounded-[28px] border border-zinc-800 shadow-2xl relative overflow-hidden p-4 sm:p-10 lg:p-16">
         {/* Background Ambience Glows */}
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-blue-600/10 rounded-full blur-[140px] pointer-events-none" />
         <div className="absolute bottom-10 right-10 w-[500px] h-[300px] bg-purple-600/10 rounded-full blur-[120px] pointer-events-none" />

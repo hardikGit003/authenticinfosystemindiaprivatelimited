@@ -223,10 +223,10 @@ export default function Navbar() {
               />
 
               {/* Tagline separator */}
-              <div className="h-5 sm:h-6 w-[1.5px] bg-slate-300/80 rounded-full shrink-0" />
+              <div className="hidden min-[420px]:block h-5 sm:h-6 w-[1.5px] bg-slate-300/80 rounded-full shrink-0" />
 
               {/* Tagline */}
-              <span className="text-[12px] sm:text-[13px] md:text-[13.5px] font-semibold text-[#0e3262] tracking-wide italic leading-none select-none whitespace-nowrap">
+              <span className="hidden min-[420px]:block text-[12px] sm:text-[13px] md:text-[13.5px] font-semibold text-[#0e3262] tracking-wide italic leading-none select-none whitespace-nowrap">
                 Solutions that Empower
               </span>
             </Link>

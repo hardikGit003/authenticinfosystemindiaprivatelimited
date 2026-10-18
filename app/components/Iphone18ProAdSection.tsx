@@ -27,10 +27,10 @@ export default function Iphone18ProAdSection() {
         {/* LEFT COLUMN: Brand, Heading, Description, CTA */}
         <motion.div 
           className="iphone-ad-left"
-          initial={{ opacity: 0, x: -80 }}
-          whileInView={{ opacity: 1, x: 0 }}
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 1 }}
+          transition={{ duration: 0.8 }}
         >
           {/* Top Brand Lockup */}
           <div className="iphone-ad-brand">
@@ -69,10 +69,10 @@ export default function Iphone18ProAdSection() {
         {/* RIGHT COLUMN: Featured Photo Display Frame */}
         <motion.div 
           className="iphone-ad-right"
-          initial={{ opacity: 0, x: 80 }}
-          whileInView={{ opacity: 1, x: 0 }}
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 1 }}
+          transition={{ duration: 0.8 }}
         >
           <div className="iphone-ad-frame group flex items-center justify-center">
             <img
