@@ -212,17 +212,15 @@ export default function Navbar() {
               className="nav-logo flex items-center gap-2.5 sm:gap-3 py-1 group" 
               aria-label="Authentic Infosystem - Solutions that Empower"
             >
-              <div className="bg-white/95 px-2.5 py-1 rounded-xl shadow-xs">
-                <img 
-                  src="/Full%20Logo.png" 
-                  alt="Authentic Infosystem" 
-                  width="68"
-                  height="52"
-                  loading="eager"
-                  decoding="async"
-                  className="h-[36px] sm:h-[42px] md:h-[46px] w-auto object-contain shrink-0 group-hover:scale-105 transition-transform" 
-                />
-              </div>
+              <img 
+                src="/Full%20Logo.png" 
+                alt="Authentic Infosystem" 
+                width="68"
+                height="52"
+                loading="eager"
+                decoding="async"
+                className="h-[38px] sm:h-[44px] md:h-[48px] w-auto object-contain shrink-0 group-hover:scale-105 transition-transform" 
+              />
 
               {/* Tagline separator */}
               <div className="hidden min-[420px]:block h-5 sm:h-6 w-[1.5px] bg-white/40 rounded-full shrink-0" />
