@@ -212,21 +212,23 @@ export default function Navbar() {
               className="nav-logo flex items-center gap-2.5 sm:gap-3 py-1 group" 
               aria-label="Authentic Infosystem - Solutions that Empower"
             >
-              <img 
-                src="/Full%20Logo.png" 
-                alt="Authentic Infosystem" 
-                width="68"
-                height="52"
-                loading="eager"
-                decoding="async"
-                className="h-[38px] sm:h-[44px] md:h-[48px] w-auto object-contain shrink-0 group-hover:scale-105 transition-transform" 
-              />
+              <div className="bg-white/95 px-2.5 py-1 rounded-xl shadow-xs">
+                <img 
+                  src="/Full%20Logo.png" 
+                  alt="Authentic Infosystem" 
+                  width="68"
+                  height="52"
+                  loading="eager"
+                  decoding="async"
+                  className="h-[36px] sm:h-[42px] md:h-[46px] w-auto object-contain shrink-0 group-hover:scale-105 transition-transform" 
+                />
+              </div>
 
               {/* Tagline separator */}
-              <div className="hidden min-[420px]:block h-5 sm:h-6 w-[1.5px] bg-slate-300/80 rounded-full shrink-0" />
+              <div className="hidden min-[420px]:block h-5 sm:h-6 w-[1.5px] bg-white/40 rounded-full shrink-0" />
 
               {/* Tagline */}
-              <span className="hidden min-[420px]:block text-[12px] sm:text-[13px] md:text-[13.5px] font-semibold text-[#0e3262] tracking-wide italic leading-none select-none whitespace-nowrap">
+              <span className="hidden min-[420px]:block text-[12px] sm:text-[13px] md:text-[13.5px] font-semibold text-white tracking-wide italic leading-none select-none whitespace-nowrap">
                 Solutions that Empower
               </span>
             </Link>
@@ -238,13 +240,13 @@ export default function Navbar() {
             <Link
               href="/"
               className={`relative flex items-center h-full px-4 xl:px-4.5 text-[14.5px] xl:text-[15px] tracking-tight font-semibold transition-colors duration-150 group ${
-                pathname === "/" ? "text-slate-950 font-bold" : "text-slate-700 hover:text-black"
+                pathname === "/" ? "text-white font-bold" : "text-white/90 hover:text-white"
               }`}
             >
               <span className="relative z-10 py-2">Home</span>
-              <span className="absolute inset-x-1 inset-y-4 rounded-lg bg-slate-100/0 group-hover:bg-slate-100/80 transition-colors -z-0 pointer-events-none" />
+              <span className="absolute inset-x-1 inset-y-4 rounded-lg bg-white/0 group-hover:bg-white/20 transition-colors -z-0 pointer-events-none" />
               {pathname === "/" && (
-                <span className="absolute bottom-0 left-2 right-2 h-[3px] bg-slate-950 rounded-t-full shadow-xs" />
+                <span className="absolute bottom-0 left-2 right-2 h-[3px] bg-white rounded-t-full shadow-xs" />
               )}
             </Link>
 
@@ -253,16 +255,16 @@ export default function Navbar() {
               <button
                 type="button"
                 className={`nav-dropdown-trigger relative flex items-center gap-1.5 h-full px-4 xl:px-4.5 text-[14.5px] xl:text-[15px] tracking-tight font-semibold transition-colors duration-150 group ${
-                  isProductsActive ? "text-slate-950 font-bold" : "text-slate-700 hover:text-black"
+                  isProductsActive ? "text-white font-bold" : "text-white/90 hover:text-white"
                 }`}
                 aria-haspopup="true"
                 aria-expanded="false"
               >
                 <span className="relative z-10 py-2">Products</span>
                 <FaChevronDown className="nav-dropdown-chevron" />
-                <span className="absolute inset-x-1 inset-y-4 rounded-lg bg-slate-100/0 group-hover:bg-slate-100/80 transition-colors -z-0 pointer-events-none" />
+                <span className="absolute inset-x-1 inset-y-4 rounded-lg bg-white/0 group-hover:bg-white/20 transition-colors -z-0 pointer-events-none" />
                 {isProductsActive && (
-                  <span className="absolute bottom-0 left-2 right-2 h-[3px] bg-slate-950 rounded-t-full shadow-xs" />
+                  <span className="absolute bottom-0 left-2 right-2 h-[3px] bg-white rounded-t-full shadow-xs" />
                 )}
               </button>
 
@@ -291,16 +293,16 @@ export default function Navbar() {
               <button
                 type="button"
                 className={`nav-dropdown-trigger relative flex items-center gap-1.5 h-full px-4 xl:px-4.5 text-[14.5px] xl:text-[15px] tracking-tight font-semibold transition-colors duration-150 group ${
-                  isSolutionsActive ? "text-slate-950 font-bold" : "text-slate-700 hover:text-black"
+                  isSolutionsActive ? "text-white font-bold" : "text-white/90 hover:text-white"
                 }`}
                 aria-haspopup="true"
                 aria-expanded="false"
               >
                 <span className="relative z-10 py-2">Solutions</span>
                 <FaChevronDown className="nav-dropdown-chevron" />
-                <span className="absolute inset-x-1 inset-y-4 rounded-lg bg-slate-100/0 group-hover:bg-slate-100/80 transition-colors -z-0 pointer-events-none" />
+                <span className="absolute inset-x-1 inset-y-4 rounded-lg bg-white/0 group-hover:bg-white/20 transition-colors -z-0 pointer-events-none" />
                 {isSolutionsActive && (
-                  <span className="absolute bottom-0 left-2 right-2 h-[3px] bg-slate-950 rounded-t-full shadow-xs" />
+                  <span className="absolute bottom-0 left-2 right-2 h-[3px] bg-white rounded-t-full shadow-xs" />
                 )}
               </button>
 
@@ -328,13 +330,13 @@ export default function Navbar() {
             <Link
               href="/#contact"
               className={`relative flex items-center h-full px-4 xl:px-4.5 text-[14.5px] xl:text-[15px] tracking-tight font-semibold transition-colors duration-150 group ${
-                pathname === "/contact" ? "text-slate-950 font-bold" : "text-slate-700 hover:text-black"
+                pathname === "/contact" ? "text-white font-bold" : "text-white/90 hover:text-white"
               }`}
             >
               <span className="relative z-10 py-2">Contact Us</span>
-              <span className="absolute inset-x-1 inset-y-4 rounded-lg bg-slate-100/0 group-hover:bg-slate-100/80 transition-colors -z-0 pointer-events-none" />
+              <span className="absolute inset-x-1 inset-y-4 rounded-lg bg-white/0 group-hover:bg-white/20 transition-colors -z-0 pointer-events-none" />
               {pathname === "/contact" && (
-                <span className="absolute bottom-0 left-2 right-2 h-[3px] bg-slate-950 rounded-t-full shadow-xs" />
+                <span className="absolute bottom-0 left-2 right-2 h-[3px] bg-white rounded-t-full shadow-xs" />
               )}
             </Link>
           </nav>
@@ -361,8 +363,8 @@ export default function Navbar() {
               <div 
                 className={`relative flex items-center h-[42px] transition-all duration-200 ease-out rounded-full border ${
                   isSearchFocused 
-                    ? "w-64 lg:w-76 xl:w-84 bg-white border-slate-900 ring-2 ring-slate-100 shadow-sm" 
-                    : "w-52 lg:w-60 xl:w-68 bg-slate-100/90 border-slate-200/90 hover:bg-slate-100 hover:border-slate-300"
+                    ? "w-64 lg:w-76 xl:w-84 bg-white border-white ring-2 ring-white/50 shadow-md" 
+                    : "w-52 lg:w-60 xl:w-68 bg-white/95 border-white/80 hover:bg-white shadow-xs"
                 }`}
                 onClick={() => {
                   inputRef.current?.focus();
@@ -508,8 +510,8 @@ export default function Navbar() {
               aria-label={mobileSearchOpen ? "Close search bar" : "Open search bar"}
               className={`md:hidden p-2.5 rounded-full transition-colors flex items-center justify-center ${
                 mobileSearchOpen 
-                  ? "bg-black text-white shadow-sm" 
-                  : "text-slate-700 hover:text-black hover:bg-slate-100"
+                  ? "bg-white text-[#f5425a] shadow-sm" 
+                  : "text-white hover:bg-white/20"
               }`}
               onClick={() => {
                 setMobileSearchOpen((prev) => !prev);
@@ -523,7 +525,7 @@ export default function Navbar() {
             <button
               type="button"
               aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
-              className="lg:hidden text-slate-700 hover:text-black p-2.5 transition-colors flex items-center justify-center rounded-full hover:bg-slate-100 active:scale-95"
+              className="lg:hidden text-white hover:bg-white/20 p-2.5 transition-colors flex items-center justify-center rounded-full active:scale-95"
               onClick={() => {
                 setMobileMenuOpen((prev) => !prev);
                 if (mobileSearchOpen) setMobileSearchOpen(false);

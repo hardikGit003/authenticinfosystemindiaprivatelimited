@@ -1677,19 +1677,19 @@ section {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255, 255, 255, 0.96);
+  background: #f5425a;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(226, 232, 240, 0.85);
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.03);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 18px rgba(245, 66, 90, 0.25);
   z-index: 9999;
   transition: all 0.25s ease;
 }
 
 .main-navbar.scrolled {
-  background: rgba(255, 255, 255, 0.98);
-  border-bottom-color: rgba(203, 213, 225, 0.9);
-  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.06), 0 2px 6px -1px rgba(0, 0, 0, 0.03);
+  background: #f5425a;
+  border-bottom-color: rgba(0, 0, 0, 0.12);
+  box-shadow: 0 6px 24px -2px rgba(245, 66, 90, 0.35), 0 2px 8px -1px rgba(0, 0, 0, 0.1);
 }
 
 .nav-logo {
@@ -1730,7 +1730,7 @@ section {
   padding: 0 16px;
   font-size: 15px;
   font-weight: 600;
-  color: #334155;
+  color: #ffffff;
   transition: all 0.15s ease;
   cursor: pointer;
   background: transparent;
@@ -1740,7 +1740,7 @@ section {
 .nav-dropdown-trigger:hover,
 .nav-dropdown-wrapper:hover .nav-dropdown-trigger,
 .nav-dropdown-wrapper:focus-within .nav-dropdown-trigger {
-  color: #0f172a;
+  color: #ffffff;
 }
 
 .nav-dropdown-chevron {
