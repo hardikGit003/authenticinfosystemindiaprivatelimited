@@ -1673,23 +1673,23 @@ section {
   left: 0;
   right: 0;
   width: 100%;
-  height: 78px;
+  height: 62px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #f5425a;
+  background: rgba(255, 255, 255, 0.96);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-  box-shadow: 0 4px 18px rgba(245, 66, 90, 0.25);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.85);
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.03);
   z-index: 9999;
   transition: all 0.25s ease;
 }
 
 .main-navbar.scrolled {
-  background: #f5425a;
-  border-bottom-color: rgba(0, 0, 0, 0.12);
-  box-shadow: 0 6px 24px -2px rgba(245, 66, 90, 0.35), 0 2px 8px -1px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.98);
+  border-bottom-color: rgba(203, 213, 225, 0.9);
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.06), 0 2px 6px -1px rgba(0, 0, 0, 0.03);
 }
 
 .nav-logo {
@@ -1702,8 +1702,8 @@ section {
 }
 
 .nav-logo img {
-  height: 52px;
-  max-height: 56px;
+  height: 40px;
+  max-height: 44px;
   width: auto;
   object-fit: contain;
   transition: transform 0.2s ease;
@@ -1730,7 +1730,7 @@ section {
   padding: 0 16px;
   font-size: 15px;
   font-weight: 600;
-  color: #ffffff;
+  color: #334155;
   transition: all 0.15s ease;
   cursor: pointer;
   background: transparent;
@@ -1740,7 +1740,7 @@ section {
 .nav-dropdown-trigger:hover,
 .nav-dropdown-wrapper:hover .nav-dropdown-trigger,
 .nav-dropdown-wrapper:focus-within .nav-dropdown-trigger {
-  color: #ffffff;
+  color: #0f172a;
 }
 
 .nav-dropdown-chevron {
@@ -2339,15 +2339,15 @@ section {
 
 @media (max-width: 480px) {
   .main-navbar {
-    height: 64px !important;
+    height: 52px !important;
     padding: 0 !important;
     top: 0 !important;
     width: 100% !important;
     border-radius: 0 !important;
   }
   .nav-logo img {
-    height: 40px !important;
-    max-height: 42px !important;
+    height: 34px !important;
+    max-height: 36px !important;
   }
   .benq-banner-section {
     padding: 32px 12px 32px !important;
@@ -2419,7 +2419,7 @@ section {
   max-width: calc(1720px - 2rem);
   margin-left: auto;
   margin-right: auto;
-  margin-top: 5.75rem;
+  margin-top: 4.75rem;
   margin-bottom: 0.5rem;
   background: linear-gradient(to right, #4A0A16, #650E20, #3B0712);
   color: #ffffff;
@@ -2434,7 +2434,7 @@ section {
   .maroon-hero-section {
     width: calc(100% - 3rem);
     max-width: calc(1720px - 3rem);
-    margin-top: 6.25rem;
+    margin-top: 5.25rem;
     margin-bottom: 0.75rem;
     padding: 2.25rem 1.75rem;
     border-radius: 24px;
@@ -2445,7 +2445,7 @@ section {
   .maroon-hero-section {
     width: calc(100% - 4rem);
     max-width: calc(1720px - 4rem);
-    margin-top: 6.5rem;
+    margin-top: 5.5rem;
     margin-bottom: 1rem;
     padding: 2.5rem 2rem;
   }
@@ -2455,7 +2455,7 @@ section {
   .maroon-hero-section {
     width: calc(100% - 5rem);
     max-width: calc(1720px - 5rem);
-    margin-top: 6.75rem;
+    margin-top: 5.75rem;
     margin-bottom: 1rem;
     padding: 2.75rem 2.5rem;
     border-radius: 28px;
@@ -3742,7 +3742,7 @@ section {
   position: relative;
   width: 100%;
   background: #ffffff;
-  padding-top: 96px;
+  padding-top: 78px;
   padding-bottom: 36px;
   border-bottom: none;
   overflow: hidden;
