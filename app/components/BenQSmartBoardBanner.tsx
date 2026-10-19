@@ -81,7 +81,7 @@ export default function BenQSmartBoardBanner() {
       className="benq-banner-section"
     >
       {/* Hidden image preloader to keep transitions instant and seamless */}
-      <div className="hidden" aria-hidden="true">
+      <div className="hidden" aria-hidden="true" suppressHydrationWarning>
         {slideImages.map((src, i) => (
           <img key={i} src={src} alt="" loading="eager" />
         ))}

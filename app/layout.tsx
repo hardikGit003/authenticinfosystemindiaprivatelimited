@@ -106,6 +106,47 @@ export default function RootLayout({
 
   return (
     <html lang="en" className={`${inter.variable} ${lato.variable}`} suppressHydrationWarning>
+      <head>
+        <script
+          id="strip-extension-attributes"
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var ATTRS = ['bis_skin_checked', 'data-new-gr-c-s-check-loaded', 'data-gr-ext-installed', 'cz-shortcut-listen'];
+                  function clean() {
+                    for (var a = 0; a < ATTRS.length; a++) {
+                      var els = document.querySelectorAll('[' + ATTRS[a] + ']');
+                      for (var i = 0; i < els.length; i++) {
+                        els[i].removeAttribute(ATTRS[a]);
+                      }
+                    }
+                  }
+                  clean();
+                  if (typeof MutationObserver !== 'undefined') {
+                    var obs = new MutationObserver(function(mutations) {
+                      for (var i = 0; i < mutations.length; i++) {
+                        var m = mutations[i];
+                        if (m.type === 'attributes' && ATTRS.indexOf(m.attributeName) !== -1) {
+                          m.target.removeAttribute(m.attributeName);
+                        }
+                      }
+                    });
+                    obs.observe(document.documentElement, {
+                      subtree: true,
+                      attributes: true,
+                      attributeFilter: ATTRS
+                    });
+                    window.addEventListener('load', function() {
+                      setTimeout(function() { obs.disconnect(); }, 3500);
+                    });
+                  }
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
+      </head>
       <body
         suppressHydrationWarning
         className={`${inter.className} font-sans overflow-x-hidden w-full bg-white text-slate-900 selection:bg-blue-500/30 selection:text-inherit`}
