@@ -127,7 +127,7 @@ export default function Iphone18PopupModal() {
                     {/* SHOWCASE BANNER IMAGE */}
                     <div className="relative rounded-2xl overflow-hidden border border-white/15 bg-black aspect-[16/9] shadow-2xl group">
                       <img
-                        src="/Home%20Screen%20Advertisement/Iphone18PRoBanner.png"
+                        src="/Home%20Screen%20Advertisement/Forged%20in%20Titanium.png"
                         alt="iPhone 18 Pro & iPhone Duo Launch"
                         width="800"
                         height="450"

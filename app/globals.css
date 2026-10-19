@@ -360,7 +360,7 @@ section {
   grid-template-columns: 0.9fr 1fr;
   align-items: center;
   gap: 50px;
-  margin-bottom: 60px;
+  margin-bottom: 0;
 }
 
 .iphone-ad-left {
@@ -425,7 +425,7 @@ section {
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
   overflow: hidden;
   position: relative;
-  background: #020617;
+  background: #ffffff;
   transition: all 0.5s ease;
 }
 
