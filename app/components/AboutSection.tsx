@@ -19,11 +19,11 @@ export default function AboutSection() {
         viewport={{ once: true }}
       >
 
-        <p className="about-mini-text">
+        <h2 className="about-mini-text">
           WHO WE ARE
-        </p>
+        </h2>
 
-        <h2 className="about-heading">
+        <h3 className="about-heading">
           Building Modern{" "}
           <br className="hidden sm:inline" />
           Technology
@@ -32,7 +32,7 @@ export default function AboutSection() {
           </span>{" "}
           <br className="hidden sm:inline" />
           For Businesses.
-        </h2>
+        </h3>
 
         <div className="about-line"></div>
 
