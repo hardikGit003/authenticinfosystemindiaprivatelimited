@@ -157,9 +157,30 @@ ${messageDetails}`;
       <section className="py-6 sm:py-10 bg-white" id="contact">
         <div className="page-container">
           <div className="p-8 sm:p-12 lg:p-14 rounded-2xl sm:rounded-3xl border border-zinc-800 shadow-2xl relative overflow-hidden bg-[#09090b] text-white">
+            {/* Background Image */}
+            <div className="absolute inset-0 z-0 pointer-events-none">
+              <img
+                src="/Contact_US%20Background.jpg"
+                alt="Enterprise Technology Procurement"
+                className="w-full h-full object-cover object-center"
+              />
+              <div 
+                className="absolute inset-0" 
+                style={{
+                  background: "linear-gradient(105deg, rgba(9, 9, 11, 0.94) 0%, rgba(9, 9, 11, 0.85) 45%, rgba(9, 9, 11, 0.72) 100%)"
+                }} 
+              />
+              <div 
+                className="absolute inset-0" 
+                style={{
+                  background: "linear-gradient(to bottom, rgba(9, 9, 11, 0.6) 0%, transparent 40%, rgba(9, 9, 11, 0.7) 100%)"
+                }} 
+              />
+            </div>
+
             {/* Ambient Glows */}
-            <div className="absolute -top-32 -left-32 w-80 h-80 bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
-            <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl pointer-events-none" />
+            <div className="absolute -top-32 -left-32 w-80 h-80 bg-blue-600/15 rounded-full blur-3xl pointer-events-none z-[1]" />
+            <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-purple-600/15 rounded-full blur-3xl pointer-events-none z-[1]" />
 
             <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center max-w-6xl mx-auto relative z-10">
               <div>

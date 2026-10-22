@@ -37,9 +37,31 @@ ${message}`;
       className="contact-section"
     >
       <div className="w-full bg-[#09090b] text-white rounded-[24px] sm:rounded-[28px] border border-zinc-800 shadow-2xl relative overflow-hidden p-8 sm:p-12 lg:p-16">
+        {/* Background Image */}
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <img
+            src="/Contact_US%20Background.jpg"
+            alt="Enterprise Technology Procurement"
+            className="w-full h-full object-cover object-center"
+          />
+          {/* Dark gradient overlay ensuring crisp contrast for text and high-tech hardware visibility */}
+          <div 
+            className="absolute inset-0" 
+            style={{
+              background: "linear-gradient(105deg, rgba(9, 9, 11, 0.93) 0%, rgba(9, 9, 11, 0.84) 45%, rgba(9, 9, 11, 0.72) 100%)"
+            }} 
+          />
+          <div 
+            className="absolute inset-0" 
+            style={{
+              background: "linear-gradient(to bottom, rgba(9, 9, 11, 0.5) 0%, transparent 40%, rgba(9, 9, 11, 0.6) 100%)"
+            }} 
+          />
+        </div>
+
         {/* Ambient Glows */}
-        <div className="absolute top-0 right-0 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute top-0 right-0 w-96 h-96 bg-blue-600/15 rounded-full blur-3xl pointer-events-none z-[1]" />
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-600/15 rounded-full blur-3xl pointer-events-none z-[1]" />
 
         {/* CONTENT */}
         <div className="contact-content relative z-10">
