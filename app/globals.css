@@ -650,7 +650,8 @@ section {
   gap: 16px;
 }
 
-.flip-card-front-content h3 {
+.flip-card-front-content h3,
+.flip-card-front-content h4 {
   color: #ffffff;
   font-size: 1.75rem;
   line-height: 1.15;

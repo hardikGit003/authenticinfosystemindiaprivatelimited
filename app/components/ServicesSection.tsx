@@ -41,12 +41,12 @@ export default function ServicesSection() {
         transition={{ duration: 0.6 }}
         viewport={{ once: true }}
       >
-        <p className="services-mini-text">SOLUTIONS</p>
-        <h2 className="services-heading">
+        <h2 className="services-mini-text">SOLUTIONS</h2>
+        <h3 className="services-heading">
           Enterprise Technology{" "}
           <br className="hidden sm:inline" />
           Solutions.
-        </h2>
+        </h3>
       </motion.div>
 
       {/* FLIP CARD GRID */}
@@ -80,14 +80,14 @@ export default function ServicesSection() {
                   <div className="card-overlay"></div>
                   
                   <div className="flip-card-front-content">
-                    <h3>{service.title}</h3>
+                    <h4>{service.title}</h4>
                   </div>
                 </div>
 
                 {/* BACK SIDE */}
                 <div className="flip-card-back">
                   <div className="mb-3 border-b border-slate-100 pb-2.5">
-                    <h3 className="text-xl font-bold text-slate-900 m-0">{service.title}</h3>
+                    <h4 className="text-xl font-bold text-slate-900 m-0">{service.title}</h4>
                   </div>
                   <p className="text-slate-600 text-sm leading-relaxed m-0 flex-1">{service.description}</p>
                 </div>
