@@ -3,11 +3,6 @@ export default function BrandsSection() {
     <section id="brands" className="brands-section">
       {/* CONTENT */}
       <div className="brands-content">
-
-        <p className="brands-mini-text">
-          TRUSTED GLOBAL BRANDS
-        </p>
-
         <h2 className="brands-heading">
           Technology Partners{" "}
           <br className="hidden sm:inline" />
