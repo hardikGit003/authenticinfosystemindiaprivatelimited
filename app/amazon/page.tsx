@@ -255,6 +255,7 @@ export default function AmazonStorefrontPage() {
         
         {/* LEFT SIDEBAR: FILTERS */}
         <aside className="amz-sidebar-nav">
+          <h2 className="sr-only">Product Filters</h2>
           <div>
             <h3 className="amz-filter-heading">Category</h3>
             <ul className="amz-filter-list">

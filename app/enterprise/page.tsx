@@ -6,6 +6,7 @@ import Footer from "../components/Footer";
 import PageHero from "../components/shared/PageHero";
 import SectionHeader from "../components/shared/SectionHeader";
 import { motion, AnimatePresence } from "framer-motion";
+import { FaWhatsapp, FaEnvelope, FaPhoneAlt } from "react-icons/fa";
 
 const enterpriseServices = [
   { title: "IT Procurement", image: "/Enterprise/IT%20Procurement.jpg" },
@@ -35,12 +36,12 @@ const partnerBrands = [
   { name: "Dell", logo: "/brands/dell.png" },
   { name: "HP", logo: "/brands/hp.png" },
   { name: "Lenovo", logo: "/brands/lenovo.png" },
-  { name: "Cisco", logo: "/brands/cisco.svg" },
-  { name: "Microsoft", logo: "/brands/microsoft.svg" },
+  { name: "Cisco", logo: "/brands/cisco.png" },
+  { name: "Microsoft", logo: "/brands/microsoft.png" },
   { name: "Acer", logo: "/brands/acer.png" },
   { name: "Asus", logo: "/brands/asus.png" },
-  { name: "Intel", logo: "/brands/intel.svg" },
-  { name: "AMD", logo: "/brands/amd.svg" },
+  { name: "Intel", logo: "/brands/intel.png" },
+  { name: "AMD", logo: "/brands/amd.png" },
   { name: "Apple", logo: "/brands/apple.png" },
 ];
 
@@ -154,110 +155,86 @@ ${messageDetails}`;
       </section>
 
       {/* B2B Inquiry Form */}
-      <section className="py-6 sm:py-10 bg-white" id="contact">
+      <section className="py-12 sm:py-16 bg-white" id="contact">
         <div className="page-container">
-          <div className="p-8 sm:p-12 lg:p-14 rounded-2xl sm:rounded-3xl border border-zinc-800 shadow-2xl relative overflow-hidden bg-[#09090b] text-white">
-            {/* Background Image */}
-            <div className="absolute inset-0 z-0 pointer-events-none">
-              <img
-                src="/Contact_US%20Background.jpg"
-                alt="Enterprise Technology Procurement"
-                className="w-full h-full object-cover object-center"
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center max-w-6xl mx-auto">
+            <div>
+              <SectionHeader 
+                miniText="GET IN TOUCH"
+                title="Request a Custom Quote" 
+                subtitle="Partner with us for reliable, scalable, and cost-effective IT infrastructure." 
               />
-              <div 
-                className="absolute inset-0" 
-                style={{
-                  background: "linear-gradient(105deg, rgba(9, 9, 11, 0.94) 0%, rgba(9, 9, 11, 0.85) 45%, rgba(9, 9, 11, 0.72) 100%)"
-                }} 
-              />
-              <div 
-                className="absolute inset-0" 
-                style={{
-                  background: "linear-gradient(to bottom, rgba(9, 9, 11, 0.6) 0%, transparent 40%, rgba(9, 9, 11, 0.7) 100%)"
-                }} 
-              />
+              <div className="mt-6 space-y-3 sm:space-y-4">
+                <a 
+                  href="mailto:b2b@authenticinfosystem.com" 
+                  className="flex items-center gap-4 p-4 rounded-xl bg-slate-50 border border-slate-200 hover:border-slate-300 hover:bg-slate-100/60 transition-all cursor-pointer group shadow-xs"
+                >
+                  <div className="w-11 h-11 bg-white border border-slate-200 rounded-full flex items-center justify-center shrink-0 shadow-xs group-hover:scale-105 transition-transform text-blue-600">
+                    <FaEnvelope className="text-base text-blue-600" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-slate-500 uppercase tracking-wider font-semibold">Email Us</p>
+                    <p className="font-bold text-sm sm:text-base text-slate-900 group-hover:text-blue-600 transition-colors">b2b@authenticinfosystem.com</p>
+                  </div>
+                </a>
+                <a 
+                  href="tel:+919643990077" 
+                  className="flex items-center gap-4 p-4 rounded-xl bg-slate-50 border border-slate-200 hover:border-slate-300 hover:bg-slate-100/60 transition-all cursor-pointer group shadow-xs"
+                >
+                  <div className="w-11 h-11 bg-white border border-slate-200 rounded-full flex items-center justify-center shrink-0 shadow-xs group-hover:scale-105 transition-transform text-emerald-600">
+                    <FaPhoneAlt className="text-sm text-emerald-600" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-slate-500 uppercase tracking-wider font-semibold">Call Us</p>
+                    <p className="font-bold text-sm sm:text-base text-slate-900 group-hover:text-emerald-600 transition-colors">+91 9643990077</p>
+                  </div>
+                </a>
+              </div>
             </div>
 
-            {/* Ambient Glows */}
-            <div className="absolute -top-32 -left-32 w-80 h-80 bg-blue-600/15 rounded-full blur-3xl pointer-events-none z-[1]" />
-            <div className="absolute -bottom-32 -right-32 w-96 h-96 bg-purple-600/15 rounded-full blur-3xl pointer-events-none z-[1]" />
-
-            <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center max-w-6xl mx-auto relative z-10">
-              <div>
-                <SectionHeader 
-                  dark
-                  miniText="GET IN TOUCH"
-                  title="Request a Custom Quote" 
-                  subtitle="Partner with us for reliable, scalable, and cost-effective IT infrastructure." 
-                />
-                <div className="mt-6 space-y-3 sm:space-y-4">
-                  <a 
-                    href="mailto:b2b@authenticinfosystem.com" 
-                    className="flex items-center gap-4 p-3.5 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm hover:bg-white/10 transition-all cursor-pointer group"
-                  >
-                    <div className="w-10 h-10 bg-white/10 text-white border border-white/20 rounded-full flex items-center justify-center text-lg shrink-0 group-hover:scale-105 transition-transform">📧</div>
-                    <div>
-                      <p className="text-xs text-zinc-400 uppercase tracking-wider font-semibold group-hover:text-zinc-300">Email Us</p>
-                      <p className="font-semibold text-sm sm:text-base text-white group-hover:text-blue-300 transition-colors">b2b@authenticinfosystem.com</p>
-                    </div>
-                  </a>
-                  <a 
-                    href="tel:+919643990077" 
-                    className="flex items-center gap-4 p-3.5 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm hover:bg-white/10 transition-all cursor-pointer group"
-                  >
-                    <div className="w-10 h-10 bg-white/10 text-white border border-white/20 rounded-full flex items-center justify-center text-lg shrink-0 group-hover:scale-105 transition-transform">📞</div>
-                    <div>
-                      <p className="text-xs text-zinc-400 uppercase tracking-wider font-semibold group-hover:text-zinc-300">Call Us</p>
-                      <p className="font-semibold text-sm sm:text-base text-white group-hover:text-emerald-300 transition-colors">+91 9643990077</p>
-                    </div>
-                  </a>
+            <div className="bg-white border border-slate-200 rounded-2xl shadow-lg p-6 sm:p-7 md:p-8">
+              <form className="space-y-3.5" onSubmit={handleSubmit}>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                  <div>
+                    <label className="block text-xs uppercase tracking-wider text-slate-600 font-bold mb-1.5">Company Name</label>
+                    <input type="text" className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3.5 py-2.5 text-sm text-slate-900 focus:bg-white focus:border-black outline-none transition-colors" placeholder="Acme Corp" value={companyName} onChange={(e) => setCompanyName(e.target.value)} />
+                  </div>
+                  <div>
+                    <label className="block text-xs uppercase tracking-wider text-slate-600 font-bold mb-1.5">Business Email</label>
+                    <input type="email" className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3.5 py-2.5 text-sm text-slate-900 focus:bg-white focus:border-black outline-none transition-colors" placeholder="you@company.com" value={businessEmail} onChange={(e) => setBusinessEmail(e.target.value)} />
+                  </div>
                 </div>
-              </div>
 
-              <div className="bg-white border border-slate-200 rounded-2xl shadow-xl p-6 sm:p-7 md:p-8">
-                <form className="space-y-3.5" onSubmit={handleSubmit}>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                    <div>
-                      <label className="block text-xs uppercase tracking-wider text-slate-600 font-bold mb-1.5">Company Name</label>
-                      <input type="text" className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3.5 py-2.5 text-sm text-slate-900 focus:bg-white focus:border-black outline-none transition-colors" placeholder="Acme Corp" value={companyName} onChange={(e) => setCompanyName(e.target.value)} />
-                    </div>
-                    <div>
-                      <label className="block text-xs uppercase tracking-wider text-slate-600 font-bold mb-1.5">Business Email</label>
-                      <input type="email" className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3.5 py-2.5 text-sm text-slate-900 focus:bg-white focus:border-black outline-none transition-colors" placeholder="you@company.com" value={businessEmail} onChange={(e) => setBusinessEmail(e.target.value)} />
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                    <div>
-                      <label className="block text-xs uppercase tracking-wider text-slate-600 font-bold mb-1.5">Phone Number</label>
-                      <input type="tel" className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3.5 py-2.5 text-sm text-slate-900 focus:bg-white focus:border-black outline-none transition-colors" placeholder="+91 xxxxx xxxxx" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} />
-                    </div>
-                    <div>
-                      <label className="block text-xs uppercase tracking-wider text-slate-600 font-bold mb-1.5">Company Size</label>
-                      <select className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3.5 py-2.5 text-sm text-slate-900 focus:bg-white focus:border-black outline-none transition-colors appearance-none" value={companySize} onChange={(e) => setCompanySize(e.target.value)}>
-                        <option>1-50 Employees</option>
-                        <option>51-200 Employees</option>
-                        <option>201-500 Employees</option>
-                        <option>500+ Employees</option>
-                      </select>
-                    </div>
-                  </div>
-
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                   <div>
-                    <label className="block text-xs uppercase tracking-wider text-slate-600 font-bold mb-1.5">Products/Services Interested In</label>
-                    <input type="text" className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3.5 py-2.5 text-sm text-slate-900 focus:bg-white focus:border-black outline-none transition-colors" placeholder="Laptops, Networking, AMC..." value={productsInterested} onChange={(e) => setProductsInterested(e.target.value)} />
+                    <label className="block text-xs uppercase tracking-wider text-slate-600 font-bold mb-1.5">Phone Number</label>
+                    <input type="tel" className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3.5 py-2.5 text-sm text-slate-900 focus:bg-white focus:border-black outline-none transition-colors" placeholder="+91 xxxxx xxxxx" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} />
                   </div>
-
                   <div>
-                    <label className="block text-xs uppercase tracking-wider text-slate-600 font-bold mb-1.5">Message Details</label>
-                    <textarea rows={3} className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3.5 py-2.5 text-sm text-slate-900 focus:bg-white focus:border-black outline-none transition-colors" placeholder="Tell us about your project requirements..." value={messageDetails} onChange={(e) => setMessageDetails(e.target.value)}></textarea>
+                    <label className="block text-xs uppercase tracking-wider text-slate-600 font-bold mb-1.5">Company Size</label>
+                    <select className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3.5 py-2.5 text-sm text-slate-900 focus:bg-white focus:border-black outline-none transition-colors appearance-none" value={companySize} onChange={(e) => setCompanySize(e.target.value)}>
+                      <option>1-50 Employees</option>
+                      <option>51-200 Employees</option>
+                      <option>201-500 Employees</option>
+                      <option>500+ Employees</option>
+                    </select>
                   </div>
+                </div>
 
-                  <button type="submit" className="w-full py-3 bg-black hover:bg-zinc-800 text-white rounded-lg font-bold text-sm transition-colors mt-1 shadow-md hover:shadow-lg">
-                    Submit Inquiry
-                  </button>
-                </form>
-              </div>
+                <div>
+                  <label className="block text-xs uppercase tracking-wider text-slate-600 font-bold mb-1.5">Products/Services Interested In</label>
+                  <input type="text" className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3.5 py-2.5 text-sm text-slate-900 focus:bg-white focus:border-black outline-none transition-colors" placeholder="Laptops, Networking, AMC..." value={productsInterested} onChange={(e) => setProductsInterested(e.target.value)} />
+                </div>
+
+                <div>
+                  <label className="block text-xs uppercase tracking-wider text-slate-600 font-bold mb-1.5">Message Details</label>
+                  <textarea rows={3} className="w-full bg-slate-50 border border-slate-200 rounded-lg px-3.5 py-2.5 text-sm text-slate-900 focus:bg-white focus:border-black outline-none transition-colors" placeholder="Tell us about your project requirements..." value={messageDetails} onChange={(e) => setMessageDetails(e.target.value)}></textarea>
+                </div>
+
+                <button type="submit" className="w-full py-3 bg-[#0c2340] hover:bg-[#12335e] text-white rounded-lg font-bold text-sm transition-colors mt-1 shadow-md hover:shadow-lg cursor-pointer">
+                  Submit Inquiry
+                </button>
+              </form>
             </div>
           </div>
         </div>
@@ -284,33 +261,26 @@ ${messageDetails}`;
         </div>
       </section>
 
-      {/* Brands Carousel */}
-      <section className="py-6 sm:py-8 bg-white">
+      {/* Brands Showcase */}
+      <section className="py-8 sm:py-10 bg-white border-y border-slate-100">
         <div className="page-container">
-          <div className="py-6 sm:py-7 px-4 sm:px-6 lg:px-8 rounded-2xl sm:rounded-3xl border border-zinc-800 shadow-xl relative overflow-hidden bg-[#09090b] text-white">
-            {/* Ambient Glow */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-32 bg-white/[0.04] rounded-full blur-3xl pointer-events-none" />
-
-            <div className="relative z-10">
-              <p className="text-center text-xs uppercase tracking-[3px] sm:tracking-[5px] font-bold text-zinc-400 mb-4 sm:mb-5">
-                Technology Partners
-              </p>
-              <div className="grid grid-cols-5 md:grid-cols-10 gap-2 sm:gap-2.5 lg:gap-3 w-full items-center">
-                {partnerBrands.map((brand, i) => (
-                  <div 
-                    key={i} 
-                    className="w-full h-11 sm:h-12 lg:h-13 px-2 sm:px-2.5 bg-white rounded-lg sm:rounded-xl flex items-center justify-center shadow-xs hover:scale-105 hover:shadow-md transition-all duration-200 cursor-default"
-                  >
-                    <img 
-                      src={brand.logo} 
-                      alt={`${brand.name} Authorized Enterprise Partner`} 
-                      className="max-h-6 sm:max-h-7 lg:max-h-7.5 max-w-[85%] object-contain"
-                      loading="lazy"
-                    />
-                  </div>
-                ))}
+          <p className="text-center text-xs uppercase tracking-[3px] sm:tracking-[4px] font-bold text-slate-500 mb-5 sm:mb-6">
+            Technology Partners
+          </p>
+          <div className="grid grid-cols-5 md:grid-cols-10 gap-2.5 sm:gap-3 lg:gap-4 w-full items-center">
+            {partnerBrands.map((brand, i) => (
+              <div 
+                key={i} 
+                className="w-full h-12 sm:h-14 lg:h-15 px-2.5 py-2 bg-slate-50/70 hover:bg-white rounded-xl border border-slate-200/80 hover:border-slate-300 flex items-center justify-center shadow-xs hover:shadow-sm transition-all duration-200 cursor-default group"
+              >
+                <img 
+                  src={brand.logo} 
+                  alt={`${brand.name} Authorized Enterprise Partner`} 
+                  className="max-h-6 sm:max-h-7 lg:max-h-8 max-w-[85%] object-contain group-hover:scale-105 transition-transform"
+                  loading="lazy"
+                />
               </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
@@ -346,37 +316,30 @@ ${messageDetails}`;
       </section>
 
       {/* Final CTA */}
-      <section className="pt-2 pb-14 bg-white">
-        <div className="page-container">
-          <div className="p-8 sm:p-12 lg:p-14 rounded-2xl sm:rounded-3xl border border-zinc-800 shadow-2xl relative overflow-hidden bg-[#09090b] text-white text-center">
-            {/* Atmospheric ambient glow */}
-            <div className="absolute top-0 right-0 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
-            <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl pointer-events-none" />
-
-            <div className="max-w-3xl mx-auto relative z-10">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold mb-2.5 sm:mb-3 tracking-tight">
-                Let&apos;s Build Your Next IT Infrastructure Together.
-              </h2>
-              <p className="text-zinc-400 text-xs sm:text-sm md:text-base mb-6 sm:mb-8 max-w-2xl mx-auto leading-relaxed font-normal">
-                From a single laptop to enterprise-wide digital transformation, Authentic Infosystem is your trusted technology partner.
-              </p>
-              <div className="flex flex-wrap items-center justify-center gap-4">
-                <a
-                  href="/#contact"
-                  className="px-8 py-3.5 bg-white text-black hover:bg-zinc-200 font-bold text-xs uppercase tracking-wider rounded-md shadow-md transition-all cursor-pointer"
-                >
-                  Schedule a Consultation
-                </a>
-                <a
-                  href="https://wa.me/919643990077"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-8 py-3.5 bg-zinc-900 border border-zinc-700 text-white hover:bg-zinc-800 font-bold text-xs uppercase tracking-wider rounded-md shadow-md transition-all cursor-pointer"
-                >
-                  Contact Sales
-                </a>
-              </div>
-            </div>
+      <section className="pt-8 pb-16 bg-white text-center">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-2xl sm:text-4xl md:text-5xl font-black mb-4 tracking-tight text-slate-950">
+            Let&apos;s Build Your Next IT Infrastructure Together.
+          </h2>
+          <p className="text-slate-600 text-xs sm:text-sm md:text-base mb-8 max-w-2xl mx-auto leading-relaxed font-normal">
+            From a single laptop to enterprise-wide digital transformation, Authentic Infosystem is your trusted technology partner.
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-4">
+            <a
+              href="/#contact"
+              className="px-8 py-3.5 bg-[#0c2340] hover:bg-[#12335e] text-white font-extrabold text-xs uppercase tracking-wider rounded-lg shadow-sm hover:shadow-md hover:scale-[1.02] active:scale-[0.99] transition-all cursor-pointer inline-flex items-center justify-center"
+            >
+              Schedule a Consultation
+            </a>
+            <a
+              href="https://wa.me/919643990077?text=Hi%2C%20I%20have%20an%20enterprise%20IT%20infrastructure%20inquiry%20for%20Authentic%20Infosystem."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-8 py-3.5 bg-[#25D366] hover:bg-[#20ba59] text-white font-extrabold text-xs uppercase tracking-wider rounded-lg shadow-sm hover:shadow-md transition-all cursor-pointer border border-[#25D366] inline-flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-[0.99]"
+            >
+              <FaWhatsapp className="text-base text-white" />
+              <span>Contact Sales on WhatsApp</span>
+            </a>
           </div>
         </div>
       </section>

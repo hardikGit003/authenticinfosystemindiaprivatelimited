@@ -254,9 +254,9 @@ export default function QuoteModal({
                 </button>
                 <button
                   type="submit"
-                  className="inline-flex items-center gap-2 px-6 py-2.5 bg-slate-950 hover:bg-black text-white text-xs font-bold rounded-xl transition-all shadow-md cursor-pointer hover:scale-[1.02]"
+                  className="inline-flex items-center gap-2 px-6 py-2.5 bg-[#25D366] hover:bg-[#20ba59] text-white text-xs font-bold rounded-xl transition-all shadow-md cursor-pointer hover:scale-[1.02]"
                 >
-                  <FaWhatsapp size={14} className="text-emerald-400" />
+                  <FaWhatsapp size={14} className="text-white" />
                   <span>Request Official B2B Quote</span>
                 </button>
               </div>

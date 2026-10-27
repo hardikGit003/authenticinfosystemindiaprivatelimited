@@ -36,11 +36,11 @@ export default function PageHero({
       {/* Content */}
       <div className="maroon-hero-container">
         {/* Top Breadcrumb */}
-        <div className="maroon-hero-breadcrumb">
-          <Link href="/" className="hover:text-white transition-colors">Home</Link>
-          <span className="maroon-hero-breadcrumb-sep">/</span>
-          <span className="maroon-hero-breadcrumb-current">Enterprise Infrastructure Solutions</span>
-        </div>
+        <nav className="flex items-center gap-1.5 text-xs lg:text-[13px] text-[#E2EAF5]/85 mb-2.5 select-none font-medium">
+          <Link href="/" prefetch={false} className="hover:text-white transition-colors">Home</Link>
+          <span className="text-[#E2EAF5]/60">&gt;</span>
+          <span className="text-white font-medium">Enterprise Infrastructure Solutions</span>
+        </nav>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -49,22 +49,23 @@ export default function PageHero({
           className="max-w-4xl"
         >
           {miniText && (
-            <p className="text-rose-300/90 text-[11px] sm:text-xs tracking-[3px] sm:tracking-[5px] uppercase mb-2 sm:mb-2.5 font-bold">
+            <p className="text-rose-300/90 text-[11px] sm:text-xs tracking-[3px] sm:tracking-[4px] uppercase mb-2 font-bold">
               {miniText}
             </p>
           )}
           
-          <h1 className="text-2xl sm:text-4xl md:text-5xl font-black text-white tracking-tight leading-[1.15] mb-2 sm:mb-3">
+          <h1 className="text-2xl sm:text-3xl lg:text-[34px] xl:text-[38px] font-bold tracking-tight text-white mb-2.5 leading-tight">
             {title}
           </h1>
           
-          <p className="text-rose-100/90 text-xs sm:text-sm md:text-base leading-relaxed font-normal mb-5 sm:mb-6 max-w-3xl">
+          <p className="text-[13.5px] sm:text-[14px] lg:text-[15.5px] text-[#E2EAF5] leading-relaxed font-normal mb-5 sm:mb-6 max-w-3xl">
             {subtitle}
           </p>
           
           <div className="flex flex-row flex-wrap items-center gap-2.5 sm:gap-3.5 w-full sm:w-auto">
             <Link
               href={primaryButtonLink}
+              prefetch={false}
               className="px-6 sm:px-7 py-2.5 sm:py-3 rounded-lg sm:rounded-xl bg-white hover:bg-rose-50 text-slate-950 font-bold text-xs sm:text-sm transition-all shadow-sm text-center"
             >
               {primaryButtonText}
@@ -72,6 +73,7 @@ export default function PageHero({
             
             <Link
               href={secondaryButtonLink}
+              prefetch={false}
               className="px-6 sm:px-7 py-2.5 sm:py-3 rounded-lg sm:rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white font-semibold text-xs sm:text-sm backdrop-blur-sm shadow-xs transition-all text-center"
             >
               {secondaryButtonText}

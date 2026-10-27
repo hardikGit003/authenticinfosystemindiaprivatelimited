@@ -26,7 +26,7 @@ export default function Hero() {
 
         {/* CALL TO ACTION BUTTONS */}
         <div className="hero-buttons">
-          <Link href="/configuration">
+          <Link href="/configuration" prefetch={false}>
             <button className="hero-btn-primary" aria-label="Customize your System">
               <span>Customize your System</span>
             </button>

@@ -119,6 +119,7 @@ export default function FeaturedShowcaseGrid() {
             <Link
               key={card.id}
               href={card.href}
+              prefetch={false}
               className={`fk-card ${card.themeClass}`}
               title={card.headline}
             >

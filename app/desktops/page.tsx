@@ -14,7 +14,9 @@ import {
   FaChevronUp, 
   FaFilter,
   FaDesktop,
-  FaWhatsapp
+  FaWhatsapp,
+  FaThLarge,
+  FaList
 } from "react-icons/fa";
 
 const CATEGORIES = ["All", "Basic", "Gaming", "Editing", "Enterprise"];
@@ -69,6 +71,8 @@ export default function DesktopsPage() {
   const [selectedRams, setSelectedRams] = useState<string[]>([]);
   const [selectedFormFactors, setSelectedFormFactors] = useState<string[]>([]);
   const [selectedStorages, setSelectedStorages] = useState<string[]>([]);
+  const [sortBy, setSortBy] = useState("recommended");
+  const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
 
   // Accordion state (true = expanded)
   const [accordions, setAccordions] = useState({
@@ -225,8 +229,18 @@ export default function DesktopsPage() {
       return true;
     });
 
-    // Default alphabetical sorting
-    result.sort((a, b) => a.name.localeCompare(b.name));
+    if (sortBy === "price_asc") {
+      result.sort((a, b) => (a.price || 0) - (b.price || 0));
+    } else if (sortBy === "price_desc") {
+      result.sort((a, b) => (b.price || 0) - (a.price || 0));
+    } else if (sortBy === "name_desc") {
+      result.sort((a, b) => b.name.localeCompare(a.name));
+    } else if (sortBy === "name_asc") {
+      result.sort((a, b) => a.name.localeCompare(b.name));
+    } else {
+      // Default recommended sorting (alphabetical by brand and name)
+      result.sort((a, b) => a.name.localeCompare(b.name));
+    }
 
     return result;
   }, [
@@ -237,6 +251,7 @@ export default function DesktopsPage() {
     selectedRams,
     selectedFormFactors,
     selectedStorages,
+    sortBy,
   ]);
 
   // Counts for checkboxes
@@ -289,72 +304,241 @@ export default function DesktopsPage() {
   }, [processorSearch]);
 
   return (
-    <main className="min-h-screen bg-white text-slate-900 selection:bg-rose-950 selection:text-white">
+    <main className="min-h-screen bg-white text-slate-900 selection:bg-blue-600/20 selection:text-slate-900">
       <Navbar />
 
-      {/* FULL-WIDTH MAROON HEADER SECTION */}
-      <section className="maroon-hero-section">
-        {/* Subtle ambient luxury highlight */}
-        <div className="maroon-hero-glow" />
+      {/* =========================================================================
+          HERO BANNER SECTION (50% REDUCED HEIGHT, PRESERVING WORKSTATION ASPECT RATIO)
+          ========================================================================= */}
+      <div className="w-full max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10 mt-[76px] sm:mt-[80px] lg:mt-[84px] mb-8">
+        <div 
+          className="w-full rounded-[20px] text-white shadow-2xl relative overflow-hidden border border-blue-900/30 min-h-[220px] lg:min-h-0 lg:aspect-[2172/362] p-4 sm:p-5 lg:px-7 lg:py-4 xl:px-9 xl:py-4.5 flex flex-col justify-between bg-gradient-to-r from-[#012258] via-[#022c70] to-[#01183b]"
+        >
+          {/* Background image container preserving 100% exact image ratio without cropping */}
+          <div className="absolute right-0 top-0 bottom-0 h-full pointer-events-none select-none flex justify-end z-10">
+            <img 
+              src="/Futuristic Blue Tech Workstation Banner.png" 
+              alt="Enterprise Workstations" 
+              className="h-full w-auto object-contain object-right"
+              style={{
+                maskImage: "linear-gradient(to right, transparent, black 25%)",
+                WebkitMaskImage: "linear-gradient(to right, transparent, black 25%)"
+              }}
+            />
+          </div>
 
-        <div className="maroon-hero-container">
-          {/* Top Breadcrumb */}
-          <nav className="maroon-hero-breadcrumb">
-            <Link href="/">Home</Link>
-            <span className="maroon-hero-breadcrumb-sep">/</span>
-            <span className="maroon-hero-breadcrumb-current">Desktops & Workstation Deals</span>
-          </nav>
+          {/* Subtle mobile readability overlay */}
+          <div className="absolute inset-0 bg-[#061B3D]/70 sm:bg-[#061B3D]/40 lg:hidden pointer-events-none z-15" />
 
-          <div className="maroon-hero-layout">
-            <div>
-              <h1 className="maroon-hero-title">
-                Desktops, All-in-Ones & Official Workstation Deals
-              </h1>
-              <p className="maroon-hero-desc">
-                Commercial tower workstations, ultra-compact mini PCs, enterprise all-in-ones, and AI rendering rigs with 3-year onsite support and GST invoicing.
-              </p>
+          {/* DESKTOP THREE-PART LAYOUT (lg:flex) */}
+          <div className="relative z-20 hidden lg:flex items-center justify-between h-full gap-5">
+            {/* 1. LEFT CONTENT: BREADCRUMB, HEADING, DESCRIPTION & TRUST INDICATORS */}
+            <div className="flex flex-col justify-between h-full max-w-xl xl:max-w-2xl z-20 py-0.5">
+              <div>
+                {/* Breadcrumb Navigation */}
+                <nav className="flex items-center gap-1.5 text-xs text-[#E5EDF8]/90 mb-1 select-none font-medium">
+                  <Link href="/" prefetch={false} className="hover:text-white transition-colors">Home</Link>
+                  <span className="text-[#E5EDF8]/60">&gt;</span>
+                  <span className="text-white font-medium">Desktops &amp; Workstation Deals</span>
+                </nav>
+
+                {/* Main Heading */}
+                <h1 className="text-xl sm:text-2xl lg:text-[25px] xl:text-[28px] font-bold tracking-tight text-white mb-1.5 leading-tight">
+                  Desktops &amp; Official Workstation Deals
+                </h1>
+
+                {/* Supporting Description */}
+                <p className="text-[12.5px] sm:text-[13px] lg:text-[13.5px] text-[#E5EDF8] font-normal leading-snug mb-2 max-w-xl">
+                  Commercial workstations, mini PCs, AI rendering rigs, 3-year onsite support and GST invoicing.
+                </p>
+              </div>
+
+              {/* 4 Trust Indicators along the lower-left */}
+              <div className="flex items-center gap-3 xl:gap-5 text-[#E5EDF8] text-[11px] lg:text-[11.5px] font-medium pt-1 select-none">
+                <div className="flex items-center gap-1.5 shrink-0">
+                  <svg className="w-4 h-4 text-white shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+                  </svg>
+                  <span className="whitespace-nowrap">100% Genuine Products</span>
+                </div>
+                <div className="flex items-center gap-1.5 shrink-0">
+                  <svg className="w-4 h-4 text-white shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                  </svg>
+                  <span className="whitespace-nowrap">GST Invoicing</span>
+                </div>
+                <div className="flex items-center gap-1.5 shrink-0">
+                  <svg className="w-4 h-4 text-white shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.125-.504 1.125-1.125V15.5c0-.442-.26-.84-.666-1.013l-3.344-1.433a1.5 1.5 0 00-.59-.12H15V6.75A1.125 1.125 0 0013.875 5.625H4.5A1.125 1.125 0 003.375 6.75v7.5" />
+                  </svg>
+                  <span className="whitespace-nowrap">Bulk &amp; Corporate Pricing</span>
+                </div>
+                <div className="flex items-center gap-1.5 shrink-0">
+                  <svg className="w-4 h-4 text-white shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M3 18v-6a9 9 0 0118 0v6M3 18a2 2 0 002 2h1a2 2 0 002-2v-3a2 2 0 00-2-2H3v3zm18 0a2 2 0 01-2 2h-1a2 2 0 01-2-2v-3a2 2 0 012-2h3v3z" />
+                  </svg>
+                  <span className="whitespace-nowrap">Dedicated Support</span>
+                </div>
+              </div>
             </div>
 
-            {/* Quick Search on Top */}
-            <div className="maroon-hero-search-box">
-              <FaSearch className="maroon-hero-search-icon" size={13} />
-              <input
-                type="text"
-                placeholder="Search desktop, series, CPU..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="maroon-hero-search-input"
-              />
-              {searchQuery && (
+            {/* 2. CENTER: SPACER TO ALLOW BACKGROUND HARDWARE TO SHINE THROUGH */}
+            <div className="flex-1 h-full pointer-events-none select-none min-w-[200px]" />
+
+            {/* 3. RIGHT: SEARCH BAR */}
+            <div className="w-full lg:w-auto shrink-0 z-20 self-start mt-1">
+              <div className="relative flex items-center bg-white rounded-xl shadow-lg border border-slate-200/90 p-1.5 pl-3.5 w-full sm:w-[320px] lg:w-[330px] xl:w-[360px] focus-within:ring-2 focus-within:ring-[#1456A0] focus-within:border-transparent transition-all">
+                <svg className="w-4 h-4 text-[#64748B] mr-2.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                </svg>
+                <input
+                  type="text"
+                  placeholder="Search desktop, series, CPU..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      const catalogSection = document.getElementById("desktop-matching-results-section");
+                      if (catalogSection) {
+                        catalogSection.scrollIntoView({ behavior: "smooth", block: "start" });
+                      }
+                    }
+                  }}
+                  className="w-full text-[13px] text-slate-800 placeholder-[#64748B] focus:outline-none bg-transparent font-normal"
+                />
+                {searchQuery && (
+                  <button
+                    type="button"
+                    onClick={() => setSearchQuery("")}
+                    className="text-slate-400 hover:text-slate-600 mr-2 p-1 cursor-pointer transition-colors"
+                    aria-label="Clear search"
+                  >
+                    <FaTimes size={11} />
+                  </button>
+                )}
                 <button
-                  onClick={() => setSearchQuery("")}
-                  className="maroon-hero-search-clear"
-                  aria-label="Clear search"
+                  type="button"
+                  onClick={() => {
+                    const catalogSection = document.getElementById("desktop-matching-results-section");
+                    if (catalogSection) {
+                      catalogSection.scrollIntoView({ behavior: "smooth", block: "start" });
+                    }
+                  }}
+                  className="bg-[#061B3D] hover:bg-[#0B3672] text-white px-4 py-2.5 rounded-lg text-xs font-semibold tracking-wide transition-colors shrink-0 cursor-pointer shadow-xs active:scale-98"
                 >
-                  <FaTimes size={11} />
+                  Search
                 </button>
-              )}
+              </div>
+            </div>
+          </div>
+
+          {/* MOBILE & TABLET LAYOUT (< lg) */}
+          <div className="relative z-20 flex lg:hidden flex-col gap-4 py-2">
+            {/* Top Breadcrumb */}
+            <nav className="flex items-center gap-1.5 text-xs text-[#E5EDF8]/90 select-none font-medium">
+              <Link href="/" prefetch={false} className="hover:text-white transition-colors">Home</Link>
+              <span className="text-[#E5EDF8]/60">&gt;</span>
+              <span className="text-white font-medium">Desktops &amp; Workstation Deals</span>
+            </nav>
+
+            {/* Main Heading (Mobile Visual Heading - single semantic H1 in desktop view) */}
+            <p className="text-2xl sm:text-3xl font-bold tracking-tight text-white leading-tight" aria-hidden="true">
+              Desktops, All-in-Ones &amp; Official Workstation Deals
+            </p>
+
+            {/* Description */}
+            <p className="text-xs sm:text-sm text-[#E5EDF8] font-normal leading-relaxed">
+              Commercial tower workstations, ultra-compact mini PCs, enterprise all-in-ones, and AI rendering rigs with 3-year onsite support and GST invoicing.
+            </p>
+
+            {/* Hardware Imagery (Mobile/Tablet) */}
+            <div className="w-full max-w-[340px] sm:max-w-[420px] mx-auto my-1 select-none">
+              <img
+                src="/hero-workstation-lineup.png"
+                alt="Commercial Tower Workstations, Mini PCs & All-in-Ones"
+                className="w-full h-auto max-h-[140px] sm:max-h-[180px] object-contain filter drop-shadow-xl"
+              />
+            </div>
+
+            {/* Search Bar (Mobile/Tablet) */}
+            <div className="w-full">
+              <div className="relative flex items-center bg-white rounded-xl shadow-md border border-slate-200/90 p-1.5 pl-3.5 w-full focus-within:ring-2 focus-within:ring-[#1456A0] focus-within:border-transparent transition-all">
+                <svg className="w-4 h-4 text-[#64748B] mr-2.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                </svg>
+                <input
+                  type="text"
+                  placeholder="Search desktop, series, CPU..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      const catalogSection = document.getElementById("desktop-matching-results-section");
+                      if (catalogSection) {
+                        catalogSection.scrollIntoView({ behavior: "smooth", block: "start" });
+                      }
+                    }
+                  }}
+                  className="w-full text-xs sm:text-[13px] text-slate-800 placeholder-[#64748B] focus:outline-none bg-transparent font-normal"
+                />
+                {searchQuery && (
+                  <button
+                    type="button"
+                    onClick={() => setSearchQuery("")}
+                    className="text-slate-400 hover:text-slate-600 mr-2 p-1 cursor-pointer transition-colors"
+                    aria-label="Clear search"
+                  >
+                    <FaTimes size={11} />
+                  </button>
+                )}
+                <button
+                  type="button"
+                  onClick={() => {
+                    const catalogSection = document.getElementById("desktop-matching-results-section");
+                    if (catalogSection) {
+                      catalogSection.scrollIntoView({ behavior: "smooth", block: "start" });
+                    }
+                  }}
+                  className="bg-[#061B3D] hover:bg-[#0B3672] text-white px-3 sm:px-4 py-2 rounded-lg text-xs font-semibold tracking-wide transition-colors shrink-0 cursor-pointer shadow-xs active:scale-98"
+                >
+                  Search
+                </button>
+              </div>
+            </div>
+
+            {/* Trust Indicators (Mobile/Tablet 2x2 grid) */}
+            <div className="grid grid-cols-2 gap-2 sm:gap-3 text-[#E5EDF8] text-[11px] sm:text-xs font-medium pt-1">
+              <div className="flex items-center gap-1.5">
+                <svg className="w-4 h-4 text-white shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
+                </svg>
+                <span>100% Genuine Products</span>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <svg className="w-4 h-4 text-white shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+                </svg>
+                <span>GST Invoicing</span>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <svg className="w-4 h-4 text-white shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.125-.504 1.125-1.125V15.5c0-.442-.26-.84-.666-1.013l-3.344-1.433a1.5 1.5 0 00-.59-.12H15V6.75A1.125 1.125 0 0013.875 5.625H4.5A1.125 1.125 0 003.375 6.75v7.5" />
+                </svg>
+                <span>Bulk Pricing</span>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <svg className="w-4 h-4 text-white shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.8}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M3 18v-6a9 9 0 0118 0v6M3 18a2 2 0 002 2h1a2 2 0 002-2v-3a2 2 0 00-2-2H3v3zm18 0a2 2 0 01-2 2h-1a2 2 0 01-2-2v-3a2 2 0 012-2h3v3z" />
+                </svg>
+                <span>Dedicated Support</span>
+              </div>
             </div>
           </div>
         </div>
-      </section>
+      </div>
 
       {/* EXPANDED CONTAINER: Wide e-commerce canvas to eliminate dead margins */}
       <div className="catalog-main-content">
-
-        {/* MOBILE FILTER TRIGGER */}
-        <div className="catalog-mobile-trigger">
-          <button
-            onClick={() => setShowMobileFilters(true)}
-            className="catalog-mobile-btn"
-          >
-            <FaFilter size={11} />
-            <span>Filters ({hasActiveFilters ? "Active" : "All"})</span>
-          </button>
-          <span className="results-count-text">
-            {filteredProducts.length} Matching results
-          </span>
-        </div>
 
         {/* 2-COLUMN CATALOG LAYOUT */}
         <div className="catalog-layout-2col">
@@ -584,21 +768,78 @@ export default function DesktopsPage() {
           {/* ================= RIGHT PRODUCTS SECTION ================= */}
           <div className="catalog-products-col">
             
-            {/* RESULTS HEADER BAR */}
-            <div className="results-summary-bar">
-              <div className="results-summary-row">
-                <div className="flex items-center gap-3">
-                  <span className="results-count-text">
-                    {filteredProducts.length} Matching results
-                  </span>
+            {/* RESULTS HEADER BAR (ALIGNED TOOLBAR WITH SORTING & VIEW TOGGLES) */}
+            <div id="desktop-matching-results-section" className="results-summary-bar scroll-mt-24">
+              <div className="results-summary-row flex-wrap gap-3 pb-1">
+                {/* Left: Matching Results Count & Mobile Filter Trigger */}
+                <div className="flex items-center gap-2.5 sm:gap-3">
+                  <button
+                    type="button"
+                    onClick={() => setShowMobileFilters(true)}
+                    className="flex lg:hidden items-center gap-1.5 px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-800 rounded-lg text-xs font-bold border border-slate-200 shadow-2xs cursor-pointer"
+                  >
+                    <FaFilter size={10} className="text-[#082A5E]" />
+                    <span>Filters {hasActiveFilters ? "(Active)" : ""}</span>
+                  </button>
+                  <h2 className="text-sm sm:text-xl lg:text-[22px] font-bold text-slate-900 tracking-tight">
+                    {filteredProducts.length} <span className="hidden sm:inline">Matching</span> results
+                  </h2>
                   {hasActiveFilters && (
                     <button
                       onClick={clearAllFilters}
-                      className="results-clear-btn"
+                      className="text-xs font-bold text-[#082A5E] hover:text-[#2563EB] hover:underline cursor-pointer transition-colors"
                     >
                       Clear All
                     </button>
                   )}
+                </div>
+
+                {/* Right: Sort By Dropdown & Grid / List View Toggle */}
+                <div className="flex items-center gap-2 sm:gap-3 ml-auto">
+                  <div className="flex items-center gap-1.5 sm:gap-2">
+                    <span className="text-xs sm:text-sm text-slate-600 font-medium whitespace-nowrap hidden sm:inline">
+                      Sort by
+                    </span>
+                    <select
+                      value={sortBy}
+                      onChange={(e) => setSortBy(e.target.value)}
+                      className="bg-white border border-slate-300 rounded-lg px-2.5 sm:px-3 py-1.5 text-xs sm:text-sm font-medium text-slate-800 focus:outline-none focus:border-[#2563EB] cursor-pointer shadow-2xs"
+                    >
+                      <option value="recommended">Recommended</option>
+                      <option value="name_asc">Name: A to Z</option>
+                      <option value="name_desc">Name: Z to A</option>
+                    </select>
+                  </div>
+
+                  {/* View Mode Toggle Buttons */}
+                  <div className="flex items-center gap-1">
+                    <button
+                      type="button"
+                      onClick={() => setViewMode("grid")}
+                      className={`p-1.5 sm:p-2 rounded-lg transition-colors cursor-pointer ${
+                        viewMode === "grid"
+                          ? "bg-[#082A5E] text-white shadow-xs"
+                          : "bg-white border border-slate-300 text-slate-400 hover:text-slate-700"
+                      }`}
+                      title="Grid view"
+                      aria-label="Grid view"
+                    >
+                      <FaThLarge size={12} />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setViewMode("list")}
+                      className={`p-1.5 sm:p-2 rounded-lg transition-colors cursor-pointer ${
+                        viewMode === "list"
+                          ? "bg-[#082A5E] text-white shadow-xs"
+                          : "bg-white border border-slate-300 text-slate-400 hover:text-slate-700"
+                      }`}
+                      title="List view"
+                      aria-label="List view"
+                    >
+                      <FaList size={12} />
+                    </button>
+                  </div>
                 </div>
               </div>
 
@@ -664,11 +905,12 @@ export default function DesktopsPage() {
 
             {/* PRODUCT GRID */}
             {filteredProducts.length > 0 ? (
-              <div className="catalog-cards-grid">
+              <div className={viewMode === "list" ? "grid grid-cols-1 gap-4" : "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5"}>
                 {filteredProducts.map((desktop) => (
                   <DesktopCard
                     key={desktop.id}
                     product={desktop}
+                    isCompact={viewMode === "list"}
                     onOpenQuote={(brand, model) => handleOpenQuote(brand, model)}
                   />
                 ))}
@@ -759,7 +1001,7 @@ export default function DesktopsPage() {
       </div>
 
       {/* POPULAR CONFIGURATIONS (Expanded to 1720px) */}
-      <section className="py-14 bg-slate-50 border-t border-slate-200">
+      <section className="py-14 bg-white border-t border-slate-100">
         <div className="max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10">
           <div className="text-center max-w-3xl mx-auto mb-8">
             <h2 className="text-2xl sm:text-3xl font-black text-slate-950 tracking-tight">
@@ -796,45 +1038,31 @@ export default function DesktopsPage() {
         </div>
       </section>
 
-      {/* CUSTOM DESKTOP BUILDER CTA (Card matching 1720px span width on white background) */}
-      <section className="pt-2 pb-16 bg-white">
-        <div className="max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10">
-          <div className="p-8 sm:p-12 lg:p-16 rounded-2xl sm:rounded-3xl border border-rose-200/90 shadow-xl shadow-rose-950/5 relative overflow-hidden bg-gradient-to-br from-[#FFF1F3] via-[#FFE4E8] to-[#FED2D9] text-center">
-            {/* Atmospheric ambient glows */}
-            <div className="absolute -top-24 -right-24 w-96 h-96 bg-gradient-to-br from-rose-400/20 to-pink-500/20 rounded-full blur-3xl pointer-events-none" />
-            <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-gradient-to-tr from-amber-300/25 to-rose-300/20 rounded-full blur-3xl pointer-events-none" />
-
-            <div className="max-w-3xl mx-auto relative z-10">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-rose-900/10 border border-rose-900/15 mb-3.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#650E20] animate-pulse" />
-                <span className="text-[11px] font-black tracking-[3px] text-[#4A0A16] uppercase">
-                  Custom Workstations
-                </span>
-              </div>
-              <h2 className="text-2xl sm:text-4xl md:text-5xl font-black mb-4 tracking-tight text-slate-950">
-                Build Your Custom Workstation Lab
-              </h2>
-              <p className="text-slate-700 text-xs sm:text-sm md:text-base mb-8 max-w-2xl mx-auto leading-relaxed font-medium">
-                Need custom GPU clusters, dual-socket processors, high-capacity ECC RAM, or liquid-cooled render racks? Our systems engineers craft tailored enterprise rigs with manufacturer warranty.
-              </p>
-              <div className="flex flex-wrap items-center justify-center gap-4">
-                <button
-                  onClick={() => handleOpenQuote("Custom", "Workstation Lab")}
-                  className="px-8 py-3.5 bg-gradient-to-r from-[#4A0A16] via-[#650E20] to-[#3B0712] hover:from-[#3B0712] hover:to-[#4A0A16] text-white font-extrabold text-xs uppercase tracking-wider rounded-md shadow-md hover:shadow-lg hover:scale-[1.02] active:scale-[0.99] transition-all cursor-pointer"
-                >
-                  Request Custom Architecture
-                </button>
-                <a
-                  href="https://wa.me/919643990077?text=Hi%2C%20I%20want%20to%20request%20a%20custom%20desktop%20quote."
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-8 py-3.5 bg-white hover:bg-slate-50 text-slate-950 font-extrabold text-xs uppercase tracking-wider rounded-md shadow-md hover:shadow-lg transition-all cursor-pointer border border-rose-200/90 inline-flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-[0.99]"
-                >
-                  <FaWhatsapp className="text-base text-emerald-600" />
-                  <span>Chat on WhatsApp</span>
-                </a>
-              </div>
-            </div>
+      {/* CUSTOM DESKTOP BUILDER CTA */}
+      <section className="pt-8 pb-16 bg-white text-center">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-2xl sm:text-4xl md:text-5xl font-black mb-4 tracking-tight text-slate-950">
+            Build Your Custom Workstation Lab
+          </h2>
+          <p className="text-slate-600 text-xs sm:text-sm md:text-base mb-8 max-w-2xl mx-auto leading-relaxed font-normal">
+            Need custom GPU clusters, dual-socket processors, high-capacity ECC RAM, or liquid-cooled render racks? Our systems engineers craft tailored enterprise rigs with manufacturer warranty.
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-4">
+            <button
+              onClick={() => handleOpenQuote("Custom", "Workstation Lab")}
+              className="px-8 py-3.5 bg-[#0c2340] hover:bg-[#12335e] text-white font-extrabold text-xs uppercase tracking-wider rounded-lg shadow-sm hover:shadow-md hover:scale-[1.02] active:scale-[0.99] transition-all cursor-pointer"
+            >
+              Request Custom Architecture
+            </button>
+            <a
+              href="https://wa.me/919643990077?text=Hi%2C%20I%20want%20to%20request%20a%20custom%20desktop%20quote."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-8 py-3.5 bg-[#25D366] hover:bg-[#20ba59] text-white font-extrabold text-xs uppercase tracking-wider rounded-lg shadow-sm hover:shadow-md transition-all cursor-pointer border border-[#25D366] inline-flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-[0.99]"
+            >
+              <FaWhatsapp className="text-base text-white" />
+              <span>Chat on WhatsApp</span>
+            </a>
           </div>
         </div>
       </section>

@@ -16,7 +16,6 @@ import {
   FaWhatsapp,
   FaPhoneAlt,
   FaArrowRight,
-  FaChevronDown,
   FaAmazon
 } from "react-icons/fa";
 import Link from "next/link";
@@ -209,7 +208,8 @@ export default function Navbar() {
           <div className="flex items-center shrink-0">
             <Link 
               href="/" 
-              className="nav-logo flex items-center gap-2.5 sm:gap-3 py-1 group" 
+              prefetch={false}
+              className="nav-logo flex items-center gap-2.5 sm:gap-3 py-1 group select-none" 
               aria-label="Authentic Infosystem - Solutions that Empower"
             >
               <img 
@@ -219,7 +219,7 @@ export default function Navbar() {
                 height="52"
                 loading="eager"
                 decoding="async"
-                className="h-[32px] sm:h-[36px] md:h-[40px] w-auto object-contain shrink-0 group-hover:scale-105 transition-transform" 
+                className="h-[38px] sm:h-[44px] md:h-[48px] w-auto object-contain shrink-0 group-hover:scale-105 transition-transform" 
               />
 
               {/* Tagline separator */}
@@ -232,38 +232,30 @@ export default function Navbar() {
             </Link>
           </div>
 
-          {/* CENTER: STREAMLINED CORPORATE NAVIGATION (Requirement 3: Home | Products ▾ | Solutions ▾ | Contact Us) */}
-          <nav className="hidden lg:flex items-center h-full gap-1 xl:gap-1.5 flex-1 justify-center px-4" aria-label="Main Navigation">
+          {/* CENTER: STREAMLINED CORPORATE NAVIGATION (Home | Products | Solutions | Contact Us) */}
+          <nav className="hidden lg:flex items-center h-full gap-7 xl:gap-9 flex-1 justify-center px-4" aria-label="Main Navigation">
             {/* 1. HOME */}
             <Link
               href="/"
-              className={`relative flex items-center h-full px-4 xl:px-4.5 text-[14.5px] xl:text-[15px] tracking-tight font-semibold transition-colors duration-150 group ${
-                pathname === "/" ? "text-slate-950 font-bold" : "text-slate-700 hover:text-black"
+              prefetch={false}
+              className={`relative flex items-center h-full text-nav font-semibold transition-colors duration-150 ${
+                pathname === "/" ? "text-[#0c2340] font-bold" : "text-[#24354a] hover:text-[#0c2340]"
               }`}
             >
-              <span className="relative z-10 py-2">Home</span>
-              <span className="absolute inset-x-1 inset-y-3 rounded-lg bg-transparent group-hover:bg-slate-100/80 transition-colors -z-0 pointer-events-none" />
-              {pathname === "/" && (
-                <span className="absolute bottom-0 left-2 right-2 h-[3px] bg-slate-950 rounded-t-full shadow-xs" />
-              )}
+              <span className="py-2">Home</span>
             </Link>
 
-            {/* 2. PRODUCTS DROPDOWN */}
-            <div className="nav-dropdown-wrapper">
+            {/* 2. PRODUCTS */}
+            <div className="nav-dropdown-wrapper h-full flex items-center">
               <button
                 type="button"
-                className={`nav-dropdown-trigger relative flex items-center gap-1.5 h-full px-4 xl:px-4.5 text-[14.5px] xl:text-[15px] tracking-tight font-semibold transition-colors duration-150 group ${
-                  isProductsActive ? "text-slate-950 font-bold" : "text-slate-700 hover:text-black"
+                className={`nav-dropdown-trigger relative flex items-center h-full text-nav transition-colors duration-150 !px-2 ${
+                  isProductsActive ? "text-[#0c2340] font-bold" : "text-[#24354a] hover:text-[#0c2340] font-semibold"
                 }`}
                 aria-haspopup="true"
                 aria-expanded="false"
               >
-                <span className="relative z-10 py-2">Products</span>
-                <FaChevronDown className="nav-dropdown-chevron" />
-                <span className="absolute inset-x-1 inset-y-3 rounded-lg bg-transparent group-hover:bg-slate-100/80 transition-colors -z-0 pointer-events-none" />
-                {isProductsActive && (
-                  <span className="absolute bottom-0 left-2 right-2 h-[3px] bg-slate-950 rounded-t-full shadow-xs" />
-                )}
+                <span className="py-2">Products</span>
               </button>
 
               <div className="nav-dropdown-menu">
@@ -274,9 +266,10 @@ export default function Navbar() {
                       <Link
                         key={item.href}
                         href={item.href}
+                        prefetch={false}
                         className={`nav-dropdown-item group ${isItemActive ? "bg-slate-100 font-bold" : ""}`}
                       >
-                        <span className="text-[13.5px] font-semibold text-slate-800 group-hover:text-blue-600 transition-colors">
+                        <span className="text-body-sm font-semibold text-slate-800 group-hover:text-blue-600 transition-colors">
                           {item.label}
                         </span>
                       </Link>
@@ -287,21 +280,16 @@ export default function Navbar() {
             </div>
 
             {/* 3. SOLUTIONS DROPDOWN */}
-            <div className="nav-dropdown-wrapper">
+            <div className="nav-dropdown-wrapper h-full flex items-center">
               <button
                 type="button"
-                className={`nav-dropdown-trigger relative flex items-center gap-1.5 h-full px-4 xl:px-4.5 text-[14.5px] xl:text-[15px] tracking-tight font-semibold transition-colors duration-150 group ${
-                  isSolutionsActive ? "text-slate-950 font-bold" : "text-slate-700 hover:text-black"
+                className={`nav-dropdown-trigger relative flex items-center h-full text-nav transition-colors duration-150 !px-2 ${
+                  isSolutionsActive ? "text-[#0c2340] font-bold" : "text-[#24354a] hover:text-[#0c2340] font-semibold"
                 }`}
                 aria-haspopup="true"
                 aria-expanded="false"
               >
-                <span className="relative z-10 py-2">Solutions</span>
-                <FaChevronDown className="nav-dropdown-chevron" />
-                <span className="absolute inset-x-1 inset-y-3 rounded-lg bg-transparent group-hover:bg-slate-100/80 transition-colors -z-0 pointer-events-none" />
-                {isSolutionsActive && (
-                  <span className="absolute bottom-0 left-2 right-2 h-[3px] bg-slate-950 rounded-t-full shadow-xs" />
-                )}
+                <span className="py-2">Solutions</span>
               </button>
 
               <div className="nav-dropdown-menu">
@@ -312,9 +300,10 @@ export default function Navbar() {
                       <Link
                         key={item.href}
                         href={item.href}
+                        prefetch={false}
                         className={`nav-dropdown-item group ${isItemActive ? "bg-slate-100 font-bold" : ""}`}
                       >
-                        <span className="text-[13.5px] font-semibold text-slate-800 group-hover:text-blue-600 transition-colors">
+                        <span className="text-body-sm font-semibold text-slate-800 group-hover:text-blue-600 transition-colors">
                           {item.label}
                         </span>
                       </Link>
@@ -327,42 +316,36 @@ export default function Navbar() {
             {/* 4. CONTACT US */}
             <Link
               href="/#contact"
-              className={`relative flex items-center h-full px-4 xl:px-4.5 text-[14.5px] xl:text-[15px] tracking-tight font-semibold transition-colors duration-150 group ${
-                pathname === "/contact" ? "text-slate-950 font-bold" : "text-slate-700 hover:text-black"
+              prefetch={false}
+              className={`relative flex items-center h-full text-nav font-semibold transition-colors duration-150 ${
+                pathname === "/contact" ? "text-[#0c2340] font-bold" : "text-[#24354a] hover:text-[#0c2340]"
               }`}
             >
-              <span className="relative z-10 py-2">Contact Us</span>
-              <span className="absolute inset-x-1 inset-y-3 rounded-lg bg-transparent group-hover:bg-slate-100/80 transition-colors -z-0 pointer-events-none" />
-              {pathname === "/contact" && (
-                <span className="absolute bottom-0 left-2 right-2 h-[3px] bg-slate-950 rounded-t-full shadow-xs" />
-              )}
+              <span className="py-2">Contact Us</span>
             </Link>
           </nav>
 
-          {/* RIGHT CONTROLS: SEARCH, AMAZON VISIT & TOGGLES */}
-          <div className="flex items-center gap-2">
+          {/* RIGHT CONTROLS: AMAZON VISIT & SEARCH */}
+          <div className="flex items-center gap-3">
             
             {/* AMAZON VISIT BUTTON */}
             <Link
               href="/amazon"
-              className={`hidden sm:inline-flex items-center gap-1.5 px-3 sm:px-3.5 py-1.5 sm:py-2 rounded-full font-extrabold text-xs tracking-tight transition-all duration-200 border shadow-xs group shrink-0 ${
-                pathname === "/amazon"
-                  ? "bg-amber-400 text-black border-amber-500 shadow-amber-400/20 ring-2 ring-amber-300"
-                  : "bg-gradient-to-r from-[#febd69] to-[#f3a847] hover:from-[#f3a847] hover:to-[#e89a35] text-slate-950 border-amber-400 hover:shadow-md hover:scale-[1.02]"
-              }`}
+              prefetch={false}
+              className="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-2xl font-bold text-btn text-black bg-[#fdbd54] hover:bg-[#f5b128] transition-colors shrink-0 select-none shadow-2xs"
               title="Visit Authentic Infosystem Amazon Storefront"
             >
-              <FaAmazon className="text-sm shrink-0 group-hover:scale-110 transition-transform" />
+              <FaAmazon className="text-[17px] text-black shrink-0" />
               <span className="whitespace-nowrap">Amazon Visit</span>
             </Link>
 
             {/* DESKTOP SEARCH INPUT */}
             <div className="relative hidden md:block">
               <div 
-                className={`relative flex items-center h-[38px] transition-all duration-200 ease-out rounded-full border ${
+                className={`relative flex items-center h-[38px] transition-all duration-200 ease-out rounded-2xl bg-[#eff3f8] border ${
                   isSearchFocused 
-                    ? "w-64 lg:w-76 xl:w-84 bg-white border-slate-900 ring-2 ring-slate-100 shadow-sm" 
-                    : "w-52 lg:w-60 xl:w-68 bg-slate-100/90 border-slate-200/90 hover:bg-slate-100 hover:border-slate-300 shadow-2xs"
+                    ? "w-64 lg:w-72 xl:w-80 bg-white border-slate-400 ring-2 ring-blue-50 shadow-xs" 
+                    : "w-52 lg:w-60 xl:w-64 border-[#e1e7f0]/80 hover:border-slate-300 shadow-2xs"
                 }`}
                 onClick={() => {
                   inputRef.current?.focus();
@@ -371,7 +354,7 @@ export default function Navbar() {
               >
                 <FaSearch 
                   className={`ml-3.5 shrink-0 transition-colors duration-150 ${
-                    isSearchFocused ? "text-slate-900" : "text-slate-400"
+                    isSearchFocused ? "text-slate-800" : "text-[#4b5b72]"
                   }`} 
                   size={13} 
                 />
@@ -379,7 +362,7 @@ export default function Navbar() {
                 <input
                   ref={inputRef}
                   type="text"
-                  className="w-full bg-transparent text-[13.5px] text-slate-800 placeholder-slate-400 focus:outline-none pl-3 pr-2 font-normal"
+                  className="w-full bg-transparent text-[13px] text-slate-800 placeholder-[#7b8e9e] focus:outline-none pl-2.5 pr-2 font-normal"
                   placeholder="Search products, models..."
                   value={searchValue}
                   onChange={(e) => {
@@ -394,32 +377,19 @@ export default function Navbar() {
                   }}
                 />
 
-                {/* Clear / Submit Button */}
+                {/* Clear Button when typing */}
                 {searchValue && (
-                  <div className="flex items-center mr-1.5 gap-1">
-                    <button
-                      type="button"
-                      aria-label="Clear search"
-                      className="p-1 text-slate-400 hover:text-slate-700"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        setSearchValue("");
-                      }}
-                    >
-                      <FaTimes size={11} />
-                    </button>
-                    <button
-                      type="button"
-                      aria-label="Submit search"
-                      className="px-3 py-1 text-xs font-semibold bg-black hover:bg-zinc-800 text-white rounded-full transition-all shadow-2xs cursor-pointer"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        navigateToSection(searchValue);
-                      }}
-                    >
-                      Go
-                    </button>
-                  </div>
+                  <button
+                    type="button"
+                    aria-label="Clear search"
+                    className="mr-2 p-1 text-slate-400 hover:text-slate-700"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setSearchValue("");
+                    }}
+                  >
+                    <FaTimes size={11} />
+                  </button>
                 )}
               </div>
 
@@ -440,6 +410,7 @@ export default function Navbar() {
                           <Link
                             key={item.id}
                             href={item.href}
+                            prefetch={false}
                             onClick={() => {
                               setIsSearchFocused(false);
                               setSearchValue("");
@@ -569,7 +540,7 @@ export default function Navbar() {
                     setMobileSearchOpen(false);
                   }
                 }}
-                className="w-full bg-transparent text-slate-900 text-sm focus:outline-none placeholder-slate-400 font-normal"
+                className="w-full bg-transparent text-slate-900 text-base focus:outline-none placeholder-slate-400 font-normal"
               />
               {searchValue && (
                 <button
@@ -606,6 +577,7 @@ export default function Navbar() {
                         <Link
                           key={item.id}
                           href={item.href}
+                          prefetch={false}
                           onClick={() => {
                             setMobileSearchOpen(false);
                             setSearchValue("");
@@ -679,6 +651,7 @@ export default function Navbar() {
                   <Link
                     key={chip.href}
                     href={chip.href}
+                    prefetch={false}
                     onClick={() => setMobileSearchOpen(false)}
                     className="text-xs bg-slate-100 hover:bg-slate-200 text-slate-800 px-3 py-1.5 rounded-full border border-slate-200/80 transition-colors"
                   >
@@ -709,7 +682,7 @@ export default function Navbar() {
                     navigateToSection(searchValue);
                   }
                 }}
-                className="w-full bg-transparent text-slate-900 text-sm focus:outline-none placeholder-slate-400"
+                className="w-full bg-transparent text-slate-900 text-base focus:outline-none placeholder-slate-400"
               />
               {searchValue && (
                 <button
@@ -726,6 +699,7 @@ export default function Navbar() {
           {/* AMAZON VISIT CARD IN MOBILE DRAWER */}
           <Link
             href="/amazon"
+            prefetch={false}
             onClick={() => setMobileMenuOpen(false)}
             className="flex items-center justify-between p-3.5 rounded-2xl bg-gradient-to-r from-amber-400 to-amber-500 text-black font-extrabold shadow-md mb-4 border border-amber-300 group"
           >
@@ -753,6 +727,7 @@ export default function Navbar() {
                 <Link
                   key={item.label}
                   href={item.href}
+                  prefetch={false}
                   onClick={() => setMobileMenuOpen(false)}
                   className={`flex items-center justify-between px-3.5 py-3 rounded-xl text-base font-medium transition-all ${
                     isActive
@@ -777,6 +752,7 @@ export default function Navbar() {
 
             <Link
               href="/configuration"
+              prefetch={false}
               onClick={() => setMobileMenuOpen(false)}
               className="flex items-center justify-between px-3.5 py-3 rounded-xl text-base font-medium text-slate-700 hover:bg-slate-50 hover:text-black"
             >
@@ -791,6 +767,7 @@ export default function Navbar() {
 
             <Link
               href="/#solutions"
+              prefetch={false}
               onClick={() => setMobileMenuOpen(false)}
               className="flex items-center justify-between px-3.5 py-3 rounded-xl text-base font-medium text-slate-700 hover:bg-slate-50 hover:text-black"
             >
@@ -800,6 +777,7 @@ export default function Navbar() {
 
             <Link
               href="/#about"
+              prefetch={false}
               onClick={() => setMobileMenuOpen(false)}
               className="flex items-center justify-between px-3.5 py-3 rounded-xl text-base font-medium text-slate-700 hover:bg-slate-50 hover:text-black"
             >

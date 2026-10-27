@@ -109,18 +109,18 @@ export default function AccessoriesPage() {
 
         <div className="maroon-hero-container">
           {/* Top Breadcrumb */}
-          <nav className="maroon-hero-breadcrumb">
-            <Link href="/">Home</Link>
-            <span className="maroon-hero-breadcrumb-sep">/</span>
-            <span className="maroon-hero-breadcrumb-current">Enterprise PC Accessories & IT Peripherals</span>
+          <nav className="flex items-center gap-1.5 text-xs lg:text-[13px] text-[#E2EAF5]/85 mb-2.5 select-none font-medium">
+            <Link href="/" className="hover:text-white transition-colors">Home</Link>
+            <span className="text-[#E2EAF5]/60">&gt;</span>
+            <span className="text-white font-medium">Enterprise PC Accessories &amp; IT Peripherals</span>
           </nav>
 
           <div className="maroon-hero-layout">
             <div>
-              <h1 className="maroon-hero-title">
-                Enterprise PC Accessories & IT Peripherals
+              <h1 className="text-2xl sm:text-3xl lg:text-[34px] xl:text-[38px] font-bold tracking-tight text-white mb-2.5 leading-tight">
+                Enterprise PC Accessories &amp; IT Peripherals
               </h1>
-              <p className="maroon-hero-desc">
+              <p className="text-[13.5px] sm:text-[14px] lg:text-[15.5px] text-[#E2EAF5] font-normal leading-relaxed mb-3 max-w-2xl">
                 Professional ultra-sharp 4K monitors, ergonomic mechanical keyboards, precision mice, universal Thunderbolt docks, conference audio, and enterprise power backup systems for modern workplace productivity. Backed by pan-India dispatch, official GST invoicing, and manufacturer warranty.
               </p>
             </div>
@@ -174,13 +174,13 @@ export default function AccessoriesPage() {
         <div className="results-summary-bar">
           <div className="results-summary-row">
             <div className="flex items-center gap-3">
-              <span className="results-count-text">
-                {filteredProducts.length} Matching results
-              </span>
+              <h2 className="text-xl sm:text-[22px] font-bold text-slate-900 tracking-tight">
+                {filteredProducts.length} matching results
+              </h2>
               {hasActiveFilters && (
                 <button
                   onClick={clearAllFilters}
-                  className="results-clear-btn"
+                  className="text-xs font-bold text-[#0c2340] hover:text-blue-700 hover:underline cursor-pointer transition-colors"
                 >
                   Clear All
                 </button>
@@ -263,13 +263,9 @@ export default function AccessoriesPage() {
           </div>
         )}
 
-        {/* WORKSPACE COLLECTIONS (Corporate Style with Skin-to-Pink Gradient) */}
+        {/* WORKSPACE COLLECTIONS (Corporate Style) */}
         <section className="mt-16 pt-12 border-t border-slate-200">
-          <div className="p-6 sm:p-8 lg:p-10 rounded-2xl border border-[#ecd2c5] shadow-md relative overflow-hidden bg-gradient-to-br from-[#f8d7c7] via-[#fadfd6] to-pink-200/90">
-            {/* Atmospheric ambient glow */}
-            <div className="absolute -top-24 -right-24 w-96 h-96 bg-gradient-to-br from-[#f8d7c7]/30 to-pink-400/25 rounded-full blur-3xl pointer-events-none" />
-            <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-gradient-to-tr from-[#f3c8b4]/30 to-rose-300/25 rounded-full blur-3xl pointer-events-none" />
-
+          <div className="p-6 sm:p-8 lg:p-10 rounded-2xl border border-slate-200 shadow-sm relative overflow-hidden bg-slate-50/70">
             <div className="relative z-10">
               <div className="mb-6">
                 <h2 className="text-xl sm:text-3xl font-extrabold text-slate-950 tracking-tight">
@@ -292,7 +288,7 @@ export default function AccessoriesPage() {
                   <div 
                     key={i} 
                     onClick={() => handleOpenQuote("Workspace Collection", collection.title)}
-                    className="bg-white/90 hover:bg-white rounded-xl border border-white/80 hover:border-[#dfb5a2] p-5 sm:p-6 flex flex-col justify-between shadow-xs hover:shadow-md transition-all duration-200 cursor-pointer group"
+                    className="bg-white hover:bg-slate-50/50 rounded-xl border border-slate-200 hover:border-slate-300 p-5 sm:p-6 flex flex-col justify-between shadow-xs hover:shadow-md transition-all duration-200 cursor-pointer group"
                   >
                     <div>
                       <h3 className="text-base sm:text-lg font-bold text-slate-900 group-hover:text-[#0f3e99] transition-colors mb-1.5">
@@ -377,20 +373,16 @@ export default function AccessoriesPage() {
           </div>
         </section>
 
-        {/* SPECIAL WORKSTATION BUNDLE SHOWCASE (Corporate Style) */}
+        {/* SPECIAL WORKSTATION BUNDLE SHOWCASE */}
         <section className="mt-16 pt-12 border-t border-slate-200">
-          <div className="p-6 sm:p-8 lg:p-10 rounded-2xl border border-rose-300/80 shadow-md relative overflow-hidden bg-gradient-to-br from-red-100 via-rose-100 to-pink-200/90">
-            {/* Atmospheric ambient glow */}
-            <div className="absolute -top-24 -right-24 w-96 h-96 bg-gradient-to-br from-rose-500/20 to-pink-500/25 rounded-full blur-3xl pointer-events-none" />
-            <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-gradient-to-tr from-red-500/20 to-rose-400/25 rounded-full blur-3xl pointer-events-none" />
-
+          <div className="p-6 sm:p-8 lg:p-10 rounded-2xl border border-slate-200 shadow-sm bg-slate-50/80">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
               {/* Left Column: Text & Features */}
               <div className="lg:col-span-7">
                 <h2 className="text-xl sm:text-3xl font-extrabold mb-3 text-slate-950 tracking-tight">
                   Professional Workstation Ecosystem Bundle
                 </h2>
-                <p className="text-slate-700 text-xs sm:text-sm mb-6 leading-relaxed">
+                <p className="text-slate-600 text-xs sm:text-sm mb-6 leading-relaxed">
                   Equip entire departments with fully certified, pre-configured workstation peripherals. Includes comprehensive OEM warranties, bulk GST tax invoicing, and Pan-India unified office dispatch.
                 </p>
                 
@@ -421,28 +413,11 @@ export default function AccessoriesPage() {
                   </li>
                 </ul>
 
-                <div className="flex flex-wrap items-center gap-3">
-                  <button
-                    onClick={() => handleOpenQuote("Workstation Bundle", "Complete Professional Workplace Bundle")}
-                    className="px-6 py-2.5 bg-[#1546a0] hover:bg-[#003d7e] text-white font-bold text-xs uppercase tracking-wider rounded-md transition-all shadow-xs cursor-pointer"
-                  >
-                    Request Corporate Pricing
-                  </button>
-                  <a
-                    href="https://wa.me/919643990077?text=Hi%2C%20I%20want%20to%20request%20corporate%20pricing%20for%20the%20Professional%20Workstation%20Bundle%20from%20Authentic%20Infosystem."
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-5 py-2.5 bg-slate-900 hover:bg-black text-white text-xs font-bold uppercase tracking-wider rounded-md transition-all shadow-xs cursor-pointer"
-                  >
-                    <FaWhatsapp size={13} className="text-emerald-400" />
-                    <span>Quick WhatsApp Inquiry</span>
-                  </a>
-                </div>
               </div>
 
               {/* Right Column: Bundle Photo */}
               <div className="lg:col-span-5 flex justify-center items-center">
-                <div className="rounded-xl overflow-hidden border border-rose-200/80 w-full max-w-md group bg-white shadow-md">
+                <div className="rounded-xl overflow-hidden border border-slate-200 w-full max-w-md group bg-white shadow-sm">
                   <img
                     src="/Accessories/Professional%20Workstation%20Bundle.jpeg"
                     alt="Professional Workstation Bundle - Authentic Infosystem"
@@ -459,41 +434,31 @@ export default function AccessoriesPage() {
 
       </div>
 
-      {/* CUSTOM IT ACCESSORIES INFRASTRUCTURE CTA (Card matching 1720px span width on white background) */}
-      <section className="pt-2 pb-16 bg-white">
-        <div className="max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10">
-          <div className="p-8 sm:p-12 lg:p-14 rounded-2xl sm:rounded-3xl border border-zinc-800 shadow-2xl relative overflow-hidden bg-[#09090b] text-white text-center">
-            {/* Atmospheric ambient glow */}
-            <div className="absolute top-0 right-0 w-96 h-96 bg-blue-600/15 rounded-full blur-3xl pointer-events-none" />
-            <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl pointer-events-none" />
-
-            <div className="max-w-3xl mx-auto relative z-10">
-              <p className="text-xs font-bold text-zinc-400 tracking-[4px] uppercase mb-3">
-                BULK IT PROCUREMENT DESK
-              </p>
-              <h2 className="text-2xl sm:text-4xl md:text-5xl font-extrabold mb-4 tracking-tight">
-                Scale Your Workplace Peripherals & Hardware Supply
-              </h2>
-              <p className="text-zinc-300 text-xs sm:text-sm md:text-base mb-8 max-w-2xl mx-auto leading-relaxed">
-                Need bulk procurement for multi-city branches, standard employee onboard kits, or specialized CAD/editing peripherals? Consult our corporate hardware sourcing desk for direct OEM pricing.
-              </p>
-              <div className="flex flex-wrap items-center justify-center gap-4">
-                <button
-                  onClick={() => handleOpenQuote("Enterprise", "Bulk Peripheral Fleet Procurement")}
-                  className="px-8 py-3.5 bg-[#1546a0] hover:bg-[#003d7e] text-white font-bold text-xs uppercase tracking-wider rounded-md shadow-md transition-all cursor-pointer"
-                >
-                  Request Corporate Quote
-                </button>
-                <a
-                  href="https://wa.me/919643990077?text=Hi%2C%20I%20want%20to%20request%20a%20commercial%20quote%20for%20enterprise%20accessories%20and%20hardware."
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-8 py-3.5 bg-white text-slate-950 hover:bg-slate-100 font-bold text-xs uppercase tracking-wider rounded-md shadow-md transition-all cursor-pointer"
-                >
-                  Chat on WhatsApp
-                </a>
-              </div>
-            </div>
+      {/* CUSTOM IT ACCESSORIES INFRASTRUCTURE CTA */}
+      <section className="pt-8 pb-16 bg-white text-center">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-2xl sm:text-4xl md:text-5xl font-black mb-4 tracking-tight text-slate-950">
+            Scale Your Workplace Peripherals & Hardware Supply
+          </h2>
+          <p className="text-slate-600 text-xs sm:text-sm md:text-base mb-8 max-w-2xl mx-auto leading-relaxed font-normal">
+            Need bulk procurement for multi-city branches, standard employee onboard kits, or specialized CAD/editing peripherals? Consult our corporate hardware sourcing desk for direct OEM pricing.
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-4">
+            <button
+              onClick={() => handleOpenQuote("Enterprise", "Bulk Peripheral Fleet Procurement")}
+              className="px-8 py-3.5 bg-[#0c2340] hover:bg-[#12335e] text-white font-extrabold text-xs uppercase tracking-wider rounded-lg shadow-sm hover:shadow-md hover:scale-[1.02] active:scale-[0.99] transition-all cursor-pointer"
+            >
+              Request Corporate Quote
+            </button>
+            <a
+              href="https://wa.me/919643990077?text=Hi%2C%20I%20want%20to%20request%20a%20commercial%20quote%20for%20enterprise%20accessories%20and%20hardware."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-8 py-3.5 bg-[#25D366] hover:bg-[#20ba59] text-white font-extrabold text-xs uppercase tracking-wider rounded-lg shadow-sm hover:shadow-md transition-all cursor-pointer border border-[#25D366] inline-flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-[0.99]"
+            >
+              <FaWhatsapp className="text-base text-white" />
+              <span>Chat on WhatsApp</span>
+            </a>
           </div>
         </div>
       </section>

@@ -80,6 +80,7 @@ export default function ProductCard({
           <div className="grid grid-cols-2 gap-3">
             <Link
               href={`#details-${id}`}
+              prefetch={false}
               className="py-2.5 px-4 text-center rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-800 text-sm font-semibold transition-all"
             >
               View Details

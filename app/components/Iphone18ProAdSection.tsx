@@ -47,10 +47,10 @@ export default function Iphone18ProAdSection() {
               href={`https://wa.me/919643990077?text=${whatsappInquiryMsg}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2.5 px-8 py-3.5 rounded-full bg-slate-950 hover:bg-slate-800 text-white font-bold text-sm sm:text-base shadow-lg transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
+              className="inline-flex items-center gap-2.5 px-8 py-3.5 rounded-full bg-[#25D366] hover:bg-[#20ba59] text-white font-bold text-sm sm:text-base shadow-lg transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
               aria-label="Order iPhone 18 Pro on WhatsApp"
             >
-              <FaWhatsapp className="text-emerald-400 text-base" />
+              <FaWhatsapp className="text-white text-base" />
               <span>Reserve via WhatsApp</span>
             </a>
           </div>

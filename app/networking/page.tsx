@@ -130,18 +130,18 @@ export default function NetworkingPage() {
 
         <div className="maroon-hero-container">
           {/* Top Breadcrumb */}
-          <nav className="maroon-hero-breadcrumb">
-            <Link href="/">Home</Link>
-            <span className="maroon-hero-breadcrumb-sep">/</span>
-            <span className="maroon-hero-breadcrumb-current">Enterprise Networking & Smart Surveillance (CCTV)</span>
+          <nav className="flex items-center gap-1.5 text-xs lg:text-[13px] text-[#E2EAF5]/85 mb-2.5 select-none font-medium">
+            <Link href="/" className="hover:text-white transition-colors">Home</Link>
+            <span className="text-[#E2EAF5]/60">&gt;</span>
+            <span className="text-white font-medium">Enterprise Networking &amp; Smart Surveillance (CCTV)</span>
           </nav>
 
           <div className="maroon-hero-layout">
             <div>
-              <h1 className="maroon-hero-title">
-                Enterprise Networking & Smart Surveillance (CCTV)
+              <h1 className="text-2xl sm:text-3xl lg:text-[34px] xl:text-[38px] font-bold tracking-tight text-white mb-2.5 leading-tight">
+                Enterprise Networking &amp; Smart Surveillance (CCTV)
               </h1>
-              <p className="maroon-hero-desc">
+              <p className="text-[13.5px] sm:text-[14px] lg:text-[15.5px] text-[#E2EAF5] font-normal leading-relaxed mb-3 max-w-2xl">
                 Enterprise-grade Cisco managed switches, Fortinet firewalls, Aruba access points, Ubiquiti UniFi Wi-Fi 6/7, optical fiber transceivers, server rack infrastructure, and AI-powered CCTV surveillance systems. Backed by pan-India onsite deployment, certified OEM warranties, and official GST invoicing.
               </p>
             </div>
@@ -195,13 +195,13 @@ export default function NetworkingPage() {
         <div className="results-summary-bar">
           <div className="results-summary-row">
             <div className="flex items-center gap-3">
-              <span className="results-count-text">
-                {filteredProducts.length} Matching results
-              </span>
+              <h2 className="text-xl sm:text-[22px] font-bold text-slate-900 tracking-tight">
+                {filteredProducts.length} matching results
+              </h2>
               {hasActiveFilters && (
                 <button
                   onClick={clearAllFilters}
-                  className="results-clear-btn"
+                  className="text-xs font-bold text-[#0c2340] hover:text-blue-700 hover:underline cursor-pointer transition-colors"
                 >
                   Clear All
                 </button>
@@ -261,7 +261,7 @@ export default function NetworkingPage() {
       </div>
 
       {/* SMART SURVEILLANCE (CCTV) SECTION (Expanded to 1720px) */}
-      <section className="py-14 bg-slate-50 border-t border-slate-200">
+      <section className="py-14 bg-white border-t border-slate-100">
         <div className="max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10">
           <div className="text-center max-w-3xl mx-auto mb-8">
             <h2 className="text-2xl sm:text-3xl font-black text-slate-950 tracking-tight">
@@ -271,23 +271,24 @@ export default function NetworkingPage() {
               Protect your enterprise assets, warehouses, and commercial spaces with high-definition IP cameras, smart PTZ domes, bullet cameras, NVRs, and AI video analytics.
             </p>
           </div>
-          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3 sm:gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-4 sm:gap-6 items-end">
             {surveillanceItems.map((cam, i) => (
               <button
                 key={i}
                 onClick={() => handleOpenQuote("CCTV Surveillance", `${cam.title} Setup`)}
-                className="relative rounded-xl overflow-hidden aspect-square flex items-center justify-center p-3 border border-slate-200 shadow-xs cursor-pointer group hover:shadow-md hover:border-black transition-all text-left block w-full"
+                className="group flex flex-col items-center justify-between text-center cursor-pointer transition-transform duration-300 hover:-translate-y-1.5 focus:outline-none"
               >
-                <img
-                  src={cam.image}
-                  alt={cam.title}
-                  width="400"
-                  height="400"
-                  loading="lazy"
-                  className="absolute inset-0 w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-500 ease-out"
-                />
-                <div className="absolute inset-0 bg-black/55 group-hover:bg-black/45 transition-colors duration-300" />
-                <h3 className="relative z-10 text-white font-extrabold text-xs sm:text-sm text-center px-1 tracking-wide drop-shadow-md">
+                <div className="w-full aspect-square flex items-center justify-center p-1 sm:p-2 mb-2.5">
+                  <img
+                    src={cam.image}
+                    alt={cam.title}
+                    width="400"
+                    height="400"
+                    loading="lazy"
+                    className="w-full h-full object-contain drop-shadow-sm group-hover:scale-110 group-hover:drop-shadow-md transition-all duration-300 ease-out"
+                  />
+                </div>
+                <h3 className="text-slate-900 font-bold text-xs sm:text-sm leading-tight group-hover:text-[#1546a0] transition-colors">
                   {cam.title}
                 </h3>
               </button>
@@ -333,13 +334,9 @@ export default function NetworkingPage() {
       {/* CASE STUDY SECTION */}
       <section className="pt-14 pb-6 bg-white border-t border-slate-200">
         <div className="max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10">
-          <div className="p-6 sm:p-10 rounded-2xl border border-purple-300/80 shadow-md relative overflow-hidden bg-gradient-to-br from-pink-200/90 via-fuchsia-100 to-purple-200 flex flex-col lg:flex-row items-center gap-8">
-            {/* Atmospheric ambient glow */}
-            <div className="absolute -top-24 -right-24 w-96 h-96 bg-gradient-to-br from-purple-500/20 to-indigo-500/25 rounded-full blur-3xl pointer-events-none" />
-            <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-gradient-to-tr from-pink-500/25 to-fuchsia-400/25 rounded-full blur-3xl pointer-events-none" />
-
+          <div className="p-6 sm:p-10 rounded-2xl border border-slate-200 shadow-sm relative overflow-hidden bg-slate-50 flex flex-col lg:flex-row items-center gap-8">
             <div className="lg:w-1/2 relative z-10">
-              <span className="text-purple-900 font-extrabold tracking-wider uppercase text-xs mb-1.5 block">
+              <span className="text-[#0c2340] font-extrabold tracking-wider uppercase text-xs mb-1.5 block">
                 Enterprise Deployment Case Study
               </span>
               <h2 className="text-xl sm:text-3xl font-extrabold text-slate-950 mb-3 tracking-tight">
@@ -357,19 +354,19 @@ export default function NetworkingPage() {
             </div>
 
             <div className="lg:w-1/2 grid grid-cols-2 gap-3 sm:gap-4 w-full relative z-10">
-              <div className="bg-white/90 hover:bg-white border border-white/80 hover:border-purple-300/80 rounded-xl p-4 sm:p-5 shadow-xs hover:shadow-md transition-all">
+              <div className="bg-white border border-slate-200 hover:border-slate-300 rounded-xl p-4 sm:p-5 shadow-xs hover:shadow-md transition-all">
                 <div className="text-2xl sm:text-3xl font-black text-slate-950 mb-1">99.99%</div>
                 <p className="text-slate-600 text-xs font-medium">Uptime SLA Guaranteed</p>
               </div>
-              <div className="bg-white/90 hover:bg-white border border-white/80 hover:border-purple-300/80 rounded-xl p-4 sm:p-5 shadow-xs hover:shadow-md transition-all">
+              <div className="bg-white border border-slate-200 hover:border-slate-300 rounded-xl p-4 sm:p-5 shadow-xs hover:shadow-md transition-all">
                 <div className="text-2xl sm:text-3xl font-black text-slate-950 mb-1">10 Gbps</div>
                 <p className="text-slate-600 text-xs font-medium">Fiber Backbone Throughput</p>
               </div>
-              <div className="bg-white/90 hover:bg-white border border-white/80 hover:border-purple-300/80 rounded-xl p-4 sm:p-5 shadow-xs hover:shadow-md transition-all">
+              <div className="bg-white border border-slate-200 hover:border-slate-300 rounded-xl p-4 sm:p-5 shadow-xs hover:shadow-md transition-all">
                 <div className="text-2xl sm:text-3xl font-black text-slate-950 mb-1">128+</div>
                 <p className="text-slate-600 text-xs font-medium">AI Smart IP Cameras</p>
               </div>
-              <div className="bg-white/90 hover:bg-white border border-white/80 hover:border-purple-300/80 rounded-xl p-4 sm:p-5 shadow-xs hover:shadow-md transition-all">
+              <div className="bg-white border border-slate-200 hover:border-slate-300 rounded-xl p-4 sm:p-5 shadow-xs hover:shadow-md transition-all">
                 <div className="text-2xl sm:text-3xl font-black text-slate-950 mb-1">Zero</div>
                 <p className="text-slate-600 text-xs font-medium">Business Interruption Migration</p>
               </div>
@@ -378,41 +375,31 @@ export default function NetworkingPage() {
         </div>
       </section>
 
-      {/* CUSTOM NETWORK INFRASTRUCTURE CTA (Card matching upper card size with Red to Pink gradient) */}
-      <section className="pt-2 pb-16 bg-white">
-        <div className="max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10">
-          <div className="p-8 sm:p-12 lg:p-14 rounded-2xl border border-rose-300/80 shadow-md relative overflow-hidden bg-gradient-to-br from-red-100 via-rose-100 to-pink-200/90 text-center">
-            {/* Atmospheric ambient glow */}
-            <div className="absolute -top-24 -right-24 w-96 h-96 bg-gradient-to-br from-rose-500/20 to-pink-500/25 rounded-full blur-3xl pointer-events-none" />
-            <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-gradient-to-tr from-red-500/20 to-rose-400/25 rounded-full blur-3xl pointer-events-none" />
-
-            <div className="max-w-3xl mx-auto relative z-10">
-              <p className="text-xs font-bold text-rose-900 tracking-[4px] uppercase mb-3">
-                INFRASTRUCTURE SOLUTIONS
-              </p>
-              <h2 className="text-2xl sm:text-4xl md:text-5xl font-extrabold text-slate-950 mb-4 tracking-tight">
-                Design Your Enterprise Network & Security Infrastructure
-              </h2>
-              <p className="text-slate-700 text-xs sm:text-sm md:text-base mb-8 max-w-2xl mx-auto leading-relaxed">
-                Need custom multi-site VPNs, 10G/40G fiber aggregation, high-density Wi-Fi 7 access, or centralized AI video surveillance? Our certified Cisco & Fortinet engineers craft tailored architectures with manufacturer warranty.
-              </p>
-              <div className="flex flex-wrap items-center justify-center gap-4">
-                <button
-                  onClick={() => handleOpenQuote("Enterprise", "Full Network & CCTV Solution")}
-                  className="px-8 py-3.5 bg-[#1546a0] hover:bg-[#003d7e] text-white font-bold text-xs uppercase tracking-wider rounded-md shadow-md transition-all cursor-pointer"
-                >
-                  Request Infrastructure Quote
-                </button>
-                <a
-                  href="https://wa.me/919643990077?text=Hi%2C%20I%20want%20to%20request%20a%20commercial%20quote%20for%20networking%20and%20CCTV%20solutions."
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-8 py-3.5 bg-slate-900 hover:bg-black text-white font-bold text-xs uppercase tracking-wider rounded-md shadow-md transition-all cursor-pointer"
-                >
-                  Chat on WhatsApp
-                </a>
-              </div>
-            </div>
+      {/* CUSTOM NETWORK INFRASTRUCTURE CTA */}
+      <section className="pt-8 pb-16 bg-white text-center">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-2xl sm:text-4xl md:text-5xl font-extrabold text-slate-950 mb-4 tracking-tight">
+            Design Your Enterprise Network & Security Infrastructure
+          </h2>
+          <p className="text-slate-600 text-xs sm:text-sm md:text-base mb-8 max-w-2xl mx-auto leading-relaxed font-normal">
+            Need custom multi-site VPNs, 10G/40G fiber aggregation, high-density Wi-Fi 7 access, or centralized AI video surveillance? Our certified Cisco & Fortinet engineers craft tailored architectures with manufacturer warranty.
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-4">
+            <button
+              onClick={() => handleOpenQuote("Enterprise", "Full Network & CCTV Solution")}
+              className="px-8 py-3.5 bg-[#0c2340] hover:bg-[#12335e] text-white font-extrabold text-xs uppercase tracking-wider rounded-lg shadow-sm hover:shadow-md hover:scale-[1.02] active:scale-[0.99] transition-all cursor-pointer"
+            >
+              Request Infrastructure Quote
+            </button>
+            <a
+              href="https://wa.me/919643990077?text=Hi%2C%20I%20want%20to%20request%20a%20commercial%20quote%20for%20networking%20and%20CCTV%20solutions."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-8 py-3.5 bg-[#25D366] hover:bg-[#20ba59] text-white font-extrabold text-xs uppercase tracking-wider rounded-lg shadow-sm hover:shadow-md transition-all cursor-pointer border border-[#25D366] inline-flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-[0.99]"
+            >
+              <FaWhatsapp className="text-base text-white" />
+              <span>Chat on WhatsApp</span>
+            </a>
           </div>
         </div>
       </section>

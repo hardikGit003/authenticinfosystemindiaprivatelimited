@@ -65,21 +65,21 @@ export default function Footer() {
         <div className="footer-links">
           <div className="footer-column">
             <h3>Products</h3>
-            <Link href="/amazon">Amazon Storefront</Link>
-            <Link href="/laptops">Laptops</Link>
-            <Link href="/desktops">Desktops</Link>
-            <Link href="/phones">Smartphones</Link>
-            <Link href="/networking">Networking</Link>
-            <Link href="/accessories">Accessories</Link>
-            <Link href="/configuration">Custom PC Build</Link>
+            <Link href="/amazon" prefetch={false}>Amazon Storefront</Link>
+            <Link href="/laptops" prefetch={false}>Laptops</Link>
+            <Link href="/desktops" prefetch={false}>Desktops</Link>
+            <Link href="/phones" prefetch={false}>Smartphones</Link>
+            <Link href="/networking" prefetch={false}>Networking</Link>
+            <Link href="/accessories" prefetch={false}>Accessories</Link>
+            <Link href="/configuration" prefetch={false}>Custom PC Build</Link>
           </div>
 
           <div className="footer-column">
             <h3>Solutions</h3>
-            <Link href="/enterprise">Business Solutions</Link>
-            <Link href="/enterprise">Bulk Orders</Link>
-            <Link href="/enterprise">B2B Supply</Link>
-            <Link href="/enterprise">Enterprise Infra</Link>
+            <Link href="/enterprise" prefetch={false}>Business Solutions</Link>
+            <Link href="/enterprise" prefetch={false}>Bulk Orders</Link>
+            <Link href="/enterprise" prefetch={false}>B2B Supply</Link>
+            <Link href="/enterprise" prefetch={false}>Enterprise Infra</Link>
           </div>
 
           <div className="footer-column">
@@ -92,10 +92,10 @@ export default function Footer() {
 
           <div className="footer-column">
             <h3>Custom PCs</h3>
-            <Link href="/configuration/gaming">Gaming Rig</Link>
-            <Link href="/configuration/workstation">Workstation PC</Link>
-            <Link href="/configuration/creator">Creator Studio</Link>
-            <Link href="/configuration/office">Office System</Link>
+            <Link href="/configuration/gaming" prefetch={false}>Gaming Rig</Link>
+            <Link href="/configuration/workstation" prefetch={false}>Workstation PC</Link>
+            <Link href="/configuration/creator" prefetch={false}>Creator Studio</Link>
+            <Link href="/configuration/office" prefetch={false}>Office System</Link>
           </div>
 
           <div className="footer-column">

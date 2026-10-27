@@ -12,14 +12,14 @@ export interface NetworkingProduct {
 }
 
 export const surveillanceItems = [
-  { title: "IP Cameras", image: "/Newtworking/IP%20Cameras.jpg" },
-  { title: "PTZ Cameras", image: "/Newtworking/PTZ%20Cameras.jpg" },
-  { title: "Bullet Cameras", image: "/Newtworking/Bullet%20Cameras.jpg" },
-  { title: "Dome Cameras", image: "/Newtworking/Dome%20Cameras.jpg" },
-  { title: "NVR", image: "/Newtworking/NVR%20Cameras.jpg" },
-  { title: "DVR", image: "/Newtworking/DVR%20Camera.jpg" },
-  { title: "Video Analytics", image: "/Newtworking/Video%20Analytics.jpg" },
-  { title: "AI Surveillance", image: "/Newtworking/AI%20Survillance%20Camera.jpg" },
+  { title: "IP Cameras", image: "/Newtworking/ip-cameras.png" },
+  { title: "PTZ Cameras", image: "/Newtworking/ptz-cameras.png" },
+  { title: "Bullet Cameras", image: "/Newtworking/bullet-cameras.png" },
+  { title: "Dome Cameras", image: "/Newtworking/dome-cameras.png" },
+  { title: "NVR", image: "/Newtworking/nvr-cameras.png" },
+  { title: "DVR", image: "/Newtworking/dvr-camera.png" },
+  { title: "Video Analytics", image: "/Newtworking/video-analytics.png" },
+  { title: "AI Surveillance", image: "/Newtworking/ai-surveillance-camera.png" },
 ];
 
 export const networkingProducts: NetworkingProduct[] = [

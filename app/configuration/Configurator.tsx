@@ -15,6 +15,9 @@ import {
   FaServer, 
   FaWindows, 
   FaApple,
+  FaHdd,
+  FaHeart,
+  FaRegHeart,
   FaStar, 
   FaStarHalfAlt, 
   FaRegStar,
@@ -157,6 +160,8 @@ function ConfigProductCard({
   product: TaggedProduct;
   onOpenQuote: (brand: string, model: string) => void;
 }) {
+  const [isFavorited, setIsFavorited] = useState(false);
+
   const getSpecValue = (label: string) => {
     const found = product.specs.find((s) => s.label.toLowerCase() === label.toLowerCase());
     return found ? found.value : "";
@@ -191,118 +196,129 @@ function ConfigProductCard({
     return stars;
   };
 
-  const features = [
-    product.formFactor === "Laptops"
-      ? "High-efficiency anti-glare display with low blue-light certification"
-      : `${formFactorOrOS} chassis engineered for whisper-quiet acoustics & airflow`,
-    product.formFactor === "Laptops"
-      ? "Discrete enterprise hardware security chip & camera privacy shutter"
-      : "Tool-less expansion bays supporting enterprise PCIe & memory upgrades",
-    product.warranty || "Includes manufacturer comprehensive onsite 3-year enterprise warranty",
-  ];
+  // Determine badge styling exact to Laptop and Desktop sections
+  const rawBadge = product.badges && product.badges.length > 0 ? product.badges[0] : "";
+  const badgeText = rawBadge || (product.formFactor === "Laptops" ? "Corporate Fleet" : "Workstation");
+  const categoryText = product.brand || product.formFactor;
+
+  const getBadgeStyle = (text: string) => {
+    const t = text.toLowerCase();
+    if (t.includes("top") || t.includes("best") || t.includes("gaming") || t.includes("workstation")) {
+      return { bg: "bg-[#0c1e38]", textCol: "text-white" };
+    }
+    if (t.includes("value") || t.includes("deal") || t.includes("saving") || t.includes("basic")) {
+      return { bg: "bg-[#fef08a]", textCol: "text-[#78350f]", border: "border border-yellow-300" };
+    }
+    return { bg: "bg-[#1d4ed8]", textCol: "text-white" };
+  };
+
+  const badgeStyle = getBadgeStyle(badgeText);
+  const fullTitle = `${product.brand} ${product.name} - ${processor.split("(")[0].trim()}, ${ram}, ${storage}`;
 
   return (
-    <div className="bg-white border border-slate-200 hover:border-slate-400 rounded-lg p-4 sm:p-4.5 flex flex-col justify-between transition-all duration-200 hover:shadow-lg relative group h-full">
+    <div className="bg-white border border-slate-200 hover:border-slate-300 rounded-xl p-3.5 sm:p-4 flex flex-col justify-between h-full transition-all duration-200 hover:shadow-md group">
       <div>
-        {/* MODEL TITLE (Lenovo Navy Blue) */}
-        <div className="mb-1">
-          <button onClick={handleQuoteClick} className="block text-left group/title w-full cursor-pointer">
-            <h3 className="text-[#0f3e99] group-hover/title:underline font-bold text-xs sm:text-sm leading-snug line-clamp-2 min-h-[36px]">
-              {product.brand} {product.name} - {processor.split("(")[0].trim()}, {ram}, {storage}
-            </h3>
+        {/* TOP ROW: WISHLIST HEART */}
+        <div className="flex items-center justify-end mb-1">
+          <button 
+            type="button"
+            onClick={() => setIsFavorited(!isFavorited)}
+            className="text-slate-400 hover:text-rose-500 transition-colors p-1.5 -mr-1 -mt-1 cursor-pointer shrink-0 min-h-[32px] min-w-[32px] flex items-center justify-center rounded-full hover:bg-slate-50"
+            aria-label="Save to wishlist"
+          >
+            {isFavorited ? (
+              <FaHeart className="text-rose-500" size={14} />
+            ) : (
+              <FaRegHeart size={14} />
+            )}
           </button>
         </div>
 
-        {/* STAR RATING */}
-        <div className="flex items-center gap-1.5 mb-2.5 text-xs">
-          <div className="flex items-center gap-0.5">{renderStars(rating)}</div>
-          <span className="font-bold text-slate-900 text-[11px]">{rating.toFixed(1)}</span>
-          <span className="text-slate-500 text-[11px]">({reviewCount})</span>
-        </div>
-
-        {/* PRODUCT IMAGE (Centered on Clean Background) */}
+        {/* PRODUCT IMAGE: Centered on Crisp White Background */}
         <div 
           onClick={handleQuoteClick}
-          className="relative w-full h-40 sm:h-44 bg-white flex items-center justify-center p-2 mb-3 overflow-hidden group-hover:scale-102 transition-transform duration-300 cursor-pointer"
+          className="relative w-full h-[140px] sm:h-[155px] flex items-center justify-center p-1.5 my-1 overflow-hidden group-hover:scale-[1.02] transition-transform duration-300 cursor-pointer"
         >
           <img
             src={product.image}
-            alt={`${product.name} - ${product.modelNumber}`}
+            alt={fullTitle}
             width="280"
-            height="190"
+            height="180"
             loading="lazy"
-            className="max-h-full max-w-full object-contain drop-shadow-sm"
+            className="max-h-full max-w-full object-contain filter drop-shadow-sm"
           />
         </div>
 
-        {/* TECH SPECS WITH ICONS */}
-        <div className="mt-3 space-y-2 py-2.5 border-t border-slate-100 text-[11px] text-slate-700">
+        {/* PRODUCT TITLE (Dark Bold font, 2 lines matching Laptop and Desktop sections) */}
+        <button onClick={handleQuoteClick} className="block mt-2 text-left w-full group/title border-none bg-transparent p-0 cursor-pointer">
+          <h3 className="text-[13px] sm:text-[13.5px] font-bold text-slate-900 group-hover/title:text-blue-700 leading-snug line-clamp-2 min-h-[38px] transition-colors">
+            {fullTitle}
+          </h3>
+        </button>
+
+        {/* STAR RATING ROW */}
+        <div className="flex items-center gap-1.5 my-2">
+          <div className="flex items-center gap-0.5">
+            {renderStars(rating)}
+          </div>
+          <span className="text-xs font-bold text-slate-800 ml-0.5">
+            {rating.toFixed(1)}
+          </span>
+          <span className="text-xs text-slate-400">
+            ({reviewCount})
+          </span>
+        </div>
+
+        {/* TECH SPECS WITH CLEAN ICONS MATCHING LAPTOPS & DESKTOPS */}
+        <div className="space-y-1.5 my-3 text-[11px] sm:text-[11.5px] text-slate-600 border-t border-slate-100 pt-2.5">
           {/* Processor */}
-          <div className="flex items-start gap-2">
-            <FaMicrochip className="text-slate-800 shrink-0 mt-0.5" size={12} />
-            <span className="line-clamp-2 leading-tight text-slate-900 font-medium">{processor}</span>
+          <div className="flex items-center gap-2 overflow-hidden">
+            <FaMicrochip className="text-slate-400 shrink-0 text-xs" />
+            <span className="truncate">{processor}</span>
           </div>
 
           {/* Form Factor / OS */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 overflow-hidden">
             {product.formFactor === "Laptops" ? (
               product.brand.toLowerCase() === "apple" ? (
-                <FaApple className="text-slate-800 shrink-0" size={12} />
+                <FaApple className="text-slate-400 shrink-0 text-xs" />
               ) : (
-                <FaWindows className="text-slate-800 shrink-0" size={12} />
+                <FaWindows className="text-slate-400 shrink-0 text-xs" />
               )
             ) : (
-              <FaServer className="text-slate-800 shrink-0" size={12} />
+              <FaServer className="text-slate-400 shrink-0 text-xs" />
             )}
-            <span className="truncate text-slate-900 font-medium">{formFactorOrOS}</span>
+            <span className="truncate">{formFactorOrOS}</span>
           </div>
 
           {/* GPU */}
-          <div className="flex items-center gap-2">
-            <FaDesktop className="text-slate-800 shrink-0" size={12} />
-            <span className="truncate text-slate-900 font-medium">{gpu}</span>
+          <div className="flex items-center gap-2 overflow-hidden">
+            <FaDesktop className="text-slate-400 shrink-0 text-xs" />
+            <span className="truncate">{gpu}</span>
           </div>
 
-          {/* Memory & Storage */}
-          <div className="flex items-center gap-2">
-            <FaMemory className="text-slate-800 shrink-0" size={12} />
-            <span className="truncate text-slate-900 font-medium">{ram} | {storage}</span>
+          {/* RAM */}
+          <div className="flex items-center gap-2 overflow-hidden">
+            <FaMemory className="text-slate-400 shrink-0 text-xs" />
+            <span className="truncate">{ram}</span>
           </div>
-        </div>
 
-        {/* ADDITIONAL SPECS LINK */}
-        <div className="pt-1 pb-2">
-          <button
-            onClick={handleQuoteClick}
-            className="text-[11px] font-bold text-[#0f3e99] hover:underline inline-block cursor-pointer"
-          >
-            Additional Specs & Configs
-          </button>
-        </div>
-
-        {/* FEATURES BULLET LIST */}
-        <div className="pt-2 border-t border-slate-100 text-xs text-slate-700 mb-3">
-          <div className="font-bold text-slate-900 text-[11px] uppercase tracking-wider mb-1.5">
-            Features
+          {/* Storage */}
+          <div className="flex items-center gap-2 overflow-hidden">
+            <FaHdd className="text-slate-400 shrink-0 text-xs" />
+            <span className="truncate">{storage}</span>
           </div>
-          <ul className="space-y-1 text-slate-600 text-[11px] leading-relaxed">
-            {features.map((feat, idx) => (
-              <li key={idx} className="flex items-start gap-1.5">
-                <span className="text-slate-400 select-none">•</span>
-                <span className="line-clamp-2">{feat}</span>
-              </li>
-            ))}
-          </ul>
         </div>
       </div>
 
-      {/* PRIMARY CTA BUTTON (Full Width Corporate Lenovo Blue) */}
-      <div className="mt-auto pt-2">
+      {/* BOTTOM ACTIONS SECTION: GET QUOTE CTA ONLY */}
+      <div className="mt-auto pt-2.5 border-t border-slate-100">
         <button
           onClick={handleQuoteClick}
-          className="w-full bg-[#1546a0] hover:bg-[#003d7e] active:bg-[#00285a] text-white font-bold py-2.5 px-3 text-xs tracking-wider rounded-md transition-colors shadow-xs flex items-center justify-center gap-2 cursor-pointer uppercase"
+          className="w-full bg-[#25D366] hover:bg-[#20ba59] text-white py-2.5 px-3 rounded-lg flex items-center justify-center gap-2 text-xs font-bold shadow-xs hover:shadow-md transition-all cursor-pointer"
         >
-          <span>Request Quote</span>
+          <FaWhatsapp size={14} className="text-white shrink-0" />
+          <span>Get Quote</span>
         </button>
       </div>
     </div>
@@ -587,17 +603,17 @@ export default function Configurator({
 
         <div className="maroon-hero-container">
           {/* Top Breadcrumb */}
-          <nav className="maroon-hero-breadcrumb">
-            <Link href="/">Home</Link>
-            <span className="maroon-hero-breadcrumb-sep">/</span>
-            <span className="maroon-hero-breadcrumb-current">Custom PC & Workstation Configurator</span>
+          <nav className="flex items-center gap-1.5 text-xs lg:text-[13px] text-[#E2EAF5]/85 mb-2.5 select-none font-medium">
+            <Link href="/" className="hover:text-white transition-colors">Home</Link>
+            <span className="text-[#E2EAF5]/60">&gt;</span>
+            <span className="text-white font-medium">Custom PC &amp; Workstation Configurator</span>
           </nav>
 
           <div>
-            <h1 className="maroon-hero-title">
+            <h1 className="text-2xl sm:text-3xl lg:text-[34px] xl:text-[38px] font-bold tracking-tight text-white mb-2.5 leading-tight">
               {currentWorkflow.title}
             </h1>
-            <p className="maroon-hero-desc">
+            <p className="text-[13.5px] sm:text-[14px] lg:text-[15.5px] text-[#E2EAF5] font-normal leading-relaxed mb-3 max-w-2xl">
               {currentWorkflow.description}
             </p>
           </div>
@@ -858,13 +874,13 @@ export default function Configurator({
             <div className="pb-3 border-b border-slate-200 mb-4">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
                 <div className="flex items-center gap-3">
-                  <span className="text-sm sm:text-base font-extrabold text-slate-950">
-                    {filteredProducts.length} Matching results
-                  </span>
+                  <h2 className="text-xl sm:text-[22px] font-bold text-slate-900 tracking-tight">
+                    {filteredProducts.length} matching results
+                  </h2>
                   {hasActiveFilters && (
                     <button
                       onClick={clearAllFilters}
-                      className="text-xs font-bold text-[#0f3e99] hover:underline cursor-pointer"
+                      className="text-xs font-bold text-[#0c2340] hover:text-blue-700 hover:underline cursor-pointer transition-colors"
                     >
                       Clear All
                     </button>
@@ -1063,7 +1079,7 @@ export default function Configurator({
       </div>
 
       {/* POPULAR CONFIGURATIONS (Expanded to 1720px) */}
-      <section className="py-14 bg-slate-50 border-t border-slate-200">
+      <section className="py-14 bg-white border-t border-slate-100">
         <div className="max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10">
           <div className="text-center max-w-3xl mx-auto mb-8">
             <h2 className="text-2xl sm:text-3xl font-black text-slate-950 tracking-tight">
@@ -1100,45 +1116,31 @@ export default function Configurator({
         </div>
       </section>
 
-      {/* CUSTOM WORKSTATION BUILDER CTA (Card matching 1720px span width on white background) */}
-      <section className="pt-2 pb-16 bg-white">
-        <div className="max-w-[1720px] mx-auto px-4 sm:px-6 lg:px-8 xl:px-10">
-          <div className="p-8 sm:p-12 lg:p-16 rounded-2xl sm:rounded-3xl border border-rose-200/90 shadow-xl shadow-rose-950/5 relative overflow-hidden bg-gradient-to-br from-[#FFF1F3] via-[#FFE4E8] to-[#FED2D9] text-center">
-            {/* Atmospheric ambient glows */}
-            <div className="absolute -top-24 -right-24 w-96 h-96 bg-gradient-to-br from-rose-400/20 to-pink-500/20 rounded-full blur-3xl pointer-events-none" />
-            <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-gradient-to-tr from-amber-300/25 to-rose-300/20 rounded-full blur-3xl pointer-events-none" />
-
-            <div className="max-w-3xl mx-auto relative z-10">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-rose-900/10 border border-rose-900/15 mb-3.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#650E20] animate-pulse" />
-                <span className="text-[11px] font-black tracking-[3px] text-[#4A0A16] uppercase">
-                  Custom Workstations
-                </span>
-              </div>
-              <h2 className="text-2xl sm:text-4xl md:text-5xl font-black mb-4 tracking-tight text-slate-950">
-                Build Your Custom Workstation Lab
-              </h2>
-              <p className="text-slate-700 text-xs sm:text-sm md:text-base mb-8 max-w-2xl mx-auto leading-relaxed font-medium">
-                Need custom GPU clusters, dual-socket processors, high-capacity ECC RAM, or liquid-cooled render racks? Our systems engineers craft tailored enterprise rigs with manufacturer warranty.
-              </p>
-              <div className="flex flex-wrap items-center justify-center gap-4">
-                <button
-                  onClick={() => handleOpenQuote("Custom", "Workstation Lab")}
-                  className="px-8 py-3.5 bg-gradient-to-r from-[#4A0A16] via-[#650E20] to-[#3B0712] hover:from-[#3B0712] hover:to-[#4A0A16] text-white font-extrabold text-xs uppercase tracking-wider rounded-md shadow-md hover:shadow-lg hover:scale-[1.02] active:scale-[0.99] transition-all cursor-pointer"
-                >
-                  Request Custom Architecture
-                </button>
-                <a
-                  href="https://wa.me/919643990077?text=Hi%2C%20I%20want%20to%20request%20a%20custom%20workstation%20build%20quote."
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-8 py-3.5 bg-white hover:bg-slate-50 text-slate-950 font-extrabold text-xs uppercase tracking-wider rounded-md shadow-md hover:shadow-lg transition-all cursor-pointer border border-rose-200/90 inline-flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-[0.99]"
-                >
-                  <FaWhatsapp className="text-base text-emerald-600" />
-                  <span>Chat on WhatsApp</span>
-                </a>
-              </div>
-            </div>
+      {/* CUSTOM WORKSTATION BUILDER CTA */}
+      <section className="pt-8 pb-16 bg-white text-center">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-2xl sm:text-4xl md:text-5xl font-black mb-4 tracking-tight text-slate-950">
+            Build Your Custom Workstation Lab
+          </h2>
+          <p className="text-slate-600 text-xs sm:text-sm md:text-base mb-8 max-w-2xl mx-auto leading-relaxed font-normal">
+            Need custom GPU clusters, dual-socket processors, high-capacity ECC RAM, or liquid-cooled render racks? Our systems engineers craft tailored enterprise rigs with manufacturer warranty.
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-4">
+            <button
+              onClick={() => handleOpenQuote("Custom", "Workstation Lab")}
+              className="px-8 py-3.5 bg-[#0c2340] hover:bg-[#12335e] text-white font-extrabold text-xs uppercase tracking-wider rounded-lg shadow-sm hover:shadow-md hover:scale-[1.02] active:scale-[0.99] transition-all cursor-pointer"
+            >
+              Request Custom Architecture
+            </button>
+            <a
+              href="https://wa.me/919643990077?text=Hi%2C%20I%20want%20to%20request%20a%20custom%20workstation%20build%20quote."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-8 py-3.5 bg-[#25D366] hover:bg-[#20ba59] text-white font-extrabold text-xs uppercase tracking-wider rounded-lg shadow-sm hover:shadow-md transition-all cursor-pointer border border-[#25D366] inline-flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-[0.99]"
+            >
+              <FaWhatsapp className="text-base text-white" />
+              <span>Chat on WhatsApp</span>
+            </a>
           </div>
         </div>
       </section>

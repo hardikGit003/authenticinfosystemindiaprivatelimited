@@ -69,6 +69,7 @@ export default function BrandCard({ brand, modelCount = 4 }: BrandCardProps) {
       <div className="pt-2">
         <Link
           href={`/laptops/${brand.slug}`}
+          prefetch={false}
           className="w-full inline-flex items-center justify-between py-3.5 px-5 rounded-2xl bg-slate-950 text-white font-bold text-xs sm:text-sm transition-all duration-200 hover:bg-black group-hover:shadow-md hover:translate-x-0.5"
           id={`explore-${brand.slug}-btn`}
         >
