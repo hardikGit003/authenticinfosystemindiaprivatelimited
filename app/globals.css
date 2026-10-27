@@ -2436,11 +2436,17 @@ section {
     padding-left: 16px !important;
     padding-right: 16px !important;
   }
-  .benq-banner-frame,
-  .iphone-ad-frame,
   .about-right img {
     height: 290px !important;
     border-radius: 18px !important;
+  }
+  .benq-banner-frame,
+  .iphone-ad-frame {
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 16 / 9.5 !important;
+    max-height: 230px !important;
+    border-radius: 16px !important;
   }
   .configuration-section {
     padding: 40px 14px !important;
@@ -4261,60 +4267,103 @@ section {
 }
 
 /* Responsive adjustments for Flipkart Showcase Cards & Banners on Mobile Devices */
-@media (max-width: 640px) {
+@media (max-width: 768px) {
+  .fk-section {
+    padding-top: clamp(66px, 16vw, 76px);
+    padding-bottom: clamp(10px, 3vw, 16px);
+  }
+  .fk-container {
+    padding-left: clamp(0.5rem, 2.5vw, 1rem);
+    padding-right: clamp(0.5rem, 2.5vw, 1rem);
+  }
+  /* Mobile Swipe Track with Snap & Peek */
+  .fk-grid {
+    display: flex !important;
+    overflow-x: auto !important;
+    scroll-snap-type: x mandatory !important;
+    scroll-behavior: smooth !important;
+    -webkit-overflow-scrolling: touch !important;
+    gap: clamp(8px, 2.5vw, 12px) !important;
+    padding-bottom: 6px !important;
+    scrollbar-width: none !important;
+  }
+  .fk-grid::-webkit-scrollbar {
+    display: none !important;
+  }
+  /* Proportional card size: shrinks respectively to screen ratio */
   .fk-card {
-    min-height: 175px;
-    border-radius: 14px;
+    flex: 0 0 calc(90% - 6px) !important;
+    max-width: 380px !important;
+    scroll-snap-align: center !important;
+    min-height: clamp(118px, 31vw, 142px) !important;
+    aspect-ratio: 2.35 / 1 !important;
+    border-radius: clamp(12px, 3vw, 16px) !important;
   }
   .fk-content {
-    max-width: 58%;
-    padding: 14px 6px 14px 12px;
+    max-width: 58% !important;
+    padding: clamp(10px, 2.8vw, 14px) 4px clamp(10px, 2.8vw, 14px) clamp(10px, 3vw, 14px) !important;
+    justify-content: center !important;
   }
   .fk-title {
-    font-size: 0.92rem;
-    line-height: 1.22;
-    margin-bottom: 3px;
+    font-size: clamp(0.76rem, 2.4vw, 0.92rem) !important;
+    line-height: 1.2 !important;
+    margin-bottom: 2px !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
   }
   .fk-price {
-    font-size: 1.2rem;
-    margin-bottom: 3px;
+    font-size: clamp(0.96rem, 3.2vw, 1.22rem) !important;
+    line-height: 1.1 !important;
+    margin-bottom: 2px !important;
   }
   .fk-features {
-    font-size: 0.7rem;
-    line-height: 1.3;
-    margin-bottom: 8px;
-    -webkit-line-clamp: 2;
+    font-size: clamp(0.6rem, 1.9vw, 0.7rem) !important;
+    line-height: 1.25 !important;
+    margin-bottom: 6px !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    display: block !important;
+    -webkit-line-clamp: unset !important;
   }
   .fk-cta {
-    padding: 4px 10px;
-    font-size: 0.68rem;
+    padding: clamp(3px, 1vw, 4px) clamp(8px, 2vw, 11px) !important;
+    font-size: clamp(0.6rem, 1.8vw, 0.68rem) !important;
+    gap: 4px !important;
   }
   .fk-ribbon {
-    top: 6px;
-    right: 6px;
-    padding: 3px 6px;
-    border-radius: 5px;
+    top: 6px !important;
+    right: 7px !important;
+    padding: 2.5px clamp(5px, 1.5vw, 7px) !important;
+    border-radius: 5px !important;
   }
   .fk-ribbon-title {
-    font-size: 8px;
+    font-size: clamp(6.8px, 2vw, 8px) !important;
   }
   .fk-ribbon-sub {
-    font-size: 6.5px;
+    font-size: clamp(5.2px, 1.6vw, 6.5px) !important;
   }
   .fk-media-wrap {
-    width: 42%;
-    padding-top: 28px;
-    padding-right: 6px;
-    padding-bottom: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: 42% !important;
+    padding-top: 22px !important;
+    padding-right: 8px !important;
+    padding-bottom: 8px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  .fk-podium {
+    bottom: 4px !important;
+    height: clamp(18px, 5vw, 28px) !important;
   }
   .fk-product-img {
-    max-height: 95px;
-    max-width: 100%;
-    border-radius: 8px;
+    max-height: clamp(62px, 17vw, 90px) !important;
+    max-width: 100% !important;
+    border-radius: 6px !important;
   }
+
   .benq-banner-actions {
     flex-direction: column !important;
     align-items: stretch !important;
@@ -4329,26 +4378,44 @@ section {
   }
 }
 
+/* Mobile Pagination Dots for Carousel */
+.fk-dots-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  margin-top: 6px;
+  padding: 4px 0;
+}
+.fk-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 9999px;
+  background: #cbd5e1;
+  transition: all 0.25s ease;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+.fk-dot.active {
+  width: 16px;
+  background: #2563eb;
+  border-radius: 9999px;
+}
+
 @media (max-width: 375px) {
   .fk-card {
-    min-height: 165px;
-  }
-  .fk-content {
-    max-width: 60%;
-    padding: 10px 4px 10px 10px;
+    flex: 0 0 calc(92% - 4px) !important;
+    min-height: 115px !important;
   }
   .fk-title {
-    font-size: 0.85rem;
+    font-size: 0.74rem !important;
   }
   .fk-price {
-    font-size: 1.1rem;
-  }
-  .fk-media-wrap {
-    width: 40%;
-    padding-top: 26px;
+    font-size: 0.94rem !important;
   }
   .fk-product-img {
-    max-height: 85px;
+    max-height: 60px !important;
   }
 }
 

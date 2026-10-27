@@ -15,7 +15,8 @@ import {
   FaTag,
   FaWhatsapp,
   FaHeart,
-  FaRegHeart
+  FaRegHeart,
+  FaAmazon
 } from "react-icons/fa";
 import { AccessoryProduct } from "../../data/accessoriesData";
 
@@ -171,15 +172,47 @@ export default function AccessoryCard({ product, onOpenQuote }: AccessoryCardPro
         </div>
       </div>
 
-      {/* BOTTOM ACTIONS SECTION: GET QUOTE CTA ONLY */}
-      <div className="mt-auto pt-2.5 border-t border-slate-100">
-        <button
-          onClick={handleQuoteClick}
-          className="w-full bg-[#25D366] hover:bg-[#20ba59] text-white py-2.5 px-3 rounded-lg flex items-center justify-center gap-2 text-xs font-bold shadow-xs hover:shadow-md transition-all cursor-pointer"
-        >
-          <FaWhatsapp size={14} className="text-white shrink-0" />
-          <span>Get Quote</span>
-        </button>
+      {/* BOTTOM ACTIONS SECTION */}
+      <div className="mt-auto pt-2.5 border-t border-slate-100 flex flex-col justify-end">
+        {product.price ? (
+          <div className="flex items-baseline justify-between mb-2">
+            <span className="text-[11px] text-slate-500 font-medium">Official Price:</span>
+            <span className="text-[14.5px] font-bold text-slate-900">
+              ₹{product.price.toLocaleString("en-IN")}
+            </span>
+          </div>
+        ) : null}
+
+        {product.amazonUrl ? (
+          <div className="grid grid-cols-2 gap-2">
+            <button
+              onClick={handleQuoteClick}
+              className="w-full bg-[#25D366] hover:bg-[#20ba59] text-white py-2 px-2 rounded-lg flex items-center justify-center gap-1.5 text-[11px] font-bold shadow-xs hover:shadow-md transition-all cursor-pointer"
+              title="Get B2B Quote"
+            >
+              <FaWhatsapp size={12} className="text-white shrink-0" />
+              <span>Quote</span>
+            </button>
+            <a
+              href={product.amazonUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full bg-[#febd69] hover:bg-[#f3a847] text-[#0f1111] py-2 px-2 rounded-lg flex items-center justify-center gap-1.5 text-[11px] font-bold shadow-xs hover:shadow-md transition-all cursor-pointer"
+              title="Buy on Amazon.in"
+            >
+              <FaAmazon size={12} className="shrink-0" />
+              <span>Amazon</span>
+            </a>
+          </div>
+        ) : (
+          <button
+            onClick={handleQuoteClick}
+            className="w-full bg-[#25D366] hover:bg-[#20ba59] text-white py-2.5 px-3 rounded-lg flex items-center justify-center gap-2 text-xs font-bold shadow-xs hover:shadow-md transition-all cursor-pointer"
+          >
+            <FaWhatsapp size={14} className="text-white shrink-0" />
+            <span>Get Quote</span>
+          </button>
+        )}
       </div>
     </div>
   );

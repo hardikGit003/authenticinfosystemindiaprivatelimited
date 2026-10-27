@@ -42,6 +42,10 @@ next-env.d.ts
 
 # scratch
 scratch/
+amazon_exact_eval_result.txt
+amazon_page.html
+extracted_amazon_markdown.md
+real_browser_page.md
 
 .vercel
 .env*

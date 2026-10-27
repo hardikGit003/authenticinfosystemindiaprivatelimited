@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 
 interface FlipkartCard {
@@ -109,12 +110,59 @@ const flipkartCards: FlipkartCard[] = [
 ];
 
 export default function FeaturedShowcaseGrid() {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [isInteracting, setIsInteracting] = useState(false);
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  // Update active dot index on scroll
+  const handleScroll = useCallback(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const scrollLeft = el.scrollLeft;
+    const cardWidth = el.offsetWidth * 0.88;
+    const index = Math.round(scrollLeft / cardWidth);
+    if (index >= 0 && index < flipkartCards.length && index !== activeIndex) {
+      setActiveIndex(index);
+    }
+  }, [activeIndex]);
+
+  const scrollToIndex = (index: number) => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const targetCard = el.children[index] as HTMLElement;
+    if (targetCard) {
+      targetCard.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+      setActiveIndex(index);
+    }
+  };
+
+  // Auto-advance on mobile if user is not currently touching/hovering
+  useEffect(() => {
+    if (isInteracting) return;
+    const interval = setInterval(() => {
+      if (typeof window !== "undefined" && window.innerWidth <= 768) {
+        const nextIndex = (activeIndex + 1) % flipkartCards.length;
+        scrollToIndex(nextIndex);
+      }
+    }, 4500);
+
+    return () => clearInterval(interval);
+  }, [activeIndex, isInteracting]);
+
   return (
     <section id="flipkart-showcase" className="fk-section">
       <div className="fk-container">
 
-        {/* 6 Flipkart Scenario Advertising Cards Grid (3 Columns Desktop, 2 Columns Tablet, 1 Column Mobile) */}
-        <div className="fk-grid">
+        {/* 6 Flipkart Scenario Advertising Cards (3 Cols Desktop, 2 Cols Tablet, Smooth Swipeable Carousel on Mobile) */}
+        <div 
+          ref={scrollRef}
+          onScroll={handleScroll}
+          onTouchStart={() => setIsInteracting(true)}
+          onTouchEnd={() => setTimeout(() => setIsInteracting(false), 2000)}
+          onMouseEnter={() => setIsInteracting(true)}
+          onMouseLeave={() => setIsInteracting(false)}
+          className="fk-grid"
+        >
           {flipkartCards.map((card) => (
             <Link
               key={card.id}
@@ -158,6 +206,19 @@ export default function FeaturedShowcaseGrid() {
                 />
               </div>
             </Link>
+          ))}
+        </div>
+
+        {/* Mobile Swipe Pagination Indicator Dots */}
+        <div className="fk-dots-bar sm:hidden" aria-label="Advertisement pagination">
+          {flipkartCards.map((card, i) => (
+            <button
+              key={card.id}
+              type="button"
+              onClick={() => scrollToIndex(i)}
+              className={`fk-dot ${activeIndex === i ? "active" : ""}`}
+              aria-label={`View deal ${i + 1}: ${card.headline}`}
+            />
           ))}
         </div>
 

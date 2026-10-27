@@ -18,6 +18,7 @@ import { amazonProducts, AMAZON_STORE_URL } from "../data/amazonProducts";
 export default function AmazonStorefrontPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
+  const [selectedBrand, setSelectedBrand] = useState<string>("all");
   const [payOnDelivery, setPayOnDelivery] = useState(false);
   const [includeOutOfStock, setIncludeOutOfStock] = useState(false);
   const [ratingFilter, setRatingFilter] = useState<number | null>(null);
@@ -25,11 +26,17 @@ export default function AmazonStorefrontPage() {
   // Filter products based on search or sidebar clicks
   const filteredProducts = amazonProducts.filter((product) => {
     if (ratingFilter && product.rating < ratingFilter) return false;
+    if (selectedBrand !== "all" && product.brand.toLowerCase() !== selectedBrand.toLowerCase()) return false;
+    if (selectedCategory !== "all") {
+      const matchCat = product.category === selectedCategory || product.categories?.includes(selectedCategory);
+      if (!matchCat) return false;
+    }
     if (searchQuery.trim()) {
       const q = searchQuery.toLowerCase();
       const matchName = product.fullName.toLowerCase().includes(q);
       const matchBrand = product.brand.toLowerCase().includes(q);
-      if (!matchName && !matchBrand) return false;
+      const matchAsin = product.asin.toLowerCase().includes(q);
+      if (!matchName && !matchBrand && !matchAsin) return false;
     }
     return true;
   });
@@ -263,10 +270,9 @@ export default function AmazonStorefrontPage() {
                 <button
                   type="button"
                   onClick={() => {
-                    setSelectedCategory("Computers & Accessories");
-                    setSearchQuery("");
+                    setSelectedCategory(selectedCategory === "Computers & Accessories" ? "all" : "Computers & Accessories");
                   }}
-                  className="amz-filter-item-btn"
+                  className={`amz-filter-item-btn ${selectedCategory === "Computers & Accessories" ? "font-bold text-[#c7511f]" : ""}`}
                 >
                   &lt; Computers & Accessories
                 </button>
@@ -275,10 +281,9 @@ export default function AmazonStorefrontPage() {
                 <button
                   type="button"
                   onClick={() => {
-                    setSelectedCategory("Electronics");
-                    setSearchQuery("");
+                    setSelectedCategory(selectedCategory === "Electronics" ? "all" : "Electronics");
                   }}
-                  className="amz-filter-item-btn"
+                  className={`amz-filter-item-btn ${selectedCategory === "Electronics" ? "font-bold text-[#c7511f]" : ""}`}
                 >
                   &lt; Electronics
                 </button>
@@ -287,25 +292,39 @@ export default function AmazonStorefrontPage() {
                 <button
                   type="button"
                   onClick={() => {
-                    setSelectedCategory("Fashion");
+                    setSelectedCategory(selectedCategory === "Video Games" ? "all" : "Video Games");
                   }}
-                  className="amz-filter-item-btn"
-                >
-                  &lt; Fashion
-                </button>
-              </li>
-              <li>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setSelectedCategory("Video Games");
-                  }}
-                  className="amz-filter-item-btn"
+                  className={`amz-filter-item-btn ${selectedCategory === "Video Games" ? "font-bold text-[#c7511f]" : ""}`}
                 >
                   &lt; Video Games
                 </button>
               </li>
             </ul>
+          </div>
+
+          {/* BRANDS FILTER */}
+          <div className="border-t border-[#e7e7e7] pt-3">
+            <h3 className="amz-filter-heading">Brands</h3>
+            <div className="space-y-1.5 text-[13px]">
+              <label className="flex items-center gap-2 cursor-pointer select-none text-[#0f1111]">
+                <input
+                  type="checkbox"
+                  checked={selectedBrand === "Lenovo"}
+                  onChange={() => setSelectedBrand(selectedBrand === "Lenovo" ? "all" : "Lenovo")}
+                  className="rounded border-[#888c8c] text-[#007185] focus:ring-0"
+                />
+                <span className={selectedBrand === "Lenovo" ? "font-bold text-[#c7511f]" : ""}>Lenovo</span>
+              </label>
+              <label className="flex items-center gap-2 cursor-pointer select-none text-[#0f1111]">
+                <input
+                  type="checkbox"
+                  checked={selectedBrand === "Logitech"}
+                  onChange={() => setSelectedBrand(selectedBrand === "Logitech" ? "all" : "Logitech")}
+                  className="rounded border-[#888c8c] text-[#007185] focus:ring-0"
+                />
+                <span className={selectedBrand === "Logitech" ? "font-bold text-[#c7511f]" : ""}>Logitech</span>
+              </label>
+            </div>
           </div>
 
           <div className="border-t border-[#e7e7e7] pt-3">
@@ -352,13 +371,14 @@ export default function AmazonStorefrontPage() {
             </label>
           </div>
 
-          {(ratingFilter || selectedCategory !== "all" || searchQuery) && (
+          {(ratingFilter || selectedCategory !== "all" || selectedBrand !== "all" || searchQuery) && (
             <div className="pt-2">
               <button
                 type="button"
                 onClick={() => {
                   setRatingFilter(null);
                   setSelectedCategory("all");
+                  setSelectedBrand("all");
                   setSearchQuery("");
                 }}
                 className="text-xs text-[#007185] hover:text-[#c7511f] hover:underline font-semibold cursor-pointer"
@@ -497,6 +517,7 @@ export default function AmazonStorefrontPage() {
                   setSearchQuery("");
                   setRatingFilter(null);
                   setSelectedCategory("all");
+                  setSelectedBrand("all");
                 }}
                 className="text-[#007185] hover:underline cursor-pointer"
               >
